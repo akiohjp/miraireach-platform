@@ -1,62 +1,54 @@
-export default function Home() {
-  const latestInsights = [
-    {
-      date: "Apr 23, 2026",
-      category: "F&B",
-      title:
-        "Dubai Hospitality Groups Accelerate AI-Driven Demand Forecasting for Enterprise Catering Contracts",
-      source: "MENA Business Intelligence Desk",
-    },
-    {
-      date: "Apr 22, 2026",
-      category: "BEAUTY",
-      title:
-        "Cross-Border Retail Networks Adopt Predictive Audience Clusters to Optimize Gulf Expansion Campaigns",
-      source: "GCC Commerce Wire",
-    },
-    {
-      date: "Apr 21, 2026",
-      category: "FINTECH",
-      title:
-        "B2B Payment Providers in DIFC Launch Adaptive Messaging Engines for High-Value Account Acquisition",
-      source: "Dubai Market Review",
-    },
-    {
-      date: "Apr 20, 2026",
-      category: "LOGISTICS",
-      title:
-        "Free-Zone Operators Deploy Real-Time Lead Scoring to Improve Multi-Stakeholder Tender Conversion",
-      source: "Middle East Supply Journal",
-    },
-    {
-      date: "Apr 19, 2026",
-      category: "PROPTECH",
-      title:
-        "Commercial Developers Use AI Content Workflows to Shorten Investor Decision Cycles Across the UAE",
-      source: "Enterprise Growth Bulletin",
-    },
-  ];
+import Image from "next/image";
 
-  const trending = [
+type Article = {
+  id: number;
+  created_at: string;
+  category: string;
+  title: string;
+  excerpt: string;
+  source_name: string;
+  image_url: string | null;
+  is_published: boolean;
+};
+
+const fallbackImage =
+  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80";
+
+function formatDate(value: string) {
+  return new Date(value).toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+  });
+}
+
+async function fetchArticles(): Promise<Article[]> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!url || !key) return [];
+
+  const response = await fetch(
+    `${url}/rest/v1/articles?select=id,created_at,category,title,excerpt,source_name,image_url,is_published&is_published=eq.true&order=created_at.desc,id.desc&limit=20`,
     {
-      rank: 1,
-      title: "How AI Signal Modeling Is Reshaping B2B Pipeline Strategy in Dubai",
-      image:
-        "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80",
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+      },
+      cache: "no-store",
     },
-    {
-      rank: 2,
-      title: "Executive Guide to Arabic-English Creative Personalization at Scale",
-      image:
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
-    },
-    {
-      rank: 3,
-      title: "Measuring Multi-Entity Attribution for GCC Enterprise Media Programs",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
-    },
-  ];
+  );
+
+  if (!response.ok) return [];
+  return (await response.json()) as Article[];
+}
+
+export default async function Home() {
+  const articles = await fetchArticles();
+  const featured = articles[0];
+  const latestInsights = articles.slice(0, 10);
+  const trending = articles.slice(0, 3);
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-7xl px-6 py-12 md:px-10">
@@ -75,24 +67,25 @@ export default function Home() {
       <main className="grid gap-12 lg:grid-cols-[1.6fr_0.9fr]">
         <section className="space-y-12">
           <article className="space-y-6">
-            <img
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80"
-              alt="Dubai skyline and modern business towers"
+            <Image
+              src={featured?.image_url || fallbackImage}
+              alt={featured?.title || "Dubai skyline and modern business towers"}
+              width={1600}
+              height={900}
               className="h-[360px] w-full object-cover md:h-[460px]"
             />
             <div className="space-y-4">
               <p className="text-xs tracking-[0.16em] text-muted uppercase">
-                Featured Insight | Apr 23, 2026
+                Featured Insight |{" "}
+                {featured ? formatDate(featured.created_at) : "Latest Update"}
               </p>
               <h1 className="max-w-4xl text-3xl font-medium leading-[1.35] tracking-[0.01em] md:text-5xl md:leading-[1.28]">
-                Enterprise AI Marketing in Dubai Enters a Precision Era as B2B
-                Buyers Demand Account-Level Intelligence.
+                {featured?.title ||
+                  "Enterprise AI Marketing in Dubai Enters a Precision Era as B2B Buyers Demand Account-Level Intelligence."}
               </h1>
               <p className="max-w-3xl text-base leading-8 tracking-[0.01em] text-muted md:text-lg">
-                Regional decision-makers are reallocating media budgets toward
-                data-centric programs that unify intent signals, multilingual
-                personalization, and revenue attribution across complex stakeholder
-                journeys.
+                {featured?.excerpt ||
+                  "Regional decision-makers are reallocating media budgets toward data-centric programs that unify intent signals, multilingual personalization, and revenue attribution across complex stakeholder journeys."}
               </p>
             </div>
           </article>
@@ -104,20 +97,20 @@ export default function Home() {
             <div className="space-y-0">
               {latestInsights.map((item, index) => (
                 <article
-                  key={item.title}
+                  key={item.id}
                   className={`space-y-2 py-6 ${
                     index !== 0 ? "border-t border-line" : ""
                   }`}
                 >
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs tracking-[0.14em] text-muted uppercase">
-                    <span>{item.date}</span>
+                    <span>{formatDate(item.created_at)}</span>
                     <span>{item.category}</span>
                   </div>
                   <h3 className="text-xl leading-8 tracking-[0.005em] md:text-2xl">
                     {item.title}
                   </h3>
                   <p className="text-sm tracking-[0.08em] text-muted uppercase">
-                    {item.source}
+                    {item.source_name}
                   </p>
                 </article>
               ))}
@@ -130,16 +123,18 @@ export default function Home() {
             Weekly Access Ranking
           </h2>
           <div className="space-y-5">
-            {trending.map((item) => (
-              <article key={item.rank} className="group space-y-3">
+            {trending.map((item, index) => (
+              <article key={item.id} className="group space-y-3">
                 <div className="relative overflow-hidden">
-                  <img
-                    src={item.image}
+                  <Image
+                    src={item.image_url || fallbackImage}
                     alt={item.title}
+                    width={1200}
+                    height={675}
                     className="h-44 w-full object-cover transition duration-500 group-hover:scale-[1.02]"
                   />
                   <span className="absolute left-3 top-3 text-3xl font-medium leading-none tracking-tight text-white/95">
-                    {item.rank}
+                    {index + 1}
                   </span>
                 </div>
                 <h3 className="text-base leading-7 tracking-[0.01em]">
