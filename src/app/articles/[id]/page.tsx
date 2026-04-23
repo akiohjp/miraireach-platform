@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
 import { fallbackImage, fetchArticleById, formatDate } from "@/lib/articles";
 
 type ArticlePageProps = {
@@ -49,20 +50,23 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
           priority
         />
 
-        <div className="max-w-3xl space-y-6 text-base leading-8 tracking-[0.01em] text-foreground/90 md:text-lg">
-          <p>{article.excerpt}</p>
-          <p>
-            Dubai&apos;s B2B ecosystem is increasingly focused on measurable growth,
-            where brand storytelling, demand generation, and account-level media
-            analytics are tightly integrated. Executive teams are prioritizing
-            strategies that connect content performance to commercial outcomes
-            across hospitality, retail, and enterprise services.
-          </p>
-          <p>
-            As competition intensifies across the Gulf, organizations are investing
-            in precision marketing workflows that improve cross-functional alignment
-            between marketing, sales, and procurement stakeholders.
-          </p>
+        <div className="prose prose-lg max-w-3xl prose-headings:tracking-[0.01em] prose-headings:text-foreground prose-p:leading-8 prose-p:text-foreground/90 prose-strong:font-semibold prose-li:leading-8">
+          <ReactMarkdown>
+            {article.content?.trim() ||
+              `## Market Context
+
+${article.excerpt}
+
+## Why It Matters
+
+Dubai's B2B ecosystem is rapidly aligning content strategy with measurable pipeline performance. Enterprise teams are combining AI-driven audience insights with multilingual editorial programs to improve decision velocity across procurement-heavy buying committees.
+
+## Strategic Actions
+
+- Build sector-specific editorial clusters for F&B and retail operators.
+- Align campaign reporting to account-level revenue outcomes.
+- Standardize operational workflows across marketing, sales, and partnerships.`}
+          </ReactMarkdown>
         </div>
       </article>
     </div>
