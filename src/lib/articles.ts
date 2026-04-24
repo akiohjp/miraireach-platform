@@ -34,13 +34,13 @@ function getSupabaseConfig() {
   return { url, key };
 }
 
-export async function fetchPublishedArticles(limit = 20): Promise<Article[]> {
+export async function fetchPublishedArticles(limit = 20, offset = 0): Promise<Article[]> {
   const config = getSupabaseConfig();
   if (!config) return [];
 
   const { url, key } = config;
   const response = await fetch(
-    `${url}/rest/v1/articles?select=id,created_at,category,title,title_ja,excerpt,excerpt_ja,content,content_ja,source_name,image_url,is_published&is_published=eq.true&order=created_at.desc,id.desc&limit=${limit}`,
+    `${url}/rest/v1/articles?select=id,created_at,category,title,title_ja,excerpt,excerpt_ja,content,content_ja,source_name,image_url,is_published&is_published=eq.true&order=created_at.desc,id.desc&limit=${limit}&offset=${offset}`,
     {
       headers: {
         apikey: key,

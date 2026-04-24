@@ -16,173 +16,145 @@ async function loadEnv() {
   }
 }
 
-const longFormContents = [
-  {
-    title: "Enterprise AI Marketing in Dubai Enters a Precision Era",
-    title_ja: "ドバイのエンタープライズAIマーケティングがもたらす超高精度時代",
-    excerpt: "Regional decision-makers are reallocating media budgets toward data-centric programs that unify intent signals and multilingual personalization.",
-    excerpt_ja: "中東の意思決定者たちは、検索意図のシグナルと多言語パーソナライゼーションを統合するデータ中心のプログラムへとメディア予算を再配分しています。",
-    content: `# Enterprise AI Marketing in Dubai Enters a Precision Era
+// 5 base categories and their respective image pools
+const CATEGORIES = ["F&B", "Retail", "AI Marketing", "Real Estate", "Tech & Innovation"];
 
-Dubai's marketing landscape is rapidly shifting. Regional decision-makers are reallocating media budgets toward data-centric programs that unify intent signals, multilingual personalization, and revenue attribution across complex stakeholder journeys.
+const IMAGE_POOLS = {
+  "F&B": [
+    "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80"
+  ],
+  "Retail": [
+    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1581515323683-0bd9fdfd7cf0?auto=format&fit=crop&w=1600&q=80"
+  ],
+  "AI Marketing": [
+    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1533750349088-cd071a92f430?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1600&q=80"
+  ],
+  "Real Estate": [
+    "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1577002620719-f027878d6b88?auto=format&fit=crop&w=1600&q=80"
+  ],
+  "Tech & Innovation": [
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80"
+  ]
+};
 
-## The Shift from Search to Discovery
-Traditional search engine optimization is being supplemented, and in some cases replaced, by AI-driven discovery platforms. Large Language Models (LLMs) now serve as the primary research tool for enterprise procurement and luxury consumer behavior alike. Brands that optimize for "Answer Engine Optimization" (AEO) are capturing high-intent traffic before it ever reaches a traditional search results page.
-
-## Multilingual Personalization at Scale
-In a hyper-diverse market like the UAE, generic messaging no longer converts. AI systems enable real-time translation and cultural nuance adaptation, allowing luxury and hospitality brands to speak directly to GCC nationals, European expatriates, and Asian tourists simultaneously with localized relevance.
-
-## Strategic Imperatives
-- Integrate customer data platforms with AI orchestration layers.
-- Develop entity-rich content that LLMs can easily parse and reference.
-- Shift KPIs from impressions and clicks to qualified pipeline and revenue attribution.`,
-    content_ja: `# ドバイのエンタープライズAIマーケティングがもたらす超高精度時代
-
-ドバイのマーケティング環境は急速に変化しています。地域の意思決定者たちは、複雑なステークホルダーのカスタマージャーニー全体で検索意図のシグナル、多言語パーソナライゼーション、収益の帰属を統合する、データ中心のプログラムへとメディア予算を再配分しています。
-
-## 検索から「発見」へのシフト
-従来の検索エンジン最適化（SEO）は、AI主導の発見プラットフォームによって補完され、場合によっては置き換えられつつあります。大規模言語モデル（LLM）は現在、企業の調達やラグジュアリー消費者の行動において主要なリサーチツールとして機能しています。「回答エンジン最適化（AEO）」に最適化するブランドは、従来の検索結果ページに到達する前の、購買意欲の高いトラフィックを獲得しています。
-
-## スケールする多言語パーソナライゼーション
-UAEのような極めて多様な市場において、一般的なメッセージングではもはやコンバージョンは得られません。AIシステムはリアルタイムの翻訳と文化的なニュアンスへの適応を可能にし、ラグジュアリーブランドやホスピタリティブランドがGCC諸国民、ヨーロッパの駐在員、アジアの観光客に対し、同時にローカライズされた関連性を持って直接語りかけることを可能にします。
-
-## 戦略的必須事項
-- カスタマーデータプラットフォームとAIオーケストレーション層を統合する。
-- LLMが容易に解析および参照できる、エンティティ豊富なコンテンツを開発する。
-- KPIをインプレッションやクリックから、クオリファイされたパイプラインと収益の帰属へと移行する。`,
+const baseTemplates = {
+  "F&B": {
+    title: "Multi-Brand Cloud Kitchen Expansion: Precision Analytics",
+    title_ja: "クラウドキッチンによる多ブランド展開：精密アナリティクス",
+    excerpt: "How cloud kitchens in Dubai can scale while preserving margin and quality through operational AI.",
+    excerpt_ja: "ドバイのクラウドキッチンが、運用AIを通じて利益率と品質を維持しながら規模を拡大する方法。",
+    content: "## The F&B Transformation\n\nDubai's F&B sector is shifting towards hyper-optimized delivery models. By analyzing vast amounts of consumer data, ghost kitchens can predict demand down to the hour.\n\n## Cost Optimization\nIntegrating supply chain AI reduces food waste by up to 35%, drastically improving unit economics in a highly competitive market.",
+    content_ja: "## F&Bの変革\n\nドバイのF&Bセクターは、超最適化されたデリバリーモデルへと移行しています。膨大な消費者データを分析することで、ゴーストキッチンは時間単位で需要を予測できます。\n\n## コスト最適化\nサプライチェーンAIを統合することで、食品ロスを最大35%削減し、競争の激しい市場におけるユニットエコノミクスを劇的に改善します。"
   },
-  {
-    title: "Multi-Brand Cloud Kitchen Expansion: Poke Bowls and Katsu Curry",
-    title_ja: "クラウドキッチンによる多ブランド展開：ポキボウルとカツカレーのドバイスケーリング戦略",
-    excerpt: "How cloud kitchens in Dubai can scale while preserving margin and quality.",
-    excerpt_ja: "ドバイのクラウドキッチンが、品質、信頼性、利益率を維持しながら自動化を通じてブランドを拡大する方法。",
-    content: `# Multi-Brand Cloud Kitchen Expansion: Poke Bowls and Katsu Curry
-
-The F&B tech ecosystem in Dubai has evolved beyond simple aggregation. The new frontier is the highly optimized, multi-brand cloud kitchen capable of servicing diverse culinary demands from a single operational footprint.
-
-## The Unit Economics of Delivery
-With delivery aggregators commanding substantial commissions, margin preservation is the primary challenge for F&B operators. By layering multiple complementary brands—such as a healthy Poke Bowl concept alongside an indulgent Japanese Katsu Curry brand—operators can maximize kitchen utilization, cross-utilize ingredients, and optimize labor costs.
-
-## AI in Kitchen Operations
-Advanced operators are deploying predictive AI to manage inventory, forecast demand spikes based on local events or weather patterns, and dynamically adjust preparation times to ensure the food arrives in optimal condition. This reduces food waste by up to 30% and significantly improves customer satisfaction scores.`,
-    content_ja: `# クラウドキッチンによる多ブランド展開：ポキボウルとカツカレーのドバイスケーリング戦略
-
-ドバイのF&Bテック・エコシステムは、単なるフードデリバリーの集約を超えて進化しています。新たなフロンティアは、単一のオペレーション拠点から多様な料理の需要に応えることができる、高度に最適化された多ブランド展開のクラウドキッチンです。
-
-## デリバリーのユニットエコノミクス
-デリバリーアグリゲーターが多額の手数料を取る中、利益率の維持がF&B事業者にとっての最大の課題です。ヘルシーなポキボウルのコンセプトと、満足感のある日本のカツカレーブランドなど、複数の補完的なブランドを重ね合わせることで、事業者はキッチンの稼働率を最大化し、食材を相互利用し、人件費を最適化できます。
-
-## キッチンオペレーションにおけるAI
-先進的な事業者は、予測AIを導入して在庫を管理し、地域のイベントや天候パターンに基づいて需要の急増を予測し、調理時間を動的に調整して食事が最適な状態で届くようにしています。これにより、食品ロスが最大30%削減され、顧客満足度スコアが大幅に向上します。`,
+  "Retail": {
+    title: "Omnichannel Personalization in UAE's Luxury Retail",
+    title_ja: "UAEのラグジュアリー小売におけるオムニチャネル・パーソナライゼーション",
+    excerpt: "Redefining the shopping experience by bridging offline boutiques and digital platforms.",
+    excerpt_ja: "実店舗のブティックとデジタルプラットフォームの垣根を越え、ショッピング体験を再定義する。",
+    content: "## The New Luxury Standard\n\nConsumers expect seamless transitions between Instagram discovery, WhatsApp concierge services, and VIP in-store experiences. \n\n## AI in Clienteling\nRetailers are deploying AI to track micro-preferences, allowing sales associates to act as hyper-informed personal shoppers, increasing AOV (Average Order Value) significantly.",
+    content_ja: "## ラグジュアリーの新たな基準\n\n消費者は、Instagramでの発見、WhatsAppのコンシェルジュサービス、そしてVIP向けの実店舗体験がシームレスに繋がることを期待しています。\n\n## クライアンテリングにおけるAI\n小売業者はAIを導入して細かな好みを追跡しており、これにより販売員は非常に情報通のパーソナルショッパーとして機能し、AOV（平均注文額）を大幅に向上させています。"
   },
-  {
-    title: "Precision Lead Generation and Content Pipelines for B2B Growth",
-    title_ja: "B2Bエンタープライズ成長のための高精度リード獲得とコンテンツ・パイプライン",
-    excerpt: "A field-tested framework for enterprise-grade lead generation in Dubai.",
-    excerpt_ja: "ドバイの複雑な意思決定プロセスを攻略するための、精密なターゲティングとコンテンツアーキテクチャの実践的フレームワーク。",
-    content: `# Precision Lead Generation and Content Pipelines for B2B Growth
-
-Generating qualified B2B leads in the GCC requires a nuanced approach that respects relationship-building while leveraging modern digital infrastructure.
-
-## The Content-to-Pipeline Architecture
-High-value enterprise sales cannot be generated through generic lead forms. We implement a tiered content strategy: gated industry reports, localized case studies, and highly technical whitepapers. These assets serve as the cornerstone of our lead generation pipelines, capturing intent signals across the entire buyer's journey.
-
-## Account-Based Marketing (ABM) Execution
-By identifying the top 100 target accounts in the region, marketing and sales teams can align their efforts. IP-based personalization ensures that when a stakeholder from a target enterprise visits your site, they see content specifically tailored to their industry vertical and organizational challenges.`,
-    content_ja: `# B2Bエンタープライズ成長のための高精度リード獲得とコンテンツ・パイプライン
-
-GCC（湾岸協力会議）諸国で適格なB2Bリードを獲得するには、人間関係の構築を重視しつつ、現代のデジタルインフラを活用するという、ニュアンスに富んだアプローチが必要です。
-
-## コンテンツからパイプラインへのアーキテクチャ
-価値の高いエンタープライズ営業は、一般的なリード獲得フォームからは生まれません。私たちは段階的なコンテンツ戦略を実施しています。ゲート付きの業界レポート、ローカライズされた導入事例、高度に専門的なホワイトペーパーなどです。これらの資産はリード獲得パイプラインの基礎として機能し、購買プロセス全体で検索意図のシグナルを捉えます。
-
-## アカウントベースドマーケティング（ABM）の実行
-地域内の上位100のターゲットアカウントを特定することで、マーケティングチームと営業チームは取り組みを連携させることができます。IPベースのパーソナライゼーションにより、ターゲット企業のステークホルダーがサイトを訪れた際、彼らの属する業界や組織の課題に特化したコンテンツが表示されるようになります。`,
+  "AI Marketing": {
+    title: "Enterprise AI Marketing: From Search to Answer Engines",
+    title_ja: "エンタープライズAIマーケティング：検索から回答エンジンへ",
+    excerpt: "Optimizing for LLMs is the new frontier for B2B lead generation in the GCC.",
+    excerpt_ja: "GCC諸国のB2Bリード獲得において、LLMへの最適化が新たなフロンティアとなっている。",
+    content: "## The Shift to AIO\n\nTraditional SEO is losing ground to Answer Engine Optimization (AIO). B2B buyers now use AI tools to generate vendor shortlists.\n\n## Data Structuring\nCompanies must structure their content as entities that LLMs can easily ingest. This requires a fundamental shift from keyword stuffing to deep, authoritative knowledge graphs.",
+    content_ja: "## AIOへのシフト\n\n従来のSEOは、回答エンジン最適化（AIO）にその座を奪われつつあります。現在、B2BバイヤーはAIツールを使ってベンダーのショートリストを作成しています。\n\n## データ構造化\n企業は、LLMが容易に取り込めるエンティティとしてコンテンツを構造化する必要があります。これには、キーワードの詰め込みから、深く権威あるナレッジグラフへの根本的な転換が求められます。"
   },
-  {
-    title: "Integrated AI Marketing Operating System for Consumer Enterprises",
-    title_ja: "消費者向け企業のための統合AIマーケティング・オペレーティングシステム",
-    excerpt: "Advanced operating model for luxury hospitality and retail groups.",
-    excerpt_ja: "ラグジュアリー・ホスピタリティや小売グループ向けの高度な運用モデル。分断されたデータを統合し、AIマーケティングを実現。",
-    content: `# Integrated AI Marketing Operating System for Consumer Enterprises
-
-Siloed marketing tools are the enemy of growth. Today's consumer enterprises require an integrated operating system that connects customer touchpoints into a unified intelligence graph.
-
-## Unifying the Customer View
-For luxury retail and hospitality, understanding the customer across offline boutiques, online platforms, and in-app interactions is critical. A modern AI marketing OS aggregates these data points, creating dynamic customer profiles that update in real-time.
-
-## Automated Next-Best-Action
-Instead of static marketing campaigns, an AI OS determines the "next best action" for each individual customer. Whether it's an exclusive invitation to a private viewing in Dubai Mall or a personalized offer for a staycation at Palm Jumeirah, the system autonomously orchestrates the outreach across the most effective channel.`,
-    content_ja: `# 消費者向け企業のための統合AIマーケティング・オペレーティングシステム
-
-サイロ化されたマーケティングツールは成長の敵です。今日の消費者向け企業には、顧客のタッチポイントを統合されたインテリジェンス・グラフへと接続する統合オペレーティングシステムが必要です。
-
-## 顧客ビューの統合
-ラグジュアリー小売やホスピタリティにおいて、オフラインのブティック、オンラインプラットフォーム、アプリ内でのインタラクション全体で顧客を理解することは極めて重要です。最新のAIマーケティングOSはこれらのデータポイントを集約し、リアルタイムで更新される動的な顧客プロファイルを作成します。
-
-## 自動化された「ネクスト・ベスト・アクション」
-静的なマーケティングキャンペーンの代わりに、AI OSは個々の顧客に対する「ネクスト・ベスト・アクション（次にとるべき最善の行動）」を決定します。ドバイモールでのプライベートビューイングへの限定招待であれ、パームジュメイラでのステイケーションのパーソナライズされたオファーであれ、システムは最も効果的なチャネルを通じてアプローチを自律的にオーケストレーションします。`,
+  "Real Estate": {
+    title: "PropTech 2026: Predictive Pricing Models in Dubai",
+    title_ja: "PropTech 2026：ドバイにおける予測価格モデリング",
+    excerpt: "How machine learning is bringing unprecedented transparency to UAE property valuations.",
+    excerpt_ja: "機械学習がUAEの不動産評価にいかに前例のない透明性をもたらしているか。",
+    content: "## Data-Driven Real Estate\n\nOff-plan and secondary market pricing is increasingly dictated by algorithmic models that analyze global capital flows, local infrastructure developments, and historical yields.\n\n## Investor Confidence\nThis transparency attracts institutional investors who rely on quantified risk models, stabilizing a historically volatile asset class.",
+    content_ja: "## データ駆動型不動産\n\nオフプランおよび流通市場の価格は、グローバルな資本フロー、地域のインフラ開発、歴史的な利回りを分析するアルゴリズムモデルによってますます決定されるようになっています。\n\n## 投資家の信頼\nこの透明性は、定量化されたリスクモデルに依存する機関投資家を引き付け、歴史的に変動の激しかったアセットクラスを安定させます。"
   },
-  {
-    title: "From Discovery to Revenue: A Cross-Functional AIO Playbook",
-    title_ja: "発見から収益へ：ドバイにおけるクロスファンクショナルなAIOプレイブック",
-    excerpt: "Strategic roadmap for cross-functional teams to turn discovery into revenue.",
-    excerpt_ja: "AIによる「発見」を継続的な収益に変えるため、マーケティング、営業、プロダクトチームが連携するための戦略ロードマップ。",
-    content: `# From Discovery to Revenue: A Cross-Functional AIO Playbook
+  "Tech & Innovation": {
+    title: "Automating the Enterprise: RPA and Generative AI Synergy",
+    title_ja: "エンタープライズの自動化：RPAと生成AIのシナジー",
+    excerpt: "Combining robotic process automation with LLMs to eliminate back-office friction.",
+    excerpt_ja: "ロボティック・プロセス・オートメーションとLLMを組み合わせ、バックオフィスの摩擦を排除する。",
+    content: "## Beyond Simple Scripts\n\nWhile RPA handles structured, repetitive tasks, generative AI brings cognitive capabilities to unstructured data processing like contracts and customer emails.\n\n## The Autonomous Enterprise\nThis synergy paves the way for the autonomous enterprise, reducing operational overhead in Dubai free zones by up to 40%.",
+    content_ja: "## 単純なスクリプトを超えて\n\nRPAは構造化された反復的なタスクを処理しますが、生成AIは契約書や顧客からのメールなどの非構造化データ処理に認知機能をもたらします。\n\n## 自律型エンタープライズ\nこのシナジーは自律型エンタープライズへの道を切り開き、ドバイのフリーゾーンにおける運用オーバーヘッドを最大40%削減します。"
+  }
+};
 
-Optimizing for AI Answer Engines (AIO) is not solely a marketing function. It requires deep collaboration across product, sales, and customer success to turn discovery into measurable revenue.
-
-## Aligning Teams
-When an AI engine recommends your SaaS platform or enterprise service, the subsequent user journey must deliver on that promise. Sales teams need to understand the exact context of the AI-driven referral, while product teams must ensure the features highlighted by the AI are easily accessible and robust.
-
-## The Feedback Loop
-The most critical component of this playbook is the data feedback loop. Closed-won deal data must be fed back into the marketing architecture to refine the targeting criteria and content strategy. In Dubai's highly competitive environment, this continuous improvement cycle is the differentiator between market leaders and laggards.`,
-    content_ja: `# 発見から収益へ：ドバイにおけるクロスファンクショナルなAIOプレイブック
-
-AI回答エンジン（AIO）への最適化は、単なるマーケティング機能にとどまりません。発見を測定可能な収益に変えるには、プロダクト、営業、カスタマーサクセスといった部門を横断した深いコラボレーションが必要です。
-
-## チームの連携
-AIエンジンがあなたのSaaSプラットフォームやエンタープライズサービスを推奨した際、その後のユーザージャーニーはその約束を果たすものでなければなりません。営業チームはAIによるリファラルの正確なコンテキストを理解する必要があり、プロダクトチームはAIによって強調された機能が容易にアクセスでき、堅牢であることを保証しなければなりません。
-
-## フィードバックループ
-このプレイブックの最も重要な要素は、データのフィードバックループです。成約に至った商談のデータをマーケティング・アーキテクチャにフィードバックし、ターゲティング基準やコンテンツ戦略を洗練させる必要があります。ドバイの競争の激しい環境において、この継続的な改善サイクルこそが、市場のリーダーと出遅れる企業を分ける要因となります。`,
-  },
+const modifiers = [
+  { prefix: "Case Study: ", suffix: " in Practice" },
+  { prefix: "Future Outlook: ", suffix: " Trends for 2026" },
+  { prefix: "Executive Brief: ", suffix: " Strategies" },
+  { prefix: "Deep Dive: ", suffix: " Dynamics" },
+  { prefix: "Report: ", suffix: " Analysis" }
 ];
 
-async function getLatestFiveArticles(url, key) {
-  const response = await fetch(
-    `${url}/rest/v1/articles?select=id,title&is_published=eq.true&order=created_at.desc,id.desc&limit=5`,
-    {
-      headers: {
-        apikey: key,
-        Authorization: `Bearer ${key}`,
-      },
-    },
-  );
+function generateArticles(count = 25) {
+  const articles = [];
+  const msInDay = 24 * 60 * 60 * 1000;
+  const now = Date.now();
 
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`Failed to fetch articles: ${response.status} ${body}`);
+  for (let i = 0; i < count; i++) {
+    const category = CATEGORIES[i % CATEGORIES.length];
+    const template = baseTemplates[category];
+    const modifier = modifiers[Math.floor(i / CATEGORIES.length) % modifiers.length];
+    
+    // Pick random image
+    const images = IMAGE_POOLS[category];
+    const imageUrl = images[i % images.length];
+
+    articles.push({
+      category: category,
+      title: `${modifier.prefix}${template.title}${modifier.suffix}`,
+      title_ja: `【${modifier.prefix.trim()}】${template.title_ja}`,
+      excerpt: template.excerpt,
+      excerpt_ja: template.excerpt_ja,
+      content: `# ${modifier.prefix}${template.title}\n\n${template.content}`,
+      content_ja: `# ${template.title_ja}\n\n${template.content_ja}`,
+      source_name: "mirAIreach Research",
+      image_url: imageUrl,
+      is_published: true,
+      // Stagger creation dates so they show up nicely in the timeline
+      created_at: new Date(now - i * 2 * msInDay).toISOString(),
+    });
   }
-
-  return response.json();
+  return articles;
 }
 
-async function updateArticle(url, key, id, payload) {
-  const response = await fetch(`${url}/rest/v1/articles?id=eq.${id}`, {
-    method: "PATCH",
+async function insertArticles(url, key, articles) {
+  const response = await fetch(`${url}/rest/v1/articles`, {
+    method: "POST",
     headers: {
       apikey: key,
       Authorization: `Bearer ${key}`,
       "Content-Type": "application/json",
       Prefer: "return=representation",
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(articles),
   });
 
   if (!response.ok) {
     const body = await response.text();
-    throw new Error(`Failed to update article ${id}: ${response.status} ${body}`);
+    throw new Error(`Failed to insert articles: ${response.status} ${body}`);
   }
 
   return response.json();
@@ -194,36 +166,36 @@ async function main() {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!url || !key) {
-    throw new Error(
-      "Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in environment.",
-    );
+    throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in environment.");
   }
 
-  const articles = await getLatestFiveArticles(url, key);
-  if (!Array.isArray(articles) || articles.length === 0) {
-    throw new Error("No published articles found to update.");
+  console.log("Generating 25 diverse bilingual articles...");
+  const newArticles = generateArticles(25);
+
+  console.log("Attempting to insert into Supabase...");
+  try {
+    const inserted = await insertArticles(url, key, newArticles);
+    console.log(`Successfully inserted ${inserted.length} articles!`);
+  } catch (err) {
+    console.error("\n========================================================");
+    console.error("❌ DATABASE INSERTION FAILED");
+    console.error("========================================================");
+    if (err.message.includes("42703") || err.message.includes("PGRST204") || err.message.includes("column articles.title_ja does not exist") || err.message.includes("Could not find the 'title_ja' column") || err.message.includes("content_ja")) {
+      console.error("\n[CRITICAL ERROR] The Japanese columns (title_ja, excerpt_ja, content_ja) DO NOT EXIST in your Supabase database.");
+      console.error("Please run the following SQL command in your Supabase SQL Editor:");
+      console.error(`
+      ALTER TABLE articles 
+      ADD COLUMN title_ja text,
+      ADD COLUMN excerpt_ja text,
+      ADD COLUMN content_ja text;
+      `);
+      console.error("\nAfter running the SQL, run this script again.");
+    } else {
+      console.error(err.message);
+    }
+    console.error("========================================================\n");
+    process.exit(1);
   }
-
-  const targets = articles.slice(0, 5);
-  for (let i = 0; i < targets.length; i += 1) {
-    const article = targets[i];
-    const contentPack = longFormContents[i % longFormContents.length];
-    const updated = await updateArticle(url, key, article.id, {
-      title: contentPack.title,
-      title_ja: contentPack.title_ja,
-      excerpt: contentPack.excerpt,
-      excerpt_ja: contentPack.excerpt_ja,
-      content: contentPack.content,
-      content_ja: contentPack.content_ja,
-    });
-
-    const row = updated[0];
-    console.log(
-      `Updated article ${row.id}: ${row.title.slice(0, 70)}... (bilingual contents set)`,
-    );
-  }
-
-  console.log("Completed bilingual content updates for latest five articles.");
 }
 
 main().catch((error) => {

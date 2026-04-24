@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "./Header";
@@ -15,6 +16,28 @@ interface HomeClientProps {
 
 export default function HomeClient({ articles, featured, latestInsights, trending }: HomeClientProps) {
   const { language } = useLanguage();
+  const [loadedArticles, setLoadedArticles] = useState<Article[]>(latestInsights);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(latestInsights.length >= 10); // Assuming limit is 10 initially
+
+  const loadMore = async () => {
+    setLoading(true);
+    try {
+      const offset = loadedArticles.length;
+      const res = await fetch(`/api/articles?limit=10&offset=${offset}`);
+      if (res.ok) {
+        const newArticles = await res.json();
+        if (newArticles.length < 10) {
+          setHasMore(false);
+        }
+        setLoadedArticles((prev) => [...prev, ...newArticles]);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getTitle = (article?: Article) => {
     if (!article) return "";
@@ -92,9 +115,9 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               Latest Timeline
             </h2>
             <div className="space-y-0">
-              {latestInsights.map((item, index) => (
+              {loadedArticles.map((item, index) => (
                 <article
-                  key={item.id}
+                  key={`${item.id}-${index}`}
                   className={`space-y-2 py-6 ${
                     index !== 0 ? "border-t border-line" : ""
                   }`}
@@ -114,6 +137,18 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                 </article>
               ))}
             </div>
+            
+            {hasMore && (
+              <div className="pt-8 text-center">
+                <button 
+                  onClick={loadMore}
+                  disabled={loading}
+                  className="rounded border border-line bg-transparent px-8 py-3 text-sm font-medium uppercase tracking-widest text-foreground transition-colors hover:bg-muted/5 disabled:opacity-50"
+                >
+                  {loading ? (language === "ja" ? "読み込み中..." : "Loading...") : (language === "ja" ? "もっと見る" : "Load More")}
+                </button>
+              </div>
+            )}
           </section>
         </section>
 
