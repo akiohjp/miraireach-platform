@@ -60,6 +60,31 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
             </div>
           </article>
 
+          {/* Promotional CTA Banner (Freemium Hook) */}
+          <section className="relative overflow-hidden rounded-xl border border-line bg-muted/5 p-8 md:p-10">
+            <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-foreground/5 blur-3xl"></div>
+            <div className="relative z-10 space-y-5">
+              <div className="inline-block rounded-full border border-foreground/20 bg-foreground/5 px-3 py-1 text-xs font-medium tracking-widest text-foreground uppercase">
+                {language === "ja" ? "限定オファー" : "Limited Offer"}
+              </div>
+              <h2 className="text-2xl font-medium leading-tight tracking-tight md:text-3xl">
+                {language === "ja" 
+                  ? "AI時代、ドバイの飲食店に『無料で』プロ級サイトを。"
+                  : "Zero-Cost Premium AI Websites for Dubai F&B."}
+              </h2>
+              <p className="max-w-2xl text-sm leading-relaxed text-muted md:text-base">
+                {language === "ja"
+                  ? "「自分で作る時間がない」「安っぽくなるのが嫌だ」。そんな悩みはもう過去のものです。最新AI技術で制作コストをゼロ化し、集客（AIO）に特化したウェブサイトを初期費用無料で構築・代行します。"
+                  : "No time? Worried about a cheap look? We've eliminated production costs using advanced AI. Claim your professionally designed, AIO-optimized website built entirely for you—with zero upfront cost."}
+              </p>
+              <div className="pt-2">
+                <button className="rounded bg-foreground px-6 py-3 text-sm font-medium tracking-wide text-background transition-opacity hover:opacity-90">
+                  {language === "ja" ? "詳細を見る" : "Claim Your Free Site"}
+                </button>
+              </div>
+            </div>
+          </section>
+
           <section id="latest" className="space-y-2">
             <h2 className="pb-4 text-xl font-medium tracking-[0.08em] uppercase">
               Latest Timeline
