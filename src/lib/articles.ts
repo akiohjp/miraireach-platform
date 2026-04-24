@@ -3,12 +3,16 @@ export type Article = {
   created_at: string;
   category: string;
   title: string;
+  title_ja?: string | null;
   excerpt: string;
+  excerpt_ja?: string | null;
   content?: string | null;
+  content_ja?: string | null;
   source_name: string;
   image_url: string | null;
   is_published: boolean;
 };
+
 
 export const fallbackImage =
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80";
@@ -36,7 +40,7 @@ export async function fetchPublishedArticles(limit = 20): Promise<Article[]> {
 
   const { url, key } = config;
   const response = await fetch(
-    `${url}/rest/v1/articles?select=id,created_at,category,title,excerpt,content,source_name,image_url,is_published&is_published=eq.true&order=created_at.desc,id.desc&limit=${limit}`,
+    `${url}/rest/v1/articles?select=id,created_at,category,title,title_ja,excerpt,excerpt_ja,content,content_ja,source_name,image_url,is_published&is_published=eq.true&order=created_at.desc,id.desc&limit=${limit}`,
     {
       headers: {
         apikey: key,
@@ -56,7 +60,7 @@ export async function fetchArticleById(id: number): Promise<Article | null> {
 
   const { url, key } = config;
   const response = await fetch(
-    `${url}/rest/v1/articles?select=id,created_at,category,title,excerpt,content,source_name,image_url,is_published&id=eq.${id}&is_published=eq.true&limit=1`,
+    `${url}/rest/v1/articles?select=id,created_at,category,title,title_ja,excerpt,excerpt_ja,content,content_ja,source_name,image_url,is_published&id=eq.${id}&is_published=eq.true&limit=1`,
     {
       headers: {
         apikey: key,
