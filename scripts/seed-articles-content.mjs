@@ -18,302 +18,238 @@ async function loadEnv() {
 
 const longFormContents = [
   {
-    excerpt:
-      "A practical AIO playbook for premium Japanese dining brands in Dubai that need to win AI-assisted discovery and convert high-intent guests.",
-    content: `# AI Search Visibility (AIO) for Premium Japanese Dining in Dubai
+    title: "ドバイのプレミアム・ダイニング市場におけるAIO（AI検索最適化）戦略",
+    excerpt: "検索エンジンから回答エンジンへ。ドバイの高級日本食レストランがAI時代の発見性を勝ち取り、高単価なゲストを獲得するための実践的なAIOプレイブック。",
+    content: `# ドバイのプレミアム・ダイニング市場におけるAIO（AI検索最適化）戦略
 
-Dubai's premium dining market has shifted from keyword-based discoverability to **answer-engine discoverability**. When users ask AI products where to host a client omakase dinner, where to find a private robata experience, or which venue can serve executive groups with dietary precision, recommendation systems increasingly synthesize data from multiple sources instead of simply listing classic SERP results.
+ドバイの高級ダイニング市場は、従来のキーワードベースの検索から、**「回答エンジン」による発見性**へとシフトしています。ユーザーが「クライアントとの会食に最適な、個室のある高級オマカセはどこか？」とAIに問いかけた際、AIは単なる検索結果のリストではなく、複数のソースから情報を統合して推奨を生成します。
 
-## Why AIO Changes the Competitive Landscape
+## なぜAIOが競争環境を変えるのか
 
-Traditional SEO can still drive baseline traffic, but premium Japanese restaurants now compete on:
+従来のSEOも依然として重要ですが、ドバイの高級店は現在、以下の3点で競い合っています。
 
-- **Entity trust**: clear brand identity, chef credentials, location precision, and menu specificity.
-- **Contextual depth**: structured answers for use cases like corporate hosting, halal-adjacent requirements, and multilingual guest support.
-- **Proof signals**: citations, third-party mentions, and high-consistency metadata across directories and social profiles.
+1.  **エンティティの信頼性**: 明確なブランドアイデンティティ、シェフの経歴、場所の正確性、およびメニューの具体性。
+2.  **文脈の深さ**: コーポレート・ホスティング、ハラール対応、多言語対応など、具体的なユースケースに対する構造化された回答。
+3.  **証明シグナル**: ディレクトリ、ソーシャルプロフィール、第三者による言及にわたる一貫したメタデータ。
 
-## Operational AIO Blueprint
+## 実践的なAIOブループリント
 
-### 1) Build an Intent Matrix by Commercial Scenario
+### 1) ビジネスシナリオ別のインテント・マトリクス構築
 
-Map discovery intent into enterprise-relevant scenarios:
+発見の意図を、エンタープライズに関連する以下のシナリオにマッピングします。
 
-- executive dinner booking
-- investor delegation hosting
-- premium takeaway for leadership workshops
-- private room booking for board-level discussions
+*   エグゼクティブ・ディナーの予約
+*   投資家代表団の接待
+*   リーダーシップ・ワークショップ向けのプレミアム・テイクアウト
+*   取締役会レベルの議論のためのプライベートルーム予約
 
-For each scenario, define:
+### 2) マシンが解釈可能なコンテンツ資産の公開
 
-1. target persona
-2. budget range
-3. decision timeline
-4. confidence blockers
+ドバイで効果の高い資産には以下が含まれます。
 
-### 2) Publish Machine-Interpretable Content Assets
+*   食材の調達先やこだわりを詳述したシェフへのインタビューページ
+*   DIFC、ダウンタウン、パーム・ジュメイラなどのエリア別ランディングページ
+*   法人の請求対応、個室の収容人数、食事制限へのプロトコルをカバーするFAQブロック
 
-High-performing assets in Dubai include:
+### 3) 発見から収益メトリクスへの接続
 
-- chef interview pages with provenance and ingredient sourcing details
-- neighborhood landing pages by DIFC, Downtown, and Palm Jumeirah
-- FAQ blocks covering corporate invoicing, private event capacity, and dietary protocols
+AIOの成果は、単なるインプレッションを超えて測定されるべきです。
 
-Use concise headings, canonical naming, and stable URLs so AI systems can repeatedly resolve the same entity facts.
+*   AI参照セッションからの質の高い予約問い合わせ数
+*   AI経由の予約あたりの平均利用単価
+*   問い合わせタイプ別のコンバージョン・ラグ
 
-### 3) Connect Discovery to Revenue Metrics
+## 90日間の実行プラン
 
-AIO should be measured beyond impressions. Track:
+*   **1-2週目**: テクニカル・オーディット、スキーマ修正、ソースの一貫性クリーニング。
+*   **3-6週目**: シナリオ別ページ、FAQ、構造化された証明コンテンツのローンチ。
+*   **7-10週目**: 多言語最適化と予約パスのフリクション・テスト。
+*   **11-13週目**: コンバージョン率の高いAIOエントリポイントへの広告予算再配分。
 
-- qualified booking inquiries from AI-referral sessions
-- average spend per AI-assisted booking
-- conversion lag by inquiry type
-- repeat corporate client rate
+## 結論
 
-## 90-Day Execution Plan
-
-**Weeks 1-2:** technical audit, schema corrections, source consistency cleanup.  
-**Weeks 3-6:** launch scenario pages, FAQs, and structured proof content.  
-**Weeks 7-10:** deploy multilingual optimization and booking-path friction tests.  
-**Weeks 11-13:** reallocate paid media toward top-converting AIO entry points.
-
-## Executive Takeaway
-
-In Dubai's premium segment, AIO is no longer an experimental channel. It is now a **front-door influence layer** for affluent and corporate dining demand. Restaurants that operationalize AIO early can capture disproportionate mindshare in high-value decision moments.`,
+ドバイのプレミアムセグメントにおいて、AIOはもはや実験的なチャネルではありません。それは富裕層や法人需要に影響を与える**「フロントドア」**となっています。早期にAIOを運用化したレストランは、高価値な意思決定の瞬間において圧倒的なシェアを獲得できるでしょう。`,
   },
   {
-    excerpt:
-      "How cloud kitchens in Dubai can scale poke bowl and katsu curry sub-brands while preserving margin and service quality through automation.",
-    content: `# Multi-Brand Cloud Kitchen Expansion: Poke Bowls, Katsu Curry, and Beyond
+    title: "クラウドキッチンによる多ブランド展開：ドバイでのスケーリング戦略",
+    excerpt: "ドバイのデリバリー需要を全方位でキャッチする。品質、信頼性、利益率を維持しながら、自動化を通じてポキ丼やカツカレーなどのブランドを拡大する方法。",
+    content: `# クラウドキッチンによる多ブランド展開：ドバイでのスケーリング戦略
 
-Dubai's delivery-first consumption patterns create a strong case for **multi-brand cloud kitchen portfolios**. The challenge is not concept ideation; it is operating several brands with a shared backend while protecting food quality, SLA reliability, and contribution margin.
+ドバイのデリバリー先進的な消費パターンは、**マルチブランドのクラウドキッチン・ポートフォリオ**にとって強力な追い風となっています。課題はコンセプトの考案ではなく、共通のバックエンドで複数のブランドを運営しながら、品質とサービスレベル、および貢献利益をいかに守るかにあります。
 
-## Portfolio Design for Demand Resilience
+## 需要の回復力を高めるポートフォリオ設計
 
-A robust architecture usually combines:
+堅牢な構成には通常、以下の組み合わせが含まれます。
 
-- a health-forward daytime brand (e.g., poke bowls)
-- a comfort-led evening brand (e.g., katsu curry)
-- a limited-time innovation line to test new demand pockets
+*   **ヘルシーな日中ブランド**（例：ポキ丼、サラダ）
+*   **コンフォートな夜間ブランド**（例：カツカレー、ラーメン）
+*   **期間限定のイノベーション・ライン**（新しい需要のポケットをテストするため）
 
-This model helps balance basket size volatility and daypart dependency.
+このモデルにより、客単価の変動や時間帯による依存度をバランスさせることができます。
 
-## Automation Layers That Matter
+## 重要な自動化レイヤー
 
-### Demand and Prep Forecasting
+### 需要と仕込みの予測
+注文履歴、天候の変化、給料日の影響、イベントカレンダーを使用して、SKUレベルの需要を予測します。予測に基づいてステーションごとの仕込み推奨をトリガーし、ダウンタイムと過剰生産を削減します。
 
-Use order history, weather shifts, payday effects, and event calendars to forecast SKU-level demand. Forecasting should trigger prep recommendations by station to reduce dead time and overproduction.
+### ダイナミック・メニュー・オーケストレーション
+以下の要因に基づき、メニューの表示・非表示を自動化します。
 
-### Dynamic Menu Orchestration
+*   調理負荷（バックログ）
+*   ライダーの空き状況
+*   食材の鮮度しきい値
+*   売上総利益のガードレール
 
-Automate menu visibility by:
+### 検品とディスパッチ・コントロール
+以下の条件でディスパッチ（配送依頼）をブロックするルールエンジンを導入します。
 
-- prep load
-- rider availability
-- ingredient freshness thresholds
-- gross margin guardrails
+1.  調理が鮮度保持時間を超えた場合
+2.  パッケージの不一致が検出された場合
+3.  アレルゲンタグが不完全な場合
 
-When margin-risk SKUs spike in cost, auto-prioritize substitute bundles.
+## 財務管理フレームワーク
 
-### QA and Dispatch Control
+各サブブランドについて、以下の指標を追跡します。
 
-Implement a rules engine that blocks dispatch when:
+*   注文あたりの変動貢献利益
+*   キャンセル調整後の純売上高
+*   チャネル別の顧客再獲得コスト
+*   完了チケットあたりの労働時間
 
-1. prep exceeds freshness windows
-2. packaging mismatch is detected
-3. allergen tags are incomplete
+## 戦略的結論
 
-## Financial Control Framework
-
-For each sub-brand, track:
-
-- variable contribution margin per order
-- cancellation-adjusted net revenue
-- customer reacquisition cost by channel
-- labor minutes per completed ticket
-
-The operating objective is not top-line growth alone; it is **profitable repeatability**.
-
-## Execution Priorities for Operators
-
-1. Standardize cross-brand base ingredients with clear variance limits.
-2. Deploy a single command center for menu, pricing, and promo governance.
-3. Build role-specific dashboards for kitchen managers and commercial teams.
-4. Introduce weekly kill-or-scale decisions for underperforming menu lines.
-
-## Strategic Conclusion
-
-Cloud kitchens in Dubai can scale aggressively only when brand expansion is tied to automated operational discipline. The winners will be operators that treat technology as a **profitability control system**, not just a convenience layer.`,
+ドバイのクラウドキッチンは、ブランドの拡大が自動化された運用の規律と結びついている場合にのみ、攻撃的にスケールできます。勝者は、テクノロジーを単なる利便性のレイヤーではなく、**「収益性制御システム」**として扱うオペレーターとなるでしょう。`,
   },
   {
-    excerpt:
-      "A field-tested framework for enterprise-grade lead generation in Dubai, combining precision targeting, content architecture, and pipeline orchestration.",
-    content: `# Precision Lead Generation and Content Pipelines for B2B Enterprise Growth
+    title: "B2Bエンタープライズ成長のための高精度リード獲得とコンテンツ・パイプライン",
+    excerpt: "ドバイの複雑な意思決定プロセスを攻略する。精密なターゲティング、コンテンツ・アーキテクチャ、およびパイプラインのオーケストレーションを組み合わせた実戦的フレームワーク。",
+    content: `# B2Bエンタープライズ成長のための高精度リード獲得とコンテンツ・パイプライン
 
-Dubai's B2B environment involves complex buying committees, cross-border compliance expectations, and multilingual stakeholder communication. High-output lead generation requires a pipeline strategy where content is mapped to account progression, not vanity engagement.
+ドバイのB2B環境には、複雑な購買委員会、国境を越えたコンプライアンスへの期待、および多言語によるステークホルダー・コミュニケーションが絡み合っています。高出力のリード獲得には、虚栄心の強いエンゲージメントではなく、アカウントの進行にマッピングされたコンテンツ戦略が必要です。
 
-## The New Lead Quality Equation
+## 新しいリード品質の方程式
 
-Strong enterprise demand systems now blend:
+強力なエンタープライズ需要システムは、以下の要素を融合させています。
 
-- intent signal intelligence
-- role-aware messaging
-- progressive trust assets
-- sales-ready qualification logic
+*   **意図シグナル・インテリジェンス**
+*   **役割を意識したメッセージング**
+*   **段階的な信頼構築資産**
+*   **セールス・レディな適格性判定ロジック**
 
-## Pipeline Architecture by Funnel Stage
+## ファネル段階別のパイプライン・アーキテクチャ
 
-### Stage 1: Market Signal Capture
+### ステージ1：市場シグナルの捕捉
+検索行動、業界イベント、パートナー・エコシステム、および所有チャネルからのシグナルを集約します。鮮度、関連性、および意思決定権限に基づいてスコアリングします。
 
-Aggregate signals from search behavior, industry events, partner ecosystems, and owned channels. Score for recency, relevance, and decision authority.
+### ステージ2：ナラティブによる適格化
+一般的な「ナーチャリング」の代わりに、セクター別の資産を公開します。
 
-### Stage 2: Narrative Qualification
+*   調達部門向けのROIブリーフ
+*   エグゼクティブ向けの実装ロードマップ
+*   テクニカルな準備状況チェックリスト
 
-Instead of generic nurture sequences, publish sector-specific assets:
+各資産は、進行を妨げている特定の摩擦（疑問）に対する回答である必要があります。
 
-- procurement-oriented ROI briefs
-- executive implementation roadmaps
-- technical readiness checklists
+### ステージ3：セールス・アクティベーション
+以下のしきい値を超えた場合に、営業へのハンドオフをトリガーします。
 
-Each asset should answer one high-friction question that blocks advancement.
+1.  累積意図スコアが一定以上
+2.  高価値ページへの深い訪問
+3.  複数の役割（担当者と決裁者など）からのエンゲージメント
 
-### Stage 3: Sales Activation
+## 経営陣のための必須ダッシュボード
 
-Trigger sales handoff when accounts exceed thresholds in:
+*   コンテンツピラーあたりの作成済みパイプライン額
+*   アカウントセグメント別のステージ遷移速度
+*   編集テーマ別の収益影響
+*   獲得ソース別のコンバージョン品質
 
-1. cumulative intent score
-2. high-value page depth
-3. repeat multi-role engagement
+## 最終提言
 
-## Content Operations Model
-
-Adopt an editorial operating rhythm:
-
-- weekly insight memo for fast-moving market updates
-- monthly flagship report for strategic positioning
-- quarterly proof-case collection for conversion acceleration
-
-Define clear owner roles for analysts, editors, and demand managers to eliminate production bottlenecks.
-
-## Dashboard Essentials for Leadership
-
-Leadership should monitor:
-
-- pipeline created per content pillar
-- stage velocity by account segment
-- revenue influence per editorial theme
-- conversion quality by acquisition source
-
-## Final Recommendation
-
-The most resilient B2B teams in Dubai no longer separate content and pipeline strategy. They design one integrated system where every asset has a measurable commercial purpose and every lead signal informs the next piece of narrative delivery.`,
+ドバイで最も回復力のあるB2Bチームは、もはやコンテンツ戦略とパイプライン戦略を切り離していません。すべての資産に測定可能な商業目的があり、すべてのリードシグナルが次の一手に反映される、単一の統合システムを設計しています。`,
   },
   {
-    excerpt:
-      "An advanced operating model for luxury hospitality and retail groups seeking unified AI marketing, content governance, and executive decision support.",
-    content: `# Building an Integrated AI Marketing Operating System for Dubai Consumer Enterprises
+    title: "ドバイの消費者向け企業のための統合AIマーケティング・オペレーティングシステム",
+    excerpt: "ラグジュアリー・ホスピタリティや小売グループ向けの高度な運用モデル。統合されたAIマーケティング、コンテンツ・ガバナンス、およびエグゼクティブの意思決定支援を実現。",
+    content: `# ドバイの消費者向け企業のための統合AIマーケティング・オペレーティングシステム
 
-Large hospitality and retail organizations in Dubai often run fragmented media, CRM, and content workflows across multiple brands. This fragmentation inflates spend and delays decision-making. A unified AI operating system can resolve these inefficiencies.
+ドバイの多くのホスピタリティや小売組織では、メディア、CRM、コンテンツのワークフローがブランドごとに断片化されています。この分断はコストを増大させ、意思決定を遅らせます。統合されたAIオペレーティングシステムが、これらの非効率を解消します。
 
-## Core Design Principles
+## コア・デザイン原則
 
-### Unified Taxonomy
+### 統合タクソノミー（分類学）
+オーディエンスセグメント、オファーの種類、ライフサイクルステージ、キャンペーン目的のために、単一の管理されたタクソノミーを作成します。共通のラベルがなければ、ビジネスユニット間での分析比較は不可能です。
 
-Create one controlled taxonomy for audience segments, offer classes, lifecycle stages, and campaign objectives. Without shared labels, analytics becomes non-comparable across business units.
+### 意思決定準備の整ったデータ製品
+レポート中心の文化から、意思決定のための製品（アウトプット）へと移行します。
 
-### Decision-Ready Data Products
+*   予算再配分の推奨事項
+*   解約リスクのアラート
+*   アカウント拡大のプレイブック
 
-Move from report-heavy culture to decision products:
+### 大規模なコンテンツ・ガバナンス
+以下の項目を強制するガバナンス・フレームワークを確立します。
 
-- spend reallocation recommendations
-- churn-risk alerts
-- account expansion playbooks
+1.  ブランドボイスの一貫性
+2.  法務およびコンプライアンス・チェック
+3.  市場ローカライズの品質
+4.  公開カレンデンス（頻度）の規律
 
-These outputs should be concise, prioritized, and tied to owner accountability.
+## 実装シーケンス
 
-### Content Governance at Scale
+*   **フェーズ1**: データの統合とKPIの正規化。
+*   **フェーズ2**: 計画、実験、キャンペーン後の診断のためのAI副操縦士（コパイロット）。
+*   **フェーズ3**: 入札、クリエイティブのローテーション、オーディエンスの重み付けのための自動最適化ループ。
 
-Establish a governance framework that enforces:
+## 期待される成果
 
-1. brand voice consistency
-2. legal and compliance checks
-3. market localization quality
-4. publishing cadence discipline
-
-## Implementation Sequence
-
-**Phase 1:** Data unification and KPI normalization.  
-**Phase 2:** AI copilots for planning, experimentation, and post-campaign diagnosis.  
-**Phase 3:** Automated optimization loops for bids, creative rotation, and audience re-weighting.
-
-## Risk Controls
-
-Executive teams should proactively manage:
-
-- model drift from outdated audience assumptions
-- over-automation without human quality review
-- attribution bias in multi-touch enterprise journeys
-
-## Outcome Profile
-
-Organizations that execute this model typically achieve faster cycle times, cleaner strategic alignment, and stronger capital efficiency across paid, owned, and partner channels.`,
+このモデルを実行する組織は通常、サイクルタイムの短縮、クリーンな戦略的整合、および有料・所有・パートナーチャネルにわたる資本効率の向上を達成します。`,
   },
   {
-    excerpt:
-      "A strategic roadmap for cross-functional teams to turn AI-assisted discovery into sustained enterprise revenue in Dubai's F&B and retail sectors.",
-    content: `# From Discovery to Revenue: A Cross-Functional AIO Playbook for Dubai
+    title: "発見から収益へ：ドバイにおけるクロスファンクショナルなAIOプレイブック",
+    excerpt: "F&Bおよび小売セクターのチームが、AIによる発見を継続的な収益に変えるための戦略ロードマップ。部門横断的な連携が成功の鍵を握る。",
+    content: `# 発見から収益へ：ドバイにおけるクロスファンクショナルなAIOプレイブック
 
-Winning discovery is not enough. Enterprises in Dubai need an operating bridge from AI-assisted visibility to qualified pipeline, predictable conversion, and long-term account growth.
+発見されるだけでは不十分です。ドバイの企業は、AIによる発見シグナルから、適格なパイプライン、予測可能なコンバージョン、および長期的なアカウント成長へとつなげる「運用の架け橋」を必要としています。
 
-## Commercial Alignment First
+## まずは商業的な整合性を
 
-Before scaling campaigns, leadership should define:
+キャンペーンをスケールさせる前に、経営陣は以下を定義すべきです。
 
-- primary growth segments (F&B groups, retail chains, hospitality operators)
-- revenue thresholds per segment
-- acceptable CAC-to-LTV ratio bands
+*   主要な成長セグメント（F&Bグループ、小売チェーン、ホスピタリティ事業者）
+*   セグメント別の収益しきい値
+*   許容可能なCAC（顧客獲得単価）対LTV（顧客生涯価値）の比率
 
-This prevents high-traffic programs that fail to produce meaningful commercial outcomes.
+これにより、トラフィックは多いが商業的成果に結びつかないプログラムを防ぐことができます。
 
-## High-Impact Workflow Design
+## 高影響度ワークフローの設計
 
-### Marketing
+### マーケティング
+以下のチャネルで再利用可能なモジュール型コンテンツブロックを作成します。
 
-Produce modular content blocks that can be reused across:
+*   AI回答エンジン
+*   業界ニュースレター
+*   アカウントベースのアウトリーチ・シーケンス
 
-- AI answer surfaces
-- industry newsletters
-- account-based outreach sequences
+### セールス
+すべてのリードが以下を受け取るフォローアップ・プロトコルを運用化します。
 
-### Sales
+1.  文脈を意識したアウトリーチ・ナラティブ
+2.  セクター別の価値提案（バリュー・フレーミング）
+3.  明確なネクストステップの提案
 
-Operationalize a follow-up protocol where every lead receives:
+### オペレーション
+サービスの品質を損なうような成長を避けるため、配送の制約、スタッフのデータ、利益率のアラートをキャンペーン計画に反映させます。
 
-1. context-aware outreach narrative
-2. sector-specific value framing
-3. clear next-step offer
+## 実践的な12週間のロードマップ
 
-### Operations
+*   **1-4週目**: ベースラインの診断とタクソノミーのクリーニング。
+*   **5-8週目**: ピラーコンテンツのローンチとAI発見性の最適化。
+*   **9-12週目**: セールスイネーブルメントの自動化とエグゼクティブによるKPIレビューの強化。
 
-Feed delivery constraints, staffing data, and margin alerts into campaign planning to avoid growth that breaks service quality.
+## 結論
 
-## Measurement Framework
-
-Track an integrated scorecard:
-
-- discovery-to-MQL conversion rate
-- MQL-to-opportunity progression by sector
-- opportunity win rate with content influence
-- post-sale expansion within 120 days
-
-## Practical 12-Week Roadmap
-
-**Weeks 1-4:** baseline diagnostics and taxonomy cleanup.  
-**Weeks 5-8:** launch pillar content and AI visibility optimizations.  
-**Weeks 9-12:** enforce sales enablement automation and executive KPI reviews.
-
-## Conclusion
-
-Dubai's market rewards teams that combine strategic precision with execution discipline. AIO becomes materially valuable only when it is embedded into the full go-to-market system, from discovery signal to signed revenue.`,
+ドバイの市場は、戦略的精度と実行の規律を兼ね備えたチームに報います。AIOは、発見のシグナルから契約締結に至るまでの「ゴー・トゥ・マーケット」システム全体に組み込まれたときにのみ、実質的な価値を生み出します。`,
   },
 ];
 
@@ -377,6 +313,7 @@ async function main() {
     const article = targets[i];
     const contentPack = longFormContents[i % longFormContents.length];
     const updated = await updateArticle(url, key, article.id, {
+      title: contentPack.title,
       excerpt: contentPack.excerpt,
       content: contentPack.content,
     });
