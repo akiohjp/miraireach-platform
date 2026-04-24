@@ -78,9 +78,11 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                   : "No time? Worried about a cheap look? We've eliminated production costs using advanced AI. Claim your professionally designed, AIO-optimized website built entirely for you—with zero upfront cost."}
               </p>
               <div className="pt-2">
-                <button className="rounded bg-foreground px-6 py-3 text-sm font-medium tracking-wide text-background transition-opacity hover:opacity-90">
-                  {language === "ja" ? "詳細を見る" : "Claim Your Free Site"}
-                </button>
+                <Link href="/lp/fb-automation">
+                  <button className="rounded bg-foreground px-6 py-3 text-sm font-medium tracking-wide text-background transition-opacity hover:opacity-90">
+                    {language === "ja" ? "詳細を見る" : "Claim Your Free Site"}
+                  </button>
+                </Link>
               </div>
             </div>
           </section>
