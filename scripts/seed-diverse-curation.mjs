@@ -123,13 +123,7 @@ async function main() {
   const unsplash = unsplashKey && !unsplashKey.includes("your_") ? createApi({ accessKey: unsplashKey }) : null;
 
   console.log("--------------------------------------------------");
-  console.log("PURGING PREVIOUS DATA (Excluding manual posts if any)...");
-  // Delete articles to start fresh with diverse curation
-  await fetch(`${supabaseUrl}/rest/v1/articles?is_curated=eq.true`, {
-    method: "DELETE",
-    headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` }
-  });
-  console.log("Purge complete.");
+  console.log("APPEND-ONLY MODE ENABLED (Skipping Purge)...");
 
   console.log("--------------------------------------------------");
   console.log(`INJECTING 25 DIVERSE PREMIUM ARTICLES...`);
