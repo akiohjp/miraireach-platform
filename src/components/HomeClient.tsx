@@ -256,14 +256,24 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                   </div>
                   <div className="space-y-4">
                     {catArticles.map((item, idx) => (
-                      <article key={item.id} className="group space-y-1 border-t border-line/50 pt-4 first:border-0 first:pt-0">
-                        <Link href={`/articles/${item.id}`}>
-                          <h4 className="text-xs font-semibold leading-relaxed line-clamp-2 group-hover:text-primary transition-colors">
-                            {getTitle(item)}
-                          </h4>
+                      <article key={item.id} className="group flex gap-3 border-t border-line/50 pt-4 first:border-0 first:pt-0">
+                        <Link href={`/articles/${item.id}`} className="relative aspect-video w-16 shrink-0 overflow-hidden rounded bg-muted/10">
+                          <Image
+                            src={item.image_url || fallbackImage}
+                            alt={getTitle(item)}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                          />
                         </Link>
-                        <div className="text-[8px] text-muted uppercase font-medium">
-                          {item.company_name} | {formatDate(item.created_at)}
+                        <div className="space-y-1">
+                          <Link href={`/articles/${item.id}`}>
+                            <h4 className="text-[11px] font-semibold leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+                              {getTitle(item)}
+                            </h4>
+                          </Link>
+                          <div className="text-[8px] text-muted uppercase font-medium">
+                            {item.company_name} | {formatDate(item.created_at)}
+                          </div>
                         </div>
                       </article>
                     ))}
