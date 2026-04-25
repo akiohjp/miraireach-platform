@@ -24,9 +24,9 @@ async function loadEnv() {
 }
 
 const FEEDS = [
-  { name: "Gulf News Business", url: "https://gulfnews.com/arc/outboundfeeds/rss/business.xml" },
-  { name: "Khaleej Times UAE", url: "https://www.khaleejtimes.com/rss/uae" },
-  { name: "TradeArabia", url: "http://www.tradearabia.com/news/xml/rss.xml" }
+  { name: "The National", url: "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml" },
+  { name: "Arab News", url: "https://www.arabnews.com/rss.xml" },
+  { name: "MENAbytes", url: "https://www.menabytes.com/feed/" },
 ];
 
 const FALLBACK_IMAGES = [
