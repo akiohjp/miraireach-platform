@@ -76,8 +76,8 @@ export default function ArticleClient({ article }: ArticleClientProps) {
               className="group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-primary/40 transition-all hover:bg-primary/[0.02]"
             >
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Service 01</span>
-              <span className="text-lg font-bold text-white group-hover:text-primary transition-colors">{isAr ? "تشخيص AIO المجاني" : "Free AIO Diagnostic"}</span>
-              <span className="text-xs text-white/40 leading-relaxed">{isAr ? "اكتشف كيف يراك ChatGPT و Gemini و Perplexity." : "Discover how ChatGPT, Gemini, and Perplexity perceive your brand."}</span>
+              <span className="text-lg font-bold text-white group-hover:text-primary transition-colors">{isAr ? "تدقيق البحث بالذكاء الاصطناعي (مجاني)" : "Free AI Search Audit"}</span>
+              <span className="text-xs text-white/40 leading-relaxed">{isAr ? "اكتشف كيف تصفك محركات البحث القائمة على الذكاء الاصطناعي." : "Audit how generative search engines perceive and describe your brand."}</span>
             </Link>
             <Link 
               href="/contact?service=free-design"

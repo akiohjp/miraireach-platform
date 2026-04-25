@@ -140,12 +140,12 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                 {isAr ? "خدمة مجانية" : "Free Service"}
               </div>
               <h2 className="text-2xl font-black tracking-tight md:text-3xl">
-                {isAr ? "آلة رؤية الذكاء الاصطناعي" : "AI Visibility Machine"}
+                {isAr ? "تدقيق البحث بالذكاء الاصطناعي" : "AI Search Audit"}
               </h2>
               <p className="text-sm leading-relaxed text-muted max-w-sm">
                 {isAr 
-                  ? "قم بتشخيص ظهور عملك في محركات البحث القائمة على الذكاء الاصطناعي (AIO) مجانًا. احصل على تقرير مفصل حول كيفية رؤية النماذج اللغوية لعلامتك التجارية."
-                  : "Diagnose your business visibility across AI search engines (AIO) for free. Get a detailed report on how LLMs perceive your brand."}
+                  ? "اكتشف كيف تصف أنظمة الذكاء الاصطناعي (مثل ChatGPT و Gemini) شركتك. احصل على تقرير تشخيصي مجاني لتقييم مدى جاهزيتك لعصر البحث التوليدي."
+                  : "Discover how AI systems (ChatGPT, Gemini, etc.) talk about your brand. Get a free diagnostic report to evaluate your readiness for the generative search era."}
               </p>
               <Link 
                 href="/contact?service=aio-diagnostic"

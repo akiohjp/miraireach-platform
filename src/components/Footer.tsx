@@ -27,7 +27,7 @@ export default function Footer() {
                 href="/contact?service=aio-diagnostic"
                 className="text-xs font-bold uppercase tracking-widest text-primary hover:underline"
               >
-                {isAr ? "→ ابدأ تشخيص AIO المجاني" : "→ Start Free AIO Diagnostic"}
+                {isAr ? "→ ابدأ تدقيق البحث بالذكاء الاصطناعي (مجاني)" : "→ Start Free AI Search Audit"}
               </Link>
               <Link 
                 href="/contact?service=free-design"
@@ -56,7 +56,7 @@ export default function Footer() {
             <ul className="space-y-4 text-sm font-medium">
               <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "تقارير السوق" : "Market Reports"}</Link></li>
               <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "دراسات الحالة" : "Case Studies"}</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "دليل AIO" : "AIO Guidebook"}</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "دليل AI Search Audit" : "AI Search Audit Guide"}</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">{isAr ? "مركز الدعم" : "Support Center"}</Link></li>
             </ul>
           </div>

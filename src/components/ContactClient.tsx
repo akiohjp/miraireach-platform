@@ -61,7 +61,7 @@ function ContactForm() {
             className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors appearance-none"
           >
             <option value="">{isAr ? "اختر الخدمة" : "Select a Service"}</option>
-            <option value="aio-diagnostic">{isAr ? "تشخيص AIO المجاني" : "Free AIO Diagnostic"}</option>
+            <option value="aio-diagnostic">{isAr ? "تدقيق البحث بالذكاء الاصطناعي (مجاني)" : "Free AI Search Audit"}</option>
             <option value="free-design">{isAr ? "تصميم ويب متميز (مجاني)" : "Free Premium Web Design"}</option>
             <option value="consultancy">{isAr ? "استشارات الذكاء الاصطناعي" : "AI Strategic Consultancy"}</option>
             <option value="other">{isAr ? "أخرى" : "Other Inquiry"}</option>
