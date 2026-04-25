@@ -334,7 +334,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           {/* 4. LATEST NEWS TIMELINE */}
           <section className="space-y-8">
             <header className="mb-10 flex items-center justify-between border-b border-line pb-8">
-              <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-foreground uppercase">
+              <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-foreground">
                 mirAIreach<span className="opacity-50">.</span>PRESS
               </Link>
               <div className="space-y-2 text-right">
