@@ -47,7 +47,7 @@ export async function fetchPublishedArticles(limit = 20, offset = 0): Promise<Ar
   
   // Try fetching with all columns first
   const fullSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,image_search_query,is_published,is_curated,original_source_name,original_url";
-  const basicSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,image_search_query,is_published";
+  const basicSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,is_published";
 
   try {
     const response = await fetch(
@@ -91,7 +91,7 @@ export async function fetchArticleById(id: number): Promise<Article | null> {
 
   const { url, key } = config;
   const fullSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,image_search_query,is_published,is_curated,original_source_name,original_url";
-  const basicSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,image_search_query,is_published";
+  const basicSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,is_published";
 
   try {
     const response = await fetch(
