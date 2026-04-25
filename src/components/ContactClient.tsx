@@ -45,11 +45,11 @@ function ContactForm() {
         <div className="grid gap-6 sm:grid-cols-2">
           <div className="space-y-2">
             <label className="text-[10px] font-black uppercase tracking-widest opacity-50">{isAr ? "الاسم الكامل" : "Full Name"}</label>
-            <input required type="text" className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors" />
+            <input required type="text" className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors text-foreground" />
           </div>
           <div className="space-y-2">
             <label className="text-[10px] font-black uppercase tracking-widest opacity-50">{isAr ? "البريد الإلكتروني" : "Email Address"}</label>
-            <input required type="email" className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors" />
+            <input required type="email" className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors text-foreground" />
           </div>
         </div>
 
@@ -58,7 +58,7 @@ function ContactForm() {
           <select 
             value={service} 
             onChange={(e) => setService(e.target.value)}
-            className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors appearance-none"
+            className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors appearance-none text-foreground"
           >
             <option value="">{isAr ? "اختر الخدمة" : "Select a Service"}</option>
             <option value="aio-diagnostic">{isAr ? "تدقيق البحث بالذكاء الاصطناعي (مجاني)" : "Free AI Search Audit"}</option>
@@ -70,7 +70,7 @@ function ContactForm() {
 
         <div className="space-y-2">
           <label className="text-[10px] font-black uppercase tracking-widest opacity-50">{isAr ? "الرسالة" : "Message"}</label>
-          <textarea rows={5} className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors resize-none" />
+          <textarea rows={5} className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors resize-none text-foreground" />
         </div>
 
         <button 
