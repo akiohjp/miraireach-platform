@@ -10,6 +10,7 @@ export type Article = {
   content_ar?: string | null;
   source_name: string;
   image_url: string | null;
+  image_search_query?: string | null;
   company_name?: string | null;
   is_published: boolean;
   is_curated?: boolean | null;
@@ -45,8 +46,8 @@ export async function fetchPublishedArticles(limit = 20, offset = 0): Promise<Ar
   const { url, key } = config;
   
   // Try fetching with all columns first
-  const fullSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,is_published,is_curated,original_source_name,original_url";
-  const basicSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,is_published";
+  const fullSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,image_search_query,is_published,is_curated,original_source_name,original_url";
+  const basicSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,image_search_query,is_published";
 
   try {
     const response = await fetch(
@@ -89,8 +90,8 @@ export async function fetchArticleById(id: number): Promise<Article | null> {
   if (!config) return null;
 
   const { url, key } = config;
-  const fullSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,is_published,is_curated,original_source_name,original_url";
-  const basicSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,is_published";
+  const fullSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,image_search_query,is_published,is_curated,original_source_name,original_url";
+  const basicSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,image_search_query,is_published";
 
   try {
     const response = await fetch(

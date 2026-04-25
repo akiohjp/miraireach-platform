@@ -203,12 +203,12 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           <div className="grid gap-x-8 gap-y-6 md:grid-cols-2">
             {loadedArticles.slice(0, 12).map((item) => (
               <article key={`latest-${item.id}`} className="group flex gap-4 border-b border-line pb-6 last:border-0 md:last:border-b">
-                <Link href={`/articles/${item.id}`} className="relative h-20 w-32 shrink-0 overflow-hidden rounded bg-muted/10 md:h-24 md:w-40">
+                <Link href={`/articles/${item.id}`} className="relative aspect-video w-32 shrink-0 overflow-hidden rounded bg-muted/10 md:w-40">
                   <Image
                     src={item.image_url || fallbackImage}
                     alt={getTitle(item)}
                     fill
-                    className="object-cover transition duration-300 group-hover:scale-110"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </Link>
                 <div className="flex flex-col justify-between py-0.5">
