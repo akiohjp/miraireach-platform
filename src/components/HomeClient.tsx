@@ -73,7 +73,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
       <div className="mx-auto max-w-7xl px-6 py-8 md:px-12">
         <Header showNav={true} />
 
-        <main className="mt-12 space-y-20 pb-24">
+        <main className="mt-12 space-y-12 pb-24">
           {/* 1. HERO SECTION (PR TIMES Style) */}
           <section className="grid gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2">
@@ -349,7 +349,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
             </header>
 
             <div className="grid gap-12 md:grid-cols-2">
-              {loadedArticles.slice(0, 20).map((item) => (
+              {loadedArticles.slice(0, 15).map((item) => (
                 <article key={`latest-${item.id}`} className="group flex gap-8">
                   <Link href={`/articles/${item.id}`} className="relative aspect-square w-32 shrink-0 overflow-hidden rounded-2xl bg-muted/10 md:w-40">
                     <Image
