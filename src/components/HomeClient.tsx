@@ -6,7 +6,8 @@ import Link from "next/link";
 import Header from "./Header";
 import { useLanguage } from "./LanguageProvider";
 import { Article, fallbackImage, formatDate } from "@/lib/articles";
-import { Search, Send, Layout, ArrowRight } from "lucide-react";
+import { Article, fallbackImage, formatDate } from "@/lib/articles";
+import { Search, Send, Layout, ArrowRight, Database, Cpu, TrendingUp } from "lucide-react";
 
 interface HomeClientProps {
   articles: Article[];
@@ -69,295 +70,256 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
   ];
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-7xl px-4 py-8 md:px-8">
-      <Header showNav={true} />
+    <div className="mx-auto min-h-screen w-full bg-white selection:bg-primary/10">
+      <div className="mx-auto max-w-7xl px-6 py-8 md:px-12">
+        <Header showNav={true} />
 
-      <main className="mt-6 space-y-12">
-        {/* 1. HERO SECTION (PR TIMES Style) */}
-        <section className="grid gap-6 lg:grid-cols-3">
-          <div className="lg:col-span-2">
-            <article className="group relative h-[400px] overflow-hidden rounded-xl lg:h-[500px]">
-              <Link href={featured ? `/articles/${featured.id}` : "#"}>
-                <Image
-                  src={featured?.image_url || fallbackImage}
-                  alt={getTitle(featured)}
-                  fill
-                  className="object-cover transition duration-700 group-hover:scale-105"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 p-6 text-white md:p-10 space-y-4">
-                  <div className="flex flex-wrap gap-2">
-                    <span className="rounded bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
-                      {featured?.category}
-                    </span>
-                    {featured?.is_curated && (
-                      <span className="rounded bg-white/20 backdrop-blur-sm px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
-                        {isAr ? "مختار" : "Curated"}
+        <main className="mt-12 space-y-32 pb-24">
+          {/* 1. HERO SECTION (PR TIMES Style) */}
+          <section className="grid gap-12 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <article className="group relative h-[450px] overflow-hidden rounded-3xl lg:h-[600px] shadow-sm">
+                <Link href={featured ? `/articles/${featured.id}` : "#"}>
+                  <Image
+                    src={featured?.image_url || fallbackImage}
+                    alt={getTitle(featured)}
+                    fill
+                    className="object-cover transition duration-1000 group-hover:scale-105"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  <div className="absolute bottom-0 p-8 text-white md:p-12 space-y-6">
+                    <div className="flex flex-wrap gap-3">
+                      <span className="rounded-full bg-primary px-4 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">
+                        {featured?.category}
                       </span>
-                    )}
-                    <span className="text-[10px] font-medium text-white/80 uppercase tracking-widest">
-                      {featured?.original_source_name || featured?.company_name}
-                    </span>
+                      <span className="text-[10px] font-black text-white/80 uppercase tracking-[0.2em] backdrop-blur-md bg-white/10 px-4 py-1 rounded-full border border-white/20">
+                        {featured?.original_source_name || featured?.company_name}
+                      </span>
+                    </div>
+                    <h1 className="text-3xl font-black leading-tight md:text-5xl tracking-tighter">
+                      {getTitle(featured)}
+                    </h1>
+                    <p className="line-clamp-2 text-sm text-white/80 max-w-2xl leading-relaxed">
+                      {getExcerpt(featured)}
+                    </p>
                   </div>
-                  <h1 className="text-2xl font-bold leading-tight md:text-4xl">
-                    {getTitle(featured)}
-                  </h1>
-                  <p className="line-clamp-2 text-sm text-white/70 max-w-2xl">
-                    {getExcerpt(featured)}
-                  </p>
-                </div>
-              </Link>
-            </article>
-          </div>
+                </Link>
+              </article>
+            </div>
 
-          {/* ACCESS RANKING (Side Column for density) */}
-          <div className="space-y-4">
-            <h2 className="border-b-2 border-foreground pb-2 text-sm font-bold uppercase tracking-widest">
-              {isAr ? "الأكثر قراءة" : "Access Ranking"}
-            </h2>
-            <div className="space-y-4">
-              {trending.slice(0, 5).map((item, index) => (
-                <article key={item.id} className="flex gap-4 group">
-                  <span className="text-2xl font-black text-foreground/10 italic">0{index + 1}</span>
-                  <div className="space-y-1">
+            {/* ACCESS RANKING (Side Column) */}
+            <div className="space-y-8">
+              <div className="flex items-center gap-4">
+                <div className="h-[2px] w-8 bg-primary" />
+                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-foreground/40">
+                  {isAr ? "الأكثر قراءة" : "Access Ranking"}
+                </h2>
+              </div>
+              <div className="space-y-8">
+                {trending.slice(0, 5).map((item, index) => (
+                  <article key={item.id} className="flex gap-6 group">
+                    <span className="text-4xl font-black text-foreground/5 transition-colors group-hover:text-primary/10">0{index + 1}</span>
+                    <div className="space-y-2">
+                      <Link href={`/articles/${item.id}`}>
+                        <h3 className="text-sm font-bold leading-snug line-clamp-2 group-hover:text-primary transition-colors duration-300">
+                          {getTitle(item)}
+                        </h3>
+                      </Link>
+                      <div className="text-[10px] text-muted uppercase font-black tracking-widest opacity-40">
+                        {item.company_name}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* 2. THE FOUNDATION: AI IDENTITY AGGREGATION (CORE SYSTEM) */}
+          <section className="space-y-16 py-12">
+            <div className="max-w-4xl space-y-6">
+              <div className="inline-flex items-center gap-3 rounded-full bg-foreground text-background px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em]">
+                {isAr ? "النظام الأساسي" : "The Core System"}
+              </div>
+              <h2 className="text-4xl font-black tracking-tighter md:text-6xl lg:text-7xl">
+                {isAr ? "الأساس: تجميع هوية الذكاء الاصطناعي" : "The Foundation: AI Identity Aggregation"}
+              </h2>
+              <p className="text-lg md:text-xl leading-relaxed text-muted/80 font-medium">
+                {isAr 
+                  ? "توقف عن ترك الذكاء الاصطناعي يخمن قيمتك. يقوم mirAIreach بدمج معلومات عملك المشتتة في مصدر واحد عالي الدقة، مما يضمن فهم الذكاء الاصطناعي لعلامتك التجارية والتوصية بها بدقة 100٪."
+                  : "Stop letting AI guess your value. mirAIreach integrates your scattered business information into a single 'High-Precision Source,' ensuring AI understands and recommends your brand with 100% accuracy."}
+              </p>
+            </div>
+
+            <div className="grid gap-12 md:grid-cols-3">
+              <div className="space-y-6 border-l border-line/10 pl-8 relative">
+                <div className="text-primary"><Database size={32} strokeWidth={2.5} /></div>
+                <h3 className="text-xl font-black tracking-tight">
+                  {isAr ? "إشارة بيانات موحدة" : "Unified Data Signal"}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted/70">
+                  {isAr 
+                    ? "تجميع بيانات SNS ومعلومات Google Business لإرسال إشارة متسقة وقوية لأنظمة الذكاء الاصطناعي."
+                    : "Aggregate SNS and Google Business info to send a consistent, high-authority signal to AI systems globally."}
+                </p>
+              </div>
+
+              <div className="space-y-6 border-l border-line/10 pl-8 relative">
+                <div className="text-primary"><Cpu size={32} strokeWidth={2.5} /></div>
+                <h3 className="text-xl font-black tracking-tight">
+                  {isAr ? "فهم دقيق للذكاء الاصطناعي" : "Precision AI Understanding"}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted/70">
+                  {isAr 
+                    ? "إنشاء بيانات منظمة يسهل على ChatGPT و Gemini استهلاكها، مما يثبت علامتك التجارية كمصدر موثوق."
+                    : "Generate structured data that ChatGPT and Gemini crave, establishing your brand as a 'Verified Source' in their training sets."}
+                </p>
+              </div>
+
+              <div className="space-y-6 border-l border-line/10 pl-8 relative">
+                <div className="text-primary"><TrendingUp size={32} strokeWidth={2.5} /></div>
+                <h3 className="text-xl font-black tracking-tight">
+                  {isAr ? "التموضع الاستراتيجي" : "Strategic Positioning"}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted/70">
+                  {isAr 
+                    ? "تعظيم معدل الاقتباس داخل إجابات الذكاء الاصطناعي، لتصبح أنت الإجابة بدلاً من مجرد رابط بحث."
+                    : "Maximize your citation rate within AI answers. Move beyond being a search link to becoming the 'AI's Direct Answer' itself."}
+                </p>
+              </div>
+            </div>
+
+            <div className="pt-8">
+              <Link 
+                href="/contact" 
+                className="inline-flex items-center gap-6 rounded-full bg-foreground px-12 py-5 text-xs font-black uppercase tracking-[0.3em] text-background transition hover:bg-primary hover:text-white"
+              >
+                {isAr ? "احجز اجتماعاً استراتيجياً" : "Book a Strategic Meeting"}
+                <ArrowRight size={18} />
+              </Link>
+            </div>
+          </section>
+
+          {/* 3. THREE FREE SERVICES (STANDALONE TOOLS) */}
+          <section className="space-y-20 bg-muted/5 rounded-[4rem] p-12 md:p-20 border border-line/5">
+            <div className="text-center space-y-6 max-w-3xl mx-auto">
+              <p className="text-xs font-black uppercase tracking-[0.4em] text-primary">
+                {isAr ? "هل أنت غير مستعد للتكامل الكامل؟" : "Not ready for a full system integration?"}
+              </p>
+              <h2 className="text-3xl font-black tracking-tighter md:text-5xl">
+                {isAr ? "جرب أدواتنا المستقلة المجانية أولاً" : "Try our free standalone tools first."}
+              </h2>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-3">
+              {/* Tool 1: AI PR Outreach */}
+              <div className="group bg-white rounded-3xl p-10 border border-line/10 shadow-sm transition hover:shadow-xl hover:-translate-y-2 duration-500">
+                <div className="space-y-8">
+                  <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary"><Send size={24} /></div>
+                  <div className="space-y-3">
+                    <h3 className="text-xl font-black">{isAr ? "التواصل الإعلامي بالذكاء الاصطناعي" : "AI PR Outreach"}</h3>
+                    <p className="text-xs leading-relaxed text-muted/70 font-medium">
+                      {isAr ? "أتمتة إرسال رسائل العلاقات العامة لوسائل الإعلام المستهدفة." : "Automated PR outreach to target media outlets and high-authority journalists."}
+                    </p>
+                  </div>
+                  <Link href="/contact?service=ai-pr" className="flex items-center justify-between group/link">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-primary">{isAr ? "ابدأ التجربة" : "Start Free Trial"}</span>
+                    <ArrowRight size={14} className="group-hover/link:translate-x-2 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Tool 2: AI Search Visibility Diagnosis */}
+              <div className="group bg-white rounded-3xl p-10 border border-line/10 shadow-sm transition hover:shadow-xl hover:-translate-y-2 duration-500">
+                <div className="space-y-8">
+                  <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary"><Search size={24} /></div>
+                  <div className="space-y-3">
+                    <h3 className="text-xl font-black">{isAr ? "تشخيص وضوح البحث" : "AI Search Visibility Diagnosis"}</h3>
+                    <p className="text-xs leading-relaxed text-muted/70 font-medium">
+                      {isAr ? "تقرير مجاني حول كيفية ظهور علامتك التجارية في نتائج البحث التوليدي." : "Free audit report on how your brand is perceived by generative search engines."}
+                    </p>
+                  </div>
+                  <Link href="/contact?service=ai-audit" className="flex items-center justify-between group/link">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-primary">{isAr ? "ابدأ التجربة" : "Start Free Trial"}</span>
+                    <ArrowRight size={14} className="group-hover/link:translate-x-2 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Tool 3: AI Website/LP Creation */}
+              <div className="group bg-white rounded-3xl p-10 border border-line/10 shadow-sm transition hover:shadow-xl hover:-translate-y-2 duration-500">
+                <div className="space-y-8">
+                  <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary"><Layout size={24} /></div>
+                  <div className="space-y-3">
+                    <h3 className="text-xl font-black">{isAr ? "بناء صفحات هبوط احترافية" : "AI Website/LP Creation"}</h3>
+                    <p className="text-xs leading-relaxed text-muted/70 font-medium">
+                      {isAr ? "تصميم صفحة هبوط مخصصة ومحسنة للتحويل مجاناً لعملك." : "Get a high-converting, professionally designed landing page built for free."}
+                    </p>
+                  </div>
+                  <Link href="/contact?service=free-lp" className="flex items-center justify-between group/link">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-primary">{isAr ? "ابدأ التجربة" : "Start Free Trial"}</span>
+                    <ArrowRight size={14} className="group-hover/link:translate-x-2 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 4. LATEST NEWS TIMELINE */}
+          <section className="space-y-12">
+            <div className="flex items-end justify-between border-b border-line/10 pb-6">
+              <div className="space-y-2">
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">{isAr ? "التحديثات" : "Timeline"}</p>
+                <h2 className="text-3xl font-black tracking-tight">{isAr ? "آخر أخبار الصناعة" : "Latest Industry Insights"}</h2>
+              </div>
+              <Link href="/articles" className="text-[10px] font-black uppercase tracking-[0.2em] text-muted hover:text-primary transition-colors">
+                {isAr ? "عرض كل التقارير" : "Explore All Intelligence"}
+              </Link>
+            </div>
+
+            <div className="grid gap-12 md:grid-cols-2">
+              {loadedArticles.slice(0, 10).map((item) => (
+                <article key={`latest-${item.id}`} className="group flex gap-8">
+                  <Link href={`/articles/${item.id}`} className="relative aspect-square w-32 shrink-0 overflow-hidden rounded-2xl bg-muted/10 md:w-40">
+                    <Image
+                      src={item.image_url || fallbackImage}
+                      alt={getTitle(item)}
+                      fill
+                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                    />
+                  </Link>
+                  <div className="flex flex-col justify-center space-y-3">
+                    <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest">
+                      <span className="text-primary">{item.category}</span>
+                      <span className="h-1 w-1 rounded-full bg-line" />
+                      <span className="text-muted/50">{item.original_source_name || item.company_name}</span>
+                    </div>
                     <Link href={`/articles/${item.id}`}>
-                      <h3 className="text-xs font-bold leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+                      <h3 className="text-base font-bold leading-snug group-hover:text-primary transition-colors">
                         {getTitle(item)}
                       </h3>
                     </Link>
-                    <div className="text-[9px] text-muted uppercase font-semibold">
-                      {item.company_name} | {formatDate(item.created_at)}
-                    </div>
+                    <time className="text-[10px] font-black text-muted/30 tracking-widest">{formatDate(item.created_at)}</time>
                   </div>
                 </article>
               ))}
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* 2. THREE FREE CORE SERVICES (B2B LEAD GEN) */}
-        <section className="space-y-8 py-4">
-          <div className="text-center space-y-3">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-primary">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-              </span>
-              {isAr ? "خدماتنا الأساسية المجانية" : "Our Free Core Services"}
+          {hasMore && (
+            <div className="flex justify-center pt-12">
+              <button 
+                onClick={loadMore}
+                disabled={loading}
+                className="group relative flex items-center gap-6 rounded-full border border-line px-16 py-5 text-[10px] font-black uppercase tracking-[0.3em] transition hover:bg-foreground hover:text-background disabled:opacity-50"
+              >
+                {loading ? (isAr ? "جارٍ التحميل..." : "Loading...") : (isAr ? "عرض المزيد من البيانات" : "Load More Intelligence")}
+              </button>
             </div>
-            <h2 className="text-3xl font-black tracking-tighter md:text-4xl lg:text-5xl">
-              {isAr ? "نمو عملك يبدأ من هنا" : "Scale Your Business with AI"}
-            </h2>
-            <p className="mx-auto max-w-2xl text-sm text-muted/70">
-              {isAr 
-                ? "نحن نوفر حلولاً متطورة قائمة على الذكاء الاصطناعي لمساعدة الشركات في دبي على التفوق في العصر الرقمي الجديد."
-                : "We provide cutting-edge AI-driven solutions to help Dubai-based businesses thrive in the new digital era."}
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {/* Service 1: AI Search Visibility Diagnosis */}
-            <div className="group relative overflow-hidden rounded-3xl border border-line bg-muted/5 p-8 transition hover:border-primary/50 hover:bg-muted/10">
-              <div className="relative z-10 space-y-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                  <Search size={24} />
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-xl font-bold tracking-tight">
-                    {isAr ? "تشخيص وضوح البحث بالذكاء الاصطناعي" : "AI Search Visibility Diagnosis"}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-muted/70">
-                    {isAr 
-                      ? "اكتشف كيف تصف أنظمة الذكاء الاصطناعي (ChatGPT, Perplexity) علمتك التجارية في نتائج البحث التوليدي."
-                      : "Discover how AI systems (ChatGPT, Perplexity) describe your brand in generative search results."}
-                  </p>
-                </div>
-                <Link 
-                  href="/contact?service=ai-diagnosis" 
-                  className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary group-hover:gap-4 transition-all"
-                >
-                  {isAr ? "ابدأ التشخيص الآن" : "Start Diagnosis Now"}
-                  <ArrowRight size={14} />
-                </Link>
-              </div>
-              <div className="absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-primary/5 blur-3xl group-hover:bg-primary/10 transition-colors" />
-            </div>
-
-            {/* Service 2: AI PR & Outreach System */}
-            <div className="group relative overflow-hidden rounded-3xl border border-line bg-muted/5 p-8 transition hover:border-primary/50 hover:bg-muted/10">
-              <div className="relative z-10 space-y-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                  <Send size={24} />
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-xl font-bold tracking-tight">
-                    {isAr ? "نظام العلاقات العامة والتواصل الذكي" : "AI PR & Outreach System"}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-muted/70">
-                    {isAr 
-                      ? "أتمتة التواصل مع الوسائل الإعلامية والعملاء المستهدفين باستخدام حلول الذكاء الاصطناعي المخصصة."
-                      : "Automate your media outreach and target lead generation using hyper-personalized AI solutions."}
-                  </p>
-                </div>
-                <Link 
-                  href="/contact?service=ai-outreach" 
-                  className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary group-hover:gap-4 transition-all"
-                >
-                  {isAr ? "تجربة مجانية" : "Free Trial"}
-                  <ArrowRight size={14} />
-                </Link>
-              </div>
-              <div className="absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-primary/5 blur-3xl group-hover:bg-primary/10 transition-colors" />
-            </div>
-
-            {/* Service 3: Free Landing Page Creation */}
-            <div className="group relative overflow-hidden rounded-3xl border border-line bg-muted/5 p-8 transition hover:border-primary/50 hover:bg-muted/10">
-              <div className="relative z-10 space-y-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                  <Layout size={24} />
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-xl font-bold tracking-tight">
-                    {isAr ? "بناء صفحات هبوط مجانية" : "Free Landing Page Creation"}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-muted/70">
-                    {isAr 
-                      ? "بناء صفحات هبوط عالية التحويل ومصممة باحترافية لتعزيز حضورك الرقمي في دبي مجانًا."
-                      : "Build high-converting, professionally designed landing pages to boost your digital presence in Dubai for free."}
-                  </p>
-                </div>
-                <Link 
-                  href="/contact?service=free-lp" 
-                  className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary group-hover:gap-4 transition-all"
-                >
-                  {isAr ? "احصل على صفحتك" : "Get Your Page"}
-                  <ArrowRight size={14} />
-                </Link>
-              </div>
-              <div className="absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-primary/5 blur-3xl group-hover:bg-primary/10 transition-colors" />
-            </div>
-          </div>
-
-          <div className="flex justify-center pt-4">
-            <Link 
-              href="/contact" 
-              className="group flex items-center gap-4 rounded-full bg-foreground px-10 py-4 text-xs font-black uppercase tracking-[0.2em] text-background transition hover:bg-primary hover:text-white"
-            >
-              {isAr ? "احصل على تقييمك المجاني" : "Get Your Free Assessment"}
-              <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-            </Link>
-          </div>
-        </section>
-
-        {/* 3. LATEST TIMELINE (High Density List) */}
-        <section className="space-y-6">
-          <div className="flex items-center justify-between border-b border-line pb-2">
-            <h2 className="text-base font-bold uppercase tracking-widest flex items-center gap-2">
-              <span className="h-4 w-1 bg-primary" />
-              {isAr ? "آخر الأخبار" : "Latest Releases"}
-            </h2>
-            <Link href="/articles" className="text-[10px] font-bold uppercase tracking-wider text-muted hover:text-foreground">
-              {isAr ? "عرض الكل" : "View All"}
-            </Link>
-          </div>
-
-          <div className="grid gap-x-8 gap-y-6 md:grid-cols-2">
-            {loadedArticles.slice(0, 12).map((item) => (
-              <article key={`latest-${item.id}`} className="group flex gap-4 border-b border-line pb-6 last:border-0 md:last:border-b">
-                <Link href={`/articles/${item.id}`} className="relative aspect-video w-32 shrink-0 overflow-hidden rounded bg-muted/10 md:w-40">
-                  <Image
-                    src={item.image_url || fallbackImage}
-                    alt={getTitle(item)}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                </Link>
-                <div className="flex flex-col justify-between py-0.5">
-                  <div className="space-y-1.5">
-                    <div className="flex flex-wrap items-center gap-2 text-[9px] font-bold uppercase tracking-wider">
-                      <span className="text-primary">{item.category}</span>
-                      <span className="h-2 w-[1px] bg-line" />
-                      {item.is_curated && (
-                        <>
-                          <span className="text-muted/60">{isAr ? "مختار" : "Curated"}</span>
-                          <span className="h-2 w-[1px] bg-line" />
-                        </>
-                      )}
-                      <span className="text-muted">{item.original_source_name || item.company_name}</span>
-                    </div>
-                    <Link href={`/articles/${item.id}`}>
-                      <h3 className="text-sm font-bold leading-snug line-clamp-2 group-hover:underline decoration-1 underline-offset-4">
-                        {getTitle(item)}
-                      </h3>
-                    </Link>
-                  </div>
-                  <time className="text-[9px] text-muted/60">{formatDate(item.created_at)}</time>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* 3. INDUSTRY CATEGORY GRID */}
-        <section className="space-y-8">
-          <div className="text-center space-y-2">
-            <h2 className="text-xl font-bold uppercase tracking-[0.2em]">{isAr ? "استكشاف حسب الصناعة" : "Explore by Industry"}</h2>
-            <div className="mx-auto h-0.5 w-12 bg-primary" />
-          </div>
-          
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {categories.map((cat) => {
-              const catArticles = loadedArticles.filter(a => a.category === cat).slice(0, 3);
-              if (catArticles.length === 0) return null;
-              return (
-                <div key={cat} className="rounded-xl border border-line bg-muted/5 p-5 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-black uppercase tracking-widest text-foreground">{cat}</h3>
-                    <span className="text-[10px] font-bold text-muted/50">{catArticles.length}+</span>
-                  </div>
-                  <div className="space-y-4">
-                    {catArticles.map((item, idx) => (
-                      <article key={item.id} className="group flex gap-3 border-t border-line/50 pt-4 first:border-0 first:pt-0">
-                        <Link href={`/articles/${item.id}`} className="relative aspect-video w-16 shrink-0 overflow-hidden rounded bg-muted/10">
-                          <Image
-                            src={item.image_url || fallbackImage}
-                            alt={getTitle(item)}
-                            fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
-                          />
-                        </Link>
-                        <div className="space-y-1">
-                          <Link href={`/articles/${item.id}`}>
-                            <h4 className="text-[11px] font-semibold leading-snug line-clamp-2 group-hover:text-primary transition-colors">
-                              {getTitle(item)}
-                            </h4>
-                          </Link>
-                          <div className="text-[8px] text-muted uppercase font-medium">
-                            {item.company_name} | {formatDate(item.created_at)}
-                          </div>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {hasMore && (
-          <div className="flex justify-center pt-8">
-            <button 
-              onClick={loadMore}
-              disabled={loading}
-              className="group flex items-center gap-3 rounded-full border-2 border-foreground px-12 py-3.5 text-xs font-black uppercase tracking-[0.2em] transition hover:bg-foreground hover:text-background disabled:opacity-50"
-            >
-              {loading ? (isAr ? "جارٍ التحميل..." : "Loading...") : (isAr ? "تحميل المزيد من التقارير" : "Load More Reports")}
-            </button>
-          </div>
-        )}
-      </main>
+          )}
+        </main>
+      </div>
     </div>
   );
 }
