@@ -31,7 +31,11 @@ function ContactForm() {
       <div className="text-center py-20 space-y-6">
         <div className="mx-auto h-16 w-16 rounded-full bg-primary/20 flex items-center justify-center text-primary text-2xl">✓</div>
         <h2 className="text-3xl font-black">{isAr ? "تم إرسال الرسالة بنجاح" : "Message Sent Successfully"}</h2>
-        <p className="text-muted">{isAr ? "سنتواصل معك قريباً جداً." : "We will get back to you very shortly."}</p>
+        <p className="text-muted">
+          {isAr 
+            ? "سنتواصل معك قريباً جداً من info.ae@miraireach.marketing." 
+            : "We will get back to you from info.ae@miraireach.marketing very shortly."}
+        </p>
         <button onClick={() => setStatus("idle")} className="text-xs font-black uppercase tracking-widest underline underline-offset-8">
           {isAr ? "إرسال رسالة أخرى" : "Send another message"}
         </button>

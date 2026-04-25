@@ -69,6 +69,11 @@ export default function Footer() {
               <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "بيان الخصوصية" : "Privacy"}</Link></li>
               <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "الشروط" : "Terms"}</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">{isAr ? "اتصل بنا" : "Contact"}</Link></li>
+              <li className="pt-2">
+                <a href="mailto:info.ae@miraireach.marketing" className="text-[10px] text-muted hover:text-white transition-colors lowercase tracking-wider">
+                  info.ae@miraireach.marketing
+                </a>
+              </li>
             </ul>
           </div>
         </div>
