@@ -6,6 +6,7 @@
   --foreground: #222222;
   --muted: #9a9a9a;
   --line: #ececec;
+  --primary: #222222;
 }
 
 @theme inline {
@@ -13,6 +14,7 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-primary: var(--primary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-noto-arabic: var(--font-noto-arabic);

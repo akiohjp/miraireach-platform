@@ -76,9 +76,9 @@ function ContactForm() {
         <button 
           type="submit" 
           disabled={status === "loading"}
-          className="w-full rounded-lg bg-primary py-4 text-xs font-black uppercase tracking-widest text-white hover:opacity-90 transition-opacity disabled:opacity-50"
+          className="w-full rounded-full bg-primary py-5 text-xs font-black uppercase tracking-[0.2em] text-white hover:bg-black transition-all disabled:opacity-50 shadow-lg shadow-primary/10 active:scale-[0.98]"
         >
-          {status === "loading" ? (isAr ? "جارٍ الإرسال..." : "Sending...") : (isAr ? "إرسال الطلب" : "Send Request")}
+          {status === "loading" ? (isAr ? "جارٍ الإرسال..." : "Sending...") : (isAr ? "إرسال الطلب الآن" : "Send Request Now")}
         </button>
       </form>
     </div>
