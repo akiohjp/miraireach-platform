@@ -25,6 +25,9 @@ export default function Header({ showNav = true }: HeaderProps) {
             <a href="/#trending" className="hover:text-foreground">
               Ranking
             </a>
+            <Link href="/contact" className="hover:text-foreground">
+              Contact
+            </Link>
           </nav>
         )}
         

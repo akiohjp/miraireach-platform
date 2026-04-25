@@ -128,7 +128,60 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           </div>
         </section>
 
-        {/* 2. LATEST TIMELINE (High Density List) */}
+        {/* 2. CORE SERVICES (LP HYBRID SECTION) */}
+        <section className="grid gap-6 md:grid-cols-2">
+          <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 p-8 border border-primary/20 transition hover:border-primary/40">
+            <div className="relative z-10 space-y-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
+                </span>
+                {isAr ? "خدمة مجانية" : "Free Service"}
+              </div>
+              <h2 className="text-2xl font-black tracking-tight md:text-3xl">
+                {isAr ? "آلة رؤية الذكاء الاصطناعي" : "AI Visibility Machine"}
+              </h2>
+              <p className="text-sm leading-relaxed text-muted max-w-sm">
+                {isAr 
+                  ? "قم بتشخيص ظهور عملك في محركات البحث القائمة على الذكاء الاصطناعي (AIO) مجانًا. احصل على تقرير مفصل حول كيفية رؤية النماذج اللغوية لعلامتك التجارية."
+                  : "Diagnose your business visibility across AI search engines (AIO) for free. Get a detailed report on how LLMs perceive your brand."}
+              </p>
+              <Link 
+                href="/contact?service=aio-diagnostic"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-xs font-black uppercase tracking-widest text-white transition hover:scale-105"
+              >
+                {isAr ? "ابدأ التشخيص المجاني" : "Start Free Diagnostic"}
+              </Link>
+            </div>
+            <div className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-primary/10 blur-3xl group-hover:bg-primary/20 transition-colors" />
+          </div>
+
+          <div className="group relative overflow-hidden rounded-2xl bg-[#111] p-8 border border-white/5 transition hover:border-white/10 text-white">
+            <div className="relative z-10 space-y-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white/80">
+                {isAr ? "عرض محدود" : "Limited Offer"}
+              </div>
+              <h2 className="text-2xl font-black tracking-tight md:text-3xl text-white">
+                {isAr ? "تصميم صفحة ويب احترافية مجانية" : "Free Professional Web Design"}
+              </h2>
+              <p className="text-sm leading-relaxed text-white/60 max-w-sm">
+                {isAr 
+                  ? "نقوم بتصميم صفحة هبوط متميزة لعملك مجانًا. لفترة محدودة، نساعد الشركات في دبي على تحسين حضورها الرقمي بأحدث التقنيات."
+                  : "We design a premium landing page for your business at zero cost. For a limited time, helping Dubai brands elevate their digital footprint."}
+              </p>
+              <Link 
+                href="/contact?service=free-design"
+                className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-xs font-black uppercase tracking-widest text-black transition hover:scale-105"
+              >
+                {isAr ? "احصل على عرضك الآن" : "Claim Offer Now"}
+              </Link>
+            </div>
+            <div className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-white/5 blur-3xl group-hover:bg-white/10 transition-colors" />
+          </div>
+        </section>
+
+        {/* 3. LATEST TIMELINE (High Density List) */}
         <section className="space-y-6">
           <div className="flex items-center justify-between border-b border-line pb-2">
             <h2 className="text-base font-bold uppercase tracking-widest flex items-center gap-2">

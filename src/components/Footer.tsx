@@ -9,57 +9,66 @@ export default function Footer() {
   const isAr = language === "ar";
 
   return (
-    <footer className="w-full bg-[#111] text-[#999] py-16 px-6 md:px-10 mt-20 border-t border-line/20">
+    <footer className="w-full bg-[#0a0a0a] text-[#999] py-20 px-6 md:px-10 mt-24 border-t border-white/5">
       <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-12 md:grid-cols-4 lg:grid-cols-5">
           {/* Brand Column */}
-          <div className="col-span-2 lg:col-span-1 space-y-4">
-            <Link href="/" className="inline-block text-2xl font-bold tracking-tighter text-white">
-              mirAIreach
+          <div className="col-span-2 lg:col-span-2 space-y-6">
+            <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-white">
+              mirAIreach<span className="text-primary">.</span>PRESS
             </Link>
-            <p className="text-sm leading-relaxed max-w-xs">
+            <p className="text-sm leading-relaxed max-w-md">
               {isAr 
-                ? "منصة تسويق ورؤى مدعومة بالذكاء الاصطناعي للمؤسسات (B2B) مقرها دبي." 
-                : "Dubai-based AI marketing and insight platform for B2B enterprises."}
+                ? "المنصة الرائدة لاستخبارات الأعمال المدعومة بالذكاء الاصطناعي في دبي. نحن نربط المؤسسات بأحدث الرؤى التقنية ونوفر أدوات التحول الرقمي المتقدمة لتعزيز الوجود الرقمي في عصر AIO." 
+                : "Dubai's leading AI-powered business intelligence platform. We bridge enterprises with cutting-edge tech insights and provide advanced digital transformation tools for visibility in the AIO era."}
             </p>
+            <div className="flex flex-col gap-4 pt-4">
+              <Link 
+                href="/contact?service=aio-diagnostic"
+                className="text-xs font-bold uppercase tracking-widest text-primary hover:underline"
+              >
+                {isAr ? "→ ابدأ تشخيص AIO المجاني" : "→ Start Free AIO Diagnostic"}
+              </Link>
+              <Link 
+                href="/contact?service=free-design"
+                className="text-xs font-bold uppercase tracking-widest text-white hover:underline"
+              >
+                {isAr ? "→ اطلب تصميم صفحة ويب مجانية" : "→ Claim Free Web Design Offer"}
+              </Link>
+            </div>
+          </div>
+
+          {/* Industry Hubs */}
+          <div className="space-y-6">
+            <h3 className="text-[10px] font-black tracking-[0.2em] text-white uppercase opacity-50">Industry Hubs</h3>
+            <ul className="space-y-4 text-sm font-medium">
+              <li><Link href="/articles?cat=AI" className="hover:text-primary transition-colors">AI & Deep Tech</Link></li>
+              <li><Link href="/articles?cat=FB" className="hover:text-primary transition-colors">F&B & Hospitality</Link></li>
+              <li><Link href="/articles?cat=RE" className="hover:text-primary transition-colors">Real Estate & PropTech</Link></li>
+              <li><Link href="/articles?cat=FT" className="hover:text-primary transition-colors">FinTech & Crypto</Link></li>
+              <li><Link href="/articles?cat=LT" className="hover:text-primary transition-colors">Logistics & Supply Chain</Link></li>
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div className="space-y-6">
+            <h3 className="text-[10px] font-black tracking-[0.2em] text-white uppercase opacity-50">Resources</h3>
+            <ul className="space-y-4 text-sm font-medium">
+              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "تقارير السوق" : "Market Reports"}</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "دراسات الحالة" : "Case Studies"}</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "دليل AIO" : "AIO Guidebook"}</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">{isAr ? "مركز الدعم" : "Support Center"}</Link></li>
+            </ul>
           </div>
 
           {/* Company */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold tracking-wider text-white uppercase">Company</h3>
-            <ul className="space-y-3 text-sm">
-              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "من نحن (About Us)" : "About Us"}</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "الأخبار (News)" : "News"}</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "الوظائف (Careers)" : "Careers"}</Link></li>
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold tracking-wider text-white uppercase">Services</h3>
-            <ul className="space-y-3 text-sm">
-              <li><Link href="#" className="hover:text-white transition-colors">mirAIreach Insight</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Enterprise AI Solutions</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Marketing AIO</Link></li>
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold tracking-wider text-white uppercase">Legal</h3>
-            <ul className="space-y-3 text-sm">
-              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "سياسة الخصوصية" : "Privacy Policy"}</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "شروط الخدمة" : "Terms of Service"}</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "سياسة ملفات تعريف الارتباط" : "Cookie Policy"}</Link></li>
-            </ul>
-          </div>
-
-          {/* Support */}
-          <div className="space-y-4 lg:col-span-1 col-span-2 md:col-span-4">
-            <h3 className="text-sm font-semibold tracking-wider text-white uppercase">Support</h3>
-            <ul className="space-y-3 text-sm">
-              <li><Link href="/contact" className="hover:text-white transition-colors">{isAr ? "اتصل بنا (Contact Us)" : "Contact Us"}</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">FAQ</Link></li>
+          <div className="space-y-6">
+            <h3 className="text-[10px] font-black tracking-[0.2em] text-white uppercase opacity-50">Company</h3>
+            <ul className="space-y-4 text-sm font-medium">
+              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "من نحن" : "About Press"}</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "بيان الخصوصية" : "Privacy"}</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "الشروط" : "Terms"}</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">{isAr ? "اتصل بنا" : "Contact"}</Link></li>
             </ul>
           </div>
         </div>

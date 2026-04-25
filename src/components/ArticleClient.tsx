@@ -53,6 +53,56 @@ export default function ArticleClient({ article }: ArticleClientProps) {
               `## Market Context\n\n${excerpt}\n\n## Why It Matters\n\nDubai's B2B ecosystem is rapidly aligning content strategy with measurable pipeline performance.`}
           </ReactMarkdown>
         </div>
+
+        {/* EXECUTIVE ACTION CTA (LP HYBRID) */}
+        <div className="mt-20 rounded-3xl bg-[#0a0a0a] p-10 border border-white/5 space-y-10">
+          <div className="space-y-4">
+            <div className="inline-block rounded bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white">
+              {isAr ? "خطوات تنفيذية" : "Executive Action"}
+            </div>
+            <h3 className="text-2xl font-black tracking-tight text-white md:text-3xl">
+              {isAr ? "تحويل الرؤى إلى ميزة تنافسية" : "Turn Insights into Advantage"}
+            </h3>
+            <p className="text-sm text-white/50 leading-relaxed max-w-2xl">
+              {isAr 
+                ? "بناءً على هذا التقرير، نوصي الشركات الرائدة في دبي بالتحقق من مدى وضوح علامتها التجارية في أنظمة الذكاء الاصطناعي."
+                : "Following the trends in this report, we recommend Dubai enterprises verify their brand visibility within the AI ecosystem immediately."}
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <Link 
+              href="/contact?service=aio-diagnostic"
+              className="group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-primary/40 transition-all hover:bg-primary/[0.02]"
+            >
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Service 01</span>
+              <span className="text-lg font-bold text-white group-hover:text-primary transition-colors">{isAr ? "تشخيص AIO المجاني" : "Free AIO Diagnostic"}</span>
+              <span className="text-xs text-white/40 leading-relaxed">{isAr ? "اكتشف كيف يراك ChatGPT و Gemini و Perplexity." : "Discover how ChatGPT, Gemini, and Perplexity perceive your brand."}</span>
+            </Link>
+            <Link 
+              href="/contact?service=free-design"
+              className="group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-white/20 transition-all hover:bg-white/[0.02]"
+            >
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">Service 02</span>
+              <span className="text-lg font-bold text-white group-hover:text-white/80 transition-colors">{isAr ? "تصميم ويب متميز (مجاني)" : "Premium Web Design (Free)"}</span>
+              <span className="text-xs text-white/40 leading-relaxed">{isAr ? "احصل على صفحة هبوط مخصصة محسنة للذكاء الاصطناعي." : "Get a bespoke, AI-optimized landing page built for your business."}</span>
+            </Link>
+          </div>
+
+          <div className="pt-4 border-t border-white/5">
+            <Link 
+              href="/contact"
+              className="flex items-center justify-between group"
+            >
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-white group-hover:text-primary transition-colors">
+                {isAr ? "تحدث مع خبير استراتيجي" : "Talk to a Strategist"}
+              </span>
+              <span className="h-10 w-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                {isAr ? "←" : "→"}
+              </span>
+            </Link>
+          </div>
+        </div>
       </article>
     </div>
   );
