@@ -60,52 +60,52 @@ const IMAGE_POOLS = {
 const baseTemplates = {
   "F&B": {
     title: "Multi-Brand Cloud Kitchen Expansion: Precision Analytics",
-    title_ja: "クラウドキッチンによる多ブランド展開：精密アナリティクス",
+    title_ar: "توسع المطابخ السحابية متعددة العلامات التجارية: التحليلات الدقيقة",
     excerpt: "How cloud kitchens in Dubai can scale while preserving margin and quality through operational AI.",
-    excerpt_ja: "ドバイのクラウドキッチンが、運用AIを通じて利益率と品質を維持しながら規模を拡大する方法。",
+    excerpt_ar: "كيف يمكن للمطابخ السحابية في دبي التوسع مع الحفاظ على الهامش والجودة من خلال الذكاء الاصطناعي التشغيلي.",
     content: "## The F&B Transformation\n\nDubai's F&B sector is shifting towards hyper-optimized delivery models. By analyzing vast amounts of consumer data, ghost kitchens can predict demand down to the hour.\n\n## Cost Optimization\nIntegrating supply chain AI reduces food waste by up to 35%, drastically improving unit economics in a highly competitive market.",
-    content_ja: "## F&Bの変革\n\nドバイのF&Bセクターは、超最適化されたデリバリーモデルへと移行しています。膨大な消費者データを分析することで、ゴーストキッチンは時間単位で需要を予測できます。\n\n## コスト最適化\nサプライチェーンAIを統合することで、食品ロスを最大35%削減し、競争の激しい市場におけるユニットエコノミクスを劇的に改善します。"
+    content_ar: "## تحول قطاع الأغذية والمشروبات\n\nيشهد قطاع الأغذية والمشروبات في دبي تحولاً نحو نماذج التوصيل فائقة التحسين. من خلال تحليل كميات هائلة من بيانات المستهلكين، يمكن للمطابخ السحابية التنبؤ بالطلب بدقة تصل إلى الساعة.\n\n## تحسين التكاليف\nيؤدي دمج الذكاء الاصطناعي في سلاسل التوريد إلى تقليل هدر الطعام بنسبة تصل إلى 35٪، مما يحسن اقتصاديات الوحدة بشكل كبير في سوق شديد التنافسية."
   },
   "Retail": {
     title: "Omnichannel Personalization in UAE's Luxury Retail",
-    title_ja: "UAEのラグジュアリー小売におけるオムニチャネル・パーソナライゼーション",
+    title_ar: "التخصيص متعدد القنوات في تجارة التجزئة الفاخرة في الإمارات",
     excerpt: "Redefining the shopping experience by bridging offline boutiques and digital platforms.",
-    excerpt_ja: "実店舗のブティックとデジタルプラットフォームの垣根を越え、ショッピング体験を再定義する。",
+    excerpt_ar: "إعادة تعريف تجربة التسوق من خلال الربط بين المتاجر التقليدية والمنصات الرقمية.",
     content: "## The New Luxury Standard\n\nConsumers expect seamless transitions between Instagram discovery, WhatsApp concierge services, and VIP in-store experiences. \n\n## AI in Clienteling\nRetailers are deploying AI to track micro-preferences, allowing sales associates to act as hyper-informed personal shoppers, increasing AOV (Average Order Value) significantly.",
-    content_ja: "## ラグジュアリーの新たな基準\n\n消費者は、Instagramでの発見、WhatsAppのコンシェルジュサービス、そしてVIP向けの実店舗体験がシームレスに繋がることを期待しています。\n\n## クライアンテリングにおけるAI\n小売業者はAIを導入して細かな好みを追跡しており、これにより販売員は非常に情報通のパーソナルショッパーとして機能し、AOV（平均注文額）を大幅に向上させています。"
+    content_ar: "## المعيار الجديد للفخامة\n\nيتوقع المستهلكون انتقالات سلسة بين الاكتشاف عبر Instagram، وخدمات الكونسيرج عبر WhatsApp، وتجارب الشخصيات الهامة داخل المتجر.\n\n## الذكاء الاصطناعي في خدمة العملاء\nيقوم تجار التجزئة بنشر الذكاء الاصطناعي لتتبع التفضيلات الدقيقة، مما يسمح لموظفي المبيعات بالعمل كمتسوقين شخصيين مطلعين للغاية، مما يزيد من متوسط قيمة الطلب (AOV) بشكل كبير."
   },
   "AI Marketing": {
     title: "Enterprise AI Marketing: From Search to Answer Engines",
-    title_ja: "エンタープライズAIマーケティング：検索から回答エンジンへ",
+    title_ar: "تسويق الذكاء الاصطناعي للمؤسسات: من البحث إلى محركات الإجابة",
     excerpt: "Optimizing for LLMs is the new frontier for B2B lead generation in the GCC.",
-    excerpt_ja: "GCC諸国のB2Bリード獲得において、LLMへの最適化が新たなフロンティアとなっている。",
+    excerpt_ar: "يعد التحسين لنماذج اللغات الكبيرة (LLMs) هو الحدود الجديدة لجذب العملاء المحتملين في دول مجلس التعاون الخليجي.",
     content: "## The Shift to AIO\n\nTraditional SEO is losing ground to Answer Engine Optimization (AIO). B2B buyers now use AI tools to generate vendor shortlists.\n\n## Data Structuring\nCompanies must structure their content as entities that LLMs can easily ingest. This requires a fundamental shift from keyword stuffing to deep, authoritative knowledge graphs.",
-    content_ja: "## AIOへのシフト\n\n従来のSEOは、回答エンジン最適化（AIO）にその座を奪われつつあります。現在、B2BバイヤーはAIツールを使ってベンダーのショートリストを作成しています。\n\n## データ構造化\n企業は、LLMが容易に取り込めるエンティティとしてコンテンツを構造化する必要があります。これには、キーワードの詰め込みから、深く権威あるナレッジグラフへの根本的な転換が求められます。"
+    content_ar: "## التحول إلى AIO\n\nيفقد تحسين محركات البحث التقليدي (SEO) مكانته لصالح تحسين محركات الإجابة (AIO). يستخدم مشتري B2B الآن أدوات الذكاء الاصطناعي لإنشاء قوائم مختصرة للموردين.\n\n## هيكلة البيانات\nيجب على الشركات هيكلة محتواها ككيانات يمكن لنماذج اللغات الكبيرة استيعابها بسهولة. يتطلب ذلك تحولاً جوهرياً من حشو الكلمات الرئيسية إلى الرسوم البيانية للمعرفة العميقة والموثوقة."
   },
   "Real Estate": {
     title: "PropTech 2026: Predictive Pricing Models in Dubai",
-    title_ja: "PropTech 2026：ドバイにおける予測価格モデリング",
+    title_ar: "بروبتيك 2026: نماذج التسعير التنبؤية في دبي",
     excerpt: "How machine learning is bringing unprecedented transparency to UAE property valuations.",
-    excerpt_ja: "機械学習がUAEの不動産評価にいかに前例のない透明性をもたらしているか。",
+    excerpt_ar: "كيف يجلب التعلم الآلي شفافية غير مسبوقة لتقييم العقارات في الإمارات.",
     content: "## Data-Driven Real Estate\n\nOff-plan and secondary market pricing is increasingly dictated by algorithmic models that analyze global capital flows, local infrastructure developments, and historical yields.\n\n## Investor Confidence\nThis transparency attracts institutional investors who rely on quantified risk models, stabilizing a historically volatile asset class.",
-    content_ja: "## データ駆動型不動産\n\nオフプランおよび流通市場の価格は、グローバルな資本フロー、地域のインフラ開発、歴史的な利回りを分析するアルゴリズムモデルによってますます決定されるようになっています。\n\n## 投資家の信頼\nこの透明性は、定量化されたリスクモデルに依存する機関投資家を引き付け、歴史的に変動の激しかったアセットクラスを安定させます。"
+    content_ar: "## العقارات القائمة على البيانات\n\nيتم تحديد أسعار السوق على الخارطة والسوق الثانوية بشكل متزايد من خلال النماذج الخوارزمية التي تحلل تدفقات رأس المال العالمية، وتطورات البنية التحتية المحلية، والعوائد التاريخية.\n\n## ثقة المستثمر\nتجذب هذه الشفافية المستثمرين المؤسسيين الذين يعتمدون على نماذج المخاطر الكمية، مما يؤدي إلى استقرار فئة الأصول التي كانت متقلبة تاريخياً."
   },
   "Tech & Innovation": {
     title: "Automating the Enterprise: RPA and Generative AI Synergy",
-    title_ja: "エンタープライズの自動化：RPAと生成AIのシナジー",
+    title_ar: "أتمتة المؤسسات: التآزر بين RPA والذكاء الاصطناعي التوليدي",
     excerpt: "Combining robotic process automation with LLMs to eliminate back-office friction.",
-    excerpt_ja: "ロボティック・プロセス・オートメーションとLLMを組み合わせ、バックオフィスの摩擦を排除する。",
+    excerpt_ar: "الجمع بين أتمتة العمليات الروبوتية ونماذج اللغات الكبيرة للقضاء على احتكاك المكاتب الخلفية.",
     content: "## Beyond Simple Scripts\n\nWhile RPA handles structured, repetitive tasks, generative AI brings cognitive capabilities to unstructured data processing like contracts and customer emails.\n\n## The Autonomous Enterprise\nThis synergy paves the way for the autonomous enterprise, reducing operational overhead in Dubai free zones by up to 40%.",
-    content_ja: "## 単純なスクリプトを超えて\n\nRPAは構造化された反復的なタスクを処理しますが、生成AIは契約書や顧客からのメールなどの非構造化データ処理に認知機能をもたらします。\n\n## 自律型エンタープライズ\nこのシナジーは自律型エンタープライズへの道を切り開き、ドバイのフリーゾーンにおける運用オーバーヘッドを最大40%削減します。"
+    content_ar: "## ما وراء النصوص البرمجية البسيطة\n\nبينما تتعامل أتمتة العمليات الروبوتية (RPA) مع المهام الهيكلية والمتكررة، يوفر الذكاء الاصطناعي التوليدي قدرات معرفية لمعالجة البيانات غير الهيكلية مثل العقود ورسائل البريد الإلكتروني للعملاء.\n\n## المؤسسة المستقلة\nيمهد هذا التآزر الطريق للمؤسسة المستقلة، مما يقلل من النفقات التشغيلية في المناطق الحرة في دبي بنسبة تصل إلى 40٪."
   }
 };
 
 const modifiers = [
-  { prefix: "Case Study: ", suffix: " in Practice" },
-  { prefix: "Future Outlook: ", suffix: " Trends for 2026" },
-  { prefix: "Executive Brief: ", suffix: " Strategies" },
-  { prefix: "Deep Dive: ", suffix: " Dynamics" },
-  { prefix: "Report: ", suffix: " Analysis" }
+  { prefix: "Case Study: ", suffix: " in Practice", prefix_ar: "دراسة حالة: ", suffix_ar: " في الممارسة العملية" },
+  { prefix: "Future Outlook: ", suffix: " Trends for 2026", prefix_ar: "آفاق مستقبلية: ", suffix_ar: " اتجاهات عام 2026" },
+  { prefix: "Executive Brief: ", suffix: " Strategies", prefix_ar: "موجز تنفيذي: ", suffix_ar: " استراتيجيات" },
+  { prefix: "Deep Dive: ", suffix: " Dynamics", prefix_ar: "تحليل عميق: ", suffix_ar: " ديناميكيات" },
+  { prefix: "Report: ", suffix: " Analysis", prefix_ar: "تقرير: ", suffix_ar: " تحليل" }
 ];
 
 function generateArticles(count = 25) {
@@ -125,15 +125,14 @@ function generateArticles(count = 25) {
     articles.push({
       category: category,
       title: `${modifier.prefix}${template.title}${modifier.suffix}`,
-      title_ja: `【${modifier.prefix.trim()}】${template.title_ja}`,
+      title_ar: `${modifier.prefix_ar}${template.title_ar}${modifier.suffix_ar}`,
       excerpt: template.excerpt,
-      excerpt_ja: template.excerpt_ja,
+      excerpt_ar: template.excerpt_ar,
       content: `# ${modifier.prefix}${template.title}\n\n${template.content}`,
-      content_ja: `# ${template.title_ja}\n\n${template.content_ja}`,
+      content_ar: `# ${modifier.prefix_ar}${template.title_ar}\n\n${template.content_ar}`,
       source_name: "mirAIreach Research",
       image_url: imageUrl,
       is_published: true,
-      // Stagger creation dates so they show up nicely in the timeline
       created_at: new Date(now - i * 2 * msInDay).toISOString(),
     });
   }
@@ -169,7 +168,7 @@ async function main() {
     throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in environment.");
   }
 
-  console.log("Generating 25 diverse bilingual articles...");
+  console.log("Generating 25 diverse bilingual (EN/AR) articles...");
   const newArticles = generateArticles(25);
 
   console.log("Attempting to insert into Supabase...");
@@ -180,14 +179,14 @@ async function main() {
     console.error("\n========================================================");
     console.error("❌ DATABASE INSERTION FAILED");
     console.error("========================================================");
-    if (err.message.includes("42703") || err.message.includes("PGRST204") || err.message.includes("column articles.title_ja does not exist") || err.message.includes("Could not find the 'title_ja' column") || err.message.includes("content_ja")) {
-      console.error("\n[CRITICAL ERROR] The Japanese columns (title_ja, excerpt_ja, content_ja) DO NOT EXIST in your Supabase database.");
+    if (err.message.includes("42703") || err.message.includes("column articles.title_ar does not exist")) {
+      console.error("\n[CRITICAL ERROR] The Arabic columns (title_ar, excerpt_ar, content_ar) DO NOT EXIST in your Supabase database.");
       console.error("Please run the following SQL command in your Supabase SQL Editor:");
       console.error(`
       ALTER TABLE articles 
-      ADD COLUMN title_ja text,
-      ADD COLUMN excerpt_ja text,
-      ADD COLUMN content_ja text;
+      ADD COLUMN title_ar text,
+      ADD COLUMN excerpt_ar text,
+      ADD COLUMN content_ar text;
       `);
       console.error("\nAfter running the SQL, run this script again.");
     } else {
@@ -197,6 +196,7 @@ async function main() {
     process.exit(1);
   }
 }
+
 
 main().catch((error) => {
   console.error(error.message);

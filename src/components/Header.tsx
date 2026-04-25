@@ -37,16 +37,17 @@ export default function Header({ showNav = true }: HeaderProps) {
             <>
               <span className="text-foreground">EN</span>
               <span className="mx-1 opacity-40">/</span>
-              <span className="opacity-50">JP</span>
+              <span className="opacity-50">AR</span>
             </>
           ) : (
             <>
               <span className="opacity-50">EN</span>
               <span className="mx-1 opacity-40">/</span>
-              <span className="text-foreground">JP</span>
+              <span className="text-foreground">AR</span>
             </>
           )}
         </button>
+
       </div>
     </header>
   );

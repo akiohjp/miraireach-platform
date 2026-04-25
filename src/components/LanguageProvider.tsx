@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
-type Language = "en" | "ja";
+type Language = "en" | "ar";
 
 interface LanguageContextType {
   language: Language;
@@ -14,17 +14,23 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>("en");
 
-  // Load language from localStorage if available (optional, but good UX)
+  // Load language from localStorage if available
   useEffect(() => {
     const savedLang = localStorage.getItem("app-language") as Language;
-    if (savedLang === "en" || savedLang === "ja") {
+    if (savedLang === "en" || savedLang === "ar") {
       setLanguage(savedLang);
     }
   }, []);
 
+  // Update document attributes for RTL and language
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+  }, [language]);
+
   const toggleLanguage = () => {
     setLanguage((prev) => {
-      const newLang = prev === "en" ? "ja" : "en";
+      const newLang = prev === "en" ? "ar" : "en";
       localStorage.setItem("app-language", newLang);
       return newLang;
     });
@@ -44,3 +50,4 @@ export function useLanguage() {
   }
   return context;
 }
+

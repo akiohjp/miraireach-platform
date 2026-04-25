@@ -18,7 +18,9 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
   const { language } = useLanguage();
   const [loadedArticles, setLoadedArticles] = useState<Article[]>(latestInsights);
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(latestInsights.length >= 10); // Assuming limit is 10 initially
+  const [hasMore, setHasMore] = useState(latestInsights.length >= 10);
+
+  const isAr = language === "ar";
 
   const loadMore = async () => {
     setLoading(true);
@@ -41,147 +43,210 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
 
   const getTitle = (article?: Article) => {
     if (!article) return "";
-    return language === "ja" && article.title_ja ? article.title_ja : article.title;
+    return isAr && article.title_ar ? article.title_ar : article.title;
   };
 
   const getExcerpt = (article?: Article) => {
     if (!article) return "";
-    return language === "ja" && article.excerpt_ja ? article.excerpt_ja : article.excerpt;
+    return isAr && article.excerpt_ar ? article.excerpt_ar : article.excerpt;
   };
 
+  // Group loaded articles by category for the parallel grid layout
+  const categories = Array.from(new Set(loadedArticles.map(a => a.category)));
+  const topCategories = categories.slice(0, 3); // Display top 3 categories in parallel columns
+
   return (
-    <div className="mx-auto min-h-screen w-full max-w-7xl px-6 py-12 md:px-10">
+    <div className="mx-auto min-h-screen w-full max-w-7xl px-6 py-8 md:px-10">
       <Header showNav={true} />
 
-      <main className="grid gap-12 lg:grid-cols-[1.6fr_0.9fr]">
-        <section className="space-y-12">
-          <article className="space-y-6">
-            <Link href={featured ? `/articles/${featured.id}` : "#"} className="block">
-              <Image
-                src={featured?.image_url || fallbackImage}
-                alt={getTitle(featured) || "Dubai skyline and modern business towers"}
-                width={1600}
-                height={900}
-                className="h-[360px] w-full object-cover md:h-[460px]"
-              />
-            </Link>
-            <div className="space-y-4">
-              <p className="text-xs tracking-[0.16em] text-muted uppercase">
-                Featured Insight |{" "}
-                {featured ? formatDate(featured.created_at) : "Latest Update"}
-              </p>
-              <Link href={featured ? `/articles/${featured.id}` : "#"}>
-                <h1 className="max-w-4xl text-3xl font-medium leading-[1.35] tracking-[0.01em] md:text-5xl md:leading-[1.28] hover:opacity-80">
-                  {getTitle(featured) ||
-                    "Enterprise AI Marketing in Dubai Enters a Precision Era as B2B Buyers Demand Account-Level Intelligence."}
-                </h1>
-              </Link>
-              <p className="max-w-3xl text-base leading-8 tracking-[0.01em] text-muted md:text-lg">
-                {getExcerpt(featured) ||
-                  "Regional decision-makers are reallocating media budgets toward data-centric programs that unify intent signals, multilingual personalization, and revenue attribution across complex stakeholder journeys."}
-              </p>
-            </div>
-          </article>
-
-          {/* Promotional CTA Banner (Freemium Hook) */}
-          <section className="relative overflow-hidden rounded-xl border border-line bg-muted/5 p-8 md:p-10">
-            <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-foreground/5 blur-3xl"></div>
-            <div className="relative z-10 space-y-5">
-              <div className="inline-block rounded-full border border-foreground/20 bg-foreground/5 px-3 py-1 text-xs font-medium tracking-widest text-foreground uppercase">
-                {language === "ja" ? "限定オファー" : "Limited Offer"}
-              </div>
-              <h2 className="text-2xl font-medium leading-tight tracking-tight md:text-3xl">
-                {language === "ja" 
-                  ? "AI時代、ドバイの飲食店に『無料で』プロ級サイトを。"
-                  : "Zero-Cost Premium AI Websites for Dubai F&B."}
-              </h2>
-              <p className="max-w-2xl text-sm leading-relaxed text-muted md:text-base">
-                {language === "ja"
-                  ? "「自分で作る時間がない」「安っぽくなるのが嫌だ」。そんな悩みはもう過去のものです。最新AI技術で制作コストをゼロ化し、集客（AIO）に特化したウェブサイトを初期費用無料で構築・代行します。"
-                  : "No time? Worried about a cheap look? We've eliminated production costs using advanced AI. Claim your professionally designed, AIO-optimized website built entirely for you—with zero upfront cost."}
-              </p>
-              <div className="pt-2">
-                <Link href="/lp/fb-automation">
-                  <button className="rounded bg-foreground px-6 py-3 text-sm font-medium tracking-wide text-background transition-opacity hover:opacity-90">
-                    {language === "ja" ? "詳細を見る" : "Claim Your Free Site"}
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </section>
-
-          <section id="latest" className="space-y-2">
-            <h2 className="pb-4 text-xl font-medium tracking-[0.08em] uppercase">
-              Latest Timeline
+      <main className="mt-8 space-y-16">
+        {/* 1. FEATURED INSIGHT */}
+        <section>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-xl font-bold tracking-widest uppercase">
+              {isAr ? "رؤى مميزة" : "Featured Insight"}
             </h2>
-            <div className="space-y-0">
-              {loadedArticles.map((item, index) => (
-                <article
-                  key={`${item.id}-${index}`}
-                  className={`space-y-2 py-6 ${
-                    index !== 0 ? "border-t border-line" : ""
-                  }`}
-                >
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs tracking-[0.14em] text-muted uppercase">
-                    <span>{formatDate(item.created_at)}</span>
-                    <span>{item.category}</span>
-                  </div>
-                  <Link href={`/articles/${item.id}`}>
-                    <h3 className="text-xl leading-8 tracking-[0.005em] md:text-2xl hover:opacity-80">
-                      {getTitle(item)}
-                    </h3>
-                  </Link>
-                  <p className="text-sm tracking-[0.08em] text-muted uppercase">
-                    {item.source_name}
-                  </p>
-                </article>
-              ))}
-            </div>
-            
-            {hasMore && (
-              <div className="pt-8 text-center">
-                <button 
-                  onClick={loadMore}
-                  disabled={loading}
-                  className="rounded border border-line bg-transparent px-8 py-3 text-sm font-medium uppercase tracking-widest text-foreground transition-colors hover:bg-muted/5 disabled:opacity-50"
-                >
-                  {loading ? (language === "ja" ? "読み込み中..." : "Loading...") : (language === "ja" ? "もっと見る" : "Load More")}
-                </button>
+          </div>
+          <article className="group relative overflow-hidden rounded-2xl bg-foreground/5">
+            <Link href={featured ? `/articles/${featured.id}` : "#"} className="block lg:grid lg:grid-cols-2">
+              <div className="relative h-[300px] lg:h-[450px]">
+                <Image
+                  src={featured?.image_url || fallbackImage}
+                  alt={getTitle(featured) || "Dubai skyline"}
+                  fill
+                  className="object-cover transition duration-700 group-hover:scale-105"
+                />
               </div>
-            )}
-          </section>
+              <div className="flex flex-col justify-center p-8 lg:p-12 space-y-6">
+                <div className="inline-block rounded-full bg-foreground text-background px-3 py-1 text-xs font-semibold tracking-wider uppercase w-fit">
+                  {featured?.category || "Top Story"}
+                </div>
+                <h1 className="text-2xl font-bold leading-[1.3] md:text-4xl group-hover:text-foreground/80 transition-colors">
+                  {getTitle(featured)}
+                </h1>
+                <p className="text-muted leading-relaxed max-w-xl">
+                  {getExcerpt(featured)}
+                </p>
+                <div className="text-xs font-medium tracking-widest text-muted/70 uppercase">
+                  {featured ? formatDate(featured.created_at) : "Latest Update"} | {featured?.source_name}
+                </div>
+              </div>
+            </Link>
+          </article>
         </section>
 
-        <aside id="trending" className="space-y-4 lg:pt-[4.5rem]">
-          <h2 className="pb-2 text-sm tracking-[0.16em] text-muted uppercase">
-            Weekly Access Ranking
-          </h2>
-          <div className="space-y-5">
-            {trending.map((item, index) => (
-              <article key={item.id} className="group space-y-3">
-                <div className="relative overflow-hidden">
+        {/* 2. WEEKLY ACCESS RANKING (Grid Layout) */}
+        <section>
+          <div className="mb-6 flex items-center justify-between border-b border-line pb-4">
+            <h2 className="text-lg font-bold tracking-widest uppercase">
+              {isAr ? "الأكثر قراءة هذا الأسبوع" : "Weekly Access Ranking"}
+            </h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {trending.slice(0, 4).map((item, index) => (
+              <article key={item.id} className="group flex flex-col space-y-3">
+                <div className="relative aspect-video overflow-hidden rounded-lg">
                   <Link href={`/articles/${item.id}`}>
                     <Image
                       src={item.image_url || fallbackImage}
                       alt={getTitle(item)}
-                      width={1200}
-                      height={675}
-                      className="h-44 w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-105"
                     />
                   </Link>
-                  <span className="absolute left-3 top-3 text-3xl font-medium leading-none tracking-tight text-white/95 drop-shadow-md">
+                  <span className="absolute left-2 top-2 flex h-8 w-8 items-center justify-center bg-background/90 text-sm font-bold shadow backdrop-blur-sm">
                     {index + 1}
                   </span>
                 </div>
                 <Link href={`/articles/${item.id}`}>
-                  <h3 className="text-base leading-7 tracking-[0.01em] hover:opacity-80">
+                  <h3 className="text-sm font-semibold leading-relaxed line-clamp-2 group-hover:text-foreground/80 transition-colors">
                     {getTitle(item)}
                   </h3>
                 </Link>
               </article>
             ))}
           </div>
-        </aside>
+        </section>
+
+        {/* 3. CATEGORY PARALLEL GRIDS */}
+        {topCategories.length > 0 && (
+          <section className="grid gap-8 lg:grid-cols-3">
+            {topCategories.map((cat) => {
+              const catArticles = loadedArticles.filter(a => a.category === cat).slice(0, 4);
+              return (
+                <div key={cat} className="space-y-6">
+                  <div className="border-b-2 border-foreground pb-2">
+                    <h2 className="text-lg font-bold uppercase tracking-wider">{cat}</h2>
+                  </div>
+                  <div className="space-y-5">
+                    {catArticles.map((item, index) => (
+                      <article key={item.id} className={`group flex gap-4 ${index !== 0 ? 'pt-5 border-t border-line/50' : ''}`}>
+                        <Link href={`/articles/${item.id}`} className="shrink-0 relative h-20 w-24 overflow-hidden rounded bg-muted/10">
+                          <Image
+                            src={item.image_url || fallbackImage}
+                            alt={getTitle(item)}
+                            fill
+                            className="object-cover transition duration-300 group-hover:opacity-80"
+                          />
+                        </Link>
+                        <div className="flex flex-col justify-between py-0.5">
+                          <Link href={`/articles/${item.id}`}>
+                            <h3 className="text-sm font-medium leading-snug line-clamp-3 group-hover:underline decoration-1 underline-offset-2">
+                              {getTitle(item)}
+                            </h3>
+                          </Link>
+                          <span className="text-[10px] uppercase tracking-wider text-muted/60">
+                            {formatDate(item.created_at)}
+                          </span>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </section>
+        )}
+
+        <hr className="border-line" />
+
+        <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
+          {/* 4. LATEST TIMELINE */}
+          <section className="space-y-6">
+            <div className="mb-6 flex items-center justify-between border-b border-line pb-4">
+              <h2 className="text-lg font-bold tracking-widest uppercase">
+                {isAr ? "أحدث الأخبار" : "Latest Timeline"}
+              </h2>
+            </div>
+            
+            <div className="grid gap-6 sm:grid-cols-2">
+              {loadedArticles.map((item) => (
+                <article key={`latest-${item.id}`} className="group relative overflow-hidden rounded-xl border border-line bg-muted/5 transition hover:bg-muted/10 hover:shadow-sm flex flex-col">
+                  <Link href={`/articles/${item.id}`} className="relative aspect-[16/9] w-full overflow-hidden">
+                    <Image
+                      src={item.image_url || fallbackImage}
+                      alt={getTitle(item)}
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
+                  </Link>
+                  <div className="flex flex-1 flex-col justify-between p-5 space-y-3">
+                    <div className="space-y-2">
+                      <div className="flex flex-wrap gap-2 text-[10px] font-bold tracking-widest uppercase text-muted">
+                        <span className="text-foreground">{item.category}</span>
+                        <span>|</span>
+                        <span>{formatDate(item.created_at)}</span>
+                      </div>
+                      <Link href={`/articles/${item.id}`}>
+                        <h3 className="text-base font-semibold leading-relaxed group-hover:text-foreground/80 line-clamp-2">
+                          {getTitle(item)}
+                        </h3>
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {hasMore && (
+              <div className="pt-8 text-center">
+                <button 
+                  onClick={loadMore}
+                  disabled={loading}
+                  className="rounded-full bg-foreground px-10 py-3.5 text-sm font-bold uppercase tracking-widest text-background transition-opacity hover:opacity-90 disabled:opacity-50"
+                >
+                  {loading ? (isAr ? "جارٍ التحميل..." : "Loading...") : (isAr ? "تحميل المزيد" : "Load More")}
+                </button>
+              </div>
+            )}
+          </section>
+
+          {/* 5. SIDEBAR (CTA Hook) */}
+          <aside className="space-y-8">
+            <section className="sticky top-8 overflow-hidden rounded-xl bg-[#111] text-white p-8">
+              <div className="space-y-5 relative z-10">
+                <div className="inline-block rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-bold tracking-widest uppercase">
+                  {isAr ? "عرض لفترة محدودة" : "Limited Offer"}
+                </div>
+                <h2 className="text-xl font-bold leading-tight">
+                  {isAr 
+                    ? "مواقع إلكترونية متميزة بالذكاء الاصطناعي لقطاع المطاعم في دبي 'بدون تكلفة'."
+                    : "Zero-Cost Premium AI Websites for Dubai F&B."}
+                </h2>
+                <p className="text-sm leading-relaxed text-gray-400">
+                  {isAr
+                    ? "نحن نبني وندير مواقع إلكترونية متخصصة في جذب العملاء (AIO) باستخدام أحدث تقنيات الذاء الاصطناعي، بدون أي تكاليف أولية."
+                    : "Claim your professionally designed, AIO-optimized website built entirely for you—with zero upfront cost."}
+                </p>
+                <div className="pt-2">
+                  <Link href="/lp/fb-automation" className="block text-center rounded bg-white text-black px-6 py-3 text-sm font-bold tracking-wide transition-opacity hover:opacity-90">
+                    {isAr ? "احصل على موقعك المجاني" : "Claim Your Free Site"}
+                  </Link>
+                </div>
+              </div>
+            </section>
+          </aside>
+        </div>
       </main>
     </div>
   );

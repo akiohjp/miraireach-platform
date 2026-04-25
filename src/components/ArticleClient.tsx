@@ -14,9 +14,10 @@ interface ArticleClientProps {
 export default function ArticleClient({ article }: ArticleClientProps) {
   const { language } = useLanguage();
 
-  const title = language === "ja" && article.title_ja ? article.title_ja : article.title;
-  const content = language === "ja" && article.content_ja ? article.content_ja : article.content;
-  const excerpt = language === "ja" && article.excerpt_ja ? article.excerpt_ja : article.excerpt;
+  const title = language === "ar" && article.title_ar ? article.title_ar : article.title;
+  const content = language === "ar" && article.content_ar ? article.content_ar : article.content;
+  const excerpt = language === "ar" && article.excerpt_ar ? article.excerpt_ar : article.excerpt;
+
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-5xl px-6 py-12 md:px-10">
