@@ -73,7 +73,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
       <div className="mx-auto max-w-7xl px-6 py-8 md:px-12">
         <Header showNav={true} />
 
-        <main className="mt-12 space-y-32 pb-24">
+        <main className="mt-12 space-y-20 pb-24">
           {/* 1. HERO SECTION (PR TIMES Style) */}
           <section className="grid gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2">
@@ -232,6 +232,27 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                     : "Maximize your citation rate within AI answers. Move beyond being a search link to becoming the 'AI's Direct Answer' itself."}
                 </p>
               </div>
+
+              {/* Growth Acceleration (Exclusive AI Ads) */}
+              <div className="space-y-6 border-l border-primary/20 pl-8 relative bg-primary/5 p-8 rounded-2xl md:col-span-3">
+                <div className="flex items-center gap-4">
+                  <div className="text-primary"><TrendingUp size={32} strokeWidth={2.5} /></div>
+                  <div className="rounded-full bg-primary px-3 py-1 text-[8px] font-black uppercase text-white">Exclusive Add-on</div>
+                </div>
+                <h3 className="text-2xl font-black tracking-tight">
+                  {isAr ? "تسريع النمو (إعلانات الذكاء الاصطناعي الحصرية)" : "Growth Acceleration (Exclusive AI Ads)"}
+                </h3>
+                <p className="text-base leading-relaxed text-muted/80 font-medium">
+                  {isAr 
+                    ? "قم بتسريع رؤية هويتك الرقمية المنظمة من خلال حملات إعلانية مخصصة لمحركات البحث التوليدية. نستخدم NotebookLM لضمان تطابق إشاراتك العضوية مع رسائلك الترويجية."
+                    : "Accelerate the visibility of your structured AI Identity through specialized ad campaigns for generative search engines. We leverage NotebookLM to ensure your organic signal matches your promotional messaging perfectly."}
+                </p>
+                <p className="text-[10px] font-bold text-primary italic">
+                  {isAr 
+                    ? "※本機能はmirAIreach Identity Aggregationを導入済みの企業様限定のアップグレードプランです"
+                    : "※ This feature is an exclusive upgrade plan for clients who have already implemented mirAIreach Identity Aggregation."}
+                </p>
+              </div>
             </div>
 
             <div className="pt-8">
@@ -314,8 +335,8 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           <section className="space-y-12">
             <header className="mb-14 flex items-center justify-between border-b border-line pb-8">
               <Link href="/" className="hover:opacity-80 transition-opacity">
-                <p className="text-2xl font-black tracking-tighter text-foreground uppercase">
-                  mirAIreach<span className="text-foreground opacity-30">.</span>PRESS
+                <p className="text-2xl font-black tracking-tighter text-foreground uppercase flex items-center">
+                  mirAIreach<span className="mx-0.5 text-primary">.</span>PRESS
                 </p>
               </Link>
               <div className="space-y-2 text-right">
