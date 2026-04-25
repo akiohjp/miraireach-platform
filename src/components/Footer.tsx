@@ -14,8 +14,8 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-12 md:grid-cols-4 lg:grid-cols-5">
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2 space-y-6">
-            <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-white">
-              mirAIreach<span className="text-white opacity-50">.</span>PRESS
+            <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-white uppercase">
+              mirAIreach<span className="opacity-50">.</span>PRESS
             </Link>
             <p className="text-sm leading-relaxed max-w-md">
               {isAr 

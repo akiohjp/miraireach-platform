@@ -12,10 +12,8 @@ export default function Header({ showNav = true }: HeaderProps) {
 
   return (
     <header className="mb-14 flex items-center justify-between border-b border-line pb-8">
-      <Link href="/" className="hover:opacity-80 transition-opacity">
-        <p className="text-2xl font-black tracking-tighter text-foreground uppercase">
-          mirAIreach<span className="text-foreground opacity-50">.</span>PRESS
-        </p>
+      <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-foreground uppercase">
+        mirAIreach<span className="opacity-50">.</span>PRESS
       </Link>
       
       <div className="flex items-center gap-6">
