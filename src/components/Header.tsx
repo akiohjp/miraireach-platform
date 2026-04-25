@@ -11,9 +11,11 @@ export default function Header({ showNav = true }: HeaderProps) {
   const { language, toggleLanguage } = useLanguage();
 
   return (
-    <header className="mb-14 flex items-center justify-between border-b border-line pb-5">
-      <Link href="/" className="hover:opacity-80">
-        <p className="text-xl font-medium tracking-[0.22em]">MIRAIREACH PRESS</p>
+    <header className="mb-14 flex items-center justify-between border-b border-line pb-8">
+      <Link href="/" className="hover:opacity-80 transition-opacity">
+        <p className="text-2xl font-black tracking-tighter text-foreground uppercase">
+          mirAIreach<span className="text-foreground opacity-30">.</span>PRESS
+        </p>
       </Link>
       
       <div className="flex items-center gap-6">

@@ -107,31 +107,76 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               </article>
             </div>
 
-            {/* ACCESS RANKING (Side Column) */}
-            <div className="space-y-8">
-              <div className="flex items-center gap-4">
-                <div className="h-[2px] w-8 bg-primary" />
-                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-foreground/40">
-                  {isAr ? "الأكثر قراءة" : "Access Ranking"}
-                </h2>
-              </div>
-              <div className="space-y-8">
-                {trending.slice(0, 5).map((item, index) => (
-                  <article key={item.id} className="flex gap-6 group">
-                    <span className="text-4xl font-black text-foreground/5 transition-colors group-hover:text-primary/10">0{index + 1}</span>
-                    <div className="space-y-2">
-                      <Link href={`/articles/${item.id}`}>
-                        <h3 className="text-sm font-bold leading-snug line-clamp-2 group-hover:text-primary transition-colors duration-300">
-                          {getTitle(item)}
-                        </h3>
+            {/* ACCESS RANKING & SIDEBAR WIDGETS */}
+            <div className="space-y-12">
+              <aside className="sticky top-24 space-y-16">
+                {/* Access Ranking */}
+                <div className="space-y-8">
+                  <div className="flex items-center gap-4">
+                    <div className="h-[2px] w-8 bg-primary" />
+                    <h2 className="text-xs font-black uppercase tracking-[0.3em] text-foreground/40">
+                      {isAr ? "الأكثر قراءة" : "Access Ranking"}
+                    </h2>
+                  </div>
+                  <div className="space-y-8">
+                    {trending.slice(0, 5).map((item, index) => (
+                      <article key={item.id} className="flex gap-6 group">
+                        <span className="text-4xl font-black text-foreground/5 transition-colors group-hover:text-primary/10">0{index + 1}</span>
+                        <div className="space-y-2">
+                          <Link href={`/articles/${item.id}`}>
+                            <h3 className="text-sm font-bold leading-snug line-clamp-2 group-hover:text-primary transition-colors duration-300">
+                              {getTitle(item)}
+                            </h3>
+                          </Link>
+                          <div className="text-[10px] text-muted uppercase font-black tracking-widest opacity-40">
+                            {item.company_name}
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+
+                {/* AI Diagnosis CTA Widget */}
+                <div className="rounded-3xl bg-foreground p-8 text-background space-y-6">
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Free Audit</p>
+                    <h3 className="text-xl font-black leading-tight tracking-tighter">
+                      {isAr ? "تشخيص مجاني للذكاء الاصطناعي" : "Free AI Search Audit"}
+                    </h3>
+                  </div>
+                  <p className="text-xs leading-relaxed text-background/60 font-medium">
+                    {isAr ? "اكتشف كيف تصف أنظمة الذكاء الاصطناعي عملك في نتائج البحث." : "Discover how AI systems perceive and describe your business in generative results."}
+                  </p>
+                  <Link 
+                    href="/contact?service=audit" 
+                    className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-primary text-xs font-black uppercase tracking-widest text-white transition hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    {isAr ? "ابدأ التشخيص" : "Start Audit Now"}
+                  </Link>
+                </div>
+
+                {/* Category List Widget */}
+                <div className="space-y-8">
+                  <div className="flex items-center gap-4">
+                    <div className="h-[2px] w-8 bg-primary" />
+                    <h2 className="text-xs font-black uppercase tracking-[0.3em] text-foreground/40">
+                      {isAr ? "الفئات" : "Categories"}
+                    </h2>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {categories.map((cat) => (
+                      <Link 
+                        key={cat} 
+                        href={`/articles?cat=${cat}`}
+                        className="rounded-full border border-line px-4 py-2 text-[10px] font-black uppercase tracking-widest text-muted hover:border-primary hover:text-primary transition-all"
+                      >
+                        {cat}
                       </Link>
-                      <div className="text-[10px] text-muted uppercase font-black tracking-widest opacity-40">
-                        {item.company_name}
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
+                    ))}
+                  </div>
+                </div>
+              </aside>
             </div>
           </section>
 
@@ -267,15 +312,20 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
 
           {/* 4. LATEST NEWS TIMELINE */}
           <section className="space-y-12">
-            <div className="flex items-end justify-between border-b border-line/10 pb-6">
-              <div className="space-y-2">
+            <header className="mb-14 flex items-center justify-between border-b border-line pb-8">
+              <Link href="/" className="hover:opacity-80 transition-opacity">
+                <p className="text-2xl font-black tracking-tighter text-foreground uppercase">
+                  mirAIreach<span className="text-foreground opacity-30">.</span>PRESS
+                </p>
+              </Link>
+              <div className="space-y-2 text-right">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">{isAr ? "التحديثات" : "Timeline"}</p>
                 <h2 className="text-3xl font-black tracking-tight">{isAr ? "آخر أخبار الصناعة" : "Latest Industry Insights"}</h2>
               </div>
               <Link href="/articles" className="text-[10px] font-black uppercase tracking-[0.2em] text-muted hover:text-primary transition-colors">
                 {isAr ? "عرض كل التقارير" : "Explore All Intelligence"}
               </Link>
-            </div>
+            </header>
 
             <div className="grid gap-12 md:grid-cols-2">
               {loadedArticles.slice(0, 20).map((item) => (
