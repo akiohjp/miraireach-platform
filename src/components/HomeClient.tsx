@@ -6,7 +6,6 @@ import Link from "next/link";
 import Header from "./Header";
 import { useLanguage } from "./LanguageProvider";
 import { Article, fallbackImage, formatDate } from "@/lib/articles";
-import { Article, fallbackImage, formatDate } from "@/lib/articles";
 import { Search, Send, Layout, ArrowRight, Database, Cpu, TrendingUp } from "lucide-react";
 
 interface HomeClientProps {
