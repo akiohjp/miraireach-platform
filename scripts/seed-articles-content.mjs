@@ -21,94 +21,94 @@ const CATEGORIES = ["F&B", "Retail", "AI Marketing", "Real Estate", "Tech & Inno
 
 const IMAGE_POOLS = {
   "F&B": [
-    "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1600&q=80",
     "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1600&q=80",
     "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80"
   ],
   "Retail": [
     "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?auto=format&fit=crop&w=1600&q=80",
     "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1581515323683-0bd9fdfd7cf0?auto=format&fit=crop&w=1600&q=80"
+    "https://images.unsplash.com/photo-1591085686350-798c0f9faa7f?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=80"
   ],
   "AI Marketing": [
-    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1533750349088-cd071a92f430?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1600&q=80"
+    "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80"
   ],
   "Real Estate": [
     "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=80",
     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80",
     "https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1600&q=80",
     "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1577002620719-f027878d6b88?auto=format&fit=crop&w=1600&q=80"
+    "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80"
   ],
   "Tech & Innovation": [
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80"
+    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80"
   ]
 };
 
 const baseTemplates = {
   "F&B": {
-    title: "Multi-Brand Cloud Kitchen Expansion: Precision Analytics",
-    title_ar: "توسع المطابخ السحابية متعددة العلامات التجارية: التحليلات الدقيقة",
-    excerpt: "How cloud kitchens in Dubai can scale while preserving margin and quality through operational AI.",
-    excerpt_ar: "كيف يمكن للمطابخ السحابية في دبي التوسع مع الحفاظ على الهامش والجودة من خلال الذكاء الاصطناعي التشغيلي.",
-    content: "## The F&B Transformation\n\nDubai's F&B sector is shifting towards hyper-optimized delivery models. By analyzing vast amounts of consumer data, ghost kitchens can predict demand down to the hour.\n\n## Cost Optimization\nIntegrating supply chain AI reduces food waste by up to 35%, drastically improving unit economics in a highly competitive market.",
-    content_ar: "## تحول قطاع الأغذية والمشروبات\n\nيشهد قطاع الأغذية والمشروبات في دبي تحولاً نحو نماذج التوصيل فائقة التحسين. من خلال تحليل كميات هائلة من بيانات المستهلكين، يمكن للمطابخ السحابية التنبؤ بالطلب بدقة تصل إلى الساعة.\n\n## تحسين التكاليف\nيؤدي دمج الذكاء الاصطناعي في سلاسل التوريد إلى تقليل هدر الطعام بنسبة تصل إلى 35٪، مما يحسن اقتصاديات الوحدة بشكل كبير في سوق شديد التنافسية."
+    title: "AI-Driven Operational Excellence in Dubai's F&B Sector",
+    title_ar: "التميز التشغيلي القائم على الذكاء الاصطناعي في قطاع الأغذية والمشروبات في دبي",
+    excerpt: "Exploring how deep-learning algorithms are revolutionizing inventory management and customer sentiment analysis for top-tier restaurants.",
+    excerpt_ar: "استكشاف كيف تحدث خوارزميات التعلم العميق ثورة في إدارة المخزون وتحليل مشاعر العملاء للمطاعم رفيعة المستوى.",
+    content: "## The Intelligence Era\n\nDubai's competitive dining landscape now requires more than just great food. AI is being used to predict table turnover and optimize staffing levels in real-time.\n\n## Waste Reduction\nSophisticated systems are now reducing back-of-house waste by 40% through predictive ordering, ensuring sustainability meets profitability.",
+    content_ar: "## عصر الذكاء\n\nتتطلب بيئة المطاعم التنافسية في دبي الآن أكثر من مجرد طعام رائع. يتم استخدام الذكاء الاصطناعي للتنبؤ بدوران الطاولات وتحسين مستويات التوظيف في الوقت الفعلي.\n\n## تقليل النفايات\nتعمل الأنظمة المتطورة الآن على تقليل نفايات المطبخ بنسبة 40٪ من خلال الطلب التنبؤي، مما يضمن تلاقي الاستدامة مع الربحية."
   },
   "Retail": {
-    title: "Omnichannel Personalization in UAE's Luxury Retail",
-    title_ar: "التخصيص متعدد القنوات في تجارة التجزئة الفاخرة في الإمارات",
-    excerpt: "Redefining the shopping experience by bridging offline boutiques and digital platforms.",
-    excerpt_ar: "إعادة تعريف تجربة التسوق من خلال الربط بين المتاجر التقليدية والمنصات الرقمية.",
-    content: "## The New Luxury Standard\n\nConsumers expect seamless transitions between Instagram discovery, WhatsApp concierge services, and VIP in-store experiences. \n\n## AI in Clienteling\nRetailers are deploying AI to track micro-preferences, allowing sales associates to act as hyper-informed personal shoppers, increasing AOV (Average Order Value) significantly.",
-    content_ar: "## المعيار الجديد للفخامة\n\nيتوقع المستهلكون انتقالات سلسة بين الاكتشاف عبر Instagram، وخدمات الكونسيرج عبر WhatsApp، وتجارب الشخصيات الهامة داخل المتجر.\n\n## الذكاء الاصطناعي في خدمة العملاء\nيقوم تجار التجزئة بنشر الذكاء الاصطناعي لتتبع التفضيلات الدقيقة، مما يسمح لموظفي المبيعات بالعمل كمتسوقين شخصيين مطلعين للغاية، مما يزيد من متوسط قيمة الطلب (AOV) بشكل كبير."
+    title: "The Future of Phygital Retail in the GCC",
+    title_ar: "مستقبل تجارة التجزئة 'فيجيتال' في دول مجلس التعاون الخليجي",
+    excerpt: "Merging physical boutiques with digital precision to create the ultimate luxury shopping journey.",
+    excerpt_ar: "دمج البوتيكات المادية مع الدقة الرقمية لخلق رحلة تسوق فاخرة مثالية.",
+    content: "## Seamless Integration\n\nThe boundary between online and offline is blurring. Smart mirrors and AI stylists in Dubai Mall are redefining personal shopping.\n\n## Hyper-Personalization\nBy leveraging localized data, retailers can now offer bespoke experiences that cater to the unique preferences of the UAE's diverse demographic.",
+    content_ar: "## التكامل السلس\n\nتتلاشى الحدود بين الإنترنت والواقع. المرايا الذكية ومنسقو الأزياء المعتمدون على الذكاء الاصطناعي في دبي مول يعيدون تعريف التسوق الشخصي.\n\n## التخصيص الفائق\nمن خلال الاستفادة من البيانات المحلية، يمكن لتجار التجزئة الآن تقديم تجارب مخصصة تلبي التفضيلات الفريدة للديموغرافية المتنوعة في دولة الإمارات العربية المتحدة."
   },
   "AI Marketing": {
-    title: "Enterprise AI Marketing: From Search to Answer Engines",
-    title_ar: "تسويق الذكاء الاصطناعي للمؤسسات: من البحث إلى محركات الإجابة",
-    excerpt: "Optimizing for LLMs is the new frontier for B2B lead generation in the GCC.",
-    excerpt_ar: "يعد التحسين لنماذج اللغات الكبيرة (LLMs) هو الحدود الجديدة لجذب العملاء المحتملين في دول مجلس التعاون الخليجي.",
-    content: "## The Shift to AIO\n\nTraditional SEO is losing ground to Answer Engine Optimization (AIO). B2B buyers now use AI tools to generate vendor shortlists.\n\n## Data Structuring\nCompanies must structure their content as entities that LLMs can easily ingest. This requires a fundamental shift from keyword stuffing to deep, authoritative knowledge graphs.",
-    content_ar: "## التحول إلى AIO\n\nيفقد تحسين محركات البحث التقليدي (SEO) مكانته لصالح تحسين محركات الإجابة (AIO). يستخدم مشتري B2B الآن أدوات الذكاء الاصطناعي لإنشاء قوائم مختصرة للموردين.\n\n## هيكلة البيانات\nيجب على الشركات هيكلة محتواها ككيانات يمكن لنماذج اللغات الكبيرة استيعابها بسهولة. يتطلب ذلك تحولاً جوهرياً من حشو الكلمات الرئيسية إلى الرسوم البيانية للمعرفة العميقة والموثوقة."
+    title: "B2B Marketing Automation: The AIO Revolution",
+    title_ar: "أتمتة التسويق بين الشركات (B2B): ثورة تحسين محركات الإجابة (AIO)",
+    excerpt: "Beyond SEO: How UAE enterprises are structuring data for the age of generative search.",
+    excerpt_ar: "ما وراء تحسين محركات البحث: كيف تقوم الشركات في الإمارات بهيكلة البيانات لعصر البحث التوليدي.",
+    content: "## From Keywords to Entities\n\nGenerative AI changes how buyers find information. Content must now be structured for LLM ingestion rather than simple search algorithms.\n\n## Authority Building\nEstablishing domain authority through deep-dive technical content is now the primary driver for high-quality lead generation in the Dubai tech ecosystem.",
+    content_ar: "## من الكلمات الرئيسية إلى الكيانات\n\nيغير الذكاء الاصطناعي التوليدي كيفية عثور المشترين على المعلومات. يجب الآن هيكلة المحتوى لاستيعاب نماذج اللغات الكبيرة بدلاً من خوارزميات البحث البسيطة.\n\n## بناء السلطة\nيعد بناء سلطة المجال من خلال المحتوى التقني المتعمق الآن المحرك الرئيسي لجذب العملاء المحتملين عاليي الجودة في منظومة التكنولوجيا في دبي."
   },
   "Real Estate": {
-    title: "PropTech 2026: Predictive Pricing Models in Dubai",
-    title_ar: "بروبتيك 2026: نماذج التسعير التنبؤية في دبي",
-    excerpt: "How machine learning is bringing unprecedented transparency to UAE property valuations.",
-    excerpt_ar: "كيف يجلب التعلم الآلي شفافية غير مسبوقة لتقييم العقارات في الإمارات.",
-    content: "## Data-Driven Real Estate\n\nOff-plan and secondary market pricing is increasingly dictated by algorithmic models that analyze global capital flows, local infrastructure developments, and historical yields.\n\n## Investor Confidence\nThis transparency attracts institutional investors who rely on quantified risk models, stabilizing a historically volatile asset class.",
-    content_ar: "## العقارات القائمة على البيانات\n\nيتم تحديد أسعار السوق على الخارطة والسوق الثانوية بشكل متزايد من خلال النماذج الخوارزمية التي تحلل تدفقات رأس المال العالمية، وتطورات البنية التحتية المحلية، والعوائد التاريخية.\n\n## ثقة المستثمر\nتجذب هذه الشفافية المستثمرين المؤسسيين الذين يعتمدون على نماذج المخاطر الكمية، مما يؤدي إلى استقرار فئة الأصول التي كانت متقلبة تاريخياً."
+    title: "PropTech 3.0: Algorithmic Valuations in Dubai Real Estate",
+    title_ar: "بروبتيك 3.0: التقييمات الخوارزمية في عقارات دبي",
+    excerpt: "How predictive modeling is stabilizing the secondary market and boosting institutional investor confidence.",
+    excerpt_ar: "كيف يعمل النمذجة التنبؤية على استقرار السوق الثانوية وتعزيز ثقة المستثمرين المؤسسيين.",
+    content: "## Data-Driven Decisions\n\nReal-time market analytics are replacing traditional appraisals, offering unprecedented transparency to global investors entering the Dubai market.\n\n## The New Standard\nBlockchain-enabled smart contracts combined with AI pricing models are setting a new global standard for real estate transactions in the UAE.",
+    content_ar: "## القرارات القائمة على البيانات\n\nتحل تحليلات السوق في الوقت الفعلي محل التقييمات التقليدية، مما يوفر شفافية غير مسبوقة للمستثمرين العالميين الذين يدخلون سوق دبي.\n\n## المعيار الجديد\nتضع العقود الذكية الممكنة بالبلوكتشين، مقترنة بنماذج تسعير الذكاء الاصطناعي، معياراً عالمياً جديداً للمعاملات العقارية في دولة الإمارات العربية المتحدة."
   },
   "Tech & Innovation": {
-    title: "Automating the Enterprise: RPA and Generative AI Synergy",
-    title_ar: "أتمتة المؤسسات: التآزر بين RPA والذكاء الاصطناعي التوليدي",
-    excerpt: "Combining robotic process automation with LLMs to eliminate back-office friction.",
-    excerpt_ar: "الجمع بين أتمتة العمليات الروبوتية ونماذج اللغات الكبيرة للقضاء على احتكاك المكاتب الخلفية.",
-    content: "## Beyond Simple Scripts\n\nWhile RPA handles structured, repetitive tasks, generative AI brings cognitive capabilities to unstructured data processing like contracts and customer emails.\n\n## The Autonomous Enterprise\nThis synergy paves the way for the autonomous enterprise, reducing operational overhead in Dubai free zones by up to 40%.",
-    content_ar: "## ما وراء النصوص البرمجية البسيطة\n\nبينما تتعامل أتمتة العمليات الروبوتية (RPA) مع المهام الهيكلية والمتكررة، يوفر الذكاء الاصطناعي التوليدي قدرات معرفية لمعالجة البيانات غير الهيكلية مثل العقود ورسائل البريد الإلكتروني للعملاء.\n\n## المؤسسة المستقلة\nيمهد هذا التآزر الطريق للمؤسسة المستقلة، مما يقلل من النفقات التشغيلية في المناطق الحرة في دبي بنسبة تصل إلى 40٪."
+    title: "Autonomous Enterprise: The Synergy of RPA and LLMs",
+    title_ar: "المؤسسة المستقلة: التآزر بين RPA ونماذج اللغات الكبيرة",
+    excerpt: "Eliminating back-office friction through cognitive automation in Dubai's leading free zones.",
+    excerpt_ar: "القضاء على احتكاك المكاتب الخلفية من خلال الأتمتة المعرفية في المناطق الحرة الرائدة في دبي.",
+    content: "## Beyond Scripted Automation\n\nCognitive agents are now handling complex unstructured data, from legal contract reviews to multi-lingual customer support.\n\n## Efficiency Gains\nFree zone enterprises are reporting up to 50% reduction in operational costs by deploying autonomous workflows that scale without increasing headcount.",
+    content_ar: "## ما وراء الأتمتة المبرمجة\n\nتتعامل العوامل المعرفية الآن مع البيانات المعقدة غير الهيكلية، من مراجعة العقود القانونية إلى دعم العملاء متعدد اللغات.\n\n## مكاسب الكفاءة\nتسجل شركات المناطق الحرة انخفاضاً يصل إلى 50٪ في التكاليف التشغيلية من خلال نشر سير عمل مستقل يتوسع دون زيادة في عدد الموظفين."
   }
 };
 
 const modifiers = [
   { prefix: "Case Study: ", suffix: " in Practice", prefix_ar: "دراسة حالة: ", suffix_ar: " في الممارسة العملية" },
-  { prefix: "Future Outlook: ", suffix: " Trends for 2026", prefix_ar: "آفاق مستقبلية: ", suffix_ar: " اتجاهات عام 2026" },
-  { prefix: "Executive Brief: ", suffix: " Strategies", prefix_ar: "موجز تنفيذي: ", suffix_ar: " استراتيجيات" },
-  { prefix: "Deep Dive: ", suffix: " Dynamics", prefix_ar: "تحليل عميق: ", suffix_ar: " ديناميكيات" },
-  { prefix: "Report: ", suffix: " Analysis", prefix_ar: "تقرير: ", suffix_ar: " تحليل" }
+  { prefix: "Strategic Analysis: ", suffix: " 2026", prefix_ar: "تحليل استراتيجي: ", suffix_ar: " 2026" },
+  { prefix: "Executive Brief: ", suffix: " Frameworks", prefix_ar: "موجز تنفيذي: ", suffix_ar: " أطر عمل" },
+  { prefix: "Deep Dive: ", suffix: " Architectures", prefix_ar: "تحليل عميق: ", suffix_ar: " بنية هندسية" },
+  { prefix: "Market Intelligence: ", suffix: " Trends", prefix_ar: "استخبارات السوق: ", suffix_ar: " اتجاهات" }
 ];
 
-function generateArticles(count = 25) {
+function generateArticles(count = 20) {
   const articles = [];
   const msInDay = 24 * 60 * 60 * 1000;
   const now = Date.now();
@@ -133,11 +133,12 @@ function generateArticles(count = 25) {
       source_name: "mirAIreach Research",
       image_url: imageUrl,
       is_published: true,
-      created_at: new Date(now - i * 2 * msInDay).toISOString(),
+      created_at: new Date(now - i * 3 * msInDay).toISOString(), // Spread out over 2 months
     });
   }
   return articles;
 }
+
 
 async function insertArticles(url, key, articles) {
   const response = await fetch(`${url}/rest/v1/articles`, {
@@ -159,6 +160,24 @@ async function insertArticles(url, key, articles) {
   return response.json();
 }
 
+async function deleteAllArticles(url, key) {
+  console.log("Cleaning up existing articles...");
+  // Use a filter that matches all rows to satisfy PostgREST's requirement for a WHERE clause
+  const response = await fetch(`${url}/rest/v1/articles?id=neq.-1`, {
+    method: "DELETE",
+
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${key}`,
+    },
+  });
+
+  if (!response.ok && response.status !== 404) {
+    const body = await response.text();
+    console.warn(`Cleanup warning: ${response.status} ${body}`);
+  }
+}
+
 async function main() {
   await loadEnv();
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -168,9 +187,14 @@ async function main() {
     throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in environment.");
   }
 
-  console.log("Generating 25 diverse bilingual (EN/AR) articles...");
-  const newArticles = generateArticles(25);
+  // 1. Cleanup
+  await deleteAllArticles(url, key);
 
+  // 2. Generate
+  console.log("Generating 20 diverse bilingual (EN/AR) premium articles...");
+  const newArticles = generateArticles(20);
+
+  // 3. Insert
   console.log("Attempting to insert into Supabase...");
   try {
     const inserted = await insertArticles(url, key, newArticles);
@@ -180,15 +204,8 @@ async function main() {
     console.error("❌ DATABASE INSERTION FAILED");
     console.error("========================================================");
     if (err.message.includes("42703") || err.message.includes("column articles.title_ar does not exist")) {
-      console.error("\n[CRITICAL ERROR] The Arabic columns (title_ar, excerpt_ar, content_ar) DO NOT EXIST in your Supabase database.");
-      console.error("Please run the following SQL command in your Supabase SQL Editor:");
-      console.error(`
-      ALTER TABLE articles 
-      ADD COLUMN title_ar text,
-      ADD COLUMN excerpt_ar text,
-      ADD COLUMN content_ar text;
-      `);
-      console.error("\nAfter running the SQL, run this script again.");
+      console.error("\n[CRITICAL ERROR] Database schema mismatch.");
+      console.error("Please run the SQL cleanup provided in implementation_plan.md.");
     } else {
       console.error(err.message);
     }
@@ -197,8 +214,8 @@ async function main() {
   }
 }
 
-
 main().catch((error) => {
   console.error(error.message);
   process.exit(1);
 });
+

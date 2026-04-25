@@ -13,10 +13,14 @@ interface ArticleClientProps {
 
 export default function ArticleClient({ article }: ArticleClientProps) {
   const { language } = useLanguage();
+  const isAr = language === "ar";
 
-  const title = language === "ar" && article.title_ar ? article.title_ar : article.title;
-  const content = language === "ar" && article.content_ar ? article.content_ar : article.content;
-  const excerpt = language === "ar" && article.excerpt_ar ? article.excerpt_ar : article.excerpt;
+  const title = (isAr && article.title_ar?.trim() ? article.title_ar : article.title) || (isAr ? "عنوان غير متوفر" : "No Title Available");
+  
+  const content = (isAr && article.content_ar?.trim() ? article.content_ar : article.content) || "";
+  
+  const excerpt = (isAr && article.excerpt_ar?.trim() ? article.excerpt_ar : article.excerpt) || (isAr ? "لا يوجد ملخص متاح لهذا المقال." : "No excerpt available for this article.");
+
 
 
   return (

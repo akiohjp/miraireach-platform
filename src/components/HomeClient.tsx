@@ -43,13 +43,24 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
 
   const getTitle = (article?: Article) => {
     if (!article) return "";
-    return isAr && article.title_ar ? article.title_ar : article.title;
+    // If Arabic is selected and title_ar exists, use it.
+    if (isAr && article.title_ar?.trim()) return article.title_ar;
+    // Otherwise, fall back to English title if it exists.
+    if (article.title?.trim()) return article.title;
+    // Last resort fallback
+    return isAr ? "عنوان غير متوفر" : "No Title Available";
   };
 
   const getExcerpt = (article?: Article) => {
     if (!article) return "";
-    return isAr && article.excerpt_ar ? article.excerpt_ar : article.excerpt;
+    // If Arabic is selected and excerpt_ar exists, use it.
+    if (isAr && article.excerpt_ar?.trim()) return article.excerpt_ar;
+    // Otherwise, fall back to English excerpt if it exists.
+    if (article.excerpt?.trim()) return article.excerpt;
+    // Last resort fallback
+    return isAr ? "لا يوجد ملخص متاح لهذا المقال." : "No excerpt available for this article.";
   };
+
 
   // Group loaded articles by category for the parallel grid layout
   const categories = Array.from(new Set(loadedArticles.map(a => a.category)));
