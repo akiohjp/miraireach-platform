@@ -230,20 +230,35 @@ The move to autonomous logistics is not just about efficiency—it's a massive h
 ];
 
 async function insertArticles(url, key, articles) {
-  const response = await fetch(`${url}/rest/v1/articles`, {
-    method: "POST",
-    headers: {
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/json",
-      Prefer: "return=representation",
-    },
-    body: JSON.stringify(articles),
-  });
+  const tryInsert = async (payload) => {
+    return await fetch(`${url}/rest/v1/articles`, {
+      method: "POST",
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        "Content-Type": "application/json",
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify(payload),
+    });
+  };
+
+  let response = await tryInsert(articles);
 
   if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`Failed to insert articles: ${response.status} ${body}`);
+    const errorBody = await response.text();
+    // Check if the error is due to missing columns (PGRST204)
+    if (response.status === 400 && errorBody.includes("PGRST204")) {
+      console.warn("Curation columns missing. Retrying with basic fields only...");
+      const basicArticles = articles.map(({ is_curated, original_source_name, original_url, ...rest }) => rest);
+      response = await tryInsert(basicArticles);
+      if (!response.ok) {
+        const retryErrorBody = await response.text();
+        throw new Error(`Failed to insert basic articles: ${response.status} ${retryErrorBody}`);
+      }
+    } else {
+      throw new Error(`Failed to insert articles: ${response.status} ${errorBody}`);
+    }
   }
 
   return response.json();
@@ -251,7 +266,6 @@ async function insertArticles(url, key, articles) {
 
 async function deleteB2CArticles(url, key) {
   console.log("Cleaning up legacy B2C articles...");
-  // Use OR filter for B2C specific cleanup
   const response = await fetch(`${url}/rest/v1/articles?or=(company_name.eq.Trend%20Hub%20Dubai,source_name.eq.mirAIreach%20Curation)`, {
     method: "DELETE",
     headers: {
