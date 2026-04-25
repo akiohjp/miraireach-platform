@@ -15,7 +15,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2 space-y-6">
             <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-white">
-              mirAIreach<span className="text-primary">.</span>PRESS
+              mirAIreach<span className="text-white opacity-50">.</span>PRESS
             </Link>
             <p className="text-sm leading-relaxed max-w-md">
               {isAr 
@@ -25,7 +25,7 @@ export default function Footer() {
             <div className="flex flex-col gap-4 pt-4">
               <Link 
                 href="/contact?service=aio-diagnostic"
-                className="text-xs font-bold uppercase tracking-widest text-primary hover:underline"
+                className="text-xs font-bold uppercase tracking-widest text-white hover:underline"
               >
                 {isAr ? "→ ابدأ تدقيق البحث بالذكاء الاصطناعي (مجاني)" : "→ Start Free AI Search Audit"}
               </Link>
