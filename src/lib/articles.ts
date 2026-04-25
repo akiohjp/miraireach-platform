@@ -10,6 +10,7 @@ export type Article = {
   content_ar?: string | null;
   source_name: string;
   image_url: string | null;
+  company_name?: string | null;
   is_published: boolean;
 };
 
@@ -40,7 +41,7 @@ export async function fetchPublishedArticles(limit = 20, offset = 0): Promise<Ar
 
   const { url, key } = config;
   const response = await fetch(
-    `${url}/rest/v1/articles?select=id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,image_url,is_published&is_published=eq.true&order=created_at.desc,id.desc&limit=${limit}&offset=${offset}`,
+    `${url}/rest/v1/articles?select=id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,is_published&is_published=eq.true&order=created_at.desc,id.desc&limit=${limit}&offset=${offset}`,
     {
       headers: {
         apikey: key,
@@ -60,7 +61,7 @@ export async function fetchArticleById(id: number): Promise<Article | null> {
 
   const { url, key } = config;
   const response = await fetch(
-    `${url}/rest/v1/articles?select=id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,image_url,is_published&id=eq.${id}&is_published=eq.true&limit=1`,
+    `${url}/rest/v1/articles?select=id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,is_published&id=eq.${id}&is_published=eq.true&limit=1`,
     {
       headers: {
         apikey: key,
