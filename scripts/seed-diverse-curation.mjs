@@ -74,6 +74,10 @@ async function generatePremiumContent(openai, item) {
     5. AI Insight (H2): A unique strategic takeaway regarding tech integration or market disruption.
     
     Requirements:
+    - LANGUAGE SEPARATION (MANDATORY):
+      * The "content" field MUST contain ONLY English. Do not include any Arabic text.
+      * The "content_ar" field MUST contain ONLY Arabic. Do not include any English text.
+      * The same strict rule applies to title/title_ar and excerpt/excerpt_ar.
     - Minimum 1500 words in English.
     - Professional, high-quality Arabic translation for ALL sections.
     - STUNNING Markdown formatting (H2, H3, bolding, bullet points, data).

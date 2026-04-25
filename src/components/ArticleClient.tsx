@@ -27,9 +27,12 @@ export default function ArticleClient({ article }: ArticleClientProps) {
     <div className="mx-auto min-h-screen w-full max-w-5xl px-6 py-12 md:px-10">
       <Header showNav={false} />
 
-      <article className="space-y-8 mt-4">
+      <article 
+        className={`space-y-8 mt-4 ${isAr ? "text-right font-arabic" : "text-left"}`} 
+        dir={isAr ? "rtl" : "ltr"}
+      >
         <div className="space-y-3">
-          <div className="flex flex-wrap items-center gap-3">
+          <div className={`flex flex-wrap items-center gap-3 ${isAr ? "flex-row-reverse" : ""}`}>
             <p className="text-xs tracking-[0.16em] text-muted uppercase">
               {article.category} | {formatDate(article.created_at)} |{" "}
               {article.source_name}
@@ -59,16 +62,18 @@ export default function ArticleClient({ article }: ArticleClientProps) {
           priority
         />
 
-        <div className="prose prose-lg max-w-3xl prose-headings:tracking-[0.01em] prose-headings:text-foreground prose-p:leading-8 prose-p:text-foreground/90 prose-strong:font-semibold prose-li:leading-8">
+        <div className={`prose prose-lg max-w-3xl prose-headings:tracking-[0.01em] prose-headings:text-foreground prose-p:leading-8 prose-p:text-foreground/90 prose-strong:font-semibold prose-li:leading-8 ${isAr ? "text-right" : "text-left"}`}>
           <ReactMarkdown>
             {content?.trim() ||
-              `## Market Context\n\n${excerpt}\n\n## Why It Matters\n\nDubai's B2B ecosystem is rapidly aligning content strategy with measurable pipeline performance.`}
+              (isAr 
+                ? `## سياق السوق\n\n${excerpt}\n\n## لماذا يهم هذا\n\nيصطف نظام B2B في دبي بسرعة مع استراتيجية المحتوى مع أداء خط الأنابيب القابل للقياس.`
+                : `## Market Context\n\n${excerpt}\n\n## Why It Matters\n\nDubai's B2B ecosystem is rapidly aligning content strategy with measurable pipeline performance.`)}
           </ReactMarkdown>
         </div>
 
         {/* EXECUTIVE ACTION CTA (LP HYBRID) */}
-        <div className="mt-20 rounded-3xl bg-[#0a0a0a] p-10 border border-white/5 space-y-10">
-          <div className="space-y-4">
+        <div className="mt-20 rounded-3xl bg-[#0a0a0a] p-10 border border-white/5 space-y-10" dir={isAr ? "rtl" : "ltr"}>
+          <div className={`space-y-4 ${isAr ? "text-right" : "text-left"}`}>
             <div className="inline-block rounded bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white">
               {isAr ? "خطوات تنفيذية" : "Executive Action"}
             </div>
@@ -85,7 +90,7 @@ export default function ArticleClient({ article }: ArticleClientProps) {
           <div className="grid gap-6 md:grid-cols-2">
             <Link 
               href="/contact?service=aio-diagnostic"
-              className="group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-primary/40 transition-all hover:bg-primary/[0.02]"
+              className={`group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-primary/40 transition-all hover:bg-primary/[0.02] ${isAr ? "text-right" : "text-left"}`}
             >
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Service 01</span>
               <span className="text-lg font-bold text-white group-hover:text-primary transition-colors">{isAr ? "تدقيق البحث بالذكاء الاصطناعي (مجاني)" : "Free AI Search Audit"}</span>
@@ -93,7 +98,7 @@ export default function ArticleClient({ article }: ArticleClientProps) {
             </Link>
             <Link 
               href="/contact?service=free-design"
-              className="group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-white/20 transition-all hover:bg-white/[0.02]"
+              className={`group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-white/20 transition-all hover:bg-white/[0.02] ${isAr ? "text-right" : "text-left"}`}
             >
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">Service 02</span>
               <span className="text-lg font-bold text-white group-hover:text-white/80 transition-colors">{isAr ? "تصميم ويب متميز (مجاني)" : "Premium Web Design (Free)"}</span>
@@ -104,7 +109,7 @@ export default function ArticleClient({ article }: ArticleClientProps) {
           <div className="pt-4 border-t border-white/5">
             <Link 
               href="/contact"
-              className="flex items-center justify-between group"
+              className={`flex items-center justify-between group ${isAr ? "flex-row-reverse" : ""}`}
             >
               <span className="text-xs font-black uppercase tracking-[0.2em] text-white group-hover:text-primary transition-colors">
                 {isAr ? "تحدث مع خبير استراتيجي" : "Talk to a Strategist"}
