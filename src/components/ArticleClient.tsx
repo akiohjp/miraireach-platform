@@ -29,10 +29,22 @@ export default function ArticleClient({ article }: ArticleClientProps) {
 
       <article className="space-y-8 mt-4">
         <div className="space-y-3">
-          <p className="text-xs tracking-[0.16em] text-muted uppercase">
-            {article.category} | {formatDate(article.created_at)} |{" "}
-            {article.source_name}
-          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="text-xs tracking-[0.16em] text-muted uppercase">
+              {article.category} | {formatDate(article.created_at)} |{" "}
+              {article.source_name}
+            </p>
+            {article.is_curated && article.original_url && (
+              <a 
+                href={article.original_url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="rounded-full bg-primary/10 border border-primary/20 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary hover:bg-primary/20 transition-colors"
+              >
+                {isAr ? "المصدر: " : "Source: "}{article.original_source_name}
+              </a>
+            )}
+          </div>
           <h1 className="max-w-4xl text-3xl font-medium leading-[1.3] tracking-[0.01em] md:text-5xl">
             {title}
           </h1>

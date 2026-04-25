@@ -86,12 +86,17 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-0 p-6 text-white md:p-10 space-y-4">
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     <span className="rounded bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
                       {featured?.category}
                     </span>
+                    {featured?.is_curated && (
+                      <span className="rounded bg-white/20 backdrop-blur-sm px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+                        {isAr ? "مختار" : "Curated"}
+                      </span>
+                    )}
                     <span className="text-[10px] font-medium text-white/80 uppercase tracking-widest">
-                      {featured?.company_name}
+                      {featured?.original_source_name || featured?.company_name}
                     </span>
                   </div>
                   <h1 className="text-2xl font-bold leading-tight md:text-4xl">
@@ -211,7 +216,13 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                     <div className="flex flex-wrap items-center gap-2 text-[9px] font-bold uppercase tracking-wider">
                       <span className="text-primary">{item.category}</span>
                       <span className="h-2 w-[1px] bg-line" />
-                      <span className="text-muted">{item.company_name}</span>
+                      {item.is_curated && (
+                        <>
+                          <span className="text-muted/60">{isAr ? "مختار" : "Curated"}</span>
+                          <span className="h-2 w-[1px] bg-line" />
+                        </>
+                      )}
+                      <span className="text-muted">{item.original_source_name || item.company_name}</span>
                     </div>
                     <Link href={`/articles/${item.id}`}>
                       <h3 className="text-sm font-bold leading-snug line-clamp-2 group-hover:underline decoration-1 underline-offset-4">
