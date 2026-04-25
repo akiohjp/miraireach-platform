@@ -61,8 +61,10 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
     "F&B & Hospitality",
     "Real Estate & PropTech",
     "FinTech & Crypto",
-    "Logistics & Supply Chain",
-    "Retail & E-commerce"
+    "Gourmet & Dining",
+    "Lifestyle & Travel",
+    "Local Guide",
+    "Trend Curation"
   ];
 
   return (
