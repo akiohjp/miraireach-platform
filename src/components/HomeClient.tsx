@@ -6,6 +6,7 @@ import Link from "next/link";
 import Header from "./Header";
 import { useLanguage } from "./LanguageProvider";
 import { Article, fallbackImage, formatDate } from "@/lib/articles";
+import { Search, Send, Layout, ArrowRight } from "lucide-react";
 
 interface HomeClientProps {
   articles: Article[];
@@ -135,56 +136,117 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           </div>
         </section>
 
-        {/* 2. CORE SERVICES (LP HYBRID SECTION) */}
-        <section className="grid gap-6 md:grid-cols-2">
-          <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 p-8 border border-primary/20 transition hover:border-primary/40">
-            <div className="relative z-10 space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-                </span>
-                {isAr ? "خدمة مجانية" : "Free Service"}
-              </div>
-              <h2 className="text-2xl font-black tracking-tight md:text-3xl">
-                {isAr ? "تدقيق البحث بالذكاء الاصطناعي" : "AI Search Audit"}
-              </h2>
-              <p className="text-sm leading-relaxed text-muted max-w-sm">
-                {isAr 
-                  ? "اكتشف كيف تصف أنظمة الذكاء الاصطناعي (مثل ChatGPT و Gemini) شركتك. احصل على تقرير تشخيصي مجاني لتقييم مدى جاهزيتك لعصر البحث التوليدي."
-                  : "Discover how AI systems (ChatGPT, Gemini, etc.) talk about your brand. Get a free diagnostic report to evaluate your readiness for the generative search era."}
-              </p>
-              <Link 
-                href="/contact?service=aio-diagnostic"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-xs font-black uppercase tracking-widest text-white transition hover:scale-105"
-              >
-                {isAr ? "ابدأ التشخيص المجاني" : "Start Free Diagnostic"}
-              </Link>
+        {/* 2. THREE FREE CORE SERVICES (B2B LEAD GEN) */}
+        <section className="space-y-8 py-4">
+          <div className="text-center space-y-3">
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-primary">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
+              </span>
+              {isAr ? "خدماتنا الأساسية المجانية" : "Our Free Core Services"}
             </div>
-            <div className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-primary/10 blur-3xl group-hover:bg-primary/20 transition-colors" />
+            <h2 className="text-3xl font-black tracking-tighter md:text-4xl lg:text-5xl">
+              {isAr ? "نمو عملك يبدأ من هنا" : "Scale Your Business with AI"}
+            </h2>
+            <p className="mx-auto max-w-2xl text-sm text-muted/70">
+              {isAr 
+                ? "نحن نوفر حلولاً متطورة قائمة على الذكاء الاصطناعي لمساعدة الشركات في دبي على التفوق في العصر الرقمي الجديد."
+                : "We provide cutting-edge AI-driven solutions to help Dubai-based businesses thrive in the new digital era."}
+            </p>
           </div>
 
-          <div className="group relative overflow-hidden rounded-2xl bg-[#111] p-8 border border-white/5 transition hover:border-white/10 text-white">
-            <div className="relative z-10 space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white/80">
-                {isAr ? "عرض محدود" : "Limited Offer"}
+          <div className="grid gap-6 md:grid-cols-3">
+            {/* Service 1: AI Search Visibility Diagnosis */}
+            <div className="group relative overflow-hidden rounded-3xl border border-line bg-muted/5 p-8 transition hover:border-primary/50 hover:bg-muted/10">
+              <div className="relative z-10 space-y-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                  <Search size={24} />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-bold tracking-tight">
+                    {isAr ? "تشخيص وضوح البحث بالذكاء الاصطناعي" : "AI Search Visibility Diagnosis"}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted/70">
+                    {isAr 
+                      ? "اكتشف كيف تصف أنظمة الذكاء الاصطناعي (ChatGPT, Perplexity) علمتك التجارية في نتائج البحث التوليدي."
+                      : "Discover how AI systems (ChatGPT, Perplexity) describe your brand in generative search results."}
+                  </p>
+                </div>
+                <Link 
+                  href="/contact?service=ai-diagnosis" 
+                  className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary group-hover:gap-4 transition-all"
+                >
+                  {isAr ? "ابدأ التشخيص الآن" : "Start Diagnosis Now"}
+                  <ArrowRight size={14} />
+                </Link>
               </div>
-              <h2 className="text-2xl font-black tracking-tight md:text-3xl text-white">
-                {isAr ? "تصميم صفحة ويب احترافية مجانية" : "Free Professional Web Design"}
-              </h2>
-              <p className="text-sm leading-relaxed text-white/60 max-w-sm">
-                {isAr 
-                  ? "نقوم بتصميم صفحة هبوط متميزة لعملك مجانًا. لفترة محدودة، نساعد الشركات في دبي على تحسين حضورها الرقمي بأحدث التقنيات."
-                  : "We design a premium landing page for your business at zero cost. For a limited time, helping Dubai brands elevate their digital footprint."}
-              </p>
-              <Link 
-                href="/contact?service=free-design"
-                className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-xs font-black uppercase tracking-widest text-black transition hover:scale-105"
-              >
-                {isAr ? "احصل على عرضك الآن" : "Claim Offer Now"}
-              </Link>
+              <div className="absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-primary/5 blur-3xl group-hover:bg-primary/10 transition-colors" />
             </div>
-            <div className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-white/5 blur-3xl group-hover:bg-white/10 transition-colors" />
+
+            {/* Service 2: AI PR & Outreach System */}
+            <div className="group relative overflow-hidden rounded-3xl border border-line bg-muted/5 p-8 transition hover:border-primary/50 hover:bg-muted/10">
+              <div className="relative z-10 space-y-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                  <Send size={24} />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-bold tracking-tight">
+                    {isAr ? "نظام العلاقات العامة والتواصل الذكي" : "AI PR & Outreach System"}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted/70">
+                    {isAr 
+                      ? "أتمتة التواصل مع الوسائل الإعلامية والعملاء المستهدفين باستخدام حلول الذكاء الاصطناعي المخصصة."
+                      : "Automate your media outreach and target lead generation using hyper-personalized AI solutions."}
+                  </p>
+                </div>
+                <Link 
+                  href="/contact?service=ai-outreach" 
+                  className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary group-hover:gap-4 transition-all"
+                >
+                  {isAr ? "تجربة مجانية" : "Free Trial"}
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+              <div className="absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-primary/5 blur-3xl group-hover:bg-primary/10 transition-colors" />
+            </div>
+
+            {/* Service 3: Free Landing Page Creation */}
+            <div className="group relative overflow-hidden rounded-3xl border border-line bg-muted/5 p-8 transition hover:border-primary/50 hover:bg-muted/10">
+              <div className="relative z-10 space-y-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                  <Layout size={24} />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-bold tracking-tight">
+                    {isAr ? "بناء صفحات هبوط مجانية" : "Free Landing Page Creation"}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted/70">
+                    {isAr 
+                      ? "بناء صفحات هبوط عالية التحويل ومصممة باحترافية لتعزيز حضورك الرقمي في دبي مجانًا."
+                      : "Build high-converting, professionally designed landing pages to boost your digital presence in Dubai for free."}
+                  </p>
+                </div>
+                <Link 
+                  href="/contact?service=free-lp" 
+                  className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary group-hover:gap-4 transition-all"
+                >
+                  {isAr ? "احصل على صفحتك" : "Get Your Page"}
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+              <div className="absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-primary/5 blur-3xl group-hover:bg-primary/10 transition-colors" />
+            </div>
+          </div>
+
+          <div className="flex justify-center pt-4">
+            <Link 
+              href="/contact" 
+              className="group flex items-center gap-4 rounded-full bg-foreground px-10 py-4 text-xs font-black uppercase tracking-[0.2em] text-background transition hover:bg-primary hover:text-white"
+            >
+              {isAr ? "احصل على تقييمك المجاني" : "Get Your Free Assessment"}
+              <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+            </Link>
           </div>
         </section>
 
