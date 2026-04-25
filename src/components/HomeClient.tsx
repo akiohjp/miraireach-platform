@@ -181,7 +181,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           </section>
 
           {/* 2. THE FOUNDATION: AI IDENTITY AGGREGATION (CORE SYSTEM) */}
-          <section className="space-y-16 py-12">
+          <section className="space-y-16 pb-12">
             <div className="max-w-4xl space-y-6">
               <div className="inline-flex items-center gap-3 rounded-full bg-foreground text-background px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em]">
                 {isAr ? "النظام الأساسي" : "The Core System"}
@@ -332,11 +332,11 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           </section>
 
           {/* 4. LATEST NEWS TIMELINE */}
-          <section className="space-y-12">
-            <header className="mb-14 flex items-center justify-between border-b border-line pb-8">
+          <section className="space-y-8">
+            <header className="mb-10 flex items-center justify-between border-b border-line pb-8">
               <Link href="/" className="hover:opacity-80 transition-opacity">
-                <p className="text-2xl font-black tracking-tighter text-foreground uppercase flex items-center">
-                  mirAIreach<span className="mx-0.5 text-primary">.</span>PRESS
+                <p className="text-2xl font-black tracking-tighter text-foreground uppercase">
+                  mirAIreach<span className="text-foreground opacity-50">.</span>PRESS
                 </p>
               </Link>
               <div className="space-y-2 text-right">
