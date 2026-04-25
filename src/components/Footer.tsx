@@ -65,9 +65,9 @@ export default function Footer() {
           <div className="space-y-6">
             <h3 className="text-[10px] font-black tracking-[0.2em] text-white uppercase opacity-50">Company</h3>
             <ul className="space-y-4 text-sm font-medium">
-              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "من نحن" : "About Press"}</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "بيان الخصوصية" : "Privacy"}</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">{isAr ? "الشروط" : "Terms"}</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">{isAr ? "من نحن" : "About Press"}</Link></li>
+              <li><Link href="/privacy" className="hover:text-white transition-colors">{isAr ? "بيان الخصوصية" : "Privacy"}</Link></li>
+              <li><Link href="/terms" className="hover:text-white transition-colors">{isAr ? "الشروط" : "Terms"}</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">{isAr ? "اتصل بنا" : "Contact"}</Link></li>
               <li className="pt-2">
                 <a href="mailto:info.ae@miraireach.marketing" className="text-[10px] text-muted hover:text-white transition-colors lowercase tracking-wider">
