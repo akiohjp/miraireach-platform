@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "./Header";
@@ -22,6 +23,13 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
   const [hasMore, setHasMore] = useState(latestInsights.length >= 10);
 
   const isAr = language === "ar";
+  const searchParams = useSearchParams();
+  const selectedCategory = searchParams.get("category");
+
+  const filteredArticles = useMemo(() => {
+    if (!selectedCategory) return loadedArticles;
+    return loadedArticles.filter(a => a.category === selectedCategory);
+  }, [loadedArticles, selectedCategory]);
 
   const loadMore = async () => {
     setLoading(true);
@@ -241,19 +249,36 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
 
             {/* Horizontal Categories Widget */}
             <div className="flex flex-wrap gap-3 mb-10">
-              {categories.map((cat) => (
-                <Link 
-                  key={cat} 
-                  href={`/articles?category=${encodeURIComponent(cat)}`}
-                  className="rounded-full border border-line px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-muted hover:border-primary hover:text-primary transition-all hover:bg-primary/5"
-                >
-                  {cat}
-                </Link>
-              ))}
+              <Link 
+                href="/"
+                className={`rounded-full border px-5 py-2.5 text-[10px] font-black uppercase tracking-widest transition-all ${
+                  !selectedCategory 
+                    ? "bg-foreground text-background border-foreground" 
+                    : "border-line text-muted hover:border-primary hover:text-primary hover:bg-primary/5"
+                }`}
+              >
+                {isAr ? "الكل" : "All"}
+              </Link>
+              {categories.map((cat) => {
+                const isActive = selectedCategory === cat;
+                return (
+                  <Link 
+                    key={cat} 
+                    href={`/?category=${encodeURIComponent(cat)}`}
+                    className={`rounded-full border px-5 py-2.5 text-[10px] font-black uppercase tracking-widest transition-all ${
+                      isActive 
+                        ? "bg-foreground text-background border-foreground" 
+                        : "border-line text-muted hover:border-primary hover:text-primary hover:bg-primary/5"
+                    }`}
+                  >
+                    {cat}
+                  </Link>
+                );
+              })}
             </div>
 
             <div className="grid gap-12 md:grid-cols-2">
-              {loadedArticles.slice(0, 15).map((item) => (
+              {filteredArticles.slice(0, 15).map((item) => (
                 <article key={`latest-${item.id}`} className="group flex gap-8">
                   <Link href={`/articles/${item.id}`} className="relative aspect-square w-32 shrink-0 overflow-hidden rounded-2xl bg-muted/10 md:w-40">
                     <Image

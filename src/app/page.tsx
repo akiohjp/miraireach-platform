@@ -1,5 +1,6 @@
 import { fetchPublishedArticles } from "@/lib/articles";
 import HomeClient from "@/components/HomeClient";
+import { Suspense } from "react";
 
 export const revalidate = 0;
 
@@ -10,11 +11,13 @@ export default async function Home() {
   const trending = articles.slice(0, 3);
 
   return (
-    <HomeClient 
-      articles={articles}
-      featured={featured}
-      latestInsights={latestInsights}
-      trending={trending}
-    />
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomeClient 
+        articles={articles}
+        featured={featured}
+        latestInsights={latestInsights}
+        trending={trending}
+      />
+    </Suspense>
   );
 }
