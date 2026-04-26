@@ -21,8 +21,8 @@ const notoArabic = Noto_Sans_Arabic({
 });
 
 export const metadata: Metadata = {
-  title: "Miraireach Platform",
-  description: "Next.js App Router starter with Arabica-inspired UI and APIs.",
+  title: "mirAIreach NEWS",
+  description: "Dubai's leading AI-powered business intelligence platform for DX and AIO.",
 };
 
 export default function RootLayout({

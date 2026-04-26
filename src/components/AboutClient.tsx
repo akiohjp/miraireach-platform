@@ -17,7 +17,7 @@ export default function AboutClient() {
         <main className="mt-16 max-w-4xl mx-auto space-y-16">
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-black tracking-tighter md:text-6xl uppercase">
-              {isAr ? "عن mirAIreach" : "About mirAIreach"}
+              {isAr ? "عن mirAIreach NEWS" : "About mirAIreach NEWS"}
             </h1>
             <p className="text-xl text-muted leading-relaxed">
               {isAr 
@@ -33,8 +33,8 @@ export default function AboutClient() {
               </h2>
               <p>
                 {isAr 
-                  ? "في mirAIreach، مهمتنا هي تمكين الشركات في دبي ودولة الإمارات العربية المتحدة من التنقل في المشهد الرقمي سريع التطور. نحن نجمع بين تقنيات الذكاء الاصطناعي المتطورة والرؤى العميقة للسوق المحلي لدفع النمو والابتكار والوضوح."
-                  : "At mirAIreach, our mission is to empower businesses in Dubai and the UAE to navigate the rapidly evolving digital landscape. We combine cutting-edge AI technologies with deep local market insights to drive growth, innovation, and visibility."}
+                  ? "في mirAIreach NEWS، مهمتنا هي تمكين الشركات في دبي ودولة الإمارات العربية المتحدة من التنقل في المشهد الرقمي سريع التطور. نحن نجمع بين تقنيات الذكاء الاصطناعي المتطورة والرؤى العميقة للسوق المحلي لدفع النمو والابتكار والوضوح."
+                  : "At mirAIreach NEWS, our mission is to empower businesses in Dubai and the UAE to navigate the rapidly evolving digital landscape. We combine cutting-edge AI technologies with deep local market insights to drive growth, innovation, and visibility."}
               </p>
               <p>
                 {isAr
@@ -51,8 +51,8 @@ export default function AboutClient() {
               </h2>
               <p>
                 {isAr
-                  ? "mirAIreach هي منصة استخبارات أعمال متميزة مقرها دبي. نحن فريق من خبراء التكنولوجيا والاستراتيجيين والمبدعين المكرسين لتقديم محتوى عالي الجودة وحلول عملية."
-                  : "mirAIreach is a premium business intelligence platform based in Dubai. We are a team of technologists, strategists, and creatives dedicated to providing high-quality content and actionable solutions."}
+                  ? "mirAIreach NEWS هي منصة استخبارات أعمال متميزة مقرها دبي. نحن فريق من خبراء التكنولوجيا والاستراتيجيين والمبدعين المكرسين لتقديم محتوى عالي الجودة وحلول عملية."
+                  : "mirAIreach NEWS is a premium business intelligence platform based in Dubai. We are a team of technologists, strategists, and creatives dedicated to providing high-quality content and actionable solutions."}
               </p>
               <div className="grid md:grid-cols-2 gap-8 mt-8">
                 <div className="p-6 bg-white/5 rounded-2xl border border-white/10">

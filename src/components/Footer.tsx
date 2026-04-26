@@ -15,7 +15,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2 space-y-6">
             <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-white">
-              mirAIreach<span className="opacity-50">.</span>PRESS
+              mirAIreach <span className="text-primary italic">NEWS</span>
             </Link>
             <p className="text-sm leading-relaxed max-w-md">
               {isAr 
@@ -65,7 +65,7 @@ export default function Footer() {
           <div className="space-y-6">
             <h3 className="text-[10px] font-black tracking-[0.2em] text-white uppercase opacity-50">Company</h3>
             <ul className="space-y-4 text-sm font-medium">
-              <li><Link href="/about" className="hover:text-white transition-colors">{isAr ? "من نحن" : "About Press"}</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">{isAr ? "من نحن" : "About mirAIreach NEWS"}</Link></li>
               <li><Link href="/privacy" className="hover:text-white transition-colors">{isAr ? "بيان الخصوصية" : "Privacy"}</Link></li>
               <li><Link href="/terms" className="hover:text-white transition-colors">{isAr ? "الشروط" : "Terms"}</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">{isAr ? "اتصل بنا" : "Contact"}</Link></li>
@@ -80,7 +80,7 @@ export default function Footer() {
 
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs tracking-wider">
-            &copy; 2024 mirAIreach. All rights reserved.
+            &copy; 2024 mirAIreach NEWS. All rights reserved.
           </p>
           <div className="flex gap-4">
             <a href="#" className="hover:text-white transition-colors">

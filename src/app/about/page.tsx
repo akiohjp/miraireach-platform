@@ -1,7 +1,7 @@
 import AboutClient from "@/components/AboutClient";
 
 export const metadata = {
-  title: "About Us | mirAIreach PRESS",
+  title: "About Us | mirAIreach NEWS",
   description: "Learn more about mirAIreach, Dubai's premier AI business intelligence platform.",
 };
 

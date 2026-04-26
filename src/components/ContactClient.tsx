@@ -101,7 +101,7 @@ export default function ContactClient() {
         <main className="mt-12 space-y-16">
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-black tracking-tighter md:text-6xl uppercase">
-              {isAr ? "تواصل معنا" : "Work with mirAIreach"}
+              {isAr ? "تواصل معنا" : "Work with mirAIreach NEWS"}
             </h1>
             <p className="mx-auto max-w-xl text-muted leading-relaxed">
               {isAr 
