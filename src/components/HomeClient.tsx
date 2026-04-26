@@ -75,7 +75,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
 
         <main className="mt-4 pb-24">
           {/* 1. HERO SECTION (PR TIMES Style) */}
-          <section className="grid gap-12 lg:grid-cols-3 items-start">
+          <section className="grid gap-12 lg:grid-cols-3 items-start border-b border-transparent">
             <div className="lg:col-span-2">
               <article className="group relative h-[450px] overflow-hidden rounded-3xl lg:h-[600px] shadow-sm">
                 <Link href={featured ? `/articles/${featured.id}` : "#"}>
@@ -181,7 +181,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           </section>
 
           {/* 2. THE FOUNDATION: AI IDENTITY AGGREGATION (CORE SYSTEM) */}
-          <section className="space-y-16 py-8">
+          <section className="mt-16 space-y-16">
             <div className="max-w-4xl space-y-6">
               <div className="inline-flex items-center gap-3 rounded-full bg-foreground text-background px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em]">
                 {isAr ? "النظام الأساسي" : "The Core System"}
