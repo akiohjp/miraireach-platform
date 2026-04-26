@@ -316,12 +316,12 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
       </div>
 
       {/* SECTION 1: THE NEW SEARCH REALITY */}
-      <section className="w-full py-24 bg-white border-t border-line/5">
+      <section className="w-full py-14 bg-white border-t border-line/5">
         <div className="mx-auto max-w-5xl px-6 md:px-12">
-          <div className="space-y-24">
+          <div className="space-y-12">
             
             <div className="space-y-6 text-center max-w-3xl mx-auto">
-              <h2 className="text-3xl md:text-5xl font-black tracking-tighter leading-[1.1]">
+              <h2 className="text-3xl md:text-4xl font-black tracking-tighter leading-[1.1]">
                 Don't just rank on Google. <br />
                 <span className="text-primary">Be the one AI recommends.</span>
               </h2>
@@ -331,7 +331,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-16 items-center py-16 border-y border-line/5">
+            <div className="grid md:grid-cols-2 gap-12 items-center py-10 border-y border-line/5">
               <div className="space-y-4">
                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">The New Reality</p>
                 <h3 className="text-2xl md:text-3xl font-black tracking-tight">50% of the screen is now AI-driven.</h3>
@@ -339,7 +339,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                   AI Overviews and Maps now dominate mobile search real estate. If you aren't optimized for generative responses, you are invisible to half of your potential market.
                 </p>
               </div>
-              <div className="space-y-4 md:border-l md:border-line/10 md:pl-16">
+              <div className="space-y-4 md:border-l md:border-line/10 md:pl-12">
                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-muted">The Shift</p>
                 <h3 className="text-2xl md:text-3xl font-black tracking-tight">AI is your first salesperson.</h3>
                 <p className="text-sm text-muted/80 leading-relaxed">
@@ -358,28 +358,28 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                 </span>
               </div>
               
-              <div className="grid gap-1 md:grid-cols-2 border border-line/5 rounded-3xl overflow-hidden">
-                <div className="p-10 bg-muted/5 space-y-6 border-b border-r border-line/5">
-                  <div className="text-primary"><Zap size={24} strokeWidth={2.5} /></div>
-                  <h4 className="text-lg font-black tracking-tight">Instagram-to-Everywhere Automation</h4>
+              <div className="grid gap-px md:grid-cols-2 border border-line/5 rounded-3xl overflow-hidden">
+                <div className="p-8 bg-muted/5 space-y-4 border-b border-r border-line/5">
+                  <div className="text-primary"><Zap size={20} strokeWidth={2.5} /></div>
+                  <h4 className="text-base font-black tracking-tight">Instagram-to-Everywhere Automation</h4>
                   <p className="text-xs text-muted/90 leading-relaxed">Post once to update Google, TikTok, Threads, and Voice Assistants instantly.</p>
                 </div>
 
-                <div className="p-10 bg-muted/5 space-y-6 border-b border-line/5">
-                  <div className="text-primary"><Shield size={24} strokeWidth={2.5} /></div>
-                  <h4 className="text-lg font-black tracking-tight">Secure Google Profile Management</h4>
+                <div className="p-8 bg-muted/5 space-y-4 border-b border-line/5">
+                  <div className="text-primary"><Shield size={20} strokeWidth={2.5} /></div>
+                  <h4 className="text-base font-black tracking-tight">Secure Google Profile Management</h4>
                   <p className="text-xs text-muted/90 leading-relaxed">Centralized control for 20+ locations against unauthorized edits and spam.</p>
                 </div>
 
-                <div className="p-10 bg-muted/5 space-y-6 border-r border-line/5">
-                  <div className="text-primary"><MessageCircle size={24} strokeWidth={2.5} /></div>
-                  <h4 className="text-lg font-black tracking-tight">AI-Powered Review Engine</h4>
+                <div className="p-8 bg-muted/5 space-y-4 border-r border-line/5">
+                  <div className="text-primary"><MessageCircle size={20} strokeWidth={2.5} /></div>
+                  <h4 className="text-base font-black tracking-tight">AI-Powered Review Engine</h4>
                   <p className="text-xs text-muted/90 leading-relaxed">Smart, empathetic replies to boost your visibility across AI-driven search and maps automatically.</p>
                 </div>
 
-                <div className="p-10 bg-muted/5 space-y-6">
-                  <div className="text-primary"><RefreshCw size={24} strokeWidth={2.5} /></div>
-                  <h4 className="text-lg font-black tracking-tight">Synup Global Citation Sync</h4>
+                <div className="p-8 bg-muted/5 space-y-4">
+                  <div className="text-primary"><RefreshCw size={20} strokeWidth={2.5} /></div>
+                  <h4 className="text-base font-black tracking-tight">Synup Global Citation Sync</h4>
                   <p className="text-xs text-muted/90 leading-relaxed">Instant sync across 57+ platforms including Apple Maps and ChatGPT.</p>
                 </div>
               </div>
@@ -401,12 +401,12 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
       </section>
 
       {/* SECTION 2: PREDICTABLE GROWTH */}
-      <section className="w-full py-24 bg-[#fafafa] border-t border-line/5">
+      <section className="w-full py-14 bg-[#fafafa] border-t border-line/5">
         <div className="mx-auto max-w-5xl px-6 md:px-12">
-          <div className="space-y-24">
+          <div className="space-y-12">
             <div className="space-y-6 text-center max-w-3xl mx-auto">
               <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">Performance Marketing 2.0</p>
-              <h2 className="text-3xl md:text-5xl font-black tracking-tighter leading-[1.1]">
+              <h2 className="text-3xl md:text-4xl font-black tracking-tighter leading-[1.1]">
                 Predictable Growth: <br />
                 The Google AI Ads Acquisition System
               </h2>
@@ -415,15 +415,15 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="p-10 rounded-3xl bg-white border border-red-500/10 space-y-6">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="p-8 rounded-3xl bg-white border border-red-500/10 space-y-4">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-red-700/80">The Auction Trap (Traditional)</p>
                 <h3 className="text-xl font-black">Unpredictable & Rising Costs</h3>
                 <p className="text-sm text-muted/80 leading-relaxed">
                   Traditional agencies thrive on your spend. As competition heats up in Dubai, your CPC skyrockets, leading to structural waste and diminishing returns.
                 </p>
               </div>
-              <div className="p-10 rounded-3xl bg-white border border-primary/10 space-y-6 shadow-sm">
+              <div className="p-8 rounded-3xl bg-white border border-primary/10 space-y-4 shadow-sm">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">The Integrated Solution (mirAIreach)</p>
                 <h3 className="text-xl font-black">Visibility Foundation + AI Interception</h3>
                 <p className="text-sm text-muted/80 leading-relaxed">
@@ -436,26 +436,26 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-line/5 bg-muted/5">
-                    <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-muted/60">Feature</th>
-                    <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-red-700/80">Traditional Ads</th>
-                    <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-primary">Integrated AI Ads</th>
+                    <th className="p-5 text-[10px] font-black uppercase tracking-[0.3em] text-muted/60">Feature</th>
+                    <th className="p-5 text-[10px] font-black uppercase tracking-[0.3em] text-red-700/80">Traditional Ads</th>
+                    <th className="p-5 text-[10px] font-black uppercase tracking-[0.3em] text-primary">Integrated AI Ads</th>
                   </tr>
                 </thead>
                 <tbody className="text-sm">
                   <tr className="border-b border-line/5">
-                    <td className="p-8 font-bold">Cost Structure</td>
-                    <td className="p-8 text-muted/80 italic">Auction / Variable</td>
-                    <td className="p-8 font-black">Fixed Monthly Fee</td>
+                    <td className="p-5 font-bold">Cost Structure</td>
+                    <td className="p-5 text-muted/80 italic">Auction / Variable</td>
+                    <td className="p-5 font-black">Fixed Monthly Fee</td>
                   </tr>
                   <tr className="border-b border-line/5">
-                    <td className="p-8 font-bold">Targeting</td>
-                    <td className="p-8 text-muted/80 italic">Pay for all impressions</td>
-                    <td className="p-8 font-black">Focused on high-intent leads</td>
+                    <td className="p-5 font-bold">Targeting</td>
+                    <td className="p-5 text-muted/80 italic">Pay for all impressions</td>
+                    <td className="p-5 font-black">Focused on high-intent leads</td>
                   </tr>
                   <tr>
-                    <td className="p-8 font-bold">Strategic Edge</td>
-                    <td className="p-8 text-muted/80 italic">None (Reactive)</td>
-                    <td className="p-8 font-black">Foundation + Competitor Interception</td>
+                    <td className="p-5 font-bold">Strategic Edge</td>
+                    <td className="p-5 text-muted/80 italic">None (Reactive)</td>
+                    <td className="p-5 font-black">Foundation + Competitor Interception</td>
                   </tr>
                 </tbody>
               </table>
@@ -465,10 +465,10 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               <p className="text-lg font-black tracking-tight">Ready to start your predictable growth journey?</p>
               <Link 
                 href="/contact" 
-                className="inline-flex items-center gap-6 rounded-full bg-primary px-12 py-5 text-xs font-black uppercase tracking-[0.3em] text-white transition hover:bg-black"
+                className="inline-flex items-center gap-6 rounded-full bg-primary px-10 py-4 text-xs font-black uppercase tracking-[0.3em] text-white transition hover:bg-black"
               >
                 BOOK A 15-MINUTE STRATEGIC DIAGNOSIS
-                <ArrowRight size={18} />
+                <ArrowRight size={16} />
               </Link>
             </div>
           </div>
