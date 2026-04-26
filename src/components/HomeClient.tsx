@@ -153,61 +153,64 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
             </div>
           </section>
 
-          <section className="space-y-20 bg-muted/5 rounded-[4rem] p-12 md:p-20 border border-line/5 my-16">
-            <div className="text-center space-y-6 max-w-3xl mx-auto">
-              <p className="text-xs font-black uppercase tracking-[0.4em] text-primary">
+          <section className="space-y-12 bg-muted/5 rounded-[3rem] p-8 md:p-14 border border-line/5 my-12">
+            <div className="text-center space-y-4 max-w-2xl mx-auto">
+              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">
                 Not ready for a full system integration?
               </p>
-              <h2 className="text-3xl font-black tracking-tighter md:text-5xl">
+              <h2 className="text-2xl font-black tracking-tighter md:text-3xl">
                 Try our free standalone tools first.
               </h2>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-3">
-              <div className="group bg-white rounded-3xl p-10 border border-line/10 shadow-sm transition hover:shadow-xl hover:-translate-y-2 duration-500">
-                <div className="space-y-8">
-                  <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary"><Send size={24} /></div>
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-black">AI PR Outreach</h3>
-                    <p className="text-xs leading-relaxed text-muted/70 font-medium">
-                      Automated PR outreach to target media outlets and high-authority journalists.
+            <div className="grid gap-6 md:grid-cols-3">
+              {/* Tool 1 */}
+              <div className="group bg-white rounded-3xl p-8 border border-line/10 shadow-sm transition hover:shadow-xl hover:-translate-y-1 duration-500">
+                <div className="space-y-6">
+                  <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary"><Send size={20} /></div>
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-black leading-tight">AI PR Outreach</h3>
+                    <p className="text-[10px] leading-relaxed text-muted/70 font-medium">
+                      Automated PR outreach to target media outlets and journalists.
                     </p>
                   </div>
                   <Link href="/contact?service=ai-pr" className="flex items-center justify-between group/link">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-primary">Start Free Trial</span>
-                    <ArrowRight size={14} className="group-hover/link:translate-x-2 transition-transform" />
+                    <span className="text-[9px] font-black uppercase tracking-widest text-primary">Start Free Trial</span>
+                    <ArrowRight size={12} className="group-hover/link:translate-x-2 transition-transform" />
                   </Link>
                 </div>
               </div>
 
-              <div className="group bg-white rounded-3xl p-10 border border-line/10 shadow-sm transition hover:shadow-xl hover:-translate-y-2 duration-500">
-                <div className="space-y-8">
-                  <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary"><Search size={24} /></div>
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-black">AI Search Visibility Diagnosis</h3>
-                    <p className="text-xs leading-relaxed text-muted/70 font-medium">
-                      Free audit report on how your brand is perceived by generative search engines.
+              {/* Tool 2 */}
+              <div className="group bg-white rounded-3xl p-8 border border-line/10 shadow-sm transition hover:shadow-xl hover:-translate-y-1 duration-500">
+                <div className="space-y-6">
+                  <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary"><Search size={20} /></div>
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-black leading-tight">AI Search Visibility</h3>
+                    <p className="text-[10px] leading-relaxed text-muted/70 font-medium">
+                      Audit how your brand is perceived by generative search engines.
                     </p>
                   </div>
                   <Link href="/contact?service=ai-audit" className="flex items-center justify-between group/link">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-primary">Start Free Trial</span>
-                    <ArrowRight size={14} className="group-hover/link:translate-x-2 transition-transform" />
+                    <span className="text-[9px] font-black uppercase tracking-widest text-primary">Start Free Trial</span>
+                    <ArrowRight size={12} className="group-hover/link:translate-x-2 transition-transform" />
                   </Link>
                 </div>
               </div>
 
-              <div className="group bg-white rounded-3xl p-10 border border-line/10 shadow-sm transition hover:shadow-xl hover:-translate-y-2 duration-500">
-                <div className="space-y-8">
-                  <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary"><Layout size={24} /></div>
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-black">AI Website/LP Creation</h3>
-                    <p className="text-xs leading-relaxed text-muted/70 font-medium">
+              {/* Tool 3 */}
+              <div className="group bg-white rounded-3xl p-8 border border-line/10 shadow-sm transition hover:shadow-xl hover:-translate-y-1 duration-500">
+                <div className="space-y-6">
+                  <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary"><Layout size={20} /></div>
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-black leading-tight">AI Website Creation</h3>
+                    <p className="text-[10px] leading-relaxed text-muted/70 font-medium">
                       Get a high-converting, professionally designed landing page built for free.
                     </p>
                   </div>
                   <Link href="/contact?service=free-lp" className="flex items-center justify-between group/link">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-primary">Start Free Trial</span>
-                    <ArrowRight size={14} className="group-hover/link:translate-x-2 transition-transform" />
+                    <span className="text-[9px] font-black uppercase tracking-widest text-primary">Start Free Trial</span>
+                    <ArrowRight size={12} className="group-hover/link:translate-x-2 transition-transform" />
                   </Link>
                 </div>
               </div>
