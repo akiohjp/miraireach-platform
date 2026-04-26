@@ -106,6 +106,18 @@ async function main() {
     const title = topic;
     const title_ar = `تقرير استراتيجي: ${topic}`; // Mock AR title translation for bulk
 
+    const CATEGORY_KEYWORDS = {
+      "Gourmet & Dining": "fine-dining,restaurant,food",
+      "AI & Deep Tech": "artificial-intelligence,technology,robot",
+      "Lifestyle & Travel": "luxury-travel,hotel,lifestyle",
+      "Business & Technology": "business,corporate,technology",
+      "FinTech & Crypto": "finance,cryptocurrency,bitcoin",
+      "Real Estate & PropTech": "architecture,skyscraper,real-estate",
+      "Logistics & Supply Chain": "logistics,shipping,cargo",
+      "Food & Culture": "emirati-food,heritage,culture"
+    };
+    const keyword = CATEGORY_KEYWORDS[template.category] || "dubai,luxury";
+
     const payload = {
       category: template.category,
       source_name: source,
@@ -115,7 +127,7 @@ async function main() {
       excerpt_ar: `نظرة استراتيجية عميقة في ${topic} وتأثيرها على سوق الإمارات العربية المتحدة.`,
       content: template.content_en(topic),
       content_ar: template.content_ar(topic),
-      image_url: `${IMAGES[Math.floor(Math.random() * IMAGES.length)]}?auto=format&fit=crop&w=1600&q=80&sig=${Date.now()}_${Math.random().toString(36).substring(7)}`,
+      image_url: `https://images.unsplash.com/featured/?${encodeURIComponent(keyword)}&sig=${Date.now()}_${Math.random().toString(36).substring(7)}`,
       is_published: true,
       is_curated: true,
       created_at: new Date().toISOString()
