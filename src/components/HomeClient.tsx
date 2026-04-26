@@ -107,36 +107,9 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               </article>
             </div>
 
-            {/* ACCESS RANKING & SIDEBAR WIDGETS */}
-            <div className="space-y-12 h-fit">
-              <aside className="sticky top-24 space-y-16">
-                {/* Access Ranking */}
-                <div className="space-y-8">
-                  <div className="flex items-center gap-4">
-                    <div className="h-[2px] w-8 bg-primary" />
-                    <h2 className="text-xs font-black uppercase tracking-[0.3em] text-foreground/40">
-                      {isAr ? "الأكثر قراءة" : "Access Ranking"}
-                    </h2>
-                  </div>
-                  <div className="space-y-8">
-                    {trending.slice(0, 5).map((item, index) => (
-                      <article key={item.id} className="flex gap-6 group">
-                        <span className="text-4xl font-black text-foreground/5 transition-colors group-hover:text-primary/10">0{index + 1}</span>
-                        <div className="space-y-2">
-                          <Link href={`/articles/${item.id}`}>
-                            <h3 className="text-sm font-bold leading-snug line-clamp-2 group-hover:text-primary transition-colors duration-300">
-                              {getTitle(item)}
-                            </h3>
-                          </Link>
-                          <div className="text-[10px] text-muted uppercase font-black tracking-widest opacity-40">
-                            {item.company_name}
-                          </div>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                </div>
-
+            {/* SIDEBAR WIDGETS */}
+            <div className="h-fit">
+              <aside className="sticky top-24">
                 {/* AI Diagnosis CTA Widget */}
                 <div className="rounded-3xl bg-foreground p-8 text-background space-y-6">
                   <div className="space-y-2">
@@ -154,27 +127,6 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                   >
                     {isAr ? "ابدأ التشخيص" : "Start Audit Now"}
                   </Link>
-                </div>
-
-                {/* Category List Widget */}
-                <div className="space-y-8">
-                  <div className="flex items-center gap-4">
-                    <div className="h-[2px] w-8 bg-primary" />
-                    <h2 className="text-xs font-black uppercase tracking-[0.3em] text-foreground/40">
-                      {isAr ? "الفئات" : "Categories"}
-                    </h2>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {categories.map((cat) => (
-                      <Link 
-                        key={cat} 
-                        href={`/articles?cat=${cat}`}
-                        className="rounded-full border border-line px-4 py-2 text-[10px] font-black uppercase tracking-widest text-muted hover:border-primary hover:text-primary transition-all"
-                      >
-                        {cat}
-                      </Link>
-                    ))}
-                  </div>
                 </div>
               </aside>
             </div>
@@ -259,6 +211,19 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                 {isAr ? "عرض كل التقارير" : "Explore All Intelligence"}
               </Link>
             </header>
+
+            {/* Horizontal Categories Widget */}
+            <div className="flex flex-wrap gap-3 mb-10">
+              {categories.map((cat) => (
+                <Link 
+                  key={cat} 
+                  href={`/articles?cat=${cat}`}
+                  className="rounded-full border border-line px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-muted hover:border-primary hover:text-primary transition-all hover:bg-primary/5"
+                >
+                  {cat}
+                </Link>
+              ))}
+            </div>
 
             <div className="grid gap-12 md:grid-cols-2">
               {loadedArticles.slice(0, 15).map((item) => (
