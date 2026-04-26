@@ -180,92 +180,6 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
             </div>
           </section>
 
-          {/* 2. THE FOUNDATION: AI IDENTITY AGGREGATION (CORE SYSTEM) */}
-          <section className="mt-16 space-y-16">
-            <div className="max-w-4xl space-y-6">
-              <div className="inline-flex items-center gap-3 rounded-full bg-foreground text-background px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em]">
-                {isAr ? "النظام الأساسي" : "The Core System"}
-              </div>
-              <h2 className="text-4xl font-black tracking-tighter md:text-6xl lg:text-7xl">
-                {isAr ? "الأساس: تجميع هوية الذكاء الاصطناعي" : "The Foundation: AI Identity Aggregation"}
-              </h2>
-              <p className="text-lg md:text-xl leading-relaxed text-muted/80 font-medium">
-                {isAr 
-                  ? "توقف عن ترك الذكاء الاصطناعي يخمن قيمتك. يقوم mirAIreach بدمج معلومات عملك المشتتة في مصدر واحد عالي الدقة، مما يضمن فهم الذكاء الاصطناعي لعلامتك التجارية والتوصية بها بدقة 100٪."
-                  : "Stop letting AI guess your value. mirAIreach integrates your scattered business information into a single 'High-Precision Source,' ensuring AI understands and recommends your brand with 100% accuracy."}
-              </p>
-            </div>
-
-            <div className="grid gap-12 md:grid-cols-3">
-              <div className="space-y-6 border-l border-line/10 pl-8 relative">
-                <div className="text-primary"><Database size={32} strokeWidth={2.5} /></div>
-                <h3 className="text-xl font-black tracking-tight">
-                  {isAr ? "إشارة بيانات موحدة" : "Unified Data Signal"}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted/70">
-                  {isAr 
-                    ? "تجميع بيانات SNS ومعلومات Google Business لإرسال إشارة متسقة وقوية لأنظمة الذكاء الاصطناعي."
-                    : "Aggregate SNS and Google Business info to send a consistent, high-authority signal to AI systems globally."}
-                </p>
-              </div>
-
-              <div className="space-y-6 border-l border-line/10 pl-8 relative">
-                <div className="text-primary"><Cpu size={32} strokeWidth={2.5} /></div>
-                <h3 className="text-xl font-black tracking-tight">
-                  {isAr ? "فهم دقيق للذكاء الاصطناعي" : "Precision AI Understanding"}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted/70">
-                  {isAr 
-                    ? "إنشاء بيانات منظمة يسهل على ChatGPT و Gemini استهلاكها، مما يثبت علامتك التجارية كمصدر موثوق."
-                    : "Generate structured data that ChatGPT and Gemini crave, establishing your brand as a 'Verified Source' in their training sets."}
-                </p>
-              </div>
-
-              <div className="space-y-6 border-l border-line/10 pl-8 relative">
-                <div className="text-primary"><TrendingUp size={32} strokeWidth={2.5} /></div>
-                <h3 className="text-xl font-black tracking-tight">
-                  {isAr ? "التموضع الاستراتيجي" : "Strategic Positioning"}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted/70">
-                  {isAr 
-                    ? "تعظيم معدل الاقتباس داخل إجابات الذكاء الاصطناعي، لتصبح أنت الإجابة بدلاً من مجرد رابط بحث."
-                    : "Maximize your citation rate within AI answers. Move beyond being a search link to becoming the 'AI's Direct Answer' itself."}
-                </p>
-              </div>
-
-              {/* Growth Acceleration (Exclusive AI Ads) */}
-              <div className="space-y-6 border-l border-primary/20 pl-8 relative bg-primary/5 p-8 rounded-2xl md:col-span-3">
-                <div className="flex items-center gap-4">
-                  <div className="text-primary"><TrendingUp size={32} strokeWidth={2.5} /></div>
-                  <div className="rounded-full bg-primary px-3 py-1 text-[8px] font-black uppercase text-white">Exclusive Add-on</div>
-                </div>
-                <h3 className="text-2xl font-black tracking-tight">
-                  {isAr ? "تسريع النمو (إعلانات الذكاء الاصطناعي الحصرية)" : "Growth Acceleration (Exclusive AI Ads)"}
-                </h3>
-                <p className="text-base leading-relaxed text-muted/80 font-medium">
-                  {isAr 
-                    ? "قم بتسريع رؤية هويتك الرقمية المنظمة من خلال حملات إعلانية مخصصة لمحركات البحث التوليدية. نستخدم NotebookLM لضمان تطابق إشاراتك العضوية مع رسائلك الترويجية."
-                    : "Accelerate the visibility of your structured AI Identity through specialized ad campaigns for generative search engines. We leverage NotebookLM to ensure your organic signal matches your promotional messaging perfectly."}
-                </p>
-                <p className="text-[10px] font-bold text-primary italic">
-                  {isAr 
-                    ? "※本機能はmirAIreach Identity Aggregationを導入済みの企業様限定のアップグレードプランです"
-                    : "※ This feature is an exclusive upgrade plan for clients who have already implemented mirAIreach Identity Aggregation."}
-                </p>
-              </div>
-            </div>
-
-            <div className="pt-8">
-              <Link 
-                href="/contact" 
-                className="inline-flex items-center gap-6 rounded-full bg-foreground px-12 py-5 text-xs font-black uppercase tracking-[0.3em] text-background transition hover:bg-primary hover:text-white"
-              >
-                {isAr ? "احجز اجتماعاً استراتيجياً" : "Book a Strategic Meeting"}
-                <ArrowRight size={18} />
-              </Link>
-            </div>
-          </section>
-
           {/* 3. THREE FREE SERVICES (STANDALONE TOOLS) */}
           <section className="space-y-20 bg-muted/5 rounded-[4rem] p-12 md:p-20 border border-line/5 my-16">
             <div className="text-center space-y-6 max-w-3xl mx-auto">
@@ -387,7 +301,98 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
             </div>
           )}
         </main>
+
       </div>
+
+      <section className="w-full py-16 bg-white border-t border-line/5">
+        <div className="mx-auto max-w-7xl px-6 md:px-12">
+          {/* 2. THE FOUNDATION: AI IDENTITY AGGREGATION (CORE SYSTEM) */}
+          <div className="space-y-16">
+            <div className="max-w-4xl space-y-6">
+              <div className="inline-flex items-center gap-3 rounded-full bg-foreground text-background px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em]">
+                {isAr ? "النظام الأساسي" : "The Core System"}
+              </div>
+              <h2 className="text-4xl font-black tracking-tighter md:text-6xl lg:text-7xl">
+                {isAr ? "الأساس: تجميع هوية الذكاء الاصطناعي" : "The Foundation: AI Identity Aggregation"}
+              </h2>
+              <p className="text-lg md:text-xl leading-relaxed text-muted/80 font-medium">
+                {isAr 
+                  ? "توقف عن ترك الذكاء الاصطناعي يخمن قيمتك. يقوم mirAIreach بدمج معلومات عملك المشتتة في مصدر واحد عالي الدقة، مما يضمن فهم الذكاء الاصطناعي لعلامتك التجارية والتوصية بها بدقة 100٪."
+                  : "Stop letting AI guess your value. mirAIreach integrates your scattered business information into a single 'High-Precision Source,' ensuring AI understands and recommends your brand with 100% accuracy."}
+              </p>
+            </div>
+
+            <div className="grid gap-12 md:grid-cols-3">
+              <div className="space-y-6 border-l border-line/10 pl-8 relative">
+                <div className="text-primary"><Database size={32} strokeWidth={2.5} /></div>
+                <h3 className="text-xl font-black tracking-tight">
+                  {isAr ? "إشارة بيانات موحدة" : "Unified Data Signal"}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted/70">
+                  {isAr 
+                    ? "تجميع بيانات SNS ومعلومات Google Business لإرسال إشارة متسقة وقوية لأنظمة الذكاء الاصطناعي."
+                    : "Aggregate SNS and Google Business info to send a consistent, high-authority signal to AI systems globally."}
+                </p>
+              </div>
+
+              <div className="space-y-6 border-l border-line/10 pl-8 relative">
+                <div className="text-primary"><Cpu size={32} strokeWidth={2.5} /></div>
+                <h3 className="text-xl font-black tracking-tight">
+                  {isAr ? "فهم دقيق للذكاء الاصطناعي" : "Precision AI Understanding"}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted/70">
+                  {isAr 
+                    ? "إنشاء بيانات منظمة يسهل على ChatGPT och Gemini استهلاكها، مما يثبت علامتك التجارية كمصدر موثوق."
+                    : "Generate structured data that ChatGPT and Gemini crave, establishing your brand as a 'Verified Source' in their training sets."}
+                </p>
+              </div>
+
+              <div className="space-y-6 border-l border-line/10 pl-8 relative">
+                <div className="text-primary"><TrendingUp size={32} strokeWidth={2.5} /></div>
+                <h3 className="text-xl font-black tracking-tight">
+                  {isAr ? "التموضع الاستراتيجي" : "Strategic Positioning"}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted/70">
+                  {isAr 
+                    ? "تعظيم معدل الاقتباس داخل إجابات الذكاء الاصطناعي، لتصبح أنت الإجابة بدلاً من مجرد رابط بحث."
+                    : "Maximize your citation rate within AI answers. Move beyond being a search link to becoming the 'AI's Direct Answer' itself."}
+                </p>
+              </div>
+
+              {/* Growth Acceleration (Exclusive AI Ads) */}
+              <div className="space-y-6 border-l border-primary/20 pl-8 relative bg-primary/5 p-8 rounded-2xl md:col-span-3">
+                <div className="flex items-center gap-4">
+                  <div className="text-primary"><TrendingUp size={32} strokeWidth={2.5} /></div>
+                  <div className="rounded-full bg-primary px-3 py-1 text-[8px] font-black uppercase text-white">Exclusive Add-on</div>
+                </div>
+                <h3 className="text-2xl font-black tracking-tight">
+                  {isAr ? "تسريع النمو (إعلانات الذكاء الاصطناعي الحصرية)" : "Growth Acceleration (Exclusive AI Ads)"}
+                </h3>
+                <p className="text-base leading-relaxed text-muted/80 font-medium">
+                  {isAr 
+                    ? "قم بتسريع رؤية هويتك الرقمية المنظمة من خلال حملات إعلانية مخصصة لمحركات البحث التوليدية. نستخدم NotebookLM لضمان تطابق إشاراتك العضوية مع رسائلك الترويجية."
+                    : "Accelerate the visibility of your structured AI Identity through specialized ad campaigns for generative search engines. We leverage NotebookLM to ensure your organic signal matches your promotional messaging perfectly."}
+                </p>
+                <p className="text-[10px] font-bold text-primary italic">
+                  {isAr 
+                    ? "※本機能はmirAIreach Identity Aggregationを導入済みの企業様限定のアップグレードプランです"
+                    : "※ This feature is an exclusive upgrade plan for clients who have already implemented mirAIreach Identity Aggregation."}
+                </p>
+              </div>
+            </div>
+
+            <div className="pt-8">
+              <Link 
+                href="/contact" 
+                className="inline-flex items-center gap-6 rounded-full bg-foreground px-12 py-5 text-xs font-black uppercase tracking-[0.3em] text-background transition hover:bg-primary hover:text-white"
+              >
+                {isAr ? "احجز اجتماعاً استراتيجياً" : "Book a Strategic Meeting"}
+                <ArrowRight size={18} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
