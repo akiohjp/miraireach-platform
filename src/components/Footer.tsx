@@ -24,7 +24,7 @@ export default function Footer() {
             </Link>
             <a 
               href="mailto:info.ae@miraireach.marketing"
-              className="text-sm sm:text-base font-medium tracking-[0.1em] text-white/40 hover:text-primary transition-colors lowercase"
+              className="text-sm sm:text-base font-medium tracking-[0.1em] text-white/60 hover:text-primary transition-colors lowercase"
             >
               info.ae@miraireach.marketing
             </a>
@@ -37,7 +37,7 @@ export default function Footer() {
             href="/contact?service=aio-diagnostic"
             className="flex flex-col items-center text-center space-y-3 group"
           >
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-white/20 group-hover:text-primary transition-colors">01</span>
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-primary transition-colors">01</span>
             <span className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] leading-relaxed">
               AI Search Audit
             </span>
@@ -47,7 +47,7 @@ export default function Footer() {
             href="/contact?service=free-design"
             className="flex flex-col items-center text-center space-y-3 group"
           >
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-white/20 group-hover:text-primary transition-colors">02</span>
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-primary transition-colors">02</span>
             <span className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] leading-relaxed">
               Web Design Offer
             </span>
@@ -57,7 +57,7 @@ export default function Footer() {
             href="/contact?service=pr-outreach"
             className="flex flex-col items-center text-center space-y-3 group"
           >
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-white/20 group-hover:text-primary transition-colors">03</span>
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-primary transition-colors">03</span>
             <span className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] leading-relaxed">
               AI PR Outreach
             </span>
@@ -65,7 +65,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom: Legal & Copyright */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 opacity-40">
+        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 opacity-70">
           <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase">
             &copy; 2026 mirAIreach NEWS. All rights reserved.
           </p>

@@ -20,9 +20,9 @@ export default function AboutClient() {
             </p>
           </div>
 
-          <div className="prose prose-invert prose-lg max-w-none">
+          <div className="prose prose-lg max-w-none">
             <section className="space-y-6">
-              <h2 className="text-3xl font-bold tracking-tight text-white">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground">
                 Our Mission
               </h2>
               <p>
@@ -33,17 +33,17 @@ export default function AboutClient() {
               </p>
             </section>
 
-            <hr className="border-white/10" />
+            <hr className="border-line" />
 
             <section className="space-y-6">
-              <h2 className="text-3xl font-bold tracking-tight text-white">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground">
                 Who We Are
               </h2>
               <p>
                 mirAIreach NEWS is a premium business intelligence platform based in Dubai. We are a team of technologists, strategists, and creatives dedicated to providing high-quality content and actionable solutions.
               </p>
               <div className="grid md:grid-cols-2 gap-8 mt-8">
-                <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
+                <div className="p-6 bg-muted/5 rounded-2xl border border-line">
                   <h3 className="text-xl font-bold text-primary mb-3">
                     Intelligence Platform
                   </h3>
@@ -51,7 +51,7 @@ export default function AboutClient() {
                     We provide deep analytics and exclusive reports on AI trends and their impact on the local GCC economy.
                   </p>
                 </div>
-                <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
+                <div className="p-6 bg-muted/5 rounded-2xl border border-line">
                   <h3 className="text-xl font-bold text-primary mb-3">
                     AIO Solutions
                   </h3>
@@ -62,10 +62,10 @@ export default function AboutClient() {
               </div>
             </section>
 
-            <hr className="border-white/10" />
+            <hr className="border-line" />
 
             <section className="space-y-6">
-              <h2 className="text-3xl font-bold tracking-tight text-white">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground">
                 Our Vision for 2026
               </h2>
               <p>

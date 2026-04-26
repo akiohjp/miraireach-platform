@@ -170,7 +170,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                   <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary"><Send size={20} /></div>
                   <div className="space-y-2">
                     <h3 className="text-lg font-black leading-tight">AI PR Outreach</h3>
-                    <p className="text-[10px] leading-relaxed text-muted/70 font-medium">
+                    <p className="text-[10px] leading-relaxed text-muted/90 font-medium">
                       Automated PR outreach to target media outlets and journalists.
                     </p>
                   </div>
@@ -187,7 +187,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                   <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary"><Search size={20} /></div>
                   <div className="space-y-2">
                     <h3 className="text-lg font-black leading-tight">AI Search Visibility</h3>
-                    <p className="text-[10px] leading-relaxed text-muted/70 font-medium">
+                    <p className="text-[10px] leading-relaxed text-muted/90 font-medium">
                       Audit how your brand is perceived by generative search engines.
                     </p>
                   </div>
@@ -204,7 +204,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                   <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary"><Layout size={20} /></div>
                   <div className="space-y-2">
                     <h3 className="text-lg font-black leading-tight">AI Website Creation</h3>
-                    <p className="text-[10px] leading-relaxed text-muted/70 font-medium">
+                    <p className="text-[10px] leading-relaxed text-muted/90 font-medium">
                       Get a high-converting, professionally designed landing page built for free.
                     </p>
                   </div>
@@ -286,7 +286,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                             {getTitle(item)}
                           </h3>
                         </div>
-                        <time className="text-[8px] sm:text-[10px] font-black text-white/50 tracking-widest shrink-0 uppercase">
+                        <time className="text-[8px] sm:text-[10px] font-black text-white/80 tracking-widest shrink-0 uppercase">
                           {formatDate(item.created_at)}
                         </time>
                       </div>
@@ -321,7 +321,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                 Don't just rank on Google. <br />
                 <span className="text-primary">Be the one AI recommends.</span>
               </h2>
-              <p className="text-sm md:text-base text-muted/70 leading-relaxed font-medium">
+              <p className="text-sm md:text-base text-muted/90 leading-relaxed font-medium">
                 SEO and MEO are no longer enough. mirAIreach ensures your business is readable and trusted by the AI assistants your customers use every day.
               </p>
             </div>
@@ -330,14 +330,14 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               <div className="space-y-4">
                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">The New Reality</p>
                 <h3 className="text-2xl md:text-3xl font-black tracking-tight">50% of the screen is now AI-driven.</h3>
-                <p className="text-sm text-muted/60 leading-relaxed">
+                <p className="text-sm text-muted/80 leading-relaxed">
                   AI Overviews and Maps now dominate mobile search real estate. If you aren't optimized for generative responses, you are invisible to half of your potential market.
                 </p>
               </div>
               <div className="space-y-4 md:border-l md:border-line/10 md:pl-16">
                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-muted">The Shift</p>
                 <h3 className="text-2xl md:text-3xl font-black tracking-tight">AI is your first salesperson.</h3>
-                <p className="text-sm text-muted/60 leading-relaxed">
+                <p className="text-sm text-muted/80 leading-relaxed">
                   Customers no longer scroll through lists; they ask for the "best." mirAIreach positions your brand as the definitive answer across all major LLMs.
                 </p>
               </div>
@@ -352,25 +352,25 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                 <div className="p-10 bg-muted/5 space-y-6 border-b border-r border-line/5">
                   <div className="text-primary"><Zap size={24} strokeWidth={2.5} /></div>
                   <h4 className="text-lg font-black tracking-tight">Instagram-to-Everywhere Automation</h4>
-                  <p className="text-xs text-muted/70 leading-relaxed">Post once to update Google, TikTok, Threads, and Voice Assistants instantly.</p>
+                  <p className="text-xs text-muted/90 leading-relaxed">Post once to update Google, TikTok, Threads, and Voice Assistants instantly.</p>
                 </div>
 
                 <div className="p-10 bg-muted/5 space-y-6 border-b border-line/5">
                   <div className="text-primary"><Shield size={24} strokeWidth={2.5} /></div>
                   <h4 className="text-lg font-black tracking-tight">Secure Google Profile Management</h4>
-                  <p className="text-xs text-muted/70 leading-relaxed">Centralized control for 20+ locations against unauthorized edits and spam.</p>
+                  <p className="text-xs text-muted/90 leading-relaxed">Centralized control for 20+ locations against unauthorized edits and spam.</p>
                 </div>
 
                 <div className="p-10 bg-muted/5 space-y-6 border-r border-line/5">
                   <div className="text-primary"><MessageCircle size={24} strokeWidth={2.5} /></div>
                   <h4 className="text-lg font-black tracking-tight">AI-Powered Review Engine</h4>
-                  <p className="text-xs text-muted/70 leading-relaxed">Smart, empathetic replies to boost the UAE’s top ranking factors automatically.</p>
+                  <p className="text-xs text-muted/90 leading-relaxed">Smart, empathetic replies to boost the UAE’s top ranking factors automatically.</p>
                 </div>
 
                 <div className="p-10 bg-muted/5 space-y-6">
                   <div className="text-primary"><RefreshCw size={24} strokeWidth={2.5} /></div>
                   <h4 className="text-lg font-black tracking-tight">Synup Global Citation Sync</h4>
-                  <p className="text-xs text-muted/70 leading-relaxed">Instant sync across 57+ platforms including Apple Maps and ChatGPT.</p>
+                  <p className="text-xs text-muted/90 leading-relaxed">Instant sync across 57+ platforms including Apple Maps and ChatGPT.</p>
                 </div>
               </div>
             </div>
@@ -400,23 +400,23 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                 Predictable Growth: <br />
                 The Google AI Ads Acquisition System
               </h2>
-              <p className="text-sm md:text-base text-muted/70 leading-relaxed font-medium">
+              <p className="text-sm md:text-base text-muted/90 leading-relaxed font-medium">
                 Stop wasting budget in the "Auction Trap". mirAIreach shifts your Google Ads from a reactive cost to a fixed, predictable growth engine.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-12">
               <div className="p-10 rounded-3xl bg-white border border-red-500/10 space-y-6">
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-red-500/60">The Auction Trap (Traditional)</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-red-700/80">The Auction Trap (Traditional)</p>
                 <h3 className="text-xl font-black">Unpredictable & Rising Costs</h3>
-                <p className="text-sm text-muted/60 leading-relaxed">
+                <p className="text-sm text-muted/80 leading-relaxed">
                   Traditional agencies thrive on your spend. As competition heats up in Dubai, your CPC skyrockets, leading to structural waste and diminishing returns.
                 </p>
               </div>
               <div className="p-10 rounded-3xl bg-white border border-primary/10 space-y-6 shadow-sm">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">The Integrated Solution (mirAIreach)</p>
                 <h3 className="text-xl font-black">Visibility Foundation + AI Interception</h3>
-                <p className="text-sm text-muted/60 leading-relaxed">
+                <p className="text-sm text-muted/80 leading-relaxed">
                   We combine fixed-cost infrastructure with "Competitor Name Interception." We don't just bid on keywords; we capture high-intent leads before they even reach the auction.
                 </p>
               </div>
@@ -426,25 +426,25 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-line/5 bg-muted/5">
-                    <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-muted/40">Feature</th>
-                    <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-red-500/60">Traditional Ads</th>
+                    <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-muted/60">Feature</th>
+                    <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-red-700/80">Traditional Ads</th>
                     <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-primary">Integrated AI Ads</th>
                   </tr>
                 </thead>
                 <tbody className="text-sm">
                   <tr className="border-b border-line/5">
                     <td className="p-8 font-bold">Cost Structure</td>
-                    <td className="p-8 text-muted/60 italic">Auction / Variable</td>
+                    <td className="p-8 text-muted/80 italic">Auction / Variable</td>
                     <td className="p-8 font-black">Fixed Monthly Fee</td>
                   </tr>
                   <tr className="border-b border-line/5">
                     <td className="p-8 font-bold">Targeting</td>
-                    <td className="p-8 text-muted/60 italic">Pay for all impressions</td>
+                    <td className="p-8 text-muted/80 italic">Pay for all impressions</td>
                     <td className="p-8 font-black">Focused on high-intent leads</td>
                   </tr>
                   <tr>
                     <td className="p-8 font-bold">Strategic Edge</td>
-                    <td className="p-8 text-muted/60 italic">None (Reactive)</td>
+                    <td className="p-8 text-muted/80 italic">None (Reactive)</td>
                     <td className="p-8 font-black">Foundation + Competitor Interception</td>
                   </tr>
                 </tbody>

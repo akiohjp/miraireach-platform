@@ -20,23 +20,23 @@ export default function PrivacyClient() {
             </p>
           </div>
 
-          <div className="prose prose-invert prose-lg max-w-none">
+          <div className="prose prose-lg max-w-none">
             <section className="space-y-6">
               <p>
                 mirAIreach NEWS is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our platform and services.
               </p>
               
-              <h2 className="text-2xl font-bold text-white">Information We Collect</h2>
+              <h2 className="text-2xl font-bold text-foreground">Information We Collect</h2>
               <p>
                 We may collect personal information such as your name, email address, and company details when you interact with our contact forms or subscribe to our insights.
               </p>
 
-              <h2 className="text-2xl font-bold text-white">How We Use Your Information</h2>
+              <h2 className="text-2xl font-bold text-foreground">How We Use Your Information</h2>
               <p>
                 Your data is used to provide requested services, personalize your experience, and send updates regarding the UAE's AI business landscape. We do not sell your personal data to third parties.
               </p>
 
-              <h2 className="text-2xl font-bold text-white">Data Security</h2>
+              <h2 className="text-2xl font-bold text-foreground">Data Security</h2>
               <p>
                 We implement industry-standard security measures to protect your information from unauthorized access, alteration, or disclosure.
               </p>

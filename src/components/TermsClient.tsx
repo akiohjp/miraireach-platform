@@ -20,23 +20,23 @@ export default function TermsClient() {
             </p>
           </div>
 
-          <div className="prose prose-invert prose-lg max-w-none">
+          <div className="prose prose-lg max-w-none">
             <section className="space-y-6">
               <p>
                 By accessing and using mirAIreach NEWS, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.
               </p>
               
-              <h2 className="text-2xl font-bold text-white">Intellectual Property</h2>
+              <h2 className="text-2xl font-bold text-foreground">Intellectual Property</h2>
               <p>
                 All materials published on mirAIreach NEWS, including articles, reports, and graphics, are the intellectual property of the platform or its partners. Content may not be reproduced without prior written permission.
               </p>
 
-              <h2 className="text-2xl font-bold text-white">Trademarks</h2>
+              <h2 className="text-2xl font-bold text-foreground">Trademarks</h2>
               <p>
                 'mirAIreach' and 'AI Search Audit' are protected trademarks. Any unauthorized use of these marks or associated logos is strictly prohibited.
               </p>
 
-              <h2 className="text-2xl font-bold text-white">Disclaimer of Insights</h2>
+              <h2 className="text-2xl font-bold text-foreground">Disclaimer of Insights</h2>
               <p>
                 The AI-generated insights, reports, and analytics on mirAIreach NEWS are provided for informational purposes only. We strive for accuracy but do not guarantee the completeness or correctness of the data provided.
               </p>
