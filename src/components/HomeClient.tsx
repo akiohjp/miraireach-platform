@@ -262,30 +262,36 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               })}
             </div>
 
-            <div className="grid gap-12 md:grid-cols-2">
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-2">
               {filteredArticles.slice(0, 30).map((item) => (
-                <article key={`latest-${item.id}`} className="group flex gap-8">
-                  <Link href={`/articles/${item.id}`} className="relative aspect-square w-32 shrink-0 overflow-hidden rounded-2xl bg-muted/10 md:w-40">
+                <article key={`latest-${item.id}`} className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-muted/10 border border-line/5">
+                  <Link href={`/articles/${item.id}`} className="block h-full w-full">
                     <Image
                       src={item.image_url || fallbackImage}
                       alt={getTitle(item)}
                       fill
                       className="object-cover transition-transform duration-1000 group-hover:scale-110"
                     />
-                  </Link>
-                  <div className="flex flex-col justify-center space-y-3">
-                    <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest">
-                      <span className="text-primary">{item.category}</span>
-                      <span className="h-1 w-1 rounded-full bg-line" />
-                      <span className="text-muted/50">{item.original_source_name || item.company_name}</span>
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-opacity duration-500" />
+                    
+                    {/* Content Overlay */}
+                    <div className="absolute inset-0 p-5 sm:p-6 flex flex-col justify-end">
+                      <div className="flex justify-between items-end gap-4">
+                        <div className="space-y-1.5 flex-1">
+                          <span className="block text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-primary">
+                            {item.category}
+                          </span>
+                          <h3 className="text-sm sm:text-base md:text-lg font-black leading-tight text-white line-clamp-2">
+                            {getTitle(item)}
+                          </h3>
+                        </div>
+                        <time className="text-[8px] sm:text-[10px] font-black text-white/50 tracking-widest shrink-0 uppercase">
+                          {formatDate(item.created_at)}
+                        </time>
+                      </div>
                     </div>
-                    <Link href={`/articles/${item.id}`}>
-                      <h3 className="text-base font-bold leading-snug group-hover:text-primary transition-colors">
-                        {getTitle(item)}
-                      </h3>
-                    </Link>
-                    <time className="text-[10px] font-black text-muted/30 tracking-widest">{formatDate(item.created_at)}</time>
-                  </div>
+                  </Link>
                 </article>
               ))}
             </div>
