@@ -305,11 +305,11 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
         </main>
       </div>
 
+      {/* SECTION 1: THE NEW SEARCH REALITY */}
       <section className="w-full py-24 bg-white border-t border-line/5">
         <div className="mx-auto max-w-5xl px-6 md:px-12">
           <div className="space-y-24">
             
-            {/* STEP 1: Hero Copy */}
             <div className="space-y-6 text-center max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-5xl font-black tracking-tighter leading-[1.1]">
                 Don't just rank on Google. <br />
@@ -320,7 +320,6 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               </p>
             </div>
 
-            {/* STEP 2: The New Search Reality */}
             <div className="grid md:grid-cols-2 gap-16 items-center py-16 border-y border-line/5">
               <div className="space-y-4">
                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">The New Reality</p>
@@ -338,7 +337,6 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               </div>
             </div>
 
-            {/* STEP 3: The Four Pillars */}
             <div className="space-y-12">
               <div className="inline-flex items-center gap-3 rounded-full bg-foreground text-background px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em]">
                 The Four Pillars of AI Dominance
@@ -371,7 +369,6 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               </div>
             </div>
 
-            {/* STEP 4: Strategic Value Footer */}
             <div className="flex flex-col md:flex-row justify-center items-center gap-12 pt-8 text-center">
               <div className="space-y-1">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Competitive Edge</p>
@@ -383,13 +380,78 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                 <p className="text-sm font-bold">Zero History to AI-Ranked in Weeks</p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="flex justify-center pt-8">
+      {/* SECTION 2: PREDICTABLE GROWTH */}
+      <section className="w-full py-24 bg-[#fafafa] border-t border-line/5">
+        <div className="mx-auto max-w-5xl px-6 md:px-12">
+          <div className="space-y-24">
+            <div className="space-y-6 text-center max-w-3xl mx-auto">
+              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">Performance Marketing 2.0</p>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tighter leading-[1.1]">
+                Predictable Growth: <br />
+                The Google AI Ads Acquisition System
+              </h2>
+              <p className="text-sm md:text-base text-muted/70 leading-relaxed font-medium">
+                Stop wasting budget in the "Auction Trap". mirAIreach shifts your Google Ads from a reactive cost to a fixed, predictable growth engine.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-12">
+              <div className="p-10 rounded-3xl bg-white border border-red-500/10 space-y-6">
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-red-500/60">The Auction Trap (Traditional)</p>
+                <h3 className="text-xl font-black">Unpredictable & Rising Costs</h3>
+                <p className="text-sm text-muted/60 leading-relaxed">
+                  Traditional agencies thrive on your spend. As competition heats up in Dubai, your CPC skyrockets, leading to structural waste and diminishing returns.
+                </p>
+              </div>
+              <div className="p-10 rounded-3xl bg-white border border-primary/10 space-y-6 shadow-sm">
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">The Integrated Solution (mirAIreach)</p>
+                <h3 className="text-xl font-black">Visibility Foundation + AI Interception</h3>
+                <p className="text-sm text-muted/60 leading-relaxed">
+                  We combine fixed-cost infrastructure with "Competitor Name Interception." We don't just bid on keywords; we capture high-intent leads before they even reach the auction.
+                </p>
+              </div>
+            </div>
+
+            <div className="overflow-hidden rounded-3xl border border-line/5 bg-white">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-line/5 bg-muted/5">
+                    <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-muted/40">Feature</th>
+                    <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-red-500/60">Traditional Ads</th>
+                    <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-primary">Integrated AI Ads</th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm">
+                  <tr className="border-b border-line/5">
+                    <td className="p-8 font-bold">Cost Structure</td>
+                    <td className="p-8 text-muted/60 italic">Auction / Variable</td>
+                    <td className="p-8 font-black">Fixed Monthly Fee</td>
+                  </tr>
+                  <tr className="border-b border-line/5">
+                    <td className="p-8 font-bold">Targeting</td>
+                    <td className="p-8 text-muted/60 italic">Pay for all impressions</td>
+                    <td className="p-8 font-black">Focused on high-intent leads</td>
+                  </tr>
+                  <tr>
+                    <td className="p-8 font-bold">Strategic Edge</td>
+                    <td className="p-8 text-muted/60 italic">None (Reactive)</td>
+                    <td className="p-8 font-black">Foundation + Competitor Interception</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="text-center space-y-8 pt-8">
+              <p className="text-lg font-black tracking-tight">Ready to start your predictable growth journey?</p>
               <Link 
                 href="/contact" 
-                className="inline-flex items-center gap-6 rounded-full bg-foreground px-12 py-5 text-xs font-black uppercase tracking-[0.3em] text-background transition hover:bg-primary hover:text-white"
+                className="inline-flex items-center gap-6 rounded-full bg-primary px-12 py-5 text-xs font-black uppercase tracking-[0.3em] text-white transition hover:bg-black"
               >
-                Book a Strategic Meeting
+                BOOK A 15-MINUTE STRATEGIC DIAGNOSIS
                 <ArrowRight size={18} />
               </Link>
             </div>
