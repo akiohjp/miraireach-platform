@@ -262,36 +262,40 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               })}
             </div>
 
-            <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-2">
+            <div className="grid gap-12 sm:gap-16 md:grid-cols-2">
               {filteredArticles.slice(0, 30).map((item) => (
-                <article key={`latest-${item.id}`} className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-muted/10 border border-line/5">
-                  <Link href={`/articles/${item.id}`} className="block h-full w-full">
-                    <Image
-                      src={item.image_url || fallbackImage}
-                      alt={getTitle(item)}
-                      fill
-                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                    />
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-opacity duration-500" />
-                    
-                    {/* Content Overlay */}
-                    <div className="absolute inset-0 p-5 sm:p-6 flex flex-col justify-end">
-                      <div className="flex justify-between items-end gap-4">
-                        <div className="space-y-1.5 flex-1">
-                          <span className="block text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-primary">
-                            {item.category}
-                          </span>
-                          <h3 className="text-sm sm:text-base md:text-lg font-black leading-tight text-white line-clamp-2">
-                            {getTitle(item)}
-                          </h3>
-                        </div>
-                        <time className="text-[8px] sm:text-[10px] font-black text-white/80 tracking-widest shrink-0 uppercase">
+                <article key={`latest-${item.id}`} className="group space-y-5">
+                  <Link href={`/articles/${item.id}`} className="block overflow-hidden rounded-sm">
+                    <div className="relative aspect-[16/9] bg-muted/10">
+                      <Image
+                        src={item.image_url || fallbackImage}
+                        alt={getTitle(item)}
+                        fill
+                        className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                      />
+                    </div>
+                  </Link>
+                  
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-light uppercase tracking-[0.25em] text-primary">
+                          {item.category}
+                        </span>
+                        <time className="text-[10px] font-medium text-muted/50 tracking-widest uppercase">
                           {formatDate(item.created_at)}
                         </time>
                       </div>
+                      <Link href={`/articles/${item.id}`}>
+                        <h3 className="text-xl font-bold leading-tight tracking-tight group-hover:text-primary transition-colors duration-300">
+                          {getTitle(item)}
+                        </h3>
+                      </Link>
                     </div>
-                  </Link>
+                    <p className="text-sm text-muted/90 leading-relaxed line-clamp-2 font-medium">
+                      {getExcerpt(item)}
+                    </p>
+                  </div>
                 </article>
               ))}
             </div>
