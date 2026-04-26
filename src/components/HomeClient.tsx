@@ -109,7 +109,34 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
 
             {/* SIDEBAR WIDGETS */}
             <div className="h-fit">
-              <aside className="sticky top-24">
+              <aside className="sticky top-24 space-y-12">
+                {/* Access Ranking */}
+                <div className="space-y-8">
+                  <div className="flex items-center gap-4">
+                    <div className="h-[2px] w-8 bg-primary" />
+                    <h2 className="text-xs font-black uppercase tracking-[0.3em] text-foreground/40">
+                      {isAr ? "الأكثر قراءة" : "Access Ranking"}
+                    </h2>
+                  </div>
+                  <div className="space-y-8">
+                    {trending.slice(0, 5).map((item, index) => (
+                      <article key={item.id} className="flex gap-6 group">
+                        <span className="text-4xl font-black text-foreground/5 transition-colors group-hover:text-primary/10">0{index + 1}</span>
+                        <div className="space-y-2">
+                          <Link href={`/articles/${item.id}`}>
+                            <h3 className="text-sm font-bold leading-snug line-clamp-2 group-hover:text-primary transition-colors duration-300">
+                              {getTitle(item)}
+                            </h3>
+                          </Link>
+                          <div className="text-[10px] text-muted uppercase font-black tracking-widest opacity-40">
+                            {item.company_name}
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+
                 {/* AI Diagnosis CTA Widget */}
                 <div className="rounded-3xl bg-foreground p-8 text-background space-y-6">
                   <div className="space-y-2">
