@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "./Header";
 import { Article, fallbackImage, formatDate } from "@/lib/articles";
-import { Search, Send, Layout, ArrowRight, Database, Cpu, TrendingUp } from "lucide-react";
+import { Search, Send, Layout, ArrowRight, Database, Cpu, TrendingUp, Zap, Shield, MessageCircle, RefreshCw } from "lucide-react";
 
 interface HomeClientProps {
   articles: Article[];
@@ -305,70 +305,86 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
         </main>
       </div>
 
-      <section className="w-full py-16 bg-white border-t border-line/5">
-        <div className="mx-auto max-w-7xl px-6 md:px-12">
-          <div className="space-y-16">
-            <div className="max-w-4xl space-y-6">
-              <div className="inline-flex items-center gap-3 rounded-full bg-foreground text-background px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em]">
-                The Core System
-              </div>
-              <h2 className="text-4xl font-black tracking-tighter md:text-6xl lg:text-7xl">
-                The Foundation: AI Identity Aggregation
+      <section className="w-full py-24 bg-white border-t border-line/5">
+        <div className="mx-auto max-w-5xl px-6 md:px-12">
+          <div className="space-y-24">
+            
+            {/* STEP 1: Hero Copy */}
+            <div className="space-y-6 text-center max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-black tracking-tighter leading-[1.1]">
+                Don't just rank on Google. <br />
+                <span className="text-primary">Be the one AI recommends.</span>
               </h2>
-              <p className="text-lg md:text-xl leading-relaxed text-muted/80 font-medium">
-                Stop letting AI guess your value. mirAIreach integrates your scattered business information into a single 'High-Precision Source,' ensuring AI understands and recommends your brand with 100% accuracy.
+              <p className="text-sm md:text-base text-muted/70 leading-relaxed font-medium">
+                SEO and MEO are no longer enough. mirAIreach ensures your business is readable and trusted by the AI assistants your customers use every day.
               </p>
             </div>
 
-            <div className="grid gap-12 md:grid-cols-3">
-              <div className="space-y-6 border-l border-line/10 pl-8 relative">
-                <div className="text-primary"><Database size={32} strokeWidth={2.5} /></div>
-                <h3 className="text-xl font-black tracking-tight">
-                  Unified Data Signal
-                </h3>
-                <p className="text-sm leading-relaxed text-muted/70">
-                  Aggregate SNS and Google Business info to send a consistent, high-authority signal to AI systems globally.
+            {/* STEP 2: The New Search Reality */}
+            <div className="grid md:grid-cols-2 gap-16 items-center py-16 border-y border-line/5">
+              <div className="space-y-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">The New Reality</p>
+                <h3 className="text-2xl md:text-3xl font-black tracking-tight">50% of the screen is now AI-driven.</h3>
+                <p className="text-sm text-muted/60 leading-relaxed">
+                  AI Overviews and Maps now dominate mobile search real estate. If you aren't optimized for generative responses, you are invisible to half of your potential market.
                 </p>
               </div>
-
-              <div className="space-y-6 border-l border-line/10 pl-8 relative">
-                <div className="text-primary"><Cpu size={32} strokeWidth={2.5} /></div>
-                <h3 className="text-xl font-black tracking-tight">
-                  Precision AI Understanding
-                </h3>
-                <p className="text-sm leading-relaxed text-muted/70">
-                  Generate structured data that ChatGPT and Gemini crave, establishing your brand as a 'Verified Source' in their training sets.
-                </p>
-              </div>
-
-              <div className="space-y-6 border-l border-line/10 pl-8 relative">
-                <div className="text-primary"><TrendingUp size={32} strokeWidth={2.5} /></div>
-                <h3 className="text-xl font-black tracking-tight">
-                  Strategic Positioning
-                </h3>
-                <p className="text-sm leading-relaxed text-muted/70">
-                  Maximize your citation rate within AI answers. Move beyond being a search link to becoming the 'AI's Direct Answer' itself.
-                </p>
-              </div>
-
-              <div className="space-y-6 border-l border-primary/20 pl-8 relative bg-primary/5 p-8 rounded-2xl md:col-span-3">
-                <div className="flex items-center gap-4">
-                  <div className="text-primary"><TrendingUp size={32} strokeWidth={2.5} /></div>
-                  <div className="rounded-full bg-primary px-3 py-1 text-[8px] font-black uppercase text-white">Exclusive Add-on</div>
-                </div>
-                <h3 className="text-2xl font-black tracking-tight">
-                  Growth Acceleration (Exclusive AI Ads)
-                </h3>
-                <p className="text-base leading-relaxed text-muted/80 font-medium">
-                  Accelerate the visibility of your structured AI Identity through specialized ad campaigns for generative search engines. We leverage NotebookLM to ensure your organic signal matches your promotional messaging perfectly.
-                </p>
-                <p className="text-[10px] font-bold text-primary italic">
-                  ※ This feature is an exclusive upgrade plan for clients who have already implemented mirAIreach Identity Aggregation.
+              <div className="space-y-4 md:border-l md:border-line/10 md:pl-16">
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-muted">The Shift</p>
+                <h3 className="text-2xl md:text-3xl font-black tracking-tight">AI is your first salesperson.</h3>
+                <p className="text-sm text-muted/60 leading-relaxed">
+                  Customers no longer scroll through lists; they ask for the "best." mirAIreach positions your brand as the definitive answer across all major LLMs.
                 </p>
               </div>
             </div>
 
-            <div className="pt-8">
+            {/* STEP 3: The Four Pillars */}
+            <div className="space-y-12">
+              <div className="inline-flex items-center gap-3 rounded-full bg-foreground text-background px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em]">
+                The Four Pillars of AI Dominance
+              </div>
+              
+              <div className="grid gap-1 md:grid-cols-2 border border-line/5 rounded-3xl overflow-hidden">
+                <div className="p-10 bg-muted/5 space-y-6 border-b border-r border-line/5">
+                  <div className="text-primary"><Zap size={24} strokeWidth={2.5} /></div>
+                  <h4 className="text-lg font-black tracking-tight">Instagram-to-Everywhere Automation</h4>
+                  <p className="text-xs text-muted/70 leading-relaxed">Post once to update Google, TikTok, Threads, and Voice Assistants instantly.</p>
+                </div>
+
+                <div className="p-10 bg-muted/5 space-y-6 border-b border-line/5">
+                  <div className="text-primary"><Shield size={24} strokeWidth={2.5} /></div>
+                  <h4 className="text-lg font-black tracking-tight">Secure Google Profile Management</h4>
+                  <p className="text-xs text-muted/70 leading-relaxed">Centralized control for 20+ locations against unauthorized edits and spam.</p>
+                </div>
+
+                <div className="p-10 bg-muted/5 space-y-6 border-r border-line/5">
+                  <div className="text-primary"><MessageCircle size={24} strokeWidth={2.5} /></div>
+                  <h4 className="text-lg font-black tracking-tight">AI-Powered Review Engine</h4>
+                  <p className="text-xs text-muted/70 leading-relaxed">Smart, empathetic replies to boost the UAE’s top ranking factors automatically.</p>
+                </div>
+
+                <div className="p-10 bg-muted/5 space-y-6">
+                  <div className="text-primary"><RefreshCw size={24} strokeWidth={2.5} /></div>
+                  <h4 className="text-lg font-black tracking-tight">Synup Global Citation Sync</h4>
+                  <p className="text-xs text-muted/70 leading-relaxed">Instant sync across 57+ platforms including Apple Maps and ChatGPT.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* STEP 4: Strategic Value Footer */}
+            <div className="flex flex-col md:flex-row justify-center items-center gap-12 pt-8 text-center">
+              <div className="space-y-1">
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Competitive Edge</p>
+                <p className="text-sm font-bold">AI Trust Equals Market Share</p>
+              </div>
+              <div className="h-8 w-px bg-line/10 hidden md:block"></div>
+              <div className="space-y-1">
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Proven Speed</p>
+                <p className="text-sm font-bold">Zero History to AI-Ranked in Weeks</p>
+              </div>
+            </div>
+
+            <div className="flex justify-center pt-8">
               <Link 
                 href="/contact" 
                 className="inline-flex items-center gap-6 rounded-full bg-foreground px-12 py-5 text-xs font-black uppercase tracking-[0.3em] text-background transition hover:bg-primary hover:text-white"
