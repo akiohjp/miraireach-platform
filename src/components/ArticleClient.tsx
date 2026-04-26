@@ -59,7 +59,7 @@ export default function ArticleClient({ article }: ArticleClientProps) {
         </div>
 
         {/* EXECUTIVE ACTION CTA (LP HYBRID) */}
-        <div className="mt-20 rounded-3xl bg-[#0a0a0a] p-10 border border-white/5 space-y-10" dir="ltr">
+        <div className="mt-20 rounded-3xl bg-[#0a0a0a] p-10 border border-white/5 space-y-12" dir="ltr">
           <div className="space-y-4 text-left">
             <div className="inline-block rounded bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white">
               Executive Action
@@ -67,31 +67,41 @@ export default function ArticleClient({ article }: ArticleClientProps) {
             <h3 className="text-2xl font-black tracking-tight text-white md:text-3xl">
               Turn Insights into Advantage
             </h3>
-            <p className="text-sm text-white/50 leading-relaxed max-w-2xl">
+            <p className="text-sm text-white/70 leading-relaxed max-w-2xl">
               Following the trends in this report, we recommend Dubai enterprises verify their brand visibility within the AI ecosystem immediately.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-3">
             <Link 
               href="/contact?service=aio-diagnostic"
               className="group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-primary/40 transition-all hover:bg-primary/[0.02] text-left"
             >
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Service 01</span>
               <span className="text-lg font-bold text-white group-hover:text-primary transition-colors">Free AI Search Audit</span>
-              <span className="text-xs text-white/40 leading-relaxed">Audit how generative search engines perceive and describe your brand.</span>
+              <span className="text-xs text-white/60 leading-relaxed">Audit how generative search engines perceive and describe your brand.</span>
             </Link>
+
             <Link 
               href="/contact?service=free-design"
               className="group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-white/20 transition-all hover:bg-white/[0.02] text-left"
             >
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">Service 02</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/60">Service 02</span>
               <span className="text-lg font-bold text-white group-hover:text-white/80 transition-colors">Premium Web Design (Free)</span>
-              <span className="text-xs text-white/40 leading-relaxed">Get a bespoke, AI-optimized landing page built for your business.</span>
+              <span className="text-xs text-white/60 leading-relaxed">Get a bespoke, AI-optimized landing page built for your business.</span>
+            </Link>
+
+            <Link 
+              href="/contact?service=ai-pr"
+              className="group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-primary/40 transition-all hover:bg-primary/[0.02] text-left"
+            >
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Service 03</span>
+              <span className="text-lg font-bold text-white group-hover:text-primary transition-colors">AI PR Outreach (Free)</span>
+              <span className="text-xs text-white/60 leading-relaxed">Automate high-authority media outreach to boost your brand's AI credibility instantly.</span>
             </Link>
           </div>
 
-          <div className="pt-4 border-t border-white/5">
+          <div className="pt-6 border-t border-white/5">
             <Link 
               href="/contact"
               className="flex items-center justify-between group"
