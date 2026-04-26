@@ -66,14 +66,11 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
 
   // Industry categories for grid
    const categories = [
-    "Gourmet & Dining",
-    "AI & Deep Tech",
-    "Lifestyle & Travel",
-    "Real Estate & PropTech",
-    "FinTech & Crypto",
-    "Logistics & Supply Chain",
-    "Food & Culture",
-    "Business & Technology"
+    "UAE AI Strategy",
+    "AI x Hospitality",
+    "AI x Real Estate",
+    "AI x Corporate",
+    "AI Tools & Tactics"
   ];
 
   return (
