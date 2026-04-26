@@ -69,13 +69,13 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
   ];
 
   return (
-    <div className="mx-auto min-h-screen w-full bg-white selection:bg-primary/10">
+    <div className="mx-auto w-full bg-white selection:bg-primary/10">
       <div className="mx-auto max-w-7xl px-6 py-8 md:px-12">
         <Header showNav={true} />
 
         <main className="mt-12 pb-24">
           {/* 1. HERO SECTION (PR TIMES Style) */}
-          <section className="grid gap-12 lg:grid-cols-3 items-start pb-16">
+          <section className="grid gap-12 lg:grid-cols-3 items-start">
             <div className="lg:col-span-2">
               <article className="group relative h-[450px] overflow-hidden rounded-3xl lg:h-[600px] shadow-sm">
                 <Link href={featured ? `/articles/${featured.id}` : "#"}>
