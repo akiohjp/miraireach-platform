@@ -70,7 +70,8 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
     "AI x Hospitality",
     "AI x Real Estate",
     "AI x Corporate",
-    "AI Tools & Tactics"
+    "AI Tools & Tactics",
+    "AI Starter Guide"
   ];
 
   return (
