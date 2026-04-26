@@ -115,7 +115,7 @@ async function main() {
       excerpt_ar: `نظرة استراتيجية عميقة في ${topic} وتأثيرها على سوق الإمارات العربية المتحدة.`,
       content: template.content_en(topic),
       content_ar: template.content_ar(topic),
-      image_url: `${IMAGES[Math.floor(Math.random() * IMAGES.length)]}?auto=format&fit=crop&w=1600&q=80&sig=${Date.now()}_${i}`,
+      image_url: `${IMAGES[Math.floor(Math.random() * IMAGES.length)]}?auto=format&fit=crop&w=1600&q=80&sig=${Date.now()}_${Math.random().toString(36).substring(7)}`,
       is_published: true,
       is_curated: true,
       created_at: new Date().toISOString()

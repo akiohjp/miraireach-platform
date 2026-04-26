@@ -138,6 +138,7 @@ async function main() {
     
     const payload = {
       ...article,
+      image_url: `${article.image_url}${article.image_url.includes('?') ? '&' : '?'}sig=${Date.now()}_${Math.random().toString(36).substring(7)}`,
       is_published: true,
       is_curated: true,
       created_at: new Date().toISOString()
