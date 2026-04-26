@@ -73,9 +73,9 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
       <div className="mx-auto max-w-7xl px-6 py-8 md:px-12">
         <Header showNav={true} />
 
-        <main className="mt-12 space-y-12 pb-24">
+        <main className="mt-12 pb-24">
           {/* 1. HERO SECTION (PR TIMES Style) */}
-          <section className="grid gap-12 lg:grid-cols-3">
+          <section className="grid gap-12 lg:grid-cols-3 items-start pb-16">
             <div className="lg:col-span-2">
               <article className="group relative h-[450px] overflow-hidden rounded-3xl lg:h-[600px] shadow-sm">
                 <Link href={featured ? `/articles/${featured.id}` : "#"}>
@@ -181,7 +181,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           </section>
 
           {/* 2. THE FOUNDATION: AI IDENTITY AGGREGATION (CORE SYSTEM) */}
-          <section className="space-y-16 pb-12">
+          <section className="space-y-16 py-16">
             <div className="max-w-4xl space-y-6">
               <div className="inline-flex items-center gap-3 rounded-full bg-foreground text-background px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em]">
                 {isAr ? "النظام الأساسي" : "The Core System"}
@@ -267,7 +267,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           </section>
 
           {/* 3. THREE FREE SERVICES (STANDALONE TOOLS) */}
-          <section className="space-y-20 bg-muted/5 rounded-[4rem] p-12 md:p-20 border border-line/5">
+          <section className="space-y-20 bg-muted/5 rounded-[4rem] p-12 md:p-20 border border-line/5 my-16">
             <div className="text-center space-y-6 max-w-3xl mx-auto">
               <p className="text-xs font-black uppercase tracking-[0.4em] text-primary">
                 {isAr ? "هل أنت غير مستعد للتكامل الكامل؟" : "Not ready for a full system integration?"}
@@ -332,7 +332,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           </section>
 
           {/* 4. LATEST NEWS TIMELINE */}
-          <section className="space-y-8">
+          <section className="space-y-8 pt-16">
             <header className="mb-10 flex items-center justify-between border-b border-line pb-8">
               <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-foreground">
                 mirAIreach<span className="opacity-50">.</span>PRESS
