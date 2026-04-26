@@ -234,7 +234,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           <section className="space-y-8 pt-16">
             <header className="mb-10 flex items-center justify-between border-b border-line pb-8">
               <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-foreground">
-                mirAIreach <span className="text-primary italic">NEWS</span>
+                mirAIreach <span className="text-primary">NEWS</span>
               </Link>
               <div className="space-y-2 text-right">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">{isAr ? "التحديثات" : "Timeline"}</p>

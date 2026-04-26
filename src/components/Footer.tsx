@@ -15,7 +15,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2 space-y-6">
             <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-white">
-              mirAIreach <span className="text-primary italic">NEWS</span>
+              mirAIreach <span className="text-primary">NEWS</span>
             </Link>
             <p className="text-sm leading-relaxed max-w-md">
               {isAr 
