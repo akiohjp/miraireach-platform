@@ -326,7 +326,8 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                 <span className="text-primary">Be the one AI recommends.</span>
               </h2>
               <p className="text-sm md:text-base text-muted/90 leading-relaxed font-medium">
-                SEO and MEO are no longer enough. mirAIreach ensures your business is readable and trusted by the AI assistants your customers use every day.
+                Traditional SEO and GEO are the new industry standards. mirAIreach ensures your business is readable and trusted by the AI assistants your customers use every day.
+                <br /><span className="text-[10px] opacity-60 uppercase tracking-widest font-bold">GEO: Generative Engine Optimization: Ensuring your business is the top recommendation for AI assistants.</span>
               </p>
             </div>
 
@@ -368,7 +369,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                 <div className="p-10 bg-muted/5 space-y-6 border-r border-line/5">
                   <div className="text-primary"><MessageCircle size={24} strokeWidth={2.5} /></div>
                   <h4 className="text-lg font-black tracking-tight">AI-Powered Review Engine</h4>
-                  <p className="text-xs text-muted/90 leading-relaxed">Smart, empathetic replies to boost the UAE’s top ranking factors automatically.</p>
+                  <p className="text-xs text-muted/90 leading-relaxed">Smart, empathetic replies to boost your visibility across AI-driven search and maps automatically.</p>
                 </div>
 
                 <div className="p-10 bg-muted/5 space-y-6">
@@ -387,7 +388,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               <div className="h-8 w-px bg-line/10 hidden md:block"></div>
               <div className="space-y-1">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Proven Speed</p>
-                <p className="text-sm font-bold">Zero History to AI-Ranked in Weeks</p>
+                <p className="text-sm font-bold">Zero History to AI-Recommended in Weeks</p>
               </div>
             </div>
           </div>
