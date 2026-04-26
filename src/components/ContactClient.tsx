@@ -4,12 +4,9 @@ import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Header from "./Header";
 import Footer from "./Footer";
-import { useLanguage } from "./LanguageProvider";
 
 function ContactForm() {
   const searchParams = useSearchParams();
-  const { language } = useLanguage();
-  const isAr = language === "ar";
   
   const [service, setService] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -30,14 +27,12 @@ function ContactForm() {
     return (
       <div className="text-center py-20 space-y-6">
         <div className="mx-auto h-16 w-16 rounded-full bg-primary/20 flex items-center justify-center text-primary text-2xl">✓</div>
-        <h2 className="text-3xl font-black">{isAr ? "تم إرسال الرسالة بنجاح" : "Message Sent Successfully"}</h2>
+        <h2 className="text-3xl font-black">Message Sent Successfully</h2>
         <p className="text-muted">
-          {isAr 
-            ? "سنتواصل معك قريباً جداً من info.ae@miraireach.marketing." 
-            : "We will get back to you from info.ae@miraireach.marketing very shortly."}
+          We will get back to you from info.ae@miraireach.marketing very shortly.
         </p>
         <button onClick={() => setStatus("idle")} className="text-xs font-black uppercase tracking-widest underline underline-offset-8">
-          {isAr ? "إرسال رسالة أخرى" : "Send another message"}
+          Send another message
         </button>
       </div>
     );
@@ -48,32 +43,32 @@ function ContactForm() {
       <form onSubmit={handleSubmit} className="space-y-8">
         <div className="grid gap-6 sm:grid-cols-2">
           <div className="space-y-2">
-            <label className="text-[10px] font-black uppercase tracking-widest opacity-50">{isAr ? "الاسم الكامل" : "Full Name"}</label>
+            <label className="text-[10px] font-black uppercase tracking-widest opacity-50">Full Name</label>
             <input required type="text" className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors text-foreground" />
           </div>
           <div className="space-y-2">
-            <label className="text-[10px] font-black uppercase tracking-widest opacity-50">{isAr ? "البريد الإلكتروني" : "Email Address"}</label>
+            <label className="text-[10px] font-black uppercase tracking-widest opacity-50">Email Address</label>
             <input required type="email" className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors text-foreground" />
           </div>
         </div>
 
         <div className="space-y-2">
-          <label className="text-[10px] font-black uppercase tracking-widest opacity-50">{isAr ? "الخدمة المطلوبة" : "Interested Service"}</label>
+          <label className="text-[10px] font-black uppercase tracking-widest opacity-50">Interested Service</label>
           <select 
             value={service} 
             onChange={(e) => setService(e.target.value)}
             className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors appearance-none text-foreground"
           >
-            <option value="">{isAr ? "اختر الخدمة" : "Select a Service"}</option>
-            <option value="aio-diagnostic">{isAr ? "تدقيق البحث بالذكاء الاصطناعي (مجاني)" : "Free AI Search Audit"}</option>
-            <option value="free-design">{isAr ? "تصميم ويب متميز (مجاني)" : "Free Premium Web Design"}</option>
-            <option value="consultancy">{isAr ? "استشارات الذكاء الاصطناعي" : "AI Strategic Consultancy"}</option>
-            <option value="other">{isAr ? "أخرى" : "Other Inquiry"}</option>
+            <option value="">Select a Service</option>
+            <option value="aio-diagnostic">Free AI Search Audit</option>
+            <option value="free-design">Free Premium Web Design</option>
+            <option value="consultancy">AI Strategic Consultancy</option>
+            <option value="other">Other Inquiry</option>
           </select>
         </div>
 
         <div className="space-y-2">
-          <label className="text-[10px] font-black uppercase tracking-widest opacity-50">{isAr ? "الرسالة" : "Message"}</label>
+          <label className="text-[10px] font-black uppercase tracking-widest opacity-50">Message</label>
           <textarea rows={5} className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors resize-none text-foreground" />
         </div>
 
@@ -82,7 +77,7 @@ function ContactForm() {
           disabled={status === "loading"}
           className="w-full rounded-full bg-primary py-5 text-xs font-black uppercase tracking-[0.2em] text-white hover:bg-black transition-all disabled:opacity-50 shadow-lg shadow-primary/10 active:scale-[0.98]"
         >
-          {status === "loading" ? (isAr ? "جارٍ الإرسال..." : "Sending...") : (isAr ? "إرسال الطلب الآن" : "Send Request Now")}
+          {status === "loading" ? "Sending..." : "Send Request Now"}
         </button>
       </form>
     </div>
@@ -90,9 +85,6 @@ function ContactForm() {
 }
 
 export default function ContactClient() {
-  const { language } = useLanguage();
-  const isAr = language === "ar";
-
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-6 py-12 md:px-10">
@@ -101,12 +93,10 @@ export default function ContactClient() {
         <main className="mt-12 space-y-16">
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-black tracking-tighter md:text-6xl uppercase">
-              {isAr ? "تواصل معنا" : "Work with mirAIreach NEWS"}
+              Work with mirAIreach NEWS
             </h1>
             <p className="mx-auto max-w-xl text-muted leading-relaxed">
-              {isAr 
-                ? "ابدأ رحلة التحول الرقمي اليوم. فريقنا مستعد لمساعدتك في التميز في عصر الذكاء الاصطناعي."
-                : "Initiate your digital transformation today. Our team is ready to help you dominate in the AI-driven landscape."}
+              Initiate your digital transformation today. Our team is ready to help you dominate in the AI-driven landscape.
             </p>
           </div>
 

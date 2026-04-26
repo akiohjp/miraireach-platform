@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import Header from "./Header";
-import { useLanguage } from "./LanguageProvider";
 import { Article, fallbackImage, formatDate } from "@/lib/articles";
 
 interface ArticleClientProps {
@@ -12,27 +11,17 @@ interface ArticleClientProps {
 }
 
 export default function ArticleClient({ article }: ArticleClientProps) {
-  const { language } = useLanguage();
-  const isAr = language === "ar";
-
-  const title = (isAr && article.title_ar?.trim() ? article.title_ar : article.title) || (isAr ? "عنوان غير متوفر" : "No Title Available");
-  
-  const content = (isAr && article.content_ar?.trim() ? article.content_ar : article.content) || "";
-  
-  const excerpt = (isAr && article.excerpt_ar?.trim() ? article.excerpt_ar : article.excerpt) || (isAr ? "لا يوجد ملخص متاح لهذا المقال." : "No excerpt available for this article.");
-
-
+  const title = article.title || "No Title Available";
+  const content = article.content || "";
+  const excerpt = article.excerpt || "No excerpt available for this article.";
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-5xl px-6 py-12 md:px-10">
       <Header showNav={false} />
 
-      <article 
-        className={`space-y-8 mt-4 ${isAr ? "text-right font-arabic" : "text-left"}`} 
-        dir={isAr ? "rtl" : "ltr"}
-      >
+      <article className="space-y-8 mt-4 text-left" dir="ltr">
         <div className="space-y-3">
-          <div className={`flex flex-wrap items-center gap-3 ${isAr ? "flex-row-reverse" : ""}`}>
+          <div className="flex flex-wrap items-center gap-3">
             <p className="text-xs tracking-[0.16em] text-muted uppercase">
               {article.category} | {formatDate(article.created_at)} |{" "}
               {article.source_name}
@@ -44,7 +33,7 @@ export default function ArticleClient({ article }: ArticleClientProps) {
                 rel="noopener noreferrer"
                 className="rounded-full bg-primary/10 border border-primary/20 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary hover:bg-primary/20 transition-colors"
               >
-                {isAr ? "المصدر: " : "Source: "}{article.original_source_name}
+                Source: {article.original_source_name}
               </a>
             )}
           </div>
@@ -62,60 +51,56 @@ export default function ArticleClient({ article }: ArticleClientProps) {
           priority
         />
 
-        <div className={`prose prose-lg max-w-3xl prose-headings:tracking-[0.01em] prose-headings:text-foreground prose-p:leading-8 prose-p:text-foreground/90 prose-strong:font-semibold prose-li:leading-8 ${isAr ? "text-right" : "text-left"}`}>
+        <div className="prose prose-lg max-w-3xl prose-headings:tracking-[0.01em] prose-headings:text-foreground prose-p:leading-8 prose-p:text-foreground/90 prose-strong:font-semibold prose-li:leading-8 text-left">
           <ReactMarkdown>
             {content?.trim() ||
-              (isAr 
-                ? `## سياق السوق\n\n${excerpt}\n\n## لماذا يهم هذا\n\nيصطف نظام B2B في دبي بسرعة مع استراتيجية المحتوى مع أداء خط الأنابيب القابل للقياس.`
-                : `## Market Context\n\n${excerpt}\n\n## Why It Matters\n\nDubai's B2B ecosystem is rapidly aligning content strategy with measurable pipeline performance.`)}
+              `## Market Context\n\n${excerpt}\n\n## Why It Matters\n\nDubai's B2B ecosystem is rapidly aligning content strategy with measurable pipeline performance.`}
           </ReactMarkdown>
         </div>
 
         {/* EXECUTIVE ACTION CTA (LP HYBRID) */}
-        <div className="mt-20 rounded-3xl bg-[#0a0a0a] p-10 border border-white/5 space-y-10" dir={isAr ? "rtl" : "ltr"}>
-          <div className={`space-y-4 ${isAr ? "text-right" : "text-left"}`}>
+        <div className="mt-20 rounded-3xl bg-[#0a0a0a] p-10 border border-white/5 space-y-10" dir="ltr">
+          <div className="space-y-4 text-left">
             <div className="inline-block rounded bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white">
-              {isAr ? "خطوات تنفيذية" : "Executive Action"}
+              Executive Action
             </div>
             <h3 className="text-2xl font-black tracking-tight text-white md:text-3xl">
-              {isAr ? "تحويل الرؤى إلى ميزة تنافسية" : "Turn Insights into Advantage"}
+              Turn Insights into Advantage
             </h3>
             <p className="text-sm text-white/50 leading-relaxed max-w-2xl">
-              {isAr 
-                ? "بناءً على هذا التقرير، نوصي الشركات الرائدة في دبي بالتحقق من مدى وضوح علامتها التجارية في أنظمة الذكاء الاصطناعي."
-                : "Following the trends in this report, we recommend Dubai enterprises verify their brand visibility within the AI ecosystem immediately."}
+              Following the trends in this report, we recommend Dubai enterprises verify their brand visibility within the AI ecosystem immediately.
             </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
             <Link 
               href="/contact?service=aio-diagnostic"
-              className={`group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-primary/40 transition-all hover:bg-primary/[0.02] ${isAr ? "text-right" : "text-left"}`}
+              className="group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-primary/40 transition-all hover:bg-primary/[0.02] text-left"
             >
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Service 01</span>
-              <span className="text-lg font-bold text-white group-hover:text-primary transition-colors">{isAr ? "تدقيق البحث بالذكاء الاصطناعي (مجاني)" : "Free AI Search Audit"}</span>
-              <span className="text-xs text-white/40 leading-relaxed">{isAr ? "اكتشف كيف تصفك محركات البحث القائمة على الذكاء الاصطناعي." : "Audit how generative search engines perceive and describe your brand."}</span>
+              <span className="text-lg font-bold text-white group-hover:text-primary transition-colors">Free AI Search Audit</span>
+              <span className="text-xs text-white/40 leading-relaxed">Audit how generative search engines perceive and describe your brand.</span>
             </Link>
             <Link 
               href="/contact?service=free-design"
-              className={`group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-white/20 transition-all hover:bg-white/[0.02] ${isAr ? "text-right" : "text-left"}`}
+              className="group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-white/20 transition-all hover:bg-white/[0.02] text-left"
             >
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">Service 02</span>
-              <span className="text-lg font-bold text-white group-hover:text-white/80 transition-colors">{isAr ? "تصميم ويب متميز (مجاني)" : "Premium Web Design (Free)"}</span>
-              <span className="text-xs text-white/40 leading-relaxed">{isAr ? "احصل على صفحة هبوط مخصصة محسنة للذكاء الاصطناعي." : "Get a bespoke, AI-optimized landing page built for your business."}</span>
+              <span className="text-lg font-bold text-white group-hover:text-white/80 transition-colors">Premium Web Design (Free)</span>
+              <span className="text-xs text-white/40 leading-relaxed">Get a bespoke, AI-optimized landing page built for your business.</span>
             </Link>
           </div>
 
           <div className="pt-4 border-t border-white/5">
             <Link 
               href="/contact"
-              className={`flex items-center justify-between group ${isAr ? "flex-row-reverse" : ""}`}
+              className="flex items-center justify-between group"
             >
               <span className="text-xs font-black uppercase tracking-[0.2em] text-white group-hover:text-primary transition-colors">
-                {isAr ? "تحدث مع خبير استراتيجي" : "Talk to a Strategist"}
+                Talk to a Strategist
               </span>
               <span className="h-10 w-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
-                {isAr ? "←" : "→"}
+                →
               </span>
             </Link>
           </div>

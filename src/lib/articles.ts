@@ -3,11 +3,8 @@ export type Article = {
   created_at: string;
   category: string;
   title: string;
-  title_ar?: string | null;
   excerpt: string;
-  excerpt_ar?: string | null;
   content?: string | null;
-  content_ar?: string | null;
   source_name: string;
   image_url: string | null;
   image_search_query?: string | null;
@@ -17,7 +14,6 @@ export type Article = {
   original_source_name?: string | null;
   original_url?: string | null;
 };
-
 
 export const fallbackImage =
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80";
@@ -45,9 +41,8 @@ export async function fetchPublishedArticles(limit = 20, offset = 0): Promise<Ar
 
   const { url, key } = config;
   
-  // Try fetching with all columns first
-  const fullSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,image_search_query,is_published,is_curated,original_source_name,original_url";
-  const basicSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,is_published";
+  const fullSelect = "id,created_at,category,title,excerpt,content,source_name,company_name,image_url,image_search_query,is_published,is_curated,original_source_name,original_url";
+  const basicSelect = "id,created_at,category,title,excerpt,content,source_name,company_name,image_url,is_published";
 
   try {
     const response = await fetch(
@@ -62,7 +57,6 @@ export async function fetchPublishedArticles(limit = 20, offset = 0): Promise<Ar
     );
 
     if (response.status === 400) {
-      // Fallback to basic select if columns are missing
       const fallbackResponse = await fetch(
         `${url}/rest/v1/articles?select=${basicSelect}&is_published=eq.true&order=created_at.desc,id.desc&limit=${limit}&offset=${offset}`,
         {
@@ -90,8 +84,8 @@ export async function fetchArticleById(id: number): Promise<Article | null> {
   if (!config) return null;
 
   const { url, key } = config;
-  const fullSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,image_search_query,is_published,is_curated,original_source_name,original_url";
-  const basicSelect = "id,created_at,category,title,title_ar,excerpt,excerpt_ar,content,content_ar,source_name,company_name,image_url,is_published";
+  const fullSelect = "id,created_at,category,title,excerpt,content,source_name,company_name,image_url,image_search_query,is_published,is_curated,original_source_name,original_url";
+  const basicSelect = "id,created_at,category,title,excerpt,content,source_name,company_name,image_url,is_published";
 
   try {
     const response = await fetch(
@@ -129,4 +123,3 @@ export async function fetchArticleById(id: number): Promise<Article | null> {
     return null;
   }
 }
-

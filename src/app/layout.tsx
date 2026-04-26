@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
-import { LanguageProvider } from "@/components/LanguageProvider";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
@@ -33,13 +32,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      dir="ltr"
       className={`${geistSans.variable} ${geistMono.variable} ${notoArabic.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <LanguageProvider>
-          {children}
-          <Footer />
-        </LanguageProvider>
+        {children}
+        <Footer />
       </body>
     </html>
   );

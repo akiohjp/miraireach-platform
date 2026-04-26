@@ -1,15 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useLanguage } from "@/components/LanguageProvider";
 
 interface HeaderProps {
   showNav?: boolean;
 }
 
 export default function Header({ showNav = true }: HeaderProps) {
-  const { language, toggleLanguage } = useLanguage();
-
   return (
     <header className="mb-14 flex items-center justify-between border-b border-line pb-8">
       <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-foreground">
@@ -30,27 +27,6 @@ export default function Header({ showNav = true }: HeaderProps) {
             </Link>
           </nav>
         )}
-        
-        <button
-          onClick={toggleLanguage}
-          className="flex items-center justify-center rounded-md border border-line px-3 py-1.5 text-xs font-medium uppercase tracking-widest text-muted transition-colors hover:bg-muted/10 hover:text-foreground"
-          aria-label="Toggle Language"
-        >
-          {language === "en" ? (
-            <>
-              <span className="text-foreground">EN</span>
-              <span className="mx-1 opacity-40">/</span>
-              <span className="opacity-50">AR</span>
-            </>
-          ) : (
-            <>
-              <span className="opacity-50">EN</span>
-              <span className="mx-1 opacity-40">/</span>
-              <span className="text-foreground">AR</span>
-            </>
-          )}
-        </button>
-
       </div>
     </header>
   );

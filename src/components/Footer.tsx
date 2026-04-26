@@ -1,12 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useLanguage } from "./LanguageProvider";
 
 export default function Footer() {
-  const { language } = useLanguage();
-  const isAr = language === "ar";
-
   return (
     <footer className="w-full bg-[#0a0a0a] text-white py-24 px-6 md:px-10 mt-24 border-t border-white/5">
       <div className="mx-auto max-w-7xl flex flex-col items-center space-y-20">
@@ -23,7 +19,7 @@ export default function Footer() {
             className="group relative inline-flex items-center justify-center px-12 py-5 overflow-hidden font-black transition-all bg-white rounded-full hover:bg-primary"
           >
             <span className="relative text-[10px] uppercase tracking-[0.4em] text-black group-hover:text-white transition-colors">
-              {isAr ? "احجز اجتماعاً استراتيجياً" : "Book a strategic meeting"}
+              Book a strategic meeting
             </span>
           </Link>
         </div>
@@ -36,7 +32,7 @@ export default function Footer() {
           >
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#666] group-hover:text-primary transition-colors">01</span>
             <span className="text-[11px] font-black uppercase tracking-[0.3em] leading-loose">
-              {isAr ? "بدء تدقيق البحث بالذكاء الاصطناعي" : "Start Free AI Search Audit"}
+              Start Free AI Search Audit
             </span>
           </Link>
 
@@ -46,7 +42,7 @@ export default function Footer() {
           >
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#666] group-hover:text-primary transition-colors">02</span>
             <span className="text-[11px] font-black uppercase tracking-[0.3em] leading-loose">
-              {isAr ? "طلب تصميم ويب مجاني" : "Claim Free Web Design Offer"}
+              Claim Free Web Design Offer
             </span>
           </Link>
 
@@ -56,7 +52,7 @@ export default function Footer() {
           >
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#666] group-hover:text-primary transition-colors">03</span>
             <span className="text-[11px] font-black uppercase tracking-[0.3em] leading-loose">
-              {isAr ? "التواصل الإعلامي بالذكاء الاصطناعي" : "AI PR Outreach"}
+              AI PR Outreach
             </span>
           </Link>
         </div>
