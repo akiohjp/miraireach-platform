@@ -57,15 +57,15 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
   };
 
   // Industry categories for grid
-  const categories = [
+   const categories = [
+    "Gourmet & Dining",
     "AI & Deep Tech",
-    "F&B & Hospitality",
+    "Lifestyle & Travel",
     "Real Estate & PropTech",
     "FinTech & Crypto",
-    "Gourmet & Dining",
-    "Lifestyle & Travel",
-    "Local Guide",
-    "Trend Curation"
+    "Logistics & Supply Chain",
+    "Food & Culture",
+    "Business & Technology"
   ];
 
   return (
@@ -244,7 +244,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
               {categories.map((cat) => (
                 <Link 
                   key={cat} 
-                  href={`/articles?cat=${cat}`}
+                  href={`/articles?category=${encodeURIComponent(cat)}`}
                   className="rounded-full border border-line px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-muted hover:border-primary hover:text-primary transition-all hover:bg-primary/5"
                 >
                   {cat}
