@@ -349,8 +349,13 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
             </div>
 
             <div className="space-y-12">
-              <div className="inline-flex items-center gap-3 rounded-full bg-foreground text-background px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em]">
-                The Four Pillars of AI Dominance
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                <div className="inline-flex items-center gap-3 rounded-full bg-foreground text-background px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em]">
+                  The Four Pillars of AI Dominance
+                </div>
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary/40">
+                  Powered by the mirAIreach System
+                </span>
               </div>
               
               <div className="grid gap-1 md:grid-cols-2 border border-line/5 rounded-3xl overflow-hidden">
