@@ -251,6 +251,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
             <div className="flex flex-wrap gap-3 mb-10">
               <Link 
                 href="/"
+                scroll={false}
                 className={`rounded-full border px-5 py-2.5 text-[10px] font-black uppercase tracking-widest transition-all ${
                   !selectedCategory 
                     ? "bg-foreground text-background border-foreground" 
@@ -265,6 +266,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
                   <Link 
                     key={cat} 
                     href={`/?category=${encodeURIComponent(cat)}`}
+                    scroll={false}
                     className={`rounded-full border px-5 py-2.5 text-[10px] font-black uppercase tracking-widest transition-all ${
                       isActive 
                         ? "bg-foreground text-background border-foreground" 
