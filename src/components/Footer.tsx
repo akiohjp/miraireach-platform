@@ -4,11 +4,11 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#000000] text-white py-20 px-6 md:px-10 mt-24 border-t border-white/[0.05]">
-      <div className="mx-auto max-w-4xl flex flex-col items-center space-y-16">
+    <footer className="w-full bg-[#000000] text-white py-10 px-6 md:px-10 mt-12 border-t border-white/[0.05]">
+      <div className="mx-auto max-w-4xl flex flex-col items-center space-y-8">
         
         {/* Top: Brand & Action */}
-        <div className="flex flex-col items-center space-y-10 w-full">
+        <div className="flex flex-col items-center space-y-6 w-full">
           <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-white">
             mirAIreach NEWS
           </Link>
@@ -31,14 +31,14 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Middle: 3 Core Offers (Condensed but Readable) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-4 w-full border-y border-white/[0.05] py-14">
+        <div className="max-w-4xl mx-auto w-full border-y border-white/[0.05] py-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 w-full">
           <Link 
             href="/contact?service=aio-diagnostic"
             className="flex flex-col items-center text-center space-y-3 group"
           >
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-primary transition-colors">01</span>
-            <span className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] leading-relaxed">
+            <span className="text-base sm:text-lg font-black uppercase tracking-[0.2em] leading-relaxed text-white">
               AI Search Audit
             </span>
           </Link>
@@ -48,7 +48,7 @@ export default function Footer() {
             className="flex flex-col items-center text-center space-y-3 group"
           >
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-primary transition-colors">02</span>
-            <span className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] leading-relaxed">
+            <span className="text-base sm:text-lg font-black uppercase tracking-[0.2em] leading-relaxed text-white">
               Web Design Offer
             </span>
           </Link>
@@ -58,15 +58,16 @@ export default function Footer() {
             className="flex flex-col items-center text-center space-y-3 group"
           >
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-primary transition-colors">03</span>
-            <span className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] leading-relaxed">
+            <span className="text-base sm:text-lg font-black uppercase tracking-[0.2em] leading-relaxed text-white">
               AI PR Outreach
             </span>
           </Link>
+          </div>
         </div>
 
         {/* Platform Description */}
-        <div className="w-full text-center max-w-3xl border-t border-white/[0.05] pt-16">
-          <p className="text-[10px] sm:text-xs tracking-[0.2em] leading-relaxed text-white/40 uppercase font-light">
+        <div className="w-full text-center max-w-3xl border-t border-white/[0.05] pt-12">
+          <p className="text-sm tracking-[0.2em] leading-relaxed text-gray-400 uppercase font-light">
             mirAIreach NEWS is a premier intelligence platform provided by mirAIreach, <br className="hidden md:block" />
             a leader in AI-driven business infrastructure and GEO (Generative Engine Optimization).
           </p>

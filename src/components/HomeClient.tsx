@@ -7,7 +7,6 @@ import Link from "next/link";
 import Header from "./Header";
 import { Article, fallbackImage, formatDate } from "@/lib/articles";
 import { Search, Send, Layout, ArrowRight, Database, Cpu, TrendingUp, Zap, Shield, MessageCircle, RefreshCw } from "lucide-react";
-import WebDesignOffer from "./WebDesignOffer";
 
 interface HomeClientProps {
   articles: Article[];
@@ -475,8 +474,6 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
           </div>
         </div>
       </section>
-
-      <WebDesignOffer />
     </div>
   );
 }
