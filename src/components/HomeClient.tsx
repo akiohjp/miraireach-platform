@@ -278,7 +278,7 @@ export default function HomeClient({ articles, featured, latestInsights, trendin
             </div>
 
             <div className="grid gap-12 md:grid-cols-2">
-              {filteredArticles.slice(0, 15).map((item) => (
+              {filteredArticles.slice(0, 30).map((item) => (
                 <article key={`latest-${item.id}`} className="group flex gap-8">
                   <Link href={`/articles/${item.id}`} className="relative aspect-square w-32 shrink-0 overflow-hidden rounded-2xl bg-muted/10 md:w-40">
                     <Image
