@@ -4,11 +4,11 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#000000] text-white py-10 px-6 md:px-10 mt-12 border-t border-white/[0.05]">
-      <div className="mx-auto max-w-4xl flex flex-col items-center space-y-8">
+    <footer className="w-full bg-[#000000] text-white py-8 px-6 md:px-10 mt-8 border-t border-white/[0.05]">
+      <div className="mx-auto max-w-4xl flex flex-col items-center space-y-6">
         
         {/* Top: Brand & Action */}
-        <div className="flex flex-col items-center space-y-6 w-full">
+        <div className="flex flex-col items-center space-y-4 w-full">
           <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-white">
             mirAIreach NEWS
           </Link>
@@ -31,7 +31,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto w-full border-y border-white/[0.05] py-8">
+        <div className="max-w-4xl mx-auto w-full border-y border-white/[0.05] py-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 w-full">
           <Link 
             href="/contact?service=aio-diagnostic"
@@ -66,9 +66,10 @@ export default function Footer() {
         </div>
 
         {/* Platform Description */}
-        <div className="w-full text-center max-w-4xl border-t border-white/[0.05] pt-12">
+        <div className="w-full text-center max-w-4xl border-t border-white/[0.05] pt-8">
           <p className="text-sm tracking-[0.2em] leading-relaxed text-gray-400 uppercase font-light">
-            mirAIreach NEWS is a premier intelligence platform provided by mirAIreach, a leader in AI-driven business infrastructure and GEO (Generative Engine Optimization).
+            mirAIreach NEWS is a premier intelligence platform provided by mirAIreach, <br />
+            a leader in AI-driven business infrastructure and GEO (Generative Engine Optimization).
           </p>
         </div>
 
