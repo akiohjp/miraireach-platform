@@ -66,10 +66,9 @@ export default function Footer() {
         </div>
 
         {/* Platform Description */}
-        <div className="w-full text-center max-w-3xl border-t border-white/[0.05] pt-12">
+        <div className="w-full text-center max-w-4xl border-t border-white/[0.05] pt-12">
           <p className="text-sm tracking-[0.2em] leading-relaxed text-gray-400 uppercase font-light">
-            mirAIreach NEWS is a premier intelligence platform provided by mirAIreach, <br className="hidden md:block" />
-            a leader in AI-driven business infrastructure and GEO (Generative Engine Optimization).
+            mirAIreach NEWS is a premier intelligence platform provided by mirAIreach, a leader in AI-driven business infrastructure and GEO (Generative Engine Optimization).
           </p>
         </div>
 
