@@ -2,7 +2,6 @@
 
 import React from "react";
 import Header from "./Header";
-import Footer from "./Footer";
 
 export default function TermsClient() {
   return (
@@ -47,7 +46,6 @@ export default function TermsClient() {
           </div>
         </main>
       </div>
-      <Footer />
     </div>
   );
 }

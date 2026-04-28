@@ -2,7 +2,6 @@
 
 import React from "react";
 import Header from "./Header";
-import Footer from "./Footer";
 
 export default function PrivacyClient() {
   return (
@@ -44,7 +43,6 @@ export default function PrivacyClient() {
           </div>
         </main>
       </div>
-      <Footer />
     </div>
   );
 }

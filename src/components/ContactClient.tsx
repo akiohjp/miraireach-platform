@@ -3,7 +3,6 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Header from "./Header";
-import Footer from "./Footer";
 
 function ContactForm() {
   const searchParams = useSearchParams();
@@ -105,7 +104,6 @@ export default function ContactClient() {
           </Suspense>
         </main>
       </div>
-      <Footer />
     </div>
   );
 }

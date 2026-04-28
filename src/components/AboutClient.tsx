@@ -2,7 +2,6 @@
 
 import React from "react";
 import Header from "./Header";
-import Footer from "./Footer";
 
 export default function AboutClient() {
   return (
@@ -75,7 +74,6 @@ export default function AboutClient() {
           </div>
         </main>
       </div>
-      <Footer />
     </div>
   );
 }
