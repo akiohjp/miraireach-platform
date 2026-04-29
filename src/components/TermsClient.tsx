@@ -22,12 +22,12 @@ export default function TermsClient() {
           <div className="prose prose-lg max-w-none">
             <section className="space-y-6">
               <p>
-                By accessing and using mirAIreach NEWS, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.
+                By accessing and using our services, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.
               </p>
               
               <h2 className="text-2xl font-bold text-foreground">Intellectual Property</h2>
               <p>
-                All materials published on mirAIreach NEWS, including articles, reports, and graphics, are the intellectual property of the platform or its partners. Content may not be reproduced without prior written permission.
+                All materials published by GAM solutions L.L.C-FZ, including articles, reports, and graphics, are the intellectual property of the platform or its partners. Content may not be reproduced without prior written permission.
               </p>
 
               <h2 className="text-2xl font-bold text-foreground">Trademarks</h2>
@@ -37,10 +37,10 @@ export default function TermsClient() {
 
               <h2 className="text-2xl font-bold text-foreground">Disclaimer of Insights</h2>
               <p>
-                The AI-generated insights, reports, and analytics on mirAIreach NEWS are provided for informational purposes only. We strive for accuracy but do not guarantee the completeness or correctness of the data provided.
+                The AI-generated insights, reports, and analytics provided by GAM solutions L.L.C-FZ are for informational purposes only. We strive for accuracy but do not guarantee the completeness or correctness of the data provided.
               </p>
               <p>
-                mirAIreach NEWS shall not be held liable for any business losses or investment decisions made based on information available on the platform.
+                GAM solutions L.L.C-FZ shall not be held liable for any business losses or investment decisions made based on information available on the platform.
               </p>
             </section>
           </div>

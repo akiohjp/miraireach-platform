@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Top: Brand & Action */}
         <div className="flex flex-col items-center space-y-4 w-full">
           <Link href="/" className="inline-block text-2xl font-black tracking-tighter text-white">
-            mirAIreach NEWS
+            GAM solutions L.L.C-FZ
           </Link>
           
           <div className="flex flex-col items-center space-y-6">
@@ -68,7 +68,7 @@ export default function Footer() {
         {/* Platform Description */}
         <div className="w-full text-center max-w-4xl border-t border-white/[0.05] pt-8">
           <p className="text-sm tracking-[0.2em] leading-relaxed text-gray-400 uppercase font-light">
-            mirAIreach NEWS is a premier intelligence platform provided by mirAIreach, <br />
+            The mirAIreach intelligence platform is provided by GAM solutions L.L.C-FZ, <br />
             a leader in AI-driven business infrastructure and GEO (Generative Engine Optimization).
           </p>
         </div>
@@ -76,7 +76,7 @@ export default function Footer() {
         {/* Bottom: Legal & Copyright */}
         <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 opacity-70">
           <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase">
-            &copy; 2026 mirAIreach NEWS. All rights reserved.
+            &copy; 2026 GAM solutions L.L.C-FZ. All rights reserved.
           </p>
           <div className="flex gap-8">
             <Link href="/privacy" className="text-[10px] sm:text-xs tracking-[0.2em] uppercase hover:text-white transition-colors">

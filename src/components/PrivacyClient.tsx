@@ -22,7 +22,7 @@ export default function PrivacyClient() {
           <div className="prose prose-lg max-w-none">
             <section className="space-y-6">
               <p>
-                mirAIreach NEWS is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our platform and services.
+                GAM solutions L.L.C-FZ is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our platform and services.
               </p>
               
               <h2 className="text-2xl font-bold text-foreground">Information We Collect</h2>

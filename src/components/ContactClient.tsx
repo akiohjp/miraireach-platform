@@ -92,7 +92,7 @@ export default function ContactClient() {
         <main className="mt-12 space-y-16">
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-black tracking-tighter md:text-6xl uppercase">
-              Work with mirAIreach NEWS
+              Work with GAM solutions L.L.C-FZ
             </h1>
             <p className="mx-auto max-w-xl text-muted leading-relaxed">
               Initiate your digital transformation today. Our team is ready to help you dominate in the AI-driven landscape.

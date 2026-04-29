@@ -1,7 +1,7 @@
 import PrivacyClient from "@/components/PrivacyClient";
 
 export const metadata = {
-  title: "Privacy Policy | mirAIreach NEWS",
+  title: "Privacy Policy | GAM solutions L.L.C-FZ",
   description: "Privacy policy and data protection standards for mirAIreach users.",
 };
 

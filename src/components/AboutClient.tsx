@@ -12,7 +12,7 @@ export default function AboutClient() {
         <main className="mt-16 max-w-4xl mx-auto space-y-16">
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-black tracking-tighter md:text-6xl uppercase">
-              About mirAIreach NEWS
+              About GAM solutions L.L.C-FZ
             </h1>
             <p className="text-xl text-muted leading-relaxed">
               Bridging the gap between AI intelligence and business excellence in Dubai.
@@ -25,7 +25,7 @@ export default function AboutClient() {
                 Our Mission
               </h2>
               <p>
-                At mirAIreach NEWS, our mission is to empower businesses in Dubai and the UAE to navigate the rapidly evolving digital landscape. We combine cutting-edge AI technologies with deep local market insights to drive growth, innovation, and visibility.
+                At GAM solutions L.L.C-FZ, our mission is to empower businesses in Dubai and the UAE to navigate the rapidly evolving digital landscape. We combine cutting-edge AI technologies with deep local market insights to drive growth, innovation, and visibility.
               </p>
               <p>
                 We believe the future belongs to those who can harness the power of AI to transform traditional operations in sectors like F&B, Real Estate, and Deep Tech into intelligent, sustainable business models.
@@ -39,7 +39,7 @@ export default function AboutClient() {
                 Who We Are
               </h2>
               <p>
-                mirAIreach NEWS is a premium business intelligence platform based in Dubai. We are a team of technologists, strategists, and creatives dedicated to providing high-quality content and actionable solutions.
+                GAM solutions L.L.C-FZ is a premium AI solutions provider based in Dubai. We are a team of technologists, strategists, and creatives dedicated to providing high-quality content and actionable solutions.
               </p>
               <div className="grid md:grid-cols-2 gap-8 mt-8">
                 <div className="p-6 bg-muted/5 rounded-2xl border border-line">
