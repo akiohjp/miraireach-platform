@@ -78,7 +78,7 @@ export default function HomeClient() {
                 </h2>
               </div>
               <p className="text-base text-muted/80 leading-relaxed font-medium">
-                Our proprietary system designed to liberate Dubai businesses from traditional advertising dependency. We optimize for the generative era, ensuring your brand is the definitive recommendation across all AI platforms.
+                mirAIreach is our proprietary system designed to liberate Dubai businesses from the escalating costs of traditional Google Ads. We optimize your brand for the generative era, ensuring you are the definitive recommendation across ChatGPT, Perplexity, and AI Overviews.
               </p>
             </div>
 
