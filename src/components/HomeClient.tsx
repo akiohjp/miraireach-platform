@@ -156,53 +156,83 @@ export default function HomeClient() {
       </section>
 
       {/* SECTION 4: CORPORATE PROFILE */}
-      <section className="w-full py-32 bg-white">
-        <div className="mx-auto max-w-5xl px-6 md:px-12">
-          <div className="grid md:grid-cols-2 gap-24 items-start">
-            <div className="space-y-12">
-              <div className="space-y-6">
-                <h2 className="text-3xl md:text-5xl font-black tracking-tighter">
-                  GAM solutions <br /> L.L.C-FZ
-                </h2>
-                <div className="h-1 w-12 bg-primary" />
+      <section className="w-full py-40 bg-[#0a0a0a] text-white overflow-hidden relative">
+        {/* Subtle decorative elements for premium feel */}
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-[100px]" />
+        
+        <div className="mx-auto max-w-5xl px-6 md:px-12 relative z-10">
+          <div className="grid md:grid-cols-2 gap-20 lg:gap-32 items-start">
+            
+            <div className="space-y-16">
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <p className="text-[10px] font-black uppercase tracking-[0.5em] text-primary/80">Corporate Profile</p>
+                  <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-[1.05]">
+                    GAM solutions <br /> 
+                    <span className="text-primary/90 italic">L.L.C-FZ</span>
+                  </h2>
+                </div>
+                <div className="h-px w-24 bg-gradient-to-r from-primary to-transparent" />
               </div>
-              <p className="text-base text-muted/80 leading-relaxed font-medium">
-                GAM solutions L.L.C-FZ is a premier consulting and technology firm registered in the United Arab Emirates. We specialize in architecting the digital infrastructure that allows businesses to thrive in the era of Artificial Intelligence.
+              
+              <p className="text-lg text-white/60 leading-loose font-light">
+                GAM solutions L.L.C-FZ is a Dubai-based strategic consulting firm dedicated to redefining the digital landscape for local businesses. We go beyond simply introducing technology; we seamlessly integrate Artificial Intelligence into real-world operations. By bridging the gap between cutting-edge AI innovation—including advanced search optimization—and practical business execution, we drive tangible growth and operational excellence for highly competitive sectors like retail and gastronomy.
               </p>
               
-              <div className="grid grid-cols-2 gap-8 pt-4">
-                <div className="space-y-2">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-primary">Headquarters</p>
-                  <p className="text-sm font-bold text-foreground">Meydan Hotel, Dubai, U.A.E.</p>
+              {/* Editorial Grid Design */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-white/10 mt-12">
+                <div className="py-8 pr-8 border-b sm:border-b-0 sm:border-r border-white/10 space-y-3">
+                  <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/30">Headquarters</p>
+                  <p className="text-sm font-medium leading-relaxed text-white/90">
+                    Business Center 1, M Floor,<br />
+                    The Meydan Hotel, Nad Al Sheba,<br />
+                    Dubai, U.A.E.
+                  </p>
                 </div>
-                <div className="space-y-2">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-primary">Focus</p>
-                  <p className="text-sm font-bold text-foreground">AI Integration & DX</p>
+                <div className="py-8 sm:pl-8 space-y-3">
+                  <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/30">Primary Focus</p>
+                  <p className="text-sm font-medium leading-relaxed text-white/90">
+                    Enterprise AI Integration<br />
+                    AIO Search Strategy<br />
+                    Digital Infrastructure
+                  </p>
                 </div>
               </div>
             </div>
             
-            <div className="bg-[#fafafa] p-12 rounded-[2.5rem] border border-line/10 space-y-10">
-              <div className="space-y-4">
-                <h3 className="text-2xl font-black tracking-tight">Company Mission</h3>
-                <p className="text-sm text-muted/80 leading-relaxed">
-                  To democratize enterprise-grade AI infrastructure for local businesses, ensuring competitive parity in an increasingly automated global market.
-                </p>
-              </div>
-              
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"><MapPin size={18} /></div>
-                  <p className="text-xs font-bold text-foreground/70 tracking-wide uppercase">Meydan Free Zone, Dubai</p>
+            <div className="relative group">
+              {/* Glassmorphism Card */}
+              <div className="absolute inset-0 bg-primary/20 blur-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-1000" />
+              <div className="relative backdrop-blur-2xl bg-white/[0.03] p-10 md:p-14 rounded-[3rem] border border-white/10 space-y-12">
+                <div className="space-y-6">
+                  <h3 className="text-xs font-black uppercase tracking-[0.4em] text-primary">Company Mission</h3>
+                  <p className="text-xl md:text-2xl font-light leading-relaxed text-white/90">
+                    "To empower brick-and-mortar businesses with enterprise-grade AI. Our mission is to democratize advanced digital infrastructure, turning a sophisticated online presence into measurable offline success and competitive supremacy."
+                  </p>
                 </div>
-                <Link 
-                  href="/contact" 
-                  className="block w-full text-center bg-black text-white py-5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all"
-                >
-                  Direct Inquiry
-                </Link>
+                
+                <div className="space-y-8 pt-4">
+                  <div className="flex items-center gap-5">
+                    <div className="h-12 w-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-primary">
+                      <MapPin size={20} />
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-[9px] font-black uppercase tracking-widest text-white/30">Registered Zone</p>
+                      <p className="text-sm font-bold text-white/80">Meydan Free Zone, Dubai</p>
+                    </div>
+                  </div>
+                  
+                  <Link 
+                    href="/contact" 
+                    className="group relative flex items-center justify-center w-full bg-white text-black py-6 rounded-full text-[10px] font-black uppercase tracking-[0.3em] overflow-hidden transition-all hover:bg-primary hover:text-white"
+                  >
+                    <span className="relative z-10">Start Direct Inquiry</span>
+                    <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                  </Link>
+                </div>
               </div>
             </div>
+            
           </div>
         </div>
       </section>
