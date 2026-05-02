@@ -3,108 +3,559 @@
 import React from "react";
 import Link from "next/link";
 import Header from "./Header";
-import { ArrowRight, MapPin, Zap, Shield, MessageCircle, RefreshCw, Layout, Search, Play } from "lucide-react";
+import {
+  ArrowRight, Star, Shield, Zap, Globe, MapPin,
+  CheckCircle, Gift, Target, MessageCircle, Phone
+} from "lucide-react";
 
+const GOLD = "#D4AF37";
+const GOLD_HOVER = "#B8961C";
+
+/* ─────────────────────────────────────────────────────
+   Shared primitives
+───────────────────────────────────────────────────── */
+function GoldButton({
+  href,
+  children,
+  large,
+}: {
+  href: string;
+  children: React.ReactNode;
+  large?: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`inline-flex items-center justify-center gap-2.5 rounded-full font-black uppercase tracking-[0.15em] text-black transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5
+        ${large ? "px-10 py-4 text-[13px]" : "px-7 py-3 text-[11px]"}`}
+      style={{ backgroundColor: GOLD }}
+      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = GOLD_HOVER; }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = GOLD; }}
+    >
+      {children}
+    </Link>
+  );
+}
+
+function Check({ text }: { text: string }) {
+  return (
+    <li className="flex items-start gap-3 text-gray-700">
+      <span
+        className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] text-white shrink-0"
+        style={{ backgroundColor: GOLD }}
+      >✓</span>
+      <span className="font-semibold leading-snug">{text}</span>
+    </li>
+  );
+}
+
+function Chip({ children, gold }: { children: React.ReactNode; gold?: boolean }) {
+  return gold ? (
+    <span
+      className="inline-flex items-center rounded-full px-3.5 py-1 text-[11px] font-black uppercase tracking-widest border"
+      style={{ borderColor: `${GOLD}60`, color: GOLD, backgroundColor: `${GOLD}10` }}
+    >
+      {children}
+    </span>
+  ) : (
+    <span className="inline-flex items-center rounded-full px-3.5 py-1 text-[11px] font-black uppercase tracking-widest border border-gray-200 bg-white text-gray-500">
+      {children}
+    </span>
+  );
+}
+
+/* ─────────────────────────────────────────────────────
+   Hero: mirAIreach Bridge Visual
+───────────────────────────────────────────────────── */
+function PlatformNode({ label, icon, bg, fg }: { label: string; icon: string; bg: string; fg: string }) {
+  return (
+    <div className="flex flex-col items-center gap-1.5 select-none">
+      <div
+        className="w-12 h-12 rounded-2xl flex items-center justify-center font-black text-sm shadow-md"
+        style={{ backgroundColor: bg, color: fg, border: `1.5px solid ${fg}30` }}
+      >
+        {icon}
+      </div>
+      <span className="text-[9px] font-bold text-gray-400 whitespace-nowrap tracking-wide">{label}</span>
+    </div>
+  );
+}
+
+function BridgeVisual() {
+  const nodes = [
+    { label: "Google Business", icon: "G",  bg: "#EAF1FB", fg: "#4285F4", top: "13%", left: "13%", cls: "animate-float"    },
+    { label: "Instagram",       icon: "IG", bg: "#FDE8EF", fg: "#E1306C", top: "13%", left: "87%", cls: "animate-float-d1" },
+    { label: "Apple Maps",      icon: "A",  bg: "#F2F2F2", fg: "#444444", top: "87%", left: "13%", cls: "animate-float-d2" },
+    { label: "ChatGPT",         icon: "AI", bg: "#E8F8F4", fg: "#10A37F", top: "87%", left: "87%", cls: "animate-float-d3" },
+  ];
+  const lines = [
+    { x1: 14, y1: 14, x2: 42, y2: 42 },
+    { x1: 86, y1: 14, x2: 58, y2: 42 },
+    { x1: 14, y1: 86, x2: 42, y2: 58 },
+    { x1: 86, y1: 86, x2: 58, y2: 58 },
+  ];
+  return (
+    <div className="relative w-full max-w-[380px] mx-auto" style={{ aspectRatio: "1 / 1" }}>
+      <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="11" fill="none" stroke="#D4AF37" strokeWidth="0.6" className="animate-ring-1" />
+        <circle cx="50" cy="50" r="11" fill="none" stroke="#D4AF37" strokeWidth="0.6" className="animate-ring-2" />
+        {lines.map((l, i) => (
+          <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2}
+            stroke="#D4AF3785" strokeWidth="0.9" strokeDasharray="4 3" strokeLinecap="round"
+            className="animate-march" style={{ animationDelay: `${i * 0.25}s` }}
+          />
+        ))}
+        {[{ cx: 28, cy: 28 }, { cx: 72, cy: 28 }, { cx: 28, cy: 72 }, { cx: 72, cy: 72 }].map((p, i) => (
+          <circle key={i} cx={p.cx} cy={p.cy} r="1.4" fill="#D4AF37" opacity="0.5" />
+        ))}
+      </svg>
+      <div className="absolute z-10 animate-glow" style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+        <div className="px-4 py-2.5 rounded-xl font-black text-sm tracking-wide bg-white shadow-xl whitespace-nowrap"
+          style={{ border: `2px solid ${GOLD}`, color: GOLD }}>
+          mir<span className="text-gray-900">AI</span>reach
+        </div>
+      </div>
+      {nodes.map((n) => (
+        <div key={n.label} className={`absolute z-10 ${n.cls}`}
+          style={{ top: n.top, left: n.left, transform: "translate(-50%, -50%)" }}>
+          <PlatformNode label={n.label} icon={n.icon} bg={n.bg} fg={n.fg} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────
+   Bento Grid — mirAIreach Platform Showcase
+───────────────────────────────────────────────────── */
+const SYNC_PLATFORMS = [
+  { init: "G", name: "Google Business",  status: "Synced",    color: "#4285F4" },
+  { init: "A", name: "Apple Maps",       status: "Synced",    color: "#444444" },
+  { init: "Y", name: "Yelp",             status: "Updating…", color: "#D32323" },
+  { init: "T", name: "TripAdvisor",      status: "Synced",    color: "#00AF87" },
+  { init: "F", name: "Foursquare",       status: "Synced",    color: "#F94877" },
+  { init: "+", name: "+95 more",         status: "All synced",color: "#9CA3AF" },
+];
+
+function BentoGrid() {
+  return (
+    <section className="py-16 md:py-20 bg-white border-t border-gray-100">
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+
+        <div className="text-center mb-14 max-w-3xl mx-auto">
+          <p className="text-[11px] font-black uppercase tracking-[0.3em] text-gray-400 mb-3">
+            The mirAIreach Platform
+          </p>
+          <h2 className="text-3xl md:text-5xl font-black tracking-tight text-gray-900 leading-[1.1]">
+            Enterprise-Grade Power.<br />
+            <span style={{ color: GOLD }}>Centralized in One Dashboard.</span>
+          </h2>
+        </div>
+
+        {/* Bento: 3-col on desktop, stacked on mobile */}
+        <div className="grid lg:grid-cols-3 gap-5">
+
+          {/* ── Card 1: GEO (large, bright/light) — spans 2 cols × 2 rows ── */}
+          <div
+            className="lg:col-span-2 lg:row-span-2 rounded-3xl border border-gray-200 shadow-xl relative overflow-hidden flex flex-col justify-between p-8 md:p-10 hover:shadow-2xl transition-shadow duration-300"
+            style={{ background: "linear-gradient(145deg, #ffffff 0%, #faf9f4 100%)" }}
+          >
+            {/* Neural Network SVG Background */}
+            <svg className="absolute inset-0 w-[150%] h-[150%] -top-[25%] -left-[25%] opacity-[0.06] pointer-events-none animate-float" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M10,20 L30,40 L60,10 L90,50 L70,80 L40,70 L20,90 Z" fill="none" stroke="#000" strokeWidth="0.8" />
+              <circle cx="10" cy="20" r="3" fill="#000" />
+              <circle cx="30" cy="40" r="4" fill="#000" />
+              <circle cx="60" cy="10" r="3" fill="#000" />
+              <circle cx="90" cy="50" r="5" fill="#000" />
+              <circle cx="70" cy="80" r="4" fill="#000" />
+              <circle cx="40" cy="70" r="3" fill="#000" />
+              <circle cx="20" cy="90" r="3" fill="#000" />
+              <path d="M30,40 L40,70 M60,10 L70,80 M90,50 L40,70 M10,20 L60,10" fill="none" stroke="#000" strokeWidth="0.4" strokeDasharray="2 2" />
+            </svg>
+            
+            {/* Soft gold glow — top right */}
+            <div className="pointer-events-none absolute top-0 right-0 w-72 h-72 rounded-full opacity-[0.13] blur-3xl"
+              style={{ background: `radial-gradient(circle, ${GOLD}, transparent 70%)` }} />
+
+            {/* Text block */}
+            <div className="relative z-10 mb-6">
+              <span
+                className="inline-flex items-center rounded-full px-3.5 py-1 text-[11px] font-black uppercase tracking-widest border mb-3 shadow-sm"
+                style={{ borderColor: `${GOLD}60`, color: GOLD, backgroundColor: `${GOLD}10` }}
+              >
+                Core Technology
+              </span>
+              <h3 className="text-3xl md:text-4xl font-black text-gray-900 leading-tight">
+                Generative Engine<br />Optimization (GEO)
+              </h3>
+              <p className="mt-2 text-gray-600 font-medium text-base leading-relaxed max-w-lg">
+                Our data-structuring engine aligns your brand precisely with what AI systems
+                expect — making ChatGPT, Google AI Overviews, and Perplexity recommend you
+                first, every time.
+              </p>
+            </div>
+
+            {/* AI Search visual */}
+            <div className="relative z-10 flex-1 flex flex-col justify-end space-y-4">
+              {/* Stylised search bar & Score */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex items-center gap-3 bg-white rounded-2xl border border-gray-200 px-5 py-4 shadow-md relative overflow-hidden flex-1">
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-400 via-purple-400 to-amber-400" />
+                  <div className="relative flex items-center justify-center w-6 h-6">
+                    <div className="absolute inset-0 rounded-full border-2 border-blue-500/30 animate-ping" />
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 animate-pulse" />
+                  </div>
+                  <span className="text-sm md:text-base text-gray-800 font-bold flex-1 truncate">
+                    &quot;best restaurant in Dubai&quot;
+                  </span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 animate-pulse hidden sm:inline-block">Analyzing...</span>
+                </div>
+                
+                {/* Live Confidence Score */}
+                <div className="bg-white rounded-2xl border border-gray-200 px-4 py-3 shadow-md flex items-center justify-between sm:flex-col sm:justify-center shrink-0">
+                  <p className="text-[9px] font-black uppercase tracking-widest text-gray-400 sm:mb-1">AI Confidence</p>
+                  <div className="flex items-end gap-1.5">
+                    <span className="text-xl md:text-2xl font-black text-green-500 leading-none">98%</span>
+                    <div className="flex gap-0.5 pb-1">
+                       <div className="w-1 h-2 bg-green-200 rounded-sm"></div>
+                       <div className="w-1 h-3 bg-green-300 rounded-sm"></div>
+                       <div className="w-1 h-4 bg-green-500 rounded-sm animate-pulse"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* AI response cards — side by side */}
+              <div className="grid sm:grid-cols-2 gap-3">
+                <div className="p-4 rounded-xl bg-green-50/80 backdrop-blur-sm border border-green-200 shadow-sm space-y-2">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm">✨</span>
+                    <span className="text-[10px] font-black text-green-700 uppercase tracking-widest">Google AI Overview</span>
+                  </div>
+                  <p className="text-xs text-gray-700 leading-relaxed font-medium">
+                    <strong className="text-gray-900">GAM Solutions</strong> with{" "}
+                    <strong style={{ color: GOLD }}>mirAIreach</strong> is highly
+                    recommended for Dubai businesses…
+                  </p>
+                </div>
+                <div className="p-4 rounded-xl bg-gray-50/80 backdrop-blur-sm border border-gray-200 shadow-sm space-y-2">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs font-black" style={{ color: "#10A37F" }}>AI</span>
+                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">ChatGPT</span>
+                  </div>
+                  <p className="text-xs text-gray-700 leading-relaxed font-medium">
+                    For AI-optimised marketing in Dubai, I recommend{" "}
+                    <strong className="text-gray-900">mirAIreach</strong>-powered
+                    businesses…
+                  </p>
+                </div>
+              </div>
+
+              {/* Trusted & Cited By */}
+              <div className="pt-4 mt-2 relative z-10 border-t border-gray-200/60">
+                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 text-center sm:text-left">
+                  Trusted &amp; Cited By
+                </p>
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
+                  {[
+                    { name: "Google Gemini", color: "from-blue-500 to-purple-500" },
+                    { name: "ChatGPT", color: "from-[#10A37F] to-[#0d8a6a]" },
+                    { name: "Perplexity AI", color: "from-cyan-500 to-blue-500" },
+                    { name: "Apple Intelligence", color: "from-gray-800 to-black" },
+                    { name: "Bing Search", color: "from-blue-500 to-teal-400" },
+                  ].map((ai) => (
+                    <div key={ai.name} className="bg-white/70 backdrop-blur-md border border-white shadow-sm rounded-xl px-3 py-1.5 flex items-center gap-1.5 hover:-translate-y-0.5 transition-transform">
+                       <div className={`w-2.5 h-2.5 rounded-full bg-gradient-to-tr ${ai.color}`} />
+                       <span className="text-[11px] font-bold text-gray-800">{ai.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Card 2: 100+ Platform Sync — FULL merged dashboard ── */}
+          <div className="rounded-3xl border border-gray-200 shadow-xl bg-white hover:shadow-2xl transition-shadow duration-300 flex flex-col overflow-hidden">
+            {/* Text header */}
+            <div className="px-6 pt-6 pb-4">
+              <Chip>100+ Platforms</Chip>
+              <h3 className="mt-3 text-xl font-black text-gray-900 leading-tight">Global Platform Sync</h3>
+              <p className="mt-1.5 text-sm text-gray-500 font-medium leading-snug">
+                Update once — instantly sync across 100+ directories via Synup.
+              </p>
+            </div>
+
+            {/* Mac-window style list — full detail */}
+            <div className="mx-5 mb-5 rounded-2xl border border-gray-100 overflow-hidden flex-1">
+              <div className="bg-gray-50 px-4 py-2.5 border-b border-gray-100 flex items-center justify-between">
+                <div className="flex gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-red-300" />
+                  <div className="w-2 h-2 rounded-full bg-yellow-300" />
+                  <div className="w-2 h-2 rounded-full bg-green-300" />
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  <span className="text-[10px] font-bold text-green-600">Live</span>
+                </div>
+              </div>
+              <div className="divide-y divide-gray-50">
+                {SYNC_PLATFORMS.map((p) => (
+                  <div key={p.name} className="flex items-center justify-between px-4 py-2.5">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-black"
+                        style={{ backgroundColor: `${p.color}18`, color: p.color }}>
+                        {p.init}
+                      </div>
+                      <span className="text-xs font-semibold text-gray-700">{p.name}</span>
+                    </div>
+                    <span className={`text-[10px] font-bold ${p.status === "Updating…" ? "text-amber-500" : "text-green-600"}`}>
+                      {p.status === "Updating…" ? "⟳ " : "✓ "}{p.status}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* ── Card 3: Omnichannel Auto-Posting ── */}
+          <div className="rounded-3xl p-7 shadow-xl border border-gray-200 bg-white hover:shadow-2xl transition-shadow duration-300 flex flex-col">
+            <Chip>Automation</Chip>
+            <h3 className="mt-4 text-xl font-black text-gray-900 leading-tight">Omnichannel Auto-Posting</h3>
+            <p className="mt-2 text-sm text-gray-500 font-medium leading-relaxed">
+              Publish on Instagram and cascade to Google Business Profile automatically.
+              One post, every platform.
+            </p>
+
+            {/* IG → GBP animated flow */}
+            <div className="mt-auto pt-6">
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center font-black text-sm text-white shadow-md shrink-0"
+                  style={{ background: "linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)" }}
+                >IG</div>
+                <div className="flex-1 h-[2px] rounded-full overflow-hidden bg-gray-100">
+                  <div className="h-full animate-shimmer-right" />
+                </div>
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xs shadow-md shrink-0 border border-blue-100"
+                  style={{ backgroundColor: "#EAF1FB", color: "#4285F4" }}
+                >GBP</div>
+              </div>
+              <p className="mt-3 text-[11px] text-gray-400 font-medium">
+                Content flows automatically to all connected channels
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────────────
+   Feature 1 visual: Realistic iPhone Mockup
+───────────────────────────────────────────────────── */
+function ReviewCardsVisual() {
+  return (
+    <div className="w-full lg:w-1/2 flex justify-center relative">
+      {/* Decorative Glow behind iPhone */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D4AF37]/20 blur-[80px] rounded-full"></div>
+
+      {/* iPhone Mockup Frame */}
+      <div className="relative w-[300px] h-[600px] bg-gray-50 border-[12px] border-gray-900 rounded-[3rem] shadow-2xl overflow-hidden flex flex-col z-10 animate-float">
+        {/* iPhone Notch */}
+        <div className="absolute top-0 inset-x-0 h-6 bg-gray-900 rounded-b-3xl w-40 mx-auto z-20"></div>
+
+        {/* Google Review Header */}
+        <div className="bg-white pt-10 pb-4 px-4 shadow-sm z-10 relative">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">G</div>
+            <div>
+              <div className="text-sm font-bold text-gray-900">Your Business</div>
+              <div className="flex text-yellow-400 text-xs">★★★★★ <span className="text-gray-500 ml-1">5.0</span></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Animated Reviews Container */}
+        <div className="flex-1 p-4 relative overflow-hidden bg-gray-100">
+          {/* Review 1 */}
+          <div className="absolute w-[calc(100%-2rem)] bg-white p-4 rounded-2xl shadow-md animate-scroll-1 opacity-0">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-6 h-6 rounded-full bg-red-100 text-xs flex items-center justify-center font-bold">SM</div>
+              <div className="text-xs font-bold">Sarah M.</div>
+            </div>
+            <div className="text-yellow-400 text-xs mb-1">★★★★★</div>
+            <p className="text-xs text-gray-600">Absolutely amazing — best in Dubai! Highly recommended.</p>
+          </div>
+          {/* Review 2 */}
+          <div className="absolute w-[calc(100%-2rem)] bg-white p-4 rounded-2xl shadow-md animate-scroll-2 opacity-0">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-6 h-6 rounded-full bg-green-100 text-xs flex items-center justify-center font-bold">AK</div>
+              <div className="text-xs font-bold">Ahmed K.</div>
+            </div>
+            <div className="text-yellow-400 text-xs mb-1">★★★★★</div>
+            <p className="text-xs text-gray-600">Great service, will definitely return again next weekend.</p>
+          </div>
+          {/* Review 3 */}
+          <div className="absolute w-[calc(100%-2rem)] bg-white p-4 rounded-2xl shadow-md animate-scroll-3 opacity-0">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-6 h-6 rounded-full bg-purple-100 text-xs flex items-center justify-center font-bold">LW</div>
+              <div className="text-xs font-bold">Li Wei</div>
+            </div>
+            <div className="text-yellow-400 text-xs mb-1">★★★★★</div>
+            <p className="text-xs text-gray-600">Fantastic food and welcoming staff! 10/10 experience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* SyncDashboardVisual removed — merged into BentoGrid Card 2 */
+
+/* ─────────────────────────────────────────────────────
+   Feature 3 visual: Ads growth chart
+───────────────────────────────────────────────────── */
+function AdsChartVisual() {
+  const bars = [
+    { month: "Jan", h: 22 },
+    { month: "Feb", h: 36 },
+    { month: "Mar", h: 50 },
+    { month: "Apr", h: 65 },
+    { month: "May", h: 82 },
+    { month: "Jun", h: 100 },
+  ];
+  return (
+    <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8">
+      <div className="flex items-start justify-between mb-7">
+        <div>
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Ad ROI — 6 month trend</p>
+          <p className="text-4xl font-black text-gray-900">+247%</p>
+        </div>
+        <div className="text-xs font-bold text-green-600 bg-green-50 px-3 py-1.5 rounded-full border border-green-100">▲ AI Optimized</div>
+      </div>
+      <div className="flex items-end gap-2 h-28 mb-4">
+        {bars.map((b, i) => (
+          <div key={b.month} className="flex-1 flex flex-col items-center gap-2">
+            <div className="w-full rounded-t-lg animate-bar-grow"
+              style={{ height: `${b.h}%`, backgroundColor: i === bars.length - 1 ? GOLD : `${GOLD}50`, animationDelay: `${i * 0.12}s` }}
+            />
+            <span className="text-[10px] font-bold text-gray-400">{b.month}</span>
+          </div>
+        ))}
+      </div>
+      <div className="grid grid-cols-3 gap-3 pt-5 border-t border-gray-100">
+        {[
+          { label: "CPC Reduction", val: "−62%" },
+          { label: "Conversion ▲",  val: "+89%" },
+          { label: "Audience Match", val: "96%"  },
+        ].map((s) => (
+          <div key={s.label} className="text-center">
+            <p className="text-base font-black text-gray-900">{s.val}</p>
+            <p className="text-[10px] font-semibold text-gray-400 mt-0.5 leading-tight">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────
+   Page
+───────────────────────────────────────────────────── */
 export default function HomeClient() {
   return (
-    <div className="mx-auto w-full bg-white selection:bg-primary/10">
-      <div className="mx-auto max-w-7xl px-6 py-8 md:px-12">
-        <Header showNav={true} />
-        
-        {/* SECTION 1: HERO (GAM solutions L.L.C-FZ) with Video Background */}
-        <main className="relative mt-4 overflow-hidden rounded-[2.5rem] bg-black">
-          {/* Video Background Placeholder */}
-          <div className="absolute inset-0 z-0 overflow-hidden">
-            <video 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              className="h-full w-full object-cover opacity-60"
-              poster="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2070&auto=format&fit=crop"
-            >
-              <source src="/assets/hero-video.mp4" type="video/mp4" />
-              {/* Fallback image is used via the poster attribute */}
-            </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80" />
-          </div>
+    <div className="w-full bg-white text-gray-900 selection:bg-amber-100">
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+        @keyframes slideUpFade { 
+          0% { transform: translateY(20px); opacity: 0; } 
+          10% { transform: translateY(0); opacity: 1; } 
+          80% { transform: translateY(0); opacity: 1; } 
+          100% { transform: translateY(-20px); opacity: 0; } 
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-scroll-1 { animation: slideUpFade 6s infinite; animation-delay: 0s; }
+        .animate-scroll-2 { animation: slideUpFade 6s infinite; animation-delay: 2s; }
+        .animate-scroll-3 { animation: slideUpFade 6s infinite; animation-delay: 4s; }
+      `}} />
 
-          <div className="relative z-10 flex min-h-[70vh] flex-col items-center justify-center px-6 py-20 text-center space-y-10">
-            <div className="animate-fade-in inline-flex items-center gap-3 rounded-full bg-white/10 backdrop-blur-md px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em] text-white border border-white/20">
-              GAM solutions L.L.C-FZ
-            </div>
-            
-            <div className="max-w-4xl space-y-6">
-              <h1 className="animate-slide-up text-4xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[1.05]">
-                Solving Complexity <br className="hidden md:block" />
-                With <span className="text-primary italic">Intelligent</span> Systems.
-              </h1>
-              <p className="animate-slide-up-delayed mx-auto max-w-2xl text-base md:text-xl text-white/80 leading-relaxed font-medium">
-                We empower enterprise and local businesses in Dubai with the infrastructure of tomorrow. From AI-driven acquisition to full digital transformation.
-              </p>
-            </div>
-
-            <div className="animate-slide-up-delayed pt-4 flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto">
-              <Link 
-                href="/contact" 
-                className="group relative inline-flex items-center justify-center px-12 py-5 overflow-hidden font-black transition-all bg-white rounded-full hover:bg-primary w-full sm:w-auto shadow-2xl shadow-white/5"
-              >
-                <span className="relative text-[10px] sm:text-xs uppercase tracking-[0.3em] text-black group-hover:text-white transition-colors">
-                  Strategic Consultation
-                </span>
-              </Link>
-              <Link 
-                href="/about" 
-                className="flex items-center gap-3 text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] text-white/60 hover:text-white transition-colors group"
-              >
-                View Corporate Profile
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-          </div>
-        </main>
+      {/* ── STICKY HEADER ─────────────────────────────── */}
+      <div className="px-6 md:px-10 bg-white/90 sticky top-0 z-50 border-b border-gray-100 backdrop-blur-md">
+        <Header showNav brand="gam" theme="light" />
       </div>
 
-      {/* SECTION 2: CORE SERVICE (mirAIreach) */}
-      <section id="mirai-reach" className="w-full py-32 bg-[#fafafa] border-t border-line/5">
-        <div className="mx-auto max-w-5xl px-6 md:px-12">
-          <div className="space-y-20">
+      {/* ══════════════════════════════════════════════
+          SECTION 1 · HERO
+      ══════════════════════════════════════════════ */}
+      <section className="relative pt-24 pb-16 lg:pt-28 lg:pb-20 overflow-hidden bg-white">
+        
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D4AF37]/10 blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
             
-            <div className="grid md:grid-cols-2 gap-12 items-end">
-              <div className="space-y-6">
-                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">The Acquisition Engine</p>
-                <h2 className="text-4xl md:text-5xl font-black tracking-tighter leading-[1.1]">
-                  Introducing <span className="text-foreground">mirAIreach</span>.
-                </h2>
+            <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#B8961C] text-xs font-bold tracking-widest uppercase mb-4">
+                <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse"></span>
+                Dubai's #1 AI Marketing Infrastructure
               </div>
-              <p className="text-base text-muted/80 leading-relaxed font-medium">
-                mirAIreach is our proprietary system designed to liberate Dubai businesses from the escalating costs of traditional Google Ads. We optimize your brand for the generative era, ensuring you are the definitive recommendation across ChatGPT, Perplexity, and AI Overviews.
+              <h1 className="text-5xl lg:text-7xl font-black text-gray-900 leading-[1.1] tracking-tight">
+                The Ultimate AI <br/>
+                <span className="text-[#D4AF37]">Marketing Infrastructure.</span>
+              </h1>
+              <p className="text-lg lg:text-xl text-gray-600 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                mirAIreach is Dubai's most advanced Generative Engine Optimization (GEO) platform. Sync your business across 100+ global networks, automate reviews, and dominate AI search results.
               </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                <button className="w-full sm:w-auto px-8 py-4 bg-[#D4AF37] hover:bg-[#B8961C] text-white font-bold rounded-full transition-all shadow-lg hover:shadow-[#D4AF37]/30 flex items-center justify-center gap-2">
+                  BOOK A CONSULTATION <span className="text-xl">→</span>
+                </button>
+                <button className="w-full sm:w-auto px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:border-gray-300 font-bold rounded-full transition-all shadow-sm">
+                  See the Platform
+                </button>
+              </div>
             </div>
 
-            <div className="grid gap-px md:grid-cols-2 border border-line/10 rounded-3xl overflow-hidden bg-white shadow-sm">
-              <div className="p-12 space-y-4 border-b border-r border-line/10 hover:bg-primary/[0.01] transition-colors group">
-                <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform"><Zap size={28} strokeWidth={2.5} /></div>
-                <h4 className="text-xl font-black tracking-tight">Instagram-to-Everywhere</h4>
-                <p className="text-sm text-muted/90 leading-relaxed">Update your global digital footprint instantly from a single social post. Automated sync across Google, TikTok, and Voice AI.</p>
-              </div>
-
-              <div className="p-12 space-y-4 border-b border-line/10 hover:bg-primary/[0.01] transition-colors group">
-                <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform"><Shield size={28} strokeWidth={2.5} /></div>
-                <h4 className="text-xl font-black tracking-tight">Enterprise Shield</h4>
-                <p className="text-sm text-muted/90 leading-relaxed">Lock down your business profiles across 50+ directories. Protect your reputation from unauthorized edits and spam.</p>
-              </div>
-
-              <div className="p-12 space-y-4 border-r border-line/10 hover:bg-primary/[0.01] transition-colors group">
-                <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform"><MessageCircle size={28} strokeWidth={2.5} /></div>
-                <h4 className="text-xl font-black tracking-tight">AI Review Synthesis</h4>
-                <p className="text-sm text-muted/90 leading-relaxed">Respond to customers with AI-powered, empathetic, and context-aware replies that boost visibility and trust metrics.</p>
-              </div>
-
-              <div className="p-12 space-y-4 hover:bg-primary/[0.01] transition-colors group">
-                <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform"><RefreshCw size={28} strokeWidth={2.5} /></div>
-                <h4 className="text-xl font-black tracking-tight">Global Visibility Sync</h4>
-                <p className="text-sm text-muted/90 leading-relaxed">Real-time business data synchronization across Apple Maps, ChatGPT, and local UAE search directories.</p>
+            <div className="w-full lg:w-1/2 relative">
+              <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
+                
+                <img 
+                  src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000" 
+                  alt="Dubai Modern Cafe Lifestyle" 
+                  className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-700" 
+                />
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                
+                {/* Glassmorphism Floating Dashboard */}
+                <div className="absolute bottom-6 left-6 right-6 animate-float">
+                  <div className="bg-white/80 backdrop-blur-md border border-white/50 p-6 rounded-2xl shadow-2xl">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="text-lg font-black text-gray-900">mirAIreach Sync Active</h3>
+                        <p className="text-sm text-gray-600 font-medium">AI generating reviews &amp; syncing data...</p>
+                      </div>
+                      <span className="relative flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-3 py-1.5 bg-white text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1 border border-gray-100">
+                        <span className="text-blue-500">G</span> Google: Synced
+                      </span>
+                      <span className="px-3 py-1.5 bg-white text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1 border border-gray-100">
+                        <span className="text-pink-500">IG</span> AI-Powered Instagram Post
+                      </span>
+                      <span className="px-3 py-1.5 bg-gray-900 text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-1">
+                        + 98 Networks
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -112,132 +563,248 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* SECTION 3: LEAD MAGNET / HOOK (New Section) */}
-      <section className="w-full py-32 bg-black text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 blur-[120px] -z-10" />
-        
-        <div className="mx-auto max-w-5xl px-6 md:px-12">
-          <div className="bg-white/5 border border-white/10 rounded-[3rem] p-8 md:p-20 backdrop-blur-xl relative">
-            <div className="max-w-3xl space-y-10">
-              <div className="space-y-4">
-                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">Strategic Advantage</p>
-                <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-tight">
-                  Is your business <br className="hidden md:block" />
-                  <span className="italic">AI-Ready?</span>
-                </h2>
-                <p className="text-lg text-white/60 leading-relaxed font-medium max-w-xl">
-                  We offer a complimentary strategic audit to analyze how generative search engines perceive your brand in the Dubai market.
+      {/* ── Stats bar ─────────────────────────────────── */}
+      <div className="border-y border-gray-100 bg-gray-50/60">
+        <div className="mx-auto max-w-7xl px-6 md:px-10 py-6 grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100 text-center">
+          {[
+            { stat: "100+",     label: "Platforms Synced"   },
+            { stat: "500+",     label: "Dubai Brands"       },
+            { stat: "1M+",      label: "Reviews Managed"    },
+            { stat: "AI-Native",label: "Infrastructure"     },
+          ].map((s) => (
+            <div key={s.stat} className="px-4 py-2 flex flex-col items-center justify-center">
+              <p className="text-xl font-black text-gray-900">{s.stat}</p>
+              <div className="w-6 h-0.5 mt-1.5 mb-2" style={{ backgroundColor: GOLD }}></div>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════════
+          SECTION 2 · BENTO GRID
+      ══════════════════════════════════════════════ */}
+      <div id="bento">
+        <BentoGrid />
+      </div>
+
+      {/* ══════════════════════════════════════════════
+          SECTION 3 · FEATURES (zig-zag)
+      ══════════════════════════════════════════════ */}
+      <section id="features">
+
+        {/* ── Feature 1: LocalReach / Google Reviews ── */}
+        <div className="py-16 md:py-24 bg-gray-50 border-t border-gray-100 border-b border-gray-100">
+          <div className="mx-auto max-w-7xl px-6 md:px-10 grid lg:grid-cols-2 gap-16 items-center">
+
+            <div className="space-y-6">
+              <Chip gold>Entry Package · High Volume</Chip>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight text-gray-900 leading-[1.1]">
+                LocalReach: Automated<br />
+                <span style={{ color: GOLD }}>Google Reviews.</span>
+              </h2>
+
+              {/* Price block */}
+              <div className="rounded-2xl border-2 p-6 shadow-sm" style={{ borderColor: GOLD, backgroundColor: `${GOLD}06` }}>
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  <span className="text-5xl font-black text-gray-900">500</span>
+                  <span className="text-2xl font-black text-gray-700">AED</span>
+                  <span className="text-lg font-bold text-gray-400">/ month</span>
+                </div>
+                <p className="mt-1.5 text-xs font-bold uppercase tracking-widest text-gray-400">
+                  No hidden fees · Full automation · Less than the cost of a daily coffee
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center gap-8">
-                <Link 
-                  href="/contact?service=aio-diagnostic"
-                  className="flex items-center gap-4 bg-primary text-white px-10 py-5 rounded-full text-xs font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all group"
-                >
-                  Request Free Audit
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <div className="flex -space-x-4">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="h-12 w-12 rounded-full border-2 border-black bg-muted/20 flex items-center justify-center overflow-hidden">
-                      <img src={`https://i.pravatar.cc/150?u=${i+10}`} alt="User" />
-                    </div>
-                  ))}
-                  <div className="h-12 w-12 rounded-full border-2 border-black bg-primary flex items-center justify-center text-[10px] font-black">
-                    +50
-                  </div>
-                </div>
-                <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Joined by leading <br /> Dubai brands</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4: CORPORATE PROFILE */}
-      <section className="w-full py-40 bg-[#0a0a0a] text-white overflow-hidden relative">
-        {/* Subtle decorative elements for premium feel */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-[100px]" />
-        
-        <div className="mx-auto max-w-5xl px-6 md:px-12 relative z-10">
-          <div className="grid md:grid-cols-2 gap-20 lg:gap-32 items-start">
-            
-            <div className="space-y-16">
-              <div className="space-y-8">
-                <div className="space-y-4">
-                  <p className="text-[10px] font-black uppercase tracking-[0.5em] text-primary/80">Corporate Profile</p>
-                  <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-[1.05]">
-                    GAM solutions <br /> 
-                    <span className="text-primary/90 italic">L.L.C-FZ</span>
-                  </h2>
-                </div>
-                <div className="h-px w-24 bg-gradient-to-r from-primary to-transparent" />
-              </div>
-              
-              <p className="text-lg text-white/60 leading-loose font-light">
-                GAM solutions L.L.C-FZ is a Dubai-based strategic consulting firm dedicated to redefining the digital landscape for local businesses. We go beyond simply introducing technology; we seamlessly integrate Artificial Intelligence into real-world operations. By bridging the gap between cutting-edge AI innovation—including advanced search optimization—and practical business execution, we drive tangible growth and operational excellence for highly competitive sectors like retail and gastronomy.
+              <p className="text-lg text-gray-600 font-medium leading-relaxed">
+                Turn satisfied customers into 5-star Google reviews automatically. Smart QR
+                codes and intelligent feedback routing capture the good and shield you from
+                the bad — zero manual effort required.
               </p>
-              
-              {/* Editorial Grid Design */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-white/10 mt-12">
-                <div className="py-8 pr-8 border-b sm:border-b-0 sm:border-r border-white/10 space-y-3">
-                  <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/30">Headquarters</p>
-                  <p className="text-sm font-medium leading-relaxed text-white/90">
-                    Business Center 1, M Floor,<br />
-                    The Meydan Hotel, Nad Al Sheba,<br />
-                    Dubai, U.A.E.
-                  </p>
-                </div>
-                <div className="py-8 sm:pl-8 space-y-3">
-                  <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/30">Primary Focus</p>
-                  <p className="text-sm font-medium leading-relaxed text-white/90">
-                    Enterprise AI Integration<br />
-                    AIO Search Strategy<br />
-                    Digital Infrastructure
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="relative group">
-              {/* Glassmorphism Card */}
-              <div className="absolute inset-0 bg-primary/20 blur-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-1000" />
-              <div className="relative backdrop-blur-2xl bg-white/[0.03] p-10 md:p-14 rounded-[3rem] border border-white/10 space-y-12">
-                <div className="space-y-6">
-                  <h3 className="text-xs font-black uppercase tracking-[0.4em] text-primary">Company Mission</h3>
-                  <p className="text-xl md:text-2xl font-light leading-relaxed text-white/90">
-                    "To empower brick-and-mortar businesses with enterprise-grade AI. Our mission is to democratize advanced digital infrastructure, turning a sophisticated online presence into measurable offline success and competitive supremacy."
-                  </p>
-                </div>
-                
-                <div className="space-y-8 pt-4">
-                  <div className="flex items-center gap-5">
-                    <div className="h-12 w-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-primary">
-                      <MapPin size={20} />
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-[9px] font-black uppercase tracking-widest text-white/30">Registered Zone</p>
-                      <p className="text-sm font-bold text-white/80">Meydan Free Zone, Dubai</p>
-                    </div>
+
+              <ul className="space-y-3">
+                {[
+                  "Negative feedback routed privately — never goes public",
+                  "One-tap Google review redirects via QR code",
+                  "Works for restaurants, cafés, retail & hospitality",
+                  "Private internal feedback CRM included",
+                ].map((t) => <Check key={t} text={t} />)}
+              </ul>
+
+              {/* Social Proof Badge */}
+              <div className="pt-2">
+                <div className="inline-flex items-center gap-3 bg-white border border-gray-100 rounded-2xl px-4 py-2.5 shadow-sm">
+                  <div className="flex -space-x-2">
+                    <div className="w-8 h-8 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center"><Star size={12} className="text-gray-400"/></div>
+                    <div className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center"><Globe size={12} className="text-gray-500"/></div>
+                    <div className="w-8 h-8 rounded-full border-2 border-white bg-gray-300 flex items-center justify-center"><CheckCircle size={12} className="text-gray-600"/></div>
                   </div>
-                  
-                  <Link 
-                    href="/contact" 
-                    className="group relative flex items-center justify-center w-full bg-white text-black py-6 rounded-full text-[10px] font-black uppercase tracking-[0.3em] overflow-hidden transition-all hover:bg-primary hover:text-white"
-                  >
-                    <span className="relative z-10">Start Direct Inquiry</span>
-                    <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                  </Link>
+                  <div className="flex flex-col">
+                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Trusted by Dubai's Top</p>
+                    <p className="text-xs font-bold text-gray-800">F&amp;B Groups &amp; Retailers</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2 flex flex-wrap gap-4 items-center">
+                <GoldButton href="/contact">
+                  Get Started — 500 AED/mo <ArrowRight size={13} />
+                </GoldButton>
+                {/* QR Code Callout */}
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-100 shadow-sm rounded-xl">
+                  <div className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center border border-gray-200 p-1">
+                    <div className="w-full h-full bg-gray-300" style={{ background: "repeating-linear-gradient(45deg, #000 0, #000 2px, transparent 2px, transparent 4px)" }}></div>
+                  </div>
+                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-tight">Scan to<br/>Preview</span>
                 </div>
               </div>
             </div>
-            
+
+            <ReviewCardsVisual />
           </div>
+        </div>
+
+        {/* ── Feature 2: AI Google Ads ─────────────────── */}
+        <div className="py-16 md:py-24 bg-gray-50 border-b border-gray-100">
+          <div className="mx-auto max-w-7xl px-6 md:px-10 grid lg:grid-cols-2 gap-16 items-center">
+
+            <div className="space-y-6">
+              <Chip>Paid Acquisition</Chip>
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm"
+                style={{ backgroundColor: `${GOLD}15`, color: GOLD }}>
+                <Target size={22} />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight text-gray-900 leading-[1.1]">
+                AI-Managed<br />
+                <span style={{ color: GOLD }}>Google Ads.</span>
+              </h2>
+              <p className="text-lg text-gray-600 font-medium leading-relaxed">
+                Traditional agencies guess. Our AI optimizes every dirham of your ad spend
+                in real time — targeting the right audience at the right moment with the
+                right message. ROI that manual campaign managers simply can&apos;t match.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "AI bid optimization & precision audience targeting",
+                  "Real-time performance monitoring & auto-adjustments",
+                  "Conversion-focused ad creative generation",
+                  "Fully transparent ROI reporting dashboard",
+                ].map((t) => <Check key={t} text={t} />)}
+              </ul>
+              <GoldButton href="/contact">
+                Maximize My Ad Spend <ArrowRight size={13} />
+              </GoldButton>
+            </div>
+
+            <AdsChartVisual />
+          </div>
+        </div>
+
+      </section>
+
+      {/* ══════════════════════════════════════════════
+          SECTION 4 · FREE AUDIT HOOK
+      ══════════════════════════════════════════════ */}
+      <section className="py-20 md:py-28 bg-white border-t border-gray-100">
+        <div className="mx-auto max-w-5xl px-6 md:px-10 text-center">
+
+          <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-sm"
+            style={{ backgroundColor: `${GOLD}15`, color: GOLD }}>
+            <Gift size={28} />
+          </div>
+
+          <p className="text-[11px] font-black uppercase tracking-[0.35em] text-gray-400 mb-4">
+            Zero Risk · Zero Commitment
+          </p>
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-gray-900 mb-6 leading-tight">
+            See Your Business Through<br />
+            <span style={{ color: GOLD }}>the Eyes of AI.</span>
+          </h2>
+          <p className="text-xl text-gray-600 font-medium max-w-2xl mx-auto mb-12 leading-relaxed">
+            We&apos;ll audit your digital presence and deliver a Free AI-Ready Audit &amp; Strategy
+            Blueprint — showing exactly where AI search engines can&apos;t find you.
+          </p>
+
+          <div className="grid sm:grid-cols-3 gap-5 mb-12 text-left max-w-3xl mx-auto">
+            {[
+              {
+                icon: <CheckCircle size={18} />,
+                title: "Free AI Audit",
+                desc: "Full analysis of your AI search visibility, Google presence, and listing health.",
+              },
+              {
+                icon: <CheckCircle size={18} />,
+                title: "Strategy Blueprint",
+                desc: "Custom roadmap showing your top 3 growth opportunities, clearly prioritized.",
+              },
+              {
+                icon: <CheckCircle size={18} />,
+                title: "No Obligation",
+                desc: "Take the insights and decide freely. No pressure, no contracts, no catch.",
+              },
+            ].map((c) => (
+              <div key={c.title} className="bg-gray-50 rounded-2xl p-6 border border-gray-200 shadow-sm space-y-3">
+                <span style={{ color: GOLD }}>{c.icon}</span>
+                <p className="font-black text-gray-900 text-sm">{c.title}</p>
+                <p className="text-sm text-gray-500 font-medium leading-relaxed">{c.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <GoldButton href="/contact" large>
+            Book a Free Consultation <ArrowRight size={15} />
+          </GoldButton>
         </div>
       </section>
 
-      {/* Footer is handled globally in layout.tsx */}
+      {/* ══════════════════════════════════════════════
+          SECTION 5 · CORPORATE PROFILE
+      ══════════════════════════════════════════════ */}
+      <section className="py-20 bg-gray-50 border-t border-gray-100">
+        <div className="mx-auto max-w-6xl px-6 md:px-10 grid md:grid-cols-2 gap-16 items-center">
+
+          <div className="space-y-6">
+            <p className="text-[10px] font-black uppercase tracking-[0.35em] text-gray-400">Corporate Profile</p>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">GAM Solutions LLC FZ</h2>
+            <p className="text-base text-gray-600 font-medium leading-relaxed">
+              A Dubai-based AI marketing and digital infrastructure agency bridging AI
+              innovation with practical business execution — building measurable, lasting
+              digital presences that drive real-world growth.
+            </p>
+            <div className="flex items-start gap-3 bg-white rounded-2xl p-5 border border-gray-200 shadow-sm">
+              <MapPin size={20} style={{ color: GOLD }} className="shrink-0 mt-0.5" />
+              <p className="text-sm font-semibold text-gray-700 leading-relaxed">
+                Meydan Grandstand, 6th Floor — Al Meydan Rd<br />
+                Nad Al Sheba, Dubai, U.A.E.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl border border-gray-200 p-10 shadow-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-amber-50 rounded-full blur-3xl opacity-60 translate-x-1/2 -translate-y-1/2" />
+            <div className="relative space-y-5">
+              <h3 className="text-[11px] font-black uppercase tracking-[0.25em] text-gray-900">Mission</h3>
+              <p className="text-lg font-medium leading-relaxed text-gray-600 italic">
+                &quot;Democratizing enterprise-grade AI for brick-and-mortar businesses —
+                turning a sophisticated digital presence into measurable offline success.&quot;
+              </p>
+              <div className="pt-5 border-t border-gray-100 flex flex-col sm:flex-row items-start gap-4">
+                <GoldButton href="/contact">
+                  Book a Consultation <ArrowRight size={13} />
+                </GoldButton>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-1.5 text-sm font-bold text-gray-700 hover:text-gray-900 transition-colors py-3"
+                >
+                  Contact Us <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   );
 }

@@ -75,9 +75,14 @@ export default function Footer() {
 
         {/* Bottom: Legal & Copyright */}
         <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 opacity-70">
-          <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase">
-            &copy; 2026 GAM solutions L.L.C-FZ. All rights reserved.
-          </p>
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase">
+              &copy; 2026 GAM solutions L.L.C-FZ. All rights reserved.
+            </p>
+            <p className="text-[10px] text-white/50 text-center md:text-left">
+              Meydan Grandstand - 6th Floor Al Meydan Rd - Nad Al Sheba - Nadd Al Shiba First - Dubai
+            </p>
+          </div>
           <div className="flex gap-8">
             <Link href="/privacy" className="text-[10px] sm:text-xs tracking-[0.2em] uppercase hover:text-white transition-colors">
               Privacy Policy

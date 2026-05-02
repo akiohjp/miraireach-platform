@@ -39,7 +39,9 @@
       "Bash(curl -sL -o /dev/null -w \"%{http_code} \" \"https://www.khaleejtimes.com/rss.xml\")",
       "Bash(curl -sL -o /dev/null -w \"%{http_code} \" \"https://www.khaleejtimes.com/rss/top-stories\")",
       "Bash(curl -sL \"https://www.khaleejtimes.com/rss.xml\")",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(npx tsc *)",
+      "Bash(npx next *)"
     ]
   }
 }

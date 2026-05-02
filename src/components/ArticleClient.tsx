@@ -87,7 +87,7 @@ export default function ArticleClient({ article }: ArticleClientProps) {
               className="group flex flex-col gap-3 rounded-2xl bg-white/5 p-6 border border-white/5 hover:border-white/20 transition-all hover:bg-white/[0.02] text-left"
             >
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/60">Service 02</span>
-              <span className="text-lg font-bold text-white group-hover:text-white/80 transition-colors">Premium Web Design (Free)</span>
+              <span className="text-lg font-bold text-white group-hover:text-white/80 transition-colors">Free Web Design</span>
               <span className="text-xs text-white/60 leading-relaxed">Get a bespoke, AI-optimized landing page built for your business.</span>
             </Link>
 

@@ -59,8 +59,9 @@ function ContactForm() {
             className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors appearance-none text-foreground"
           >
             <option value="">Select a Service</option>
+            <option value="local-seo-audit">LocalReach Consultation &amp; Demo</option>
             <option value="aio-diagnostic">Free AI Search Audit</option>
-            <option value="free-design">Free Premium Web Design</option>
+            <option value="free-design">Free Web Design</option>
             <option value="consultancy">AI Strategic Consultancy</option>
             <option value="other">Other Inquiry</option>
           </select>
