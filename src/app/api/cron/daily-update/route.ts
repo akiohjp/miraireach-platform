@@ -148,8 +148,9 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ success: true, count: results.length, articles: results });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Cron Error:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    const message = error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

@@ -46,7 +46,7 @@ export default function FbAutomationClient() {
             Why do beautiful websites fail to attract customers?
           </h2>
           <p className="text-base leading-8 text-muted/90 md:text-lg">
-            In Dubai's F&B market, a website often becomes just a static billboard. Everyone knows they can build a site for free with Wix or Squarespace, but owners hesitate due to lack of time, fear of looking cheap, or technical hurdles. More importantly, simply having a site doesn't mean you'll be found on Google or AI answer engines like ChatGPT.
+            In Dubai&apos;s F&amp;B market, a website often becomes just a static billboard. Everyone knows they can build a site for free with Wix or Squarespace, but owners hesitate due to lack of time, fear of looking cheap, or technical hurdles. More importantly, simply having a site doesn&apos;t mean you&apos;ll be found on Google or AI answer engines like ChatGPT.
           </p>
         </section>
 
@@ -66,7 +66,7 @@ export default function FbAutomationClient() {
                 Zero-Cost AI Site Build
               </h3>
               <p className="text-sm leading-relaxed text-muted">
-                We combine the latest AI generators with professional direction to build a high-quality site at lightning speed for 'free'. We take away the hassle and time commitment from you.
+                We combine the latest AI generators with professional direction to build a high-quality site at lightning speed for &apos;free&apos;. We take away the hassle and time commitment from you.
               </p>
             </div>
 
@@ -77,7 +77,7 @@ export default function FbAutomationClient() {
                 AIO (Answer Engine) Optimization
               </h3>
               <p className="text-sm leading-relaxed text-muted">
-                The real game starts when the site is live. Beyond traditional SEO, we optimize your content so your restaurant is recommended when users ask ChatGPT for 'best dinner in Dubai'.
+                The real game starts when the site is live. Beyond traditional SEO, we optimize your content so your restaurant is recommended when users ask ChatGPT for &apos;best dinner in Dubai&apos;.
               </p>
             </div>
 

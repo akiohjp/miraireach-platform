@@ -21,33 +21,38 @@ export default function Header({ showNav = true, brand = "gam", theme = "dark" }
 
   return (
     <header className="flex items-center justify-between py-5">
-      <Link href="/" className={brand === "gam" ? "flex items-center gap-1.5 hover:opacity-90 transition-opacity" : "inline-flex flex-col gap-0.5 group"}>
+      <Link
+        href="/"
+        className={
+          brand === "gam"
+            ? "inline-flex items-baseline flex-wrap gap-x-1.5 gap-y-1 hover:opacity-90 transition-opacity"
+            : "inline-flex flex-col gap-0.5 group"
+        }
+      >
         {brand === "localreach" ? (
           <>
             <span className={`text-2xl font-bold tracking-tight leading-none ${textMain}`}>
               Local<span style={{ color: GOLD }}>Reach</span>
             </span>
             <span className={`text-[10px] tracking-[0.25em] uppercase font-medium ${textSub}`}>
-              Powered by GAM Solutions L.L.C-FZ
+              by GAM Solutions
             </span>
           </>
         ) : (
-          <>
-            <span className={`text-2xl md:text-3xl font-black tracking-tight leading-none ${textMain}`}>
-              GAM
-            </span>
-            <span className="text-2xl md:text-3xl font-bold tracking-tight leading-none" style={{ color: GOLD }}>
+          <span className="inline-flex flex-wrap items-baseline gap-x-2 gap-y-0 leading-none">
+            <span className={`text-xl font-black tracking-tight md:text-2xl ${textMain}`}>GAM</span>
+            <span className="text-xl font-bold tracking-tight md:text-2xl" style={{ color: GOLD }}>
               solutions
             </span>
-          </>
+          </span>
         )}
       </Link>
 
       {showNav && (
         <div className="flex items-center gap-6">
           <nav className={`hidden md:flex items-center gap-6 text-[10px] font-bold tracking-[0.2em] uppercase transition-colors ${navBase}`}>
-            <Link href="/localreach" className="hover:transition-colors">
-              LocalReach
+            <Link href="/" className="hover:transition-colors">
+              mirAIreach
             </Link>
             <Link href="/about" className="hover:transition-colors">
               About

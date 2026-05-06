@@ -1,10 +1,10 @@
 import { Metadata } from "next";
-import LocalReachClient from "../lp/localreach/LocalReachClient";
+import LocalReachClient from "./LocalReachClient";
 
 export const metadata: Metadata = {
-  title: "LocalReach — AI-Powered Review Growth for Dubai Businesses | GAM Solutions",
+  title: "GAM solutions — LocalReach review growth powered by LocalReach",
   description:
-    "Turn every customer visit into a unique Google review and a WhatsApp contact. 100% Google policy compliant. Local SEO automation built for Dubai's competitive market.",
+    "LocalReach is GAM solutions' local review-growth platform. Convert visits into Google reviews and WhatsApp contacts with a compliant, AI-powered workflow.",
 };
 
 export default function LocalReachPage() {

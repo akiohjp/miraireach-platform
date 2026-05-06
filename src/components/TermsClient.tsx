@@ -7,7 +7,7 @@ export default function TermsClient() {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-6 py-12 md:px-10">
-        <Header showNav={true} />
+        <Header showNav={true} theme="light" />
         
         <main className="mt-16 max-w-4xl mx-auto space-y-16">
           <div className="text-center space-y-4">
@@ -32,7 +32,7 @@ export default function TermsClient() {
 
               <h2 className="text-2xl font-bold text-foreground">Trademarks</h2>
               <p>
-                'mirAIreach' and 'AI Search Audit' are protected trademarks. Any unauthorized use of these marks or associated logos is strictly prohibited.
+                &ldquo;mirAIreach&rdquo; and &ldquo;AI Search Audit&rdquo; are protected trademarks. Any unauthorized use of these marks or associated logos is strictly prohibited.
               </p>
 
               <h2 className="text-2xl font-bold text-foreground">Disclaimer of Insights</h2>

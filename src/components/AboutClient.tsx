@@ -2,12 +2,17 @@
 
 import React from "react";
 import Header from "./Header";
+import {
+  GAM_ABOUT_TAGLINE,
+  GAM_MISSION_PARAGRAPHS,
+  GAM_VISION_2026,
+} from "@/content/gamAboutCopy";
 
 export default function AboutClient() {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-6 py-12 md:px-10">
-        <Header showNav={true} />
+        <Header showNav={true} theme="light" />
         
         <main className="mt-16 max-w-4xl mx-auto space-y-16">
           <div className="text-center space-y-4">
@@ -15,7 +20,7 @@ export default function AboutClient() {
               About GAM solutions L.L.C-FZ
             </h1>
             <p className="text-xl text-muted leading-relaxed">
-              Bridging the gap between AI intelligence and business excellence in Dubai.
+              {GAM_ABOUT_TAGLINE}
             </p>
           </div>
 
@@ -24,12 +29,9 @@ export default function AboutClient() {
               <h2 className="text-3xl font-bold tracking-tight text-foreground">
                 Our Mission
               </h2>
-              <p>
-                At GAM solutions L.L.C-FZ, our mission is to empower businesses in Dubai and the UAE to navigate the rapidly evolving digital landscape. We combine cutting-edge AI technologies with deep local market insights to drive growth, innovation, and visibility.
-              </p>
-              <p>
-                We believe the future belongs to those who can harness the power of AI to transform traditional operations in sectors like F&B, Real Estate, and Deep Tech into intelligent, sustainable business models.
-              </p>
+              {GAM_MISSION_PARAGRAPHS.map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
             </section>
 
             <hr className="border-line" />
@@ -39,23 +41,23 @@ export default function AboutClient() {
                 Who We Are
               </h2>
               <p>
-                GAM solutions L.L.C-FZ is a premium AI solutions provider based in Dubai. We are a team of technologists, strategists, and creatives dedicated to providing high-quality content and actionable solutions.
+                GAM solutions L.L.C-FZ is an AI-driven marketing innovator operating on a collaborative business model between the UAE and Japan. We are a team of technologists and strategists who believe in solving market challenges through sustainable systems rather than short-term tactics. We make decisions based on hard data and are fiercely dedicated to supporting the long-term survival and prosperity of local businesses.
               </p>
               <div className="grid md:grid-cols-2 gap-8 mt-8">
                 <div className="p-6 bg-muted/5 rounded-2xl border border-line">
                   <h3 className="text-xl font-bold text-primary mb-3">
-                    Intelligence Platform
+                    AI-Optimized Infrastructure
                   </h3>
                   <p className="text-sm text-muted">
-                    We provide deep analytics and exclusive reports on AI trends and their impact on the local GCC economy.
+                    We provide a structural foundation that organizes your digital presence. We take your everyday content—like posts and reviews—and structure it so it is easily understood, evaluated, and prioritized by modern AI systems.
                   </p>
                 </div>
                 <div className="p-6 bg-muted/5 rounded-2xl border border-line">
                   <h3 className="text-xl font-bold text-primary mb-3">
-                    AIO Solutions
+                    mirAIreach Ecosystem
                   </h3>
                   <p className="text-sm text-muted">
-                    Through our AI Search Audit service, we help brands optimize their visibility in generative search engines like ChatGPT and Gemini.
+                    Our execution-ready platform bridges the gap between daily operations and comprehensive search optimization. We seamlessly automate the flow of your localized information directly to Google Maps, AI Search, and Voice Search.
                   </p>
                 </div>
               </div>
@@ -67,9 +69,7 @@ export default function AboutClient() {
               <h2 className="text-3xl font-bold tracking-tight text-foreground">
                 Our Vision for 2026
               </h2>
-              <p>
-                By 2026, we aim to be the Middle East's primary trusted source for businesses seeking to integrate AI into their core strategies. We don't just report the news; we shape the future.
-              </p>
+              <p>{GAM_VISION_2026}</p>
             </section>
           </div>
         </main>

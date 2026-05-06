@@ -1,9 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
+import ReviewFlowHeroAnimation from "@/components/localreach/ReviewFlowHeroAnimation";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+
+/* ── Local animation helpers ──────────────────────────── */
+function LRFadeUp({ children, delay = 0, className }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-6%" });
+  return (
+    <motion.div ref={ref} className={className}
+      initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}>
+      {children}
+    </motion.div>
+  );
+}
+
+function LRStagger({ children, className, stagger = 0.1 }: { children: React.ReactNode; className?: string; stagger?: number }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-5%" });
+  const items = Array.isArray(children) ? children : [children];
+  return (
+    <div ref={ref} className={className}>
+      {items.map((child, i) => (
+        <motion.div key={i} initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.65, delay: i * stagger, ease: [0.22, 1, 0.36, 1] }}>
+          {child}
+        </motion.div>
+      ))}
+    </div>
+  );
+}
 
 // ── Brand constants ────────────────────────────────────────────────
 const GOLD = "#D4AF37";
@@ -31,7 +62,7 @@ const PAIN_POINTS = [
 ];
 
 const HOW_STEPS = [
-  { n: "01", icon: "📱", title: "Customer Scans QR", body: "A branded QR code at the table opens LocalReach — no app download, no friction, works on any device." },
+  { n: "01", icon: "📱", title: "Customer Scans QR", body: "A branded QR code at the table opens the LocalReach review module — no app download, no friction, works on any device." },
   { n: "02", icon: "⭐", title: "Satisfaction Survey", body: "A compliance buffer: customers rate their experience first. This feedback-first framing fully satisfies Google's review guidelines." },
   { n: "03", icon: "🤖", title: "AI Generates Unique Review", body: "Our assembler randomly combines openers, GEO keywords, and closers — producing a never-repeated, natural-language draft every session." },
   { n: "04", icon: "✅", title: "Posted + You're Instantly Notified", body: "The review goes live on Google. You receive an instant email alert with the reviewer's name and a preview of their words. Optionally the customer shares their WhatsApp number, growing your CRM automatically." },
@@ -50,7 +81,7 @@ const FEATURES = [
       "Automatic language matching for EN, JA, and AR visitors",
     ],
     visual: "ai",
-    imageUrl: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=85&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=85&auto=format&fit=crop", // More dynamic AI/tech photo
   },
   {
     icon: "📲",
@@ -65,7 +96,7 @@ const FEATURES = [
       "CSV export available at any time from the admin dashboard",
     ],
     visual: "crm",
-    imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=85&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=900&q=85&auto=format&fit=crop", // Real WhatsApp interface photo
   },
   {
     icon: "🌍",
@@ -79,7 +110,7 @@ const FEATURES = [
       "Locale-aware AI review generation matches visitor language",
     ],
     visual: "global",
-    imageUrl: "https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=900&q=85&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=85&auto=format&fit=crop", // Diverse group of people representing global market
   },
 ];
 
@@ -189,12 +220,8 @@ function StarBadge() {
 function GoogleSearchCard() {
   return (
     <div
-      className="absolute rounded-2xl overflow-hidden"
+      className="relative z-[3] w-[222px] max-w-[min(222px,calc(100vw-2.5rem))] shrink-0 rounded-2xl overflow-hidden"
       style={{
-        top: 44,
-        right: 0,
-        width: 222,
-        zIndex: 3,
         background: "rgba(255, 255, 255, 0.95)",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
@@ -388,6 +415,165 @@ function IPhoneMockup() {
   );
 }
 
+// ── Live Review Panel (replaces iPhone mockup) ────────────────────
+
+const PANEL_REVIEWS = [
+  { initial: "A", color: "#4285F4", name: "Ahmed M.",  text: "Amazing atmosphere — the salmon sashimi was absolutely flawless.", time: "2 min ago" },
+  { initial: "Y", color: "#34A853", name: "Yuki T.",   text: "Best omakase in Dubai Marina. Exceptional freshness every visit.", time: "8 min ago" },
+  { initial: "S", color: "#EA4335", name: "Sarah K.",  text: "Staff were incredibly welcoming. Highly recommend to everyone!", time: "15 min ago" },
+];
+
+function LiveReviewPanel() {
+  return (
+    <div className="relative flex-shrink-0 w-full max-w-[420px] mx-auto lg:mx-0 animate-slide-up-delayed">
+      {/* Ambient glow orbs */}
+      <div
+        className="absolute -top-14 -right-14 w-52 h-52 rounded-full pointer-events-none"
+        style={{ background: `radial-gradient(circle, ${GOLD}22 0%, transparent 65%)` }}
+      />
+      <div
+        className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full pointer-events-none"
+        style={{ background: `radial-gradient(circle, ${GOLD}16 0%, transparent 65%)` }}
+      />
+
+      {/* Main glass card */}
+      <div
+        className="relative rounded-3xl overflow-hidden"
+        style={{
+          background: "rgba(255,255,255,0.88)",
+          backdropFilter: "blur(28px)",
+          WebkitBackdropFilter: "blur(28px)",
+          border: `1px solid rgba(212,175,55,0.22)`,
+          boxShadow: "0 32px 80px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95)",
+        }}
+      >
+        {/* Top stripe */}
+        <div
+          className="absolute inset-x-0 top-0 h-px"
+          style={{ background: `linear-gradient(90deg, transparent, ${GOLD}60, rgba(245,227,160,0.8), ${GOLD}60, transparent)` }}
+        />
+
+        {/* Header */}
+        <div className="px-6 pt-6 pb-4" style={{ borderBottom: "1px solid rgba(0,0,0,0.05)" }}>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <span className="ping-soft w-2 h-2 rounded-full shrink-0" style={{ background: "#16a34a" }} />
+              <span className="text-[10px] font-black tracking-[0.28em] uppercase text-green-700">Live</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[9px] font-semibold text-gray-400">Powered by</span>
+              <span className="text-[11px] font-black" style={{ color: "#4285F4" }}>G</span>
+              <span className="text-[11px] font-black" style={{ color: "#EA4335" }}>o</span>
+              <span className="text-[11px] font-black" style={{ color: "#FBBC04" }}>o</span>
+              <span className="text-[11px] font-black" style={{ color: "#4285F4" }}>g</span>
+              <span className="text-[11px] font-black" style={{ color: "#34A853" }}>l</span>
+              <span className="text-[11px] font-black" style={{ color: "#EA4335" }}>e</span>
+            </div>
+          </div>
+
+          <div className="flex items-end justify-between">
+            <div>
+              <p className="text-lg font-black text-gray-900 tracking-tight">Your Business</p>
+              <div className="flex items-center gap-1.5 mt-0.5">
+                <Stars n={5} />
+                <span className="text-sm font-bold text-gray-700">5.0</span>
+                <span className="text-xs text-gray-400">(247 reviews)</span>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className="text-2xl font-black leading-none" style={{ color: GOLD }}>#1</p>
+              <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mt-0.5">Google Maps</p>
+            </div>
+          </div>
+
+          {/* Animated rating bar */}
+          <div className="mt-3.5">
+            <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(0,0,0,0.06)" }}>
+              <div
+                className="h-full rounded-full lr-bar-fill"
+                style={{ background: `linear-gradient(90deg, ${GOLD}, #f5e3a0)` }}
+              />
+            </div>
+            <p className="text-[9px] text-gray-400 mt-1 font-semibold">+18 reviews this week · trending ↑</p>
+          </div>
+        </div>
+
+        {/* Review cards */}
+        <div className="p-5 space-y-3">
+          <p className="text-[10px] font-black uppercase tracking-[0.28em] text-gray-400">Recent Reviews</p>
+          {PANEL_REVIEWS.map(({ initial, color, name, text, time }, i) => (
+            <div
+              key={name}
+              className="lr-card-in rounded-2xl p-4"
+              style={{
+                background: "rgba(255,255,255,0.9)",
+                border: "1px solid rgba(0,0,0,0.055)",
+                boxShadow: "0 4px 18px rgba(0,0,0,0.04)",
+                animationDelay: `${i * 0.18}s`,
+              }}
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-center gap-2.5">
+                  <div
+                    className="w-7 h-7 rounded-full flex items-center justify-center font-black text-white shrink-0"
+                    style={{ fontSize: 10, background: color }}
+                  >
+                    {initial}
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-bold text-gray-800 leading-none">{name}</p>
+                    <Stars n={5} />
+                  </div>
+                </div>
+                <div className="text-right shrink-0">
+                  <p className="text-[9px] text-gray-400">{time}</p>
+                  <span
+                    className="text-[8px] font-black px-1.5 py-0.5 rounded-full"
+                    style={{ background: `${GOLD}22`, color: GOLD }}
+                  >
+                    AI-crafted
+                  </span>
+                </div>
+              </div>
+              <p className="text-[11px] text-gray-600 leading-relaxed mt-2.5">{text}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Footer */}
+        <div
+          className="px-6 py-3 flex items-center justify-between"
+          style={{ borderTop: "1px solid rgba(0,0,0,0.05)", background: "rgba(251,245,220,0.45)" }}
+        >
+          <p className="text-[9px] font-semibold text-gray-500">Zero duplicates · 100% Google compliant</p>
+          <span className="text-[10px] font-black" style={{ color: GOLD }}>LocalReach →</span>
+        </div>
+      </div>
+
+      {/* Floating badge — top right */}
+      <div
+        className="badge-float absolute -top-5 -right-5 bg-white rounded-2xl px-4 py-2.5 shadow-xl"
+        style={{ border: `1px solid ${GOLD}30`, animationDelay: "0.8s", zIndex: 20 }}
+      >
+        <p className="text-[8px] text-gray-400 font-semibold uppercase tracking-wider">Review Growth</p>
+        <p className="text-xl font-black leading-tight" style={{ color: GOLD }}>3× faster</p>
+      </div>
+
+      {/* Floating badge — bottom left */}
+      <div
+        className="badge-float absolute -bottom-4 -left-5 bg-white rounded-2xl px-4 py-2.5 shadow-xl"
+        style={{ border: "1px solid rgba(0,0,0,0.06)", animationDelay: "0.3s", zIndex: 20 }}
+      >
+        <div className="flex items-center gap-1.5">
+          <span className="ping-soft w-2 h-2 rounded-full bg-green-500 shrink-0" />
+          <p className="text-[10px] font-black text-gray-800">New 5-star review!</p>
+        </div>
+        <p className="text-[9px] text-gray-400 mt-0.5">Google Maps · just now</p>
+      </div>
+    </div>
+  );
+}
+
 // ── Feature Visuals ────────────────────────────────────────────────
 
 function AiVisual() {
@@ -544,216 +730,150 @@ export default function LocalReachClient() {
         .ping-soft { animation: pingSoft 2s infinite; }
         .animate-fade-in-down { animation: lrFadeInDown 0.8s ease-out forwards; }
         .animate-slide-up-fade { animation: lrSlideUpFade 0.6s ease-out both; }
+
+        @keyframes lrBarFill {
+          from { width: 0%; }
+          to   { width: 96%; }
+        }
+        .lr-bar-fill {
+          animation: lrBarFill 1.4s cubic-bezier(0.22,1,0.36,1) 0.4s both;
+        }
+
+        @keyframes lrCardIn {
+          from { opacity: 0; transform: translateY(14px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .lr-card-in {
+          animation: lrCardIn 0.55s cubic-bezier(0.22,1,0.36,1) both;
+        }
       `}</style>
 
       <main className="w-full">
 
         {/* ── HEADER ──────────────────────────────────────────────── */}
-        <div className="bg-white border-b border-gray-100 px-6 md:px-10">
-          <Header showNav brand="gam" theme="light" />
+        <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border-b border-gray-700 px-6 md:px-10">
+          <Header showNav brand="gam" theme="dark" />
         </div>
 
         {/* ── 1. HERO ─────────────────────────────────────────────── */}
-        <section className="bg-white relative overflow-hidden min-h-[85vh] flex items-center">
+        <section className="relative flex min-h-[85vh] items-center overflow-x-clip overflow-y-visible bg-gradient-to-br from-gray-50 via-white to-gray-100">
           {/* Soft gold glow top-right */}
           <div
-            className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none"
-            style={{ background: `radial-gradient(circle, ${GOLD}10 0%, transparent 65%)` }}
+            className="pointer-events-none absolute -top-32 -right-32 h-[500px] w-[500px] rounded-full"
+            style={{ background: `radial-gradient(circle, ${GOLD}15 0%, transparent 65%)` }}
+          />
+          {/* Subtle dark overlay for depth */}
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{ background: `linear-gradient(135deg, rgba(0,0,0,0.02) 0%, transparent 50%, rgba(0,0,0,0.01) 100%)` }}
           />
 
-          <div className="relative mx-auto max-w-6xl px-6 md:px-10 py-16 w-full">
-            <div className="flex flex-col lg:flex-row items-center gap-16">
+          <div className="relative mx-auto w-full max-w-7xl px-6 py-14 md:px-10 md:py-20">
+            <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:items-center lg:gap-x-12 xl:gap-x-16">
 
               {/* Left: Copy */}
-              <div className="flex-1 space-y-8 animate-slide-up">
+              <LRStagger className="w-full max-w-xl space-y-8 xl:max-w-2xl" stagger={0.09}>
                 {/* Product wordmark */}
-                <div className="mb-6 animate-fade-in-down">
-                  <span className="text-2xl font-semibold text-gray-800 tracking-tight">Local</span>
-                  <span className="text-2xl font-black tracking-tight" style={{ color: GOLD }}>Reach</span>
-                </div>
+                <motion.div whileHover={{ scale: 1.03 }} transition={{ type: "spring", stiffness: 400, damping: 16 }}>
+                  <span className="text-3xl font-bold text-gray-900 tracking-tight">LocalReach</span>
+                  <p className="mt-2 text-[11px] uppercase tracking-[0.35em] text-gray-500 font-semibold">
+                    A review-growth engine within the LocalReach platform
+                  </p>
+                </motion.div>
 
                 {/* Live badge */}
                 <div className="flex items-center gap-2">
-                  <span className="ping-soft w-2 h-2 rounded-full inline-block" style={{ backgroundColor: "#16a34a" }} />
+                  <motion.span
+                    className="w-2.5 h-2.5 rounded-full shrink-0"
+                    style={{ backgroundColor: "#16a34a" }}
+                    animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                    transition={{ duration: 1.8, repeat: Infinity }}
+                  />
                   <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-green-700">
                     Live · Google Reviews Growing in Real-Time
                   </span>
                 </div>
 
                 {/* Headline */}
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.0] tracking-tight text-gray-900">
                     Maximize 5-Star Growth<br />
                     from Every{" "}
                     <span className="shimmer-gold-text">Happy Guest.</span>
                   </h1>
                   <p className="text-xl md:text-2xl font-medium text-gray-600 leading-relaxed max-w-xl">
-                    Your guests already love you — LocalReach simply makes it effortless for
-                    them to say so on Google. We surface the satisfaction that already exists,
-                    route private concerns away from public view, and compound your reputation
-                    month over month. Built for Dubai&apos;s most competitive F&amp;B market.
+                    Your guests already love you — LocalReach makes it effortless for them to say so on Google.
+                    We surface satisfaction, route concerns privately, and compound your reputation month over month.
                   </p>
                 </div>
 
                 {/* Stats */}
-                <div className="flex flex-wrap gap-8">
+                <div className="flex flex-wrap gap-10">
                   {[
                     { val: "3×", label: "Faster Review Growth" },
                     { val: "100%", label: "Google Compliant" },
                     { val: "Zero", label: "Spam Risk" },
-                  ].map(({ val, label }) => (
-                    <div key={label}>
-                      <p className="text-4xl font-black" style={{ color: GOLD }}>{val}</p>
+                  ].map(({ val, label }, i) => (
+                    <motion.div
+                      key={val}
+                      className="flex flex-col items-start"
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 + i * 0.06, duration: 0.6 }}
+                    >
+                      <motion.p
+                        className="text-4xl sm:text-5xl font-black text-gray-900 leading-none"
+                        whileHover={{ scale: 1.08 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 14 }}
+                      >{val}</motion.p>
                       <p className="text-sm font-bold text-gray-500 uppercase tracking-wider mt-0.5">{label}</p>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
 
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <GoldButton href="/contact" large>Book a Free Demo →</GoldButton>
-                  <Link
-                    href="#how-it-works"
-                    className="inline-flex items-center justify-center px-8 py-4 text-xs font-black
-                      uppercase tracking-[0.2em] rounded-full border border-gray-200 text-gray-500
-                      hover:border-gray-400 hover:text-gray-800 transition-all"
-                  >
-                    See How It Works ↓
-                  </Link>
+                  <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 18 }}>
+                    <GoldButton href="/contact" large>Book a Free Demo →</GoldButton>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.02, y: -1 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 18 }}>
+                    <Link
+                      href="#how-it-works"
+                      className="inline-flex items-center justify-center px-8 py-4 text-xs font-black
+                        uppercase tracking-[0.2em] rounded-full border border-gray-200 text-gray-500
+                        hover:border-gray-400 hover:text-gray-800 transition-colors"
+                    >
+                      See How It Works ↓
+                    </Link>
+                  </motion.div>
                 </div>
 
                 {/* Trust chips */}
                 <div className="flex flex-wrap gap-2 pt-1">
-                  {["No App Required", "EN / JA / AR", "Dubai-Ready", "Google Policy Compliant"].map((t) => (
-                    <span
+                  {["No App Required", "EN / JA / AR", "Dubai-Ready", "Google Policy Compliant"].map((t, i) => (
+                    <motion.span
                       key={t}
                       className="text-sm font-semibold text-gray-500 border border-gray-200 rounded-full px-3 py-1.5"
+                      initial={{ opacity: 0, scale: 0.85 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.6 + i * 0.08, type: "spring", stiffness: 400, damping: 18 }}
+                      whileHover={{ scale: 1.05, borderColor: GOLD, color: GOLD_DARK }}
                     >
                       ✓ {t}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
-              </div>
+              </LRStagger>
 
-              {/* ── RIGHT COLUMN: Google Ecosystem stage (desktop only) ─────── */}
-              <div
-                className="hidden lg:block flex-shrink-0 relative animate-slide-up-delayed"
-                style={{ width: 460, height: 600 }}
-              >
-                {/* ── STAGE: premium light background ────────────────────── */}
-                <div
-                  className="absolute inset-0 rounded-3xl pointer-events-none bg-gray-50 border border-gray-100 shadow-inner"
-                />
+              {/* ── RIGHT COLUMN: Live Review Dashboard（右半分の中央に配置してバランス調整） ── */}
+              <div className="relative flex min-h-[min(520px,70vw)] w-full min-w-0 flex-col items-center justify-center lg:min-h-[min(520px,58vh)]">
+                <div className="relative w-full max-w-[460px]">
+                  <LiveReviewPanel />
 
-                {/* ── AMBIENT GOLD GLOW ──────────────────────────────────── */}
-                <div
-                  className="absolute pointer-events-none rounded-full"
-                  style={{
-                    width: 320, height: 320,
-                    top: "40%", left: "24%",
-                    transform: "translate(-50%, -50%)",
-                    background: `radial-gradient(circle, ${GOLD}15 0%, transparent 65%)`,
-                  }}
-                />
-
-                {/* ── UPWARD MOMENTUM ARROWS (behind phone, z-1) ─────────── */}
-                <div className="arrow-drift-a absolute pointer-events-none" style={{ top: 108, left: 228, zIndex: 1 }}>
-                  <UpArrow size={28} />
-                </div>
-                <div className="arrow-drift-b absolute pointer-events-none" style={{ top: 218, left: 272, zIndex: 1 }}>
-                  <UpArrow size={20} />
-                </div>
-                <div className="arrow-drift-c absolute pointer-events-none" style={{ top: 62, left: 305, zIndex: 1 }}>
-                  <UpArrow size={24} />
-                </div>
-                <div className="arrow-drift-d absolute pointer-events-none" style={{ top: 330, left: 250, zIndex: 1 }}>
-                  <UpArrow size={16} />
-                </div>
-
-                {/* ── FLOATING GOOGLE PINS (right strip, z-4) ────────────── */}
-                <div className="pin-float-a absolute" style={{ top: 52, right: 42, zIndex: 4 }}>
-                  <GooglePin color={GOLD} size={36} />
-                </div>
-                <div className="pin-float-b absolute" style={{ top: 162, right: 18, zIndex: 4 }}>
-                  <GooglePin color="#4285F4" size={28} />
-                </div>
-                <div className="pin-float-c absolute" style={{ top: 308, right: 46, zIndex: 4 }}>
-                  <GooglePin color={GOLD} size={22} />
-                </div>
-                <div className="pin-float-d absolute" style={{ bottom: 148, right: 90, zIndex: 4 }}>
-                  <GooglePin color="#34A853" size={20} />
-                </div>
-
-                {/* ── SEARCH RESULTS CARD (behind phone, peeks right, z-3) ─ */}
-                <GoogleSearchCard />
-
-                {/* ── iPHONE (foreground, z-10) ──────────────────────────── */}
-                <div className="absolute" style={{ left: 28, top: 28, zIndex: 10 }}>
-                  <IPhoneMockup />
-
-                  {/* "New 5-star review!" toast — bottom-left of phone */}
-                  <div
-                    className="badge-float absolute flex items-center gap-2.5 bg-white rounded-2xl border border-gray-100"
-                    style={{
-                      bottom: -6,
-                      left: -14,
-                      zIndex: 20,
-                      padding: "10px 14px 10px 12px",
-                      boxShadow: "0 8px 28px rgba(0,0,0,0.18)",
-                    }}
-                  >
-                    <div
-                      className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
-                      style={{ background: "#f0fdf4" }}
-                    >
-                      <span style={{ fontSize: 14 }}>⭐</span>
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-black text-slate-800 leading-none">New 5-star review!</p>
-                      <p className="text-[8.5px] text-slate-400 leading-none mt-1">Google Maps · just now</p>
-                    </div>
+                  {/* Google Search Card */}
+                  <div className="absolute -top-3 left-0 z-[12] w-[min(222px,calc(100vw-2.5rem))] sm:-top-5 sm:left-1 md:-top-6 lg:-left-2 lg:top-0 xl:-left-4">
+                    <GoogleSearchCard />
                   </div>
-                </div>
-
-                {/* ── GOOGLE MAPS RANK BADGE (top-right of phone, z-20) ──── */}
-                <div
-                  className="badge-float absolute bg-white rounded-2xl border border-gray-100"
-                  style={{
-                    top: 22,
-                    left: 272,
-                    zIndex: 20,
-                    padding: "10px 16px",
-                    boxShadow: "0 8px 28px rgba(0,0,0,0.1)",
-                    animationDelay: "0.9s",
-                  }}
-                >
-                  <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none">
-                    Google Maps Rank
-                  </p>
-                  <p className="text-[22px] font-black leading-tight mt-0.5" style={{ color: GOLD }}>#1</p>
-                </div>
-              </div>
-
-              {/* ── RIGHT COLUMN: mobile (bare phone + badges) ─────────────── */}
-              <div className="lg:hidden flex-shrink-0 relative animate-slide-up-delayed">
-                <IPhoneMockup />
-                <div
-                  className="badge-float absolute -bottom-4 -left-8 bg-white rounded-2xl shadow-2xl px-4 py-3
-                    flex items-center gap-3 border border-gray-100"
-                >
-                  <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-base">⭐</div>
-                  <div>
-                    <p className="text-[10px] font-black text-slate-800">New 5-star review!</p>
-                    <p className="text-[9px] text-slate-400">Google Maps · just now</p>
-                  </div>
-                </div>
-                <div
-                  className="badge-float absolute -top-4 -right-6 bg-white rounded-2xl shadow-2xl px-4 py-3
-                    border border-gray-100"
-                  style={{ animationDelay: "1s" }}
-                >
-                  <p className="text-[9px] text-slate-500 font-semibold uppercase tracking-wider">Google Maps Rank</p>
-                  <p className="text-2xl font-black" style={{ color: GOLD }}>#1</p>
                 </div>
               </div>
 
@@ -767,8 +887,8 @@ export default function LocalReachClient() {
             {/* Hero image above pain points */}
             <div className="mb-14 rounded-3xl overflow-hidden shadow-2xl relative">
               <Image
-                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1400&q=85&auto=format&fit=crop"
-                alt="Busy Dubai restaurant dining room"
+                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=85&auto=format&fit=crop"
+                alt="Busy Dubai restaurant with happy customers"
                 width={1400}
                 height={520}
                 className="w-full h-[260px] md:h-[380px] object-cover"
@@ -784,19 +904,20 @@ export default function LocalReachClient() {
                 </p>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <LRStagger className="grid grid-cols-1 md:grid-cols-3 gap-6" stagger={0.12}>
               {PAIN_POINTS.map(({ icon, title, body }) => (
-                <div
+                <motion.div
                   key={title}
-                  className="rounded-2xl border border-line bg-white p-8 shadow-lg hover:shadow-xl
-                    transition-all hover:-translate-y-1 space-y-4"
+                  className="rounded-2xl border border-line bg-white p-8 shadow-lg space-y-4"
+                  whileHover={{ y: -8, boxShadow: `0 24px 60px rgba(0,0,0,0.1), 0 0 0 1.5px ${GOLD}35` }}
+                  transition={{ type: "spring", stiffness: 300, damping: 22 }}
                 >
-                  <p className="text-5xl">{icon}</p>
+                  <motion.p className="text-5xl" whileHover={{ scale: 1.15 }} transition={{ type: "spring", stiffness: 400, damping: 14 }}>{icon}</motion.p>
                   <h3 className="text-xl font-black text-foreground">{title}</h3>
                   <p className="text-gray-800 text-lg font-semibold leading-relaxed">{body}</p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </LRStagger>
           </div>
         </section>
 
@@ -813,36 +934,46 @@ export default function LocalReachClient() {
               </p>
             </div>
 
-            {/* Lifestyle photo: customer at cafe scanning QR */}
-            <div className="mb-10 rounded-3xl overflow-hidden shadow-2xl">
-              <Image
-                src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=1400&q=85&auto=format&fit=crop"
-                alt="Customer at a Dubai cafe using their smartphone to scan a QR code"
-                width={1400}
-                height={560}
-                className="w-full h-[280px] md:h-[420px] object-cover"
-              />
+            {/* Animated flow: QR → survey → AI draft → live on Google (replaces flaky stock photo URL) */}
+            <div className="mb-10 overflow-hidden rounded-3xl border border-line bg-white shadow-2xl">
+              <ReviewFlowHeroAnimation />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <LRStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" stagger={0.13}>
               {HOW_STEPS.map(({ n, icon, title, body }) => (
-                <div
+                <motion.div
                   key={n}
-                  className="relative text-center space-y-4 p-7 rounded-2xl bg-white border border-line
-                    shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                  className="relative text-center space-y-4 p-7 rounded-2xl bg-white border border-line shadow-lg"
+                  whileHover={{ y: -8, boxShadow: `0 24px 60px rgba(0,0,0,0.1), 0 0 0 2px ${GOLD}40` }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  <div
+                  <motion.div
                     className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center text-3xl"
                     style={{ backgroundColor: GOLD_BG }}
+                    whileHover={{ rotate: [0, -8, 8, 0], scale: 1.1 }}
+                    transition={{ duration: 0.4 }}
                   >
                     {icon}
-                  </div>
+                  </motion.div>
                   <span className="block text-[10px] font-black tracking-[0.3em] uppercase text-muted">{n}</span>
                   <h4 className="text-base font-black text-foreground">{title}</h4>
                   <p className="text-base font-medium text-gray-700 leading-relaxed">{body}</p>
-                </div>
+                  {n === "01" && (
+                    <div className="mt-4 flex justify-center">
+                      <div className="w-20 h-20 bg-white border-2 border-gray-200 rounded-lg p-2 shadow-sm overflow-hidden">
+                        <Image
+                          src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://localreach.ai/demo"
+                          alt="Sample QR code for LocalReach"
+                          width={150}
+                          height={150}
+                          className="w-full h-full object-cover rounded"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
               ))}
-            </div>
+            </LRStagger>
 
             {/* Google Maps ranking proof strip */}
             <div className="mt-10 rounded-2xl border border-line bg-white p-8 shadow-lg">
@@ -887,7 +1018,7 @@ export default function LocalReachClient() {
                   </h3>
                   <p className="text-muted leading-relaxed">
                     Google&apos;s local search algorithm heavily weights review volume, recency, and keyword diversity.
-                    LocalReach systematically addresses all three — giving your business a compounding
+                    As a review-growth engine, LocalReach systematically addresses all three — giving your business a compounding
                     Local SEO advantage that grows with every customer interaction.
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -911,36 +1042,53 @@ export default function LocalReachClient() {
         {FEATURES.map(({ icon, tag, title, body, bullets, imageUrl }, i) => (
           <section
             key={tag}
-            className={`py-20 border-t border-line ${i % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
+            className={`py-24 border-t border-line ${i % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
           >
             <div className="mx-auto max-w-6xl px-6 md:px-10">
-              <div className={`flex flex-col ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-14 items-center`}>
+              <div className={`flex flex-col ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-16 items-center`}>
 
                 {/* Text */}
-                <div className="flex-1 space-y-6">
-                  <div
+                <LRFadeUp delay={0.05} className="flex-1 space-y-6">
+                  <motion.div
                     className="inline-flex items-center gap-2 text-[10px] font-black tracking-[0.2em] uppercase px-4 py-2 rounded-full"
                     style={{ backgroundColor: GOLD_BG, color: GOLD_DARK }}
+                    whileHover={{ scale: 1.04 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 16 }}
                   >
                     <span className="text-base">{icon}</span>
                     {tag}
-                  </div>
+                  </motion.div>
                   <h2 className="text-3xl sm:text-4xl font-black text-foreground leading-tight">{title}</h2>
-                  <p className="text-muted leading-relaxed">{body}</p>
+                  <p className="text-muted leading-relaxed text-base">{body}</p>
                   <ul className="space-y-3">
-                    {bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-3 text-sm text-foreground">
-                        <span className="shrink-0 font-black mt-0.5" style={{ color: GOLD }}>✓</span>
-                        <span>{b}</span>
-                      </li>
+                    {bullets.map((b, bi) => (
+                      <motion.li
+                        key={b}
+                        className="flex items-start gap-3 text-sm text-foreground"
+                        initial={{ opacity: 0, x: -12 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: bi * 0.08, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <motion.span
+                          className="shrink-0 font-black mt-0.5 text-base"
+                          style={{ color: GOLD }}
+                          whileHover={{ scale: 1.3 }}
+                        >✓</motion.span>
+                        <span className="font-medium">{b}</span>
+                      </motion.li>
                     ))}
                   </ul>
                   <GoldButton href="/contact">Get Started →</GoldButton>
-                </div>
+                </LRFadeUp>
 
                 {/* Photo */}
-                <div className="flex-1 w-full">
-                  <div className="rounded-3xl overflow-hidden shadow-2xl">
+                <LRFadeUp delay={0.15} className="flex-1 w-full">
+                  <motion.div
+                    className="rounded-3xl overflow-hidden shadow-2xl"
+                    whileHover={{ scale: 1.02, boxShadow: `0 40px 100px rgba(0,0,0,0.18), 0 0 0 2px ${GOLD}35` }}
+                    transition={{ type: "spring", stiffness: 260, damping: 24 }}
+                  >
                     <Image
                       src={imageUrl}
                       alt={title}
@@ -948,8 +1096,8 @@ export default function LocalReachClient() {
                       height={620}
                       className="w-full h-[320px] md:h-[440px] object-cover"
                     />
-                  </div>
-                </div>
+                  </motion.div>
+                </LRFadeUp>
 
               </div>
             </div>
@@ -1303,12 +1451,12 @@ export default function LocalReachClient() {
         </section>
 
         {/* ── 9. FINAL CTA ────────────────────────────────────────── */}
-        <section className="py-24 text-center relative overflow-hidden border-t border-gray-100"
-          style={{ background: `linear-gradient(160deg, #fffdf5 0%, #ffffff 50%, ${GOLD_BG} 100%)` }}
+        <section className="py-24 text-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black"
+          style={{ background: `linear-gradient(160deg, #1a1a1a 0%, #000000 50%, ${GOLD}15 100%)` }}
         >
           {/* Subtle dot texture */}
           <div
-            className="absolute inset-0 pointer-events-none opacity-[0.35]"
+            className="absolute inset-0 pointer-events-none opacity-[0.15]"
             style={{
               backgroundImage: `radial-gradient(circle, ${GOLD}40 1px, transparent 1px)`,
               backgroundSize: "32px 32px",
@@ -1321,11 +1469,11 @@ export default function LocalReachClient() {
           />
           <div className="relative mx-auto max-w-2xl px-6 space-y-8">
             <p className="text-6xl">🚀</p>
-            <h2 className="text-4xl sm:text-5xl font-black leading-tight text-gray-900">
+            <h2 className="text-4xl sm:text-5xl font-black leading-tight text-white">
               Ready to Dominate<br />
               <span className="shimmer-gold-text">Your Local Market?</span>
             </h2>
-            <p className="text-gray-500 text-lg leading-relaxed max-w-lg mx-auto">
+            <p className="text-gray-300 text-lg leading-relaxed max-w-lg mx-auto">
               Join forward-thinking Dubai businesses already using LocalReach
               to build reviews, grow their CRM, and rank higher on Google Maps.
             </p>
@@ -1337,7 +1485,7 @@ export default function LocalReachClient() {
             </p>
             <div className="flex flex-wrap justify-center gap-4 pt-2">
               {["Google Policy Compliant", "Dubai Market Expert", "Multi-language Ready", "Zero Setup Fee"].map((b) => (
-                <span key={b} className="text-[10px] font-semibold border border-gray-200 rounded-full px-3 py-1.5 text-gray-400">
+                <span key={b} className="text-[10px] font-semibold border border-gray-600 rounded-full px-3 py-1.5 text-gray-300">
                   ✓ {b}
                 </span>
               ))}

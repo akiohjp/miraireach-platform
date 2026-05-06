@@ -354,58 +354,152 @@ function BentoGrid() {
 }
 
 /* ─────────────────────────────────────────────────────
-   Feature 1 visual: Realistic iPhone Mockup
+   Feature 1 visual: iPhone + Google ecosystem
 ───────────────────────────────────────────────────── */
+const ALL_REVIEWS = [
+  { initials: "SM", bg: "#EA4335", name: "Sarah M.",   stars: 5, text: "Absolutely amazing — best in Dubai! Will tell everyone." },
+  { initials: "AK", bg: "#34A853", name: "Ahmed K.",   stars: 5, text: "Great service, definitely returning next weekend." },
+  { initials: "LW", bg: "#9C27B0", name: "Li Wei",     stars: 5, text: "Fantastic food and welcoming staff! 10/10 experience." },
+  { initials: "FN", bg: "#4285F4", name: "Fatima N.",  stars: 5, text: "Premium quality, impeccable hospitality. Highly recommend." },
+  { initials: "RP", bg: "#FF9800", name: "Ravi P.",    stars: 5, text: "Best omakase in the Marina. Exceptional every visit." },
+  { initials: "CN", bg: "#00BCD4", name: "Carlos N.",  stars: 5, text: "Incredible atmosphere and freshest ingredients." },
+];
+// doubled for seamless infinite scroll
+const SCROLL_REVIEWS = [...ALL_REVIEWS, ...ALL_REVIEWS];
+
+function ReviewCard({ initials, bg, name, text }: { initials: string; bg: string; name: string; text: string }) {
+  return (
+    <div className="bg-white rounded-2xl p-3.5 shadow-sm border border-gray-100 mb-2.5 shrink-0">
+      <div className="flex items-center gap-2 mb-1.5">
+        <div className="w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-black text-white shrink-0" style={{ background: bg }}>
+          {initials}
+        </div>
+        <span className="text-[11px] font-bold text-gray-800">{name}</span>
+        <span className="ml-auto text-[8px] font-bold px-1.5 py-0.5 rounded-full" style={{ background: `${GOLD}20`, color: GOLD }}>AI ✓</span>
+      </div>
+      <div className="text-yellow-400 text-[10px] mb-1">★★★★★</div>
+      <p className="text-[10px] text-gray-600 leading-relaxed">{text}</p>
+      <p className="text-[8px] text-blue-500 mt-1 font-semibold">Google</p>
+    </div>
+  );
+}
+
+function GoogleMapsPin({ color = GOLD, size = 28 }: { color?: string; size?: number }) {
+  return (
+    <svg width={size} height={Math.round(size * 1.35)} viewBox="0 0 24 32" fill="none">
+      <path d="M12 0C7.03 0 3 4.03 3 9c0 6.75 9 23 9 23s9-16.25 9-23c0-4.97-4.03-9-9-9z" fill={color}
+        style={{ filter: `drop-shadow(0 3px 8px ${color}80)` }} />
+      <circle cx="12" cy="9" r="3.5" fill="white" />
+    </svg>
+  );
+}
+
 function ReviewCardsVisual() {
   return (
-    <div className="w-full lg:w-1/2 flex justify-center relative">
-      {/* Decorative Glow behind iPhone */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D4AF37]/20 blur-[80px] rounded-full"></div>
+    <div className="w-full lg:w-1/2 flex justify-center relative py-8">
 
-      {/* iPhone Mockup Frame */}
-      <div className="relative w-[300px] h-[600px] bg-gray-50 border-[12px] border-gray-900 rounded-[3rem] shadow-2xl overflow-hidden flex flex-col z-10 animate-float">
-        {/* iPhone Notch */}
-        <div className="absolute top-0 inset-x-0 h-6 bg-gray-900 rounded-b-3xl w-40 mx-auto z-20"></div>
+      {/* ── ambient glow ── */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] rounded-full pointer-events-none"
+        style={{ background: `radial-gradient(circle, ${GOLD}22 0%, transparent 65%)`, filter: "blur(40px)" }} />
 
-        {/* Google Review Header */}
-        <div className="bg-white pt-10 pb-4 px-4 shadow-sm z-10 relative">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">G</div>
-            <div>
-              <div className="text-sm font-bold text-gray-900">Your Business</div>
-              <div className="flex text-yellow-400 text-xs">★★★★★ <span className="text-gray-500 ml-1">5.0</span></div>
-            </div>
-          </div>
+      {/* ── floating Google Maps pins ── */}
+      <div className="absolute top-[8%] right-[14%] animate-float-d1 z-20 pointer-events-none">
+        <GoogleMapsPin color={GOLD} size={32} />
+      </div>
+      <div className="absolute top-[28%] right-[5%] animate-float-d2 z-20 pointer-events-none">
+        <GoogleMapsPin color="#4285F4" size={24} />
+      </div>
+      <div className="absolute bottom-[22%] right-[10%] animate-float-d3 z-20 pointer-events-none">
+        <GoogleMapsPin color="#34A853" size={20} />
+      </div>
+
+      {/* ── floating rating badge ── */}
+      <div className="absolute top-[4%] left-[6%] z-20 pointer-events-none animate-float-d2
+        bg-white rounded-2xl px-3 py-2 shadow-xl"
+        style={{ border: `1.5px solid ${GOLD}40` }}>
+        <p className="text-[8px] font-bold text-gray-400 uppercase tracking-wider leading-none">Google Maps</p>
+        <p className="text-xl font-black leading-tight" style={{ color: GOLD }}>#1</p>
+      </div>
+
+      {/* ── "New review!" notification badge ── */}
+      <div className="absolute bottom-[8%] left-[4%] z-20 pointer-events-none animate-float
+        bg-white rounded-2xl px-3 py-2.5 shadow-xl flex items-center gap-2"
+        style={{ border: "1px solid rgba(0,0,0,0.08)" }}>
+        <span className="w-2 h-2 rounded-full bg-green-500 shrink-0 animate-pulse" />
+        <div>
+          <p className="text-[10px] font-black text-gray-800 leading-none">New 5-star review!</p>
+          <p className="text-[8px] text-gray-400 mt-0.5">just now · Google Maps</p>
         </div>
+      </div>
 
-        {/* Animated Reviews Container */}
-        <div className="flex-1 p-4 relative overflow-hidden bg-gray-100">
-          {/* Review 1 */}
-          <div className="absolute w-[calc(100%-2rem)] bg-white p-4 rounded-2xl shadow-md animate-scroll-1 opacity-0">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-6 h-6 rounded-full bg-red-100 text-xs flex items-center justify-center font-bold">SM</div>
-              <div className="text-xs font-bold">Sarah M.</div>
+      {/* ── Google G logo badge ── */}
+      <div className="absolute top-[38%] left-[2%] z-20 pointer-events-none animate-float-d3">
+        <div className="w-10 h-10 rounded-full bg-white shadow-xl flex items-center justify-center text-base font-black"
+          style={{ border: "1.5px solid rgba(0,0,0,0.06)" }}>
+          <span className="text-[18px] font-black tracking-tight">
+            <span style={{ color: "#4285F4" }}>G</span>
+          </span>
+        </div>
+      </div>
+
+      {/* ── iPhone frame ── */}
+      <div className="relative w-[270px] h-[560px] rounded-[3rem] z-10 animate-float shadow-2xl"
+        style={{
+          background: "linear-gradient(150deg, #2e2e2e 0%, #0f0f0f 100%)",
+          border: "10px solid #141414",
+          boxShadow: "0 32px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06)",
+        }}>
+
+        {/* Left edge highlight */}
+        <div className="absolute inset-0 rounded-[2.5rem] pointer-events-none"
+          style={{ background: "linear-gradient(130deg, rgba(255,255,255,0.07) 0%, transparent 45%)" }} />
+
+        {/* Dynamic Island */}
+        <div className="absolute left-1/2 -translate-x-1/2"
+          style={{ top: 12, width: 84, height: 24, background: "#000", borderRadius: 12, zIndex: 10 }} />
+
+        {/* Screen */}
+        <div className="absolute rounded-[2.25rem] overflow-hidden flex flex-col"
+          style={{ inset: 8, background: "#fff" }}>
+
+          {/* Google Maps top bar */}
+          <div className="shrink-0 px-3 pt-8 pb-3" style={{ background: "#4285F4" }}>
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-[7px] font-bold text-white/70 tracking-widest uppercase">Google Maps</p>
+                <p className="text-[12px] font-black text-white leading-tight mt-0.5">Your Business</p>
+              </div>
+              <div className="text-right">
+                <div className="flex items-center justify-end gap-px">
+                  {[0,1,2,3,4].map(i => <span key={i} style={{ color: "#FBBC04", fontSize: 8 }}>★</span>)}
+                </div>
+                <p className="text-[8px] font-semibold text-white/80 mt-0.5">5.0 · 247 reviews</p>
+              </div>
             </div>
-            <div className="text-yellow-400 text-xs mb-1">★★★★★</div>
-            <p className="text-xs text-gray-600">Absolutely amazing — best in Dubai! Highly recommended.</p>
           </div>
-          {/* Review 2 */}
-          <div className="absolute w-[calc(100%-2rem)] bg-white p-4 rounded-2xl shadow-md animate-scroll-2 opacity-0">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-6 h-6 rounded-full bg-green-100 text-xs flex items-center justify-center font-bold">AK</div>
-              <div className="text-xs font-bold">Ahmed K.</div>
+
+          {/* Review count bar */}
+          <div className="shrink-0 px-3 py-2 border-b border-gray-100" style={{ background: "#f8f9fa" }}>
+            <div className="flex items-center gap-2">
+              <div className="flex-1 h-1.5 rounded-full overflow-hidden bg-gray-200">
+                <div className="h-full rounded-full" style={{ width: "94%", background: `linear-gradient(90deg, ${GOLD}, #f5e3a0)` }} />
+              </div>
+              <span className="text-[8px] font-bold" style={{ color: GOLD }}>↑ Growing</span>
             </div>
-            <div className="text-yellow-400 text-xs mb-1">★★★★★</div>
-            <p className="text-xs text-gray-600">Great service, will definitely return again next weekend.</p>
           </div>
-          {/* Review 3 */}
-          <div className="absolute w-[calc(100%-2rem)] bg-white p-4 rounded-2xl shadow-md animate-scroll-3 opacity-0">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-6 h-6 rounded-full bg-purple-100 text-xs flex items-center justify-center font-bold">LW</div>
-              <div className="text-xs font-bold">Li Wei</div>
+
+          {/* Continuous scrolling reviews */}
+          <div className="flex-1 overflow-hidden" style={{ background: "#f8f9fa" }}>
+            <div className="px-2.5 pt-2 scroll-reviews-home">
+              {SCROLL_REVIEWS.map(({ initials, bg, name, text }, idx) => (
+                <ReviewCard key={idx} initials={initials} bg={bg} name={name} text={text} />
+              ))}
             </div>
-            <div className="text-yellow-400 text-xs mb-1">★★★★★</div>
-            <p className="text-xs text-gray-600">Fantastic food and welcoming staff! 10/10 experience.</p>
+          </div>
+
+          {/* Home indicator */}
+          <div className="shrink-0 flex justify-center py-2" style={{ background: "#fff" }}>
+            <div className="w-14 h-[3px] rounded-full" style={{ background: "#d0d0d0" }} />
           </div>
         </div>
       </div>
@@ -469,17 +563,34 @@ export default function HomeClient() {
   return (
     <div className="w-full bg-white text-gray-900 selection:bg-amber-100">
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
-        @keyframes slideUpFade { 
-          0% { transform: translateY(20px); opacity: 0; } 
-          10% { transform: translateY(0); opacity: 1; } 
-          80% { transform: translateY(0); opacity: 1; } 
-          100% { transform: translateY(-20px); opacity: 0; } 
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+        @keyframes floatD1 { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        @keyframes floatD2 { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+        @keyframes floatD3 { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-14px); } }
+        @keyframes scrollReviewsHome {
+          0%   { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
         }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-scroll-1 { animation: slideUpFade 6s infinite; animation-delay: 0s; }
-        .animate-scroll-2 { animation: slideUpFade 6s infinite; animation-delay: 2s; }
-        .animate-scroll-3 { animation: slideUpFade 6s infinite; animation-delay: 4s; }
+        @keyframes shimmerRight {
+          0%   { transform: translateX(-100%); background: linear-gradient(90deg, transparent, #D4AF37, transparent); }
+          100% { transform: translateX(200%); background: linear-gradient(90deg, transparent, #D4AF37, transparent); }
+        }
+        @keyframes barGrow { from { transform: scaleY(0); transform-origin: bottom; } to { transform: scaleY(1); transform-origin: bottom; } }
+        @keyframes ring { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(2.2); opacity: 0; } }
+        @keyframes march { to { stroke-dashoffset: -20; } }
+        @keyframes pingGlow { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.15); opacity: 0.4; } }
+
+        .animate-float    { animation: float    6s ease-in-out infinite; }
+        .animate-float-d1 { animation: floatD1  5s ease-in-out infinite 0.6s; }
+        .animate-float-d2 { animation: floatD2  7s ease-in-out infinite 1.2s; }
+        .animate-float-d3 { animation: floatD3  5.5s ease-in-out infinite 0.3s; }
+        .animate-glow     { animation: pingGlow 3s ease-in-out infinite; }
+        .animate-ring-1   { animation: ring 2.5s ease-out infinite; }
+        .animate-ring-2   { animation: ring 2.5s ease-out infinite 1.25s; }
+        .animate-march    { stroke-dashoffset: 0; animation: march 2s linear infinite; }
+        .animate-shimmer-right { width: 60%; height: 100%; background: linear-gradient(90deg, transparent, #D4AF3770, transparent); animation: shimmerRight 1.6s ease-in-out infinite; }
+        .animate-bar-grow { animation: barGrow 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+        .scroll-reviews-home { animation: scrollReviewsHome 22s linear infinite; }
       `}} />
 
       {/* ── STICKY HEADER ─────────────────────────────── */}
@@ -500,14 +611,14 @@ export default function HomeClient() {
             <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#B8961C] text-xs font-bold tracking-widest uppercase mb-4">
                 <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse"></span>
-                Dubai's #1 AI Marketing Infrastructure
+                Dubai&apos;s #1 AI Marketing Infrastructure
               </div>
               <h1 className="text-5xl lg:text-7xl font-black text-gray-900 leading-[1.1] tracking-tight">
                 The Ultimate AI <br/>
                 <span className="text-[#D4AF37]">Marketing Infrastructure.</span>
               </h1>
               <p className="text-lg lg:text-xl text-gray-600 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                mirAIreach is Dubai's most advanced Generative Engine Optimization (GEO) platform. Sync your business across 100+ global networks, automate reviews, and dominate AI search results.
+                mirAIreach is Dubai&apos;s most advanced Generative Engine Optimization (GEO) platform. Sync your business across 100+ global networks, automate reviews, and dominate AI search results.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
                 <button className="w-full sm:w-auto px-8 py-4 bg-[#D4AF37] hover:bg-[#B8961C] text-white font-bold rounded-full transition-all shadow-lg hover:shadow-[#D4AF37]/30 flex items-center justify-center gap-2">
@@ -593,14 +704,29 @@ export default function HomeClient() {
       ══════════════════════════════════════════════ */}
       <section id="features">
 
-        {/* ── Feature 1: LocalReach / Google Reviews ── */}
+        {/* ── Feature 1: mirAIreach / Google Reviews ── */}
         <div className="py-16 md:py-24 bg-gray-50 border-t border-gray-100 border-b border-gray-100">
           <div className="mx-auto max-w-7xl px-6 md:px-10 grid lg:grid-cols-2 gap-16 items-center">
 
             <div className="space-y-6">
+              {/* Product wordmark */}
+              <div className="flex items-center gap-3">
+                <div>
+                  <span className="text-2xl font-bold text-gray-800 tracking-tight">mirAIreach</span>
+                </div>
+                {/* #1 rank badge */}
+                <div
+                  className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-widest"
+                  style={{ backgroundColor: `${GOLD}15`, color: GOLD, border: `1.5px solid ${GOLD}50` }}
+                >
+                  <MapPin size={11} strokeWidth={3} />
+                  #1 Google Maps Rank
+                </div>
+              </div>
+
               <Chip gold>Entry Package · High Volume</Chip>
               <h2 className="text-4xl md:text-5xl font-black tracking-tight text-gray-900 leading-[1.1]">
-                LocalReach: Automated<br />
+                Automated<br />
                 <span style={{ color: GOLD }}>Google Reviews.</span>
               </h2>
 
@@ -640,7 +766,7 @@ export default function HomeClient() {
                     <div className="w-8 h-8 rounded-full border-2 border-white bg-gray-300 flex items-center justify-center"><CheckCircle size={12} className="text-gray-600"/></div>
                   </div>
                   <div className="flex flex-col">
-                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Trusted by Dubai's Top</p>
+                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Trusted by Dubai&apos;s Top</p>
                     <p className="text-xs font-bold text-gray-800">F&amp;B Groups &amp; Retailers</p>
                   </div>
                 </div>
@@ -650,13 +776,12 @@ export default function HomeClient() {
                 <GoldButton href="/contact">
                   Get Started — 500 AED/mo <ArrowRight size={13} />
                 </GoldButton>
-                {/* QR Code Callout */}
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-100 shadow-sm rounded-xl">
-                  <div className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center border border-gray-200 p-1">
-                    <div className="w-full h-full bg-gray-300" style={{ background: "repeating-linear-gradient(45deg, #000 0, #000 2px, transparent 2px, transparent 4px)" }}></div>
-                  </div>
-                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-tight">Scan to<br/>Preview</span>
-                </div>
+                <Link
+                  href="/localreach"
+                  className="inline-flex items-center gap-1.5 text-[12px] font-bold text-gray-500 hover:text-gray-900 transition-colors"
+                >
+                  Explore Full Features <ArrowRight size={12} />
+                </Link>
               </div>
             </div>
 

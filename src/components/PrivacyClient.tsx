@@ -7,7 +7,7 @@ export default function PrivacyClient() {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-6 py-12 md:px-10">
-        <Header showNav={true} />
+        <Header showNav={true} theme="light" />
         
         <main className="mt-16 max-w-4xl mx-auto space-y-16">
           <div className="text-center space-y-4">
@@ -32,7 +32,7 @@ export default function PrivacyClient() {
 
               <h2 className="text-2xl font-bold text-foreground">How We Use Your Information</h2>
               <p>
-                Your data is used to provide requested services, personalize your experience, and send updates regarding the UAE's AI business landscape. We do not sell your personal data to third parties.
+                Your data is used to provide requested services, personalize your experience, and send updates regarding the UAE&apos;s AI business landscape. We do not sell your personal data to third parties.
               </p>
 
               <h2 className="text-2xl font-bold text-foreground">Data Security</h2>

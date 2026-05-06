@@ -17,7 +17,10 @@
   --color-primary: var(--primary);
   --color-gold: #D4AF37;
   --color-gold-dark: #B8961C;
+  --color-cream: #f5f0e6;
+  --color-dark: #1a1714;
   --font-sans: var(--font-urbanist);
+  --font-serif: var(--font-cormorant);
   --font-mono: var(--font-geist-mono);
   --font-noto-arabic: var(--font-noto-arabic);
 }
@@ -182,5 +185,196 @@ body {
 @keyframes shimmerRight {
   0%   { background-position: -200% center; }
   100% { background-position:  200% center; }
+}
+
+@keyframes goldShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+@keyframes platformPulse {
+  0%, 100% { box-shadow: 0 24px 64px -24px rgba(201,162,39,0.12); }
+  50%       { box-shadow: 0 32px 80px -20px rgba(201,162,39,0.22); }
+}
+
+@keyframes spinBorder {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes badgeFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-3px); }
+}
+
+/* ── Peaceput-style utilities ─────────────────────────── */
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Announcement ticker */
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-animate {
+  animation: tickerScroll 28s linear infinite;
+  white-space: nowrap;
+  display: flex;
+}
+
+/* Marquee (text runner in dark sections) */
+@keyframes marqueeRun {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-animate {
+  animation: marqueeRun 22s linear infinite;
+  display: flex;
+  white-space: nowrap;
+}
+
+/* Google Maps mockup: doubled review list vertical scroll */
+@keyframes scrollReviewsHome {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+.scroll-reviews-home {
+  animation: scrollReviewsHome 22s linear infinite;
+}
+
+/* Large serif display heading slide-in */
+@keyframes headingReveal {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.heading-reveal {
+  overflow: hidden;
+}
+.heading-reveal > * {
+  animation: headingReveal 1s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* Scroll down indicator bounce */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(7px); }
+}
+.scroll-bounce {
+  animation: scrollBounce 1.8s ease-in-out infinite;
+}
+
+/* ── mirAIreach LP design tokens ─────────────────────── */
+
+.text-mira-gold-gradient {
+  background: linear-gradient(135deg, #b8841c 0%, #d4a017 28%, #eedc9a 58%, #c9a227 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 100%;
+}
+
+.text-mira-gold-gradient--shimmer {
+  animation: goldShimmer 3.5s ease-in-out infinite;
+}
+
+.btn-mira-primary {
+  background: linear-gradient(135deg, #b8841c 0%, #c9a227 50%, #d4a854 100%);
+  background-size: 200% 200%;
+  box-shadow: 0 8px 32px -8px rgba(201,162,39,0.45), inset 0 1px 0 rgba(255,255,255,0.18);
+  transition: background-position 0.4s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+.btn-mira-primary:hover {
+  background-position: right center;
+  box-shadow: 0 14px 44px -8px rgba(201,162,39,0.55), inset 0 1px 0 rgba(255,255,255,0.22);
+  transform: translateY(-1px);
+}
+.btn-mira-primary:active {
+  transform: translateY(0);
+}
+
+.btn-mira-glass {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.75);
+  box-shadow: 0 4px 24px -8px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+  transition: box-shadow 0.3s ease, transform 0.2s ease, background 0.3s ease;
+}
+.btn-mira-glass:hover {
+  background: rgba(255,255,255,0.72);
+  box-shadow: 0 8px 36px -8px rgba(0,0,0,0.12);
+  transform: translateY(-1px);
+}
+
+.mira-glass-panel {
+  background: rgba(255,255,255,0.52);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.72);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 24px 64px -24px rgba(0,0,0,0.08),
+    0 4px 16px -4px rgba(0,0,0,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.88);
+}
+
+.mira-platform-card-pulse {
+  animation: platformPulse 5s ease-in-out infinite;
+}
+
+.mira-feature-card {
+  border-radius: 1.25rem;
+  transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s ease;
+}
+.mira-feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 36px 80px -28px rgba(201,162,39,0.18),
+    0 8px 24px -8px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.mira-feature-shine {
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 52%);
+}
+
+.mira-benefit-inner {
+  border-radius: 1.25rem;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease;
+}
+.mira-benefit-inner:hover {
+  transform: translateX(5px);
+  box-shadow: 0 20px 48px -20px rgba(201,162,39,0.14);
+}
+.mira-benefit-inner--alt:hover {
+  transform: translateX(-5px);
+}
+
+.nav-link-mira {
+  position: relative;
+}
+.nav-link-mira::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: #c9a227;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1);
+  border-radius: 1px;
+}
+.nav-link-mira:hover::after {
+  transform: scaleX(1);
+}
+
+.mira-live-badge {
+  animation: badgeFloat 4s ease-in-out infinite;
 }
 

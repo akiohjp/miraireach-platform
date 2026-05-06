@@ -97,7 +97,7 @@ export default function ArticleClient({ article }: ArticleClientProps) {
             >
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Service 03</span>
               <span className="text-lg font-bold text-white group-hover:text-primary transition-colors">AI PR Outreach (Free)</span>
-              <span className="text-xs text-white/60 leading-relaxed">Automate high-authority media outreach to boost your brand's AI credibility instantly.</span>
+              <span className="text-xs text-white/60 leading-relaxed">Automate high-authority media outreach to boost your brand&apos;s AI credibility instantly.</span>
             </Link>
           </div>
 

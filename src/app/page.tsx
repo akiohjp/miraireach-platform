@@ -1,10 +1,5 @@
-import HomeClient from "@/components/HomeClient";
-import { Suspense } from "react";
+import GamImmersiveLp from "@/components/GamImmersiveLp";
 
 export default function Home() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <HomeClient />
-    </Suspense>
-  );
+  return <GamImmersiveLp />;
 }

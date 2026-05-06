@@ -1,25 +1,46 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Header from "./Header";
 
 function ContactForm() {
   const searchParams = useSearchParams();
-  
-  const [service, setService] = useState("");
+  const fromQuery = searchParams.get("service");
+  /** URL sets initial preset; user edits are local-only (avoid sync setState in effects). */
+  const [picked, setPicked] = useState<string | null>(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const service = picked ?? fromQuery ?? "local-seo-audit";
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorText, setErrorText] = useState<string | null>(null);
 
-  useEffect(() => {
-    const s = searchParams.get("service");
-    if (s) setService(s);
-  }, [searchParams]);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-    // Simulate API call
-    setTimeout(() => setStatus("success"), 1500);
+    setErrorText(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, service, message }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        setErrorText(data.error ?? "Something went wrong. Please try again.");
+        setStatus("error");
+        return;
+      }
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      setErrorText("Network error. Please try again.");
+      setStatus("error");
+    }
   };
 
   if (status === "success") {
@@ -30,7 +51,13 @@ function ContactForm() {
         <p className="text-muted">
           We will get back to you from info.ae@miraireach.marketing very shortly.
         </p>
-        <button onClick={() => setStatus("idle")} className="text-xs font-black uppercase tracking-widest underline underline-offset-8">
+        <button
+          onClick={() => {
+            setStatus("idle");
+            setErrorText(null);
+          }}
+          className="text-xs font-black uppercase tracking-widest underline underline-offset-8"
+        >
           Send another message
         </button>
       </div>
@@ -40,14 +67,33 @@ function ContactForm() {
   return (
     <div className="mx-auto max-w-2xl">
       <form onSubmit={handleSubmit} className="space-y-8">
+        {status === "error" && errorText && (
+          <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">{errorText}</p>
+        )}
         <div className="grid gap-6 sm:grid-cols-2">
           <div className="space-y-2">
             <label className="text-[10px] font-black uppercase tracking-widest opacity-50">Full Name</label>
-            <input required type="text" className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors text-foreground" />
+            <input
+              required
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              autoComplete="name"
+              className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors text-foreground"
+            />
           </div>
           <div className="space-y-2">
             <label className="text-[10px] font-black uppercase tracking-widest opacity-50">Email Address</label>
-            <input required type="email" className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors text-foreground" />
+            <input
+              required
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors text-foreground"
+            />
           </div>
         </div>
 
@@ -55,21 +101,37 @@ function ContactForm() {
           <label className="text-[10px] font-black uppercase tracking-widest opacity-50">Interested Service</label>
           <select 
             value={service} 
-            onChange={(e) => setService(e.target.value)}
+            onChange={(e) => setPicked(e.target.value)}
             className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors appearance-none text-foreground"
           >
-            <option value="">Select a Service</option>
-            <option value="local-seo-audit">LocalReach Consultation &amp; Demo</option>
-            <option value="aio-diagnostic">Free AI Search Audit</option>
-            <option value="free-design">Free Web Design</option>
-            <option value="consultancy">AI Strategic Consultancy</option>
-            <option value="other">Other Inquiry</option>
+            <optgroup label="mirAIreach &amp; reputation">
+              <option value="local-seo-audit">mirAIreach Consultation &amp; Demo</option>
+              <option value="localreach">LocalReach — Automated Google Reviews</option>
+            </optgroup>
+            <optgroup label="Paid acquisition">
+              <option value="ai-google-ads">Google AI Ads — AI-managed campaigns</option>
+            </optgroup>
+            <optgroup label="Audits &amp; design">
+              <option value="aio-diagnostic">Free AI Search Audit</option>
+              <option value="free-design">Free Web Design</option>
+            </optgroup>
+            <optgroup label="Strategy">
+              <option value="consultancy">AI Strategic Consultancy</option>
+              <option value="other">Other Inquiry</option>
+            </optgroup>
           </select>
         </div>
 
         <div className="space-y-2">
           <label className="text-[10px] font-black uppercase tracking-widest opacity-50">Message</label>
-          <textarea rows={5} className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors resize-none text-foreground" />
+          <textarea
+            required
+            name="message"
+            rows={5}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="w-full bg-white border border-line rounded-lg px-4 py-3 focus:border-primary outline-none transition-colors resize-none text-foreground"
+          />
         </div>
 
         <button 
@@ -88,7 +150,7 @@ export default function ContactClient() {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-6 py-12 md:px-10">
-        <Header showNav={true} />
+        <Header showNav={true} theme="light" />
         
         <main className="mt-12 space-y-16">
           <div className="text-center space-y-4">
