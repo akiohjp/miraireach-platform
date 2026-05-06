@@ -68,11 +68,13 @@ export async function fetchPublishedArticles(limit = 20, offset = 0): Promise<Ar
         }
       );
       if (!fallbackResponse.ok) return [];
-      return (await fallbackResponse.json()) as Article[];
+      const fallbackData: unknown = await fallbackResponse.json();
+      return Array.isArray(fallbackData) ? (fallbackData as Article[]) : [];
     }
 
     if (!response.ok) return [];
-    return (await response.json()) as Article[];
+    const data: unknown = await response.json();
+    return Array.isArray(data) ? (data as Article[]) : [];
   } catch (error) {
     console.error("Fetch error:", error);
     return [];
