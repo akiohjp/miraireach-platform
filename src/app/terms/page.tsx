@@ -1,8 +1,9 @@
 import TermsClient from "@/components/TermsClient";
 
 export const metadata = {
-  title: "Terms of Service | GAM solutions L.L.C-FZ",
-  description: "Terms and conditions for using the mirAIreach platform.",
+  title: "Terms & Conditions",
+  description:
+    "Terms and Conditions for services provided by GAM Solutions L.L.C-FZ — intellectual property, trademarks, AI disclaimers, liability, and UAE governing law.",
 };
 
 export default function TermsPage() {
