@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 
 const MAX_NAME = 200;
 const MAX_EMAIL = 320;
-const MAX_MESSAGE = 8000;
+/** Quiz block + user notes (contact embeds quiz in this field). */
+const MAX_MESSAGE = 12000;
 
 type Body = {
   name?: string;
@@ -28,6 +29,7 @@ export async function POST(request: Request) {
   const email = trim(body.email, MAX_EMAIL);
   const service = trim(body.service, 120);
   const message = trim(body.message, MAX_MESSAGE);
+  const hasQuizInBody = message.includes("=== LocalReach visibility quiz (answers on file) ===");
 
   if (!name || !email || !message) {
     return NextResponse.json(
@@ -41,7 +43,7 @@ export async function POST(request: Request) {
   }
 
   const to = process.env.CONTACT_TO_EMAIL ?? "info.ae@miraireach.marketing";
-  const subject = `[${service || "inquiry"}] Contact from ${name}`;
+  const subject = `[${service || "inquiry"}]${hasQuizInBody ? " [quiz]" : ""} Contact from ${name}`;
 
   const resendKey = process.env.RESEND_API_KEY;
   const from = process.env.RESEND_FROM;

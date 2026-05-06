@@ -1,17 +1,71 @@
 "use client";
 
-import React, { useState, Suspense } from "react";
+import React, { useState, Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Header from "./Header";
+import {
+  formatLocalReachQuizForMessage,
+  formatLocalReachQuizFromAnswers,
+  LOCALREACH_QUIZ_STORAGE_KEY,
+  readLocalReachQuizTripleFromBrowser,
+} from "@/content/localReachLeadQuiz";
 
 function ContactForm() {
   const searchParams = useSearchParams();
   const fromQuery = searchParams.get("service");
+  const q0 = searchParams.get("q0");
+  const q1 = searchParams.get("q1");
+  const q2 = searchParams.get("q2");
+  /** Parsed quiz; sent in JSON so email always includes answers even if the user clears the textarea. */
+  const [attachedQuiz, setAttachedQuiz] = useState<[string, string, string] | null>(null);
   /** URL sets initial preset; user edits are local-only (avoid sync setState in effects). */
   const [picked, setPicked] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const fromUrl =
+      q0?.trim() && q1?.trim() && q2?.trim() ? ([q0, q1, q2] as [string, string, string]) : null;
+    if (fromUrl) {
+      setAttachedQuiz(fromUrl);
+      try {
+        sessionStorage.setItem(LOCALREACH_QUIZ_STORAGE_KEY, JSON.stringify({ q0, q1, q2 }));
+      } catch {
+        /* ignore quota / private mode */
+      }
+      return;
+    }
+    try {
+      const raw = sessionStorage.getItem(LOCALREACH_QUIZ_STORAGE_KEY);
+      if (!raw) {
+        setAttachedQuiz(null);
+        return;
+      }
+      const o = JSON.parse(raw) as { q0?: string; q1?: string; q2?: string };
+      if (o.q0?.trim() && o.q1?.trim() && o.q2?.trim()) {
+        setAttachedQuiz([o.q0, o.q1, o.q2]);
+      } else {
+        setAttachedQuiz(null);
+      }
+    } catch {
+      setAttachedQuiz(null);
+    }
+  }, [q0, q1, q2]);
+
+  useEffect(() => {
+    if (!attachedQuiz) return;
+    const p = new URLSearchParams();
+    attachedQuiz.forEach((a, i) => p.set(`q${i}`, a));
+    const recordedAt = new Date().toLocaleString("en-AE", {
+      dateStyle: "medium",
+      timeStyle: "short",
+      timeZone: "Asia/Dubai",
+    });
+    const block = formatLocalReachQuizForMessage(p, { recordedAt });
+    if (!block) return;
+    setMessage((m) => (m.trim() === "" ? block : m));
+  }, [attachedQuiz]);
 
   const service = picked ?? fromQuery ?? "local-seo-audit";
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -22,10 +76,26 @@ function ContactForm() {
     setStatus("loading");
     setErrorText(null);
     try {
+      const quizTriple = readLocalReachQuizTripleFromBrowser() ?? attachedQuiz;
+      const recordedAt = new Date().toLocaleString("en-AE", {
+        dateStyle: "medium",
+        timeStyle: "short",
+        timeZone: "Asia/Dubai",
+      });
+      const messageToSend =
+        quizTriple && quizTriple.every(Boolean)
+          ? `${formatLocalReachQuizFromAnswers(quizTriple, { recordedAt })}\n\n--- Message from contact form ---\n\n${message.trim() || "(empty)"}`
+          : message;
+
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, service, message }),
+        body: JSON.stringify({
+          name,
+          email,
+          service,
+          message: messageToSend,
+        }),
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string };
       if (!res.ok) {
@@ -37,6 +107,12 @@ function ContactForm() {
       setName("");
       setEmail("");
       setMessage("");
+      setAttachedQuiz(null);
+      try {
+        sessionStorage.removeItem(LOCALREACH_QUIZ_STORAGE_KEY);
+      } catch {
+        /* ignore */
+      }
     } catch {
       setErrorText("Network error. Please try again.");
       setStatus("error");
@@ -124,8 +200,14 @@ function ContactForm() {
 
         <div className="space-y-2">
           <label className="text-[10px] font-black uppercase tracking-widest opacity-50">Message</label>
+          {attachedQuiz && (
+            <p className="text-xs text-muted rounded-lg border border-primary/20 bg-primary/5 px-3 py-2">
+              Your LocalReach quiz answers are attached to this request and will appear in the email to our
+              team, even if you shorten the text below.
+            </p>
+          )}
           <textarea
-            required
+            required={!attachedQuiz}
             name="message"
             rows={5}
             value={message}

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
 import ReviewFlowHeroAnimation from "@/components/localreach/ReviewFlowHeroAnimation";
 import LocalReachProductionPreviews from "@/components/localreach/LocalReachProductionPreviews";
+import { LOCALREACH_LEAD_QUIZ_QUESTIONS, LOCALREACH_QUIZ_STORAGE_KEY } from "@/content/localReachLeadQuiz";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
 /* ── Local animation helpers ──────────────────────────── */
@@ -124,24 +125,9 @@ const COMPARISON_ROWS = [
   { feature: "Guideline Compliance",            lr: "✓  Compliant",      gen: "✗  Risk",           pop: "N/A" },
 ];
 
-const LEAD_GEN_QUESTIONS = [
-  {
-    question: "How many Google reviews does your business currently have?",
-    options: ["Fewer than 20", "20 – 100", "100 – 300", "300+"],
-  },
-  {
-    question: "How are you currently collecting customer reviews?",
-    options: ["We're not", "Asking verbally", "Paper / QR cards", "An existing tool"],
-  },
-  {
-    question: "What's your biggest growth priority right now?",
-    options: ["More Google reviews", "Repeat customers", "Higher map ranking", "All of the above"],
-  },
-];
-
 // ── Sub-components ─────────────────────────────────────────────────
 
-function GoldButton({ href, children, large }: { href: string; children: React.ReactNode; large?: boolean }) {
+function GoldButton({ href, children, large, onClick }: { href: string; children: React.ReactNode; large?: boolean; onClick?: () => void }) {
   return (
     <Link
       href={href}
@@ -151,6 +137,7 @@ function GoldButton({ href, children, large }: { href: string; children: React.R
       style={{ backgroundColor: GOLD, color: "#000" }}
       onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = GOLD_DARK; }}
       onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = GOLD; }}
+      onClick={onClick}
     >
       {children}
     </Link>
@@ -655,7 +642,30 @@ function GlobalVisual() {
 
 export default function LocalReachClient() {
   const [answers, setAnswers] = useState<Record<number, string>>({});
-  const allAnswered = Object.keys(answers).length === LEAD_GEN_QUESTIONS.length;
+  const lastQuizCardRef = useRef<HTMLDivElement>(null);
+  const wasAllAnswered = useRef(false);
+  const quizLen = LOCALREACH_LEAD_QUIZ_QUESTIONS.length;
+  const allAnswered = [...Array(quizLen).keys()].every((i) => Boolean(answers[i]));
+
+  const contactHrefWithQuiz = useMemo(() => {
+    const p = new URLSearchParams();
+    p.set("service", "local-seo-audit");
+    p.set("source", "localreach-quiz");
+    if (allAnswered) {
+      LOCALREACH_LEAD_QUIZ_QUESTIONS.forEach((_, i) => {
+        const v = answers[i];
+        if (v) p.set(`q${i}`, v);
+      });
+    }
+    return `/contact?${p.toString()}`;
+  }, [allAnswered, answers]);
+
+  useEffect(() => {
+    if (allAnswered && !wasAllAnswered.current) {
+      lastQuizCardRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+    wasAllAnswered.current = allAnswered;
+  }, [allAnswered]);
 
   return (
     <>
@@ -1232,63 +1242,85 @@ export default function LocalReachClient() {
             </p>
 
             <div className="space-y-8 text-left">
-              {LEAD_GEN_QUESTIONS.map(({ question, options }, qi) => (
-                <div
-                  key={qi}
-                  className="rounded-2xl border border-line bg-white p-7 shadow-lg space-y-4"
-                >
-                  <p className="text-sm font-black text-foreground">
-                    <span className="font-black mr-2" style={{ color: GOLD }}>0{qi + 1}.</span>
-                    {question}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {options.map((opt) => {
-                      const selected = answers[qi] === opt;
-                      return (
-                        <button
-                          key={opt}
-                          onClick={() => setAnswers((prev) => ({ ...prev, [qi]: opt }))}
-                          className="px-4 py-2.5 rounded-full text-xs font-bold transition-all border"
-                          style={
-                            selected
-                              ? { backgroundColor: GOLD, borderColor: GOLD, color: "#000" }
-                              : { backgroundColor: "white", borderColor: "#ececec", color: "#222" }
-                          }
+              {LOCALREACH_LEAD_QUIZ_QUESTIONS.map(({ question, options }, qi) => {
+                const isLast = qi === quizLen - 1;
+                return (
+                  <div
+                    key={qi}
+                    ref={isLast ? lastQuizCardRef : undefined}
+                    className="rounded-2xl border border-line bg-white p-7 shadow-lg space-y-4"
+                  >
+                    <p className="text-sm font-black text-foreground">
+                      <span className="font-black mr-2" style={{ color: GOLD }}>0{qi + 1}.</span>
+                      {question}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {options.map((opt) => {
+                        const selected = answers[qi] === opt;
+                        return (
+                          <button
+                            key={opt}
+                            type="button"
+                            onClick={() => setAnswers((prev) => ({ ...prev, [qi]: opt }))}
+                            className="px-4 py-2.5 rounded-full text-xs font-bold transition-all border"
+                            style={
+                              selected
+                                ? { backgroundColor: GOLD, borderColor: GOLD, color: "#000" }
+                                : { backgroundColor: "white", borderColor: "#ececec", color: "#222" }
+                            }
+                          >
+                            {opt}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    {isLast && allAnswered && (
+                      <div className="mt-6 space-y-4 border-t border-line pt-6 text-center">
+                        <div
+                          className="rounded-2xl border p-6"
+                          style={{ backgroundColor: GOLD_BG, borderColor: `${GOLD}60` }}
                         >
-                          {opt}
-                        </button>
-                      );
-                    })}
+                          <p className="text-sm font-black text-foreground mb-1">
+                            ✓ Great — your answers are ready!
+                          </p>
+                          <p className="text-xs text-muted">
+                            Continue to contact — we&apos;ll pre-fill your quiz answers in the message
+                            so our team can prepare your Local SEO Strategy Report.
+                          </p>
+                        </div>
+                        <GoldButton
+                          href={contactHrefWithQuiz}
+                          large
+                          onClick={() => {
+                            try {
+                              const t0 = answers[0]?.trim();
+                              const t1 = answers[1]?.trim();
+                              const t2 = answers[2]?.trim();
+                              if (t0 && t1 && t2) {
+                                sessionStorage.setItem(
+                                  LOCALREACH_QUIZ_STORAGE_KEY,
+                                  JSON.stringify({ q0: t0, q1: t1, q2: t2 }),
+                                );
+                              }
+                            } catch {
+                              /* ignore */
+                            }
+                          }}
+                        >
+                          Book My Free Consultation →
+                        </GoldButton>
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            <div className="mt-10 space-y-4">
-              {allAnswered ? (
-                <>
-                  <div
-                    className="rounded-2xl border p-6 text-center"
-                    style={{ backgroundColor: GOLD_BG, borderColor: `${GOLD}60` }}
-                  >
-                    <p className="text-sm font-black text-foreground mb-1">
-                      ✓ Great — your answers are ready!
-                    </p>
-                    <p className="text-xs text-muted">
-                      Book your free consultation below. Our team will prepare a personalised
-                      Local SEO Strategy Report based on your responses.
-                    </p>
-                  </div>
-                  <GoldButton href="/contact?service=local-seo-audit" large>
-                    Book My Free Consultation →
-                  </GoldButton>
-                </>
-              ) : (
-                <p className="text-xs text-muted">
-                  Answer all 3 questions above to unlock your free consultation.
-                </p>
-              )}
-            </div>
+            {!allAnswered && (
+              <p className="mt-10 text-xs text-muted">
+                Answer all 3 questions above to unlock your free consultation.
+              </p>
+            )}
           </div>
         </section>
 
