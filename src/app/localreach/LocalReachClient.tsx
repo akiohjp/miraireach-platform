@@ -883,9 +883,9 @@ export default function LocalReachClient() {
         </section>
 
         {/* ── 1b. PRODUCTION UI PREVIEWS (UAE) ─────────────────────── */}
-        <section className="border-t border-gray-200 bg-[#f8f8f9] py-16 md:py-20">
+        <section className="border-t border-gray-200 bg-[#f8f8f9] py-12 md:py-16">
           <div className="mx-auto max-w-6xl px-6 md:px-10">
-            <LRFadeUp className="mb-10 text-center md:text-left">
+            <LRFadeUp className="mb-6 text-center md:mb-8 md:text-left">
               <SectionLabel>Platform</SectionLabel>
               <h2 className="mt-2 text-3xl font-black tracking-tight text-gray-900 md:text-4xl">
                 Inside the LocalReach product

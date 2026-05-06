@@ -577,7 +577,7 @@ function LocalReachProductSection() {
       id="localreach"
       className="border-b border-black/[0.06] bg-white px-6 py-12 md:px-10 md:py-16"
     >
-      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-2 lg:gap-10">
         <div className="space-y-5 lg:space-y-6">
           <motion.div
             className="flex flex-wrap items-center gap-2 md:gap-3"
@@ -717,7 +717,7 @@ function LocalReachProductSection() {
         </div>
 
         <motion.div
-          className="relative flex flex-col items-stretch gap-10"
+          className="relative flex flex-col items-stretch gap-6 md:gap-7"
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.1, duration: 0.85, ease: EASE }}
