@@ -17,6 +17,29 @@ function trim(s: unknown, max: number): string {
   return s.trim().slice(0, max);
 }
 
+/** Resend / many clients render `html`; `text`-only can show a blank body in some inboxes (e.g. Zoho). */
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function buildEmailPayloadText(service: string, name: string, email: string, message: string): string {
+  return `Service: ${service || "(none)"}\nFrom: ${name} <${email}>\n\n${message}\n`;
+}
+
+function buildEmailPayloadHtml(service: string, name: string, email: string, message: string): string {
+  const safe = escapeHtml(message);
+  return `<!DOCTYPE html><html><body style="font-family:system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.55;color:#111;">
+<p style="margin:0 0 12px;"><strong>Service:</strong> ${escapeHtml(service || "(none)")}</p>
+<p style="margin:0 0 16px;"><strong>From:</strong> ${escapeHtml(name)} &lt;${escapeHtml(email)}&gt;</p>
+<hr style="border:none;border-top:1px solid #e5e5e5;margin:16px 0;" />
+<pre style="margin:0;white-space:pre-wrap;word-break:break-word;font-family:inherit;">${safe}</pre>
+</body></html>`;
+}
+
 export async function POST(request: Request) {
   let body: Body;
   try {
@@ -49,7 +72,8 @@ export async function POST(request: Request) {
   const from = process.env.RESEND_FROM;
 
   if (resendKey && from) {
-    const text = `Service: ${service || "(none)"}\nFrom: ${name} <${email}>\n\n${message}\n`;
+    const text = buildEmailPayloadText(service, name, email, message);
+    const html = buildEmailPayloadHtml(service, name, email, message);
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -62,6 +86,7 @@ export async function POST(request: Request) {
         reply_to: email,
         subject,
         text,
+        html,
       }),
     });
 
