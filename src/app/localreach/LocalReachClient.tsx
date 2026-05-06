@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
 import ReviewFlowHeroAnimation from "@/components/localreach/ReviewFlowHeroAnimation";
+import LocalReachProductionPreviews from "@/components/localreach/LocalReachProductionPreviews";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
 /* ── Local animation helpers ──────────────────────────── */
@@ -878,6 +879,23 @@ export default function LocalReachClient() {
               </div>
 
             </div>
+          </div>
+        </section>
+
+        {/* ── 1b. PRODUCTION UI PREVIEWS (UAE) ─────────────────────── */}
+        <section className="border-t border-gray-200 bg-[#f8f8f9] py-16 md:py-20">
+          <div className="mx-auto max-w-6xl px-6 md:px-10">
+            <LRFadeUp className="mb-10 text-center md:text-left">
+              <SectionLabel>Platform</SectionLabel>
+              <h2 className="mt-2 text-3xl font-black tracking-tight text-gray-900 md:text-4xl">
+                Inside the LocalReach product
+              </h2>
+              <p className="mt-3 max-w-2xl mx-auto text-base text-gray-600 md:mx-0 md:text-left">
+                Representative admin, store dashboard, and customer review screens — localized for UAE store operations
+                (preview only; not wired to your live account).
+              </p>
+            </LRFadeUp>
+            <LocalReachProductionPreviews />
           </div>
         </section>
 

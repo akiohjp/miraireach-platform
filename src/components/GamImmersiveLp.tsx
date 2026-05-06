@@ -18,6 +18,7 @@ import ScrollParallax from "@/components/miraireach/ScrollParallax";
 import MagneticLink from "@/components/miraireach/MagneticLink";
 import EcosystemFlowAnimation from "@/components/miraireach/EcosystemFlowAnimation";
 import LocalReachShowcase from "@/components/miraireach/LocalReachShowcase";
+import LocalReachProductionPreviews from "@/components/localreach/LocalReachProductionPreviews";
 import { GAM_MISSION_AND_VISION_BLOCKS } from "@/content/gamAboutCopy";
 import { GAM_FAQ_ITEMS } from "@/content/gamFaq";
 
@@ -716,12 +717,15 @@ function LocalReachProductSection() {
         </div>
 
         <motion.div
-          className="relative flex justify-center"
+          className="relative flex flex-col items-stretch gap-10"
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.1, duration: 0.85, ease: EASE }}
         >
-          <LocalReachShowcase />
+          <div className="flex justify-center">
+            <LocalReachShowcase />
+          </div>
+          <LocalReachProductionPreviews embedded />
         </motion.div>
       </div>
     </section>
