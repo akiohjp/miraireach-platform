@@ -1,27 +1,27 @@
 export const GAM_FAQ_ITEMS = [
   {
-    question: "What exactly does mirAIreach do for my business?",
+    question: "What exactly does mirAIreach do for my business in Dubai or the UAE?",
     answer:
-      "mirAIreach is an AI-driven marketing service that optimizes your digital visibility. We organize your everyday content—such as Instagram posts and customer reviews—into a structure that AI systems easily understand. This ensures your business is highly evaluated and prominently displayed across Google Search, Google Maps, AI searches, and voice searches.",
+      "mirAIreach is an AI marketing and digital marketing layer built for Dubai and UAE operators. We structure your reviews, posts, and business data so AI systems—from Google AI Overviews and ChatGPT-style answers to maps and voice—can clearly understand and recommend you. It is GEO (generative engine optimization) and Dubai AIO-style visibility, not just traditional SEO.",
   },
   {
     question: "Will this add extra work or operational burden to my staff?",
     answer:
-      "Not at all. Your team only needs to continue posting on Instagram using designated keywords and collecting customer reviews. Our AI handles the complex optimization and automatically syncs your content to your Google Business Profile (GBP) in the background.",
+      "No. Your team keeps normal routines (for example Instagram posts with agreed keywords and collecting customer reviews). Our AI marketing automation syncs and optimizes in the background, including Google Business Profile updates where applicable, so you get UAE-wide digital presence without hiring a large in-house marketing desk.",
   },
   {
     question: "What are the pricing structure and contract terms?",
     answer:
-      "Our pricing consists of an initial setup fee and a simple monthly subscription. To ensure we build a strong, sustainable foundation for your digital visibility, we require a minimum contract period of 6 months.",
+      "Pricing is a setup fee plus a monthly subscription, designed for predictable Dubai marketing spend. We use a minimum six-month term so GEO, reputation, and directory foundations have time to compound across the Emirates.",
   },
   {
     question: "We have multiple branches. Can your system handle multi-location operations?",
     answer:
-      "Yes. Our solution is designed to solve marketing challenges systematically rather than relying on individual, manual effort. This removes dependency on specific staff members and makes our service highly scalable and perfectly suited for multi-store expansions.",
+      "Yes. The stack is built for scalable digital marketing across Abu Dhabi, Dubai, Sharjah, and wider UAE footprints—consistent listings, reviews, and AI-visible signals per location without depending on one heroic staff member.",
   },
   {
     question: "Is this service currently available and ready to use?",
     answer:
-      "Absolutely. Operating on a collaborative UAE–Japan model, mirAIreach is not just a concept—it is fully in the execution phase. Our company is established, our systems are built, and we are ready for immediate operation to support your business.",
+      "Yes. GAM solutions L.L.C-FZ operates a live UAE–Japan execution model: company incorporated, systems running, and AI marketing / GEO programs ready for onboarding across Dubai and the UAE.",
   },
 ] as const;

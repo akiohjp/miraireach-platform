@@ -413,7 +413,7 @@ function HeroBlock() {
           animate={{ opacity: 1, filter: "blur(0px)" }}
           transition={{ duration: 1.15, delay: 0.08, ease: EASE }}
         >
-          AI marketing infrastructure
+          AI marketing · Dubai &amp; UAE
         </motion.p>
 
         <h1 className="m-0 p-0 font-normal">
@@ -456,8 +456,9 @@ function HeroBlock() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.15, delay: 0.55, ease: EASE }}
         >
-          GAM solutions bridges reputation, reviews, and AI discovery — so customers meet you
-          first, across ChatGPT, Google, maps, and the open web.
+          GAM solutions delivers AI marketing and digital marketing for Dubai and the UAE: GEO, Dubai AIO-style
+          visibility, reputation, and maps — so customers meet you first across ChatGPT-class answers, Google AI
+          surfaces, Maps, and the open web.
         </motion.p>
 
         <motion.div
@@ -547,9 +548,9 @@ function EcosystemFlowSection() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.12, duration: 0.8, ease: EASE }}
         >
-          Your main social channel supplies the story; mirAIreach turns it into consistent business data for Google.
-          From there, automated sign-up and citation sync connect you to directories and the open internet — not just a
-          single platform.
+          Your social channel supplies the story; mirAIreach turns it into structured data for Google and AI answers.
+          Automated signup and citation sync extend Dubai marketing and UAE digital footprint across directories and
+          the wider web—not a single silo.
         </motion.p>
       </div>
       <div className="relative mx-auto mt-8 max-w-5xl md:mt-10">
@@ -641,9 +642,9 @@ function LocalReachProductSection() {
             animate={inView ? { opacity: 1 } : {}}
             transition={{ delay: 0.12, duration: 0.75, ease: EASE }}
           >
-            Turn satisfied guests into 5-star Google reviews automatically. Smart QR codes and intelligent feedback
-            routing surface praise publicly and route concerns privately — so your Maps profile climbs without extra
-            staff time.
+            Turn satisfied guests into five-star Google reviews automatically—built for Dubai and UAE hospitality and
+            retail. Smart QR codes and feedback routing lift Maps visibility while protecting your brand; core AI
+            marketing for local discovery in the Emirates.
           </motion.p>
 
           <motion.ul
@@ -686,7 +687,7 @@ function LocalReachProductSection() {
               </div>
               <div className="flex flex-col">
                 <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">
-                  Trusted by Dubai&apos;s top
+                  Trusted across Dubai &amp; the UAE
                 </p>
                 <p className="text-xs font-bold text-gray-800">F&amp;B groups &amp; retailers</p>
               </div>
@@ -777,9 +778,9 @@ function GoogleAiAdsSection() {
             animate={inView ? { opacity: 1 } : {}}
             transition={{ delay: 0.1, duration: 0.75, ease: EASE }}
           >
-            Traditional agencies guess. Our AI optimizes every dirham of your ad spend in real time — targeting the
-            right audience at the right moment with the right message. ROI that manual campaign managers simply
-            can&apos;t match.
+            Traditional agencies guess. Our AI optimizes every dirham of your ad spend in real time for Dubai and UAE
+            audiences—targeting the right audience at the right moment with the right message. ROI that manual campaign
+            managers simply can&apos;t match.
           </motion.p>
           <motion.ul
             className="space-y-3"
@@ -996,7 +997,7 @@ function TimelineStrip() {
   const steps = [
     {
       y: "2026",
-      t: "Deploying next-generation systems proven in Japan. Gain an exclusive first-mover advantage with Dubai's newest marketing mechanism.",
+      t: "Deploying AI marketing systems proven in Japan—now packaged for Dubai marketing and UAE-wide digital marketing. Gain first-mover advantage with GEO, Dubai AIO programs, and automation built for the Emirates.",
     },
   ];
   const ref = useRef(null);
@@ -1059,25 +1060,25 @@ const CAPABILITIES = [
   {
     title: "mirAIreach",
     sub: "Flagship engine",
-    body: "Reputation, reviews, and response flows tuned for how people actually decide.",
+    body: "Dubai and UAE AI marketing core: reputation, reviews, and flows tuned for how people actually decide—Maps, AI answers, and digital marketing in one lane.",
     href: "/localreach",
   },
   {
     title: "GEO & AI Search",
-    sub: "Where answers are written",
-    body: "Structured visibility across ChatGPT-style answers, Google AI surfaces, and Perplexity-class discovery.",
+    sub: "Generative engine optimization",
+    body: "GEO for ChatGPT-class answers, Google AI Overviews, Perplexity-style discovery, and Dubai AIO visibility—structured so AI recommends your brand in the Emirates.",
     href: "/contact",
   },
   {
     title: "Directory sync",
     sub: "Everywhere local",
-    body: "100+ listings aligned so maps, voice, and mobile search tell one true story.",
+    body: "100+ listings aligned for UAE-wide Dubai marketing: maps, voice, and mobile search tell one true story from Abu Dhabi to Dubai and beyond.",
     href: "/contact",
   },
   {
     title: "Campaign layer",
     sub: "Ads that learn",
-    body: "Creative and targeting that feeds back into what AI systems remember about your brand.",
+    body: "Performance creative and targeting that feeds AI memory about your brand—digital marketing and paid media aligned with GEO and AIO signals.",
     href: "/contact",
   },
 ];
@@ -1100,10 +1101,11 @@ function CapabilitiesGrid() {
             what we offer
           </p>
           <h2 className="mt-4 mb-4 font-serif text-4xl md:text-5xl" style={{ color: INK }}>
-            When intent becomes infrastructure.
+            When intent becomes infrastructure—in Dubai, Abu Dhabi, and across the UAE.
           </h2>
           <p className="mb-16 max-w-2xl text-base leading-relaxed md:mb-20" style={{ color: MUTED }}>
-            Like a house of brands, each layer serves a different moment — from first search to repeat visit — with one coherent spine.
+            One spine for AI marketing, GEO, digital marketing, and paid layers—aligned to how buyers discover brands
+            in the Emirates, from AI answers to maps and the open web.
           </p>
         </RevealStaggerGroup>
 
@@ -1213,7 +1215,8 @@ function PlatformStatement() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.18, duration: 1, ease: EASE }}
         >
-          Built for operators who want craft-grade execution without losing the tempo of performance marketing.
+          Built for operators in Dubai and the UAE who want craft-grade AI marketing and digital marketing execution—
+          GEO, Dubai AIO, and performance tempo without losing coherence.
         </motion.p>
         <motion.div
           className="mt-14 flex flex-col items-center"
@@ -1229,6 +1232,98 @@ function PlatformStatement() {
           </MagneticLink>
         </motion.div>
       </ScrollParallax>
+    </section>
+  );
+}
+
+/** Dubai / UAE — crawler-visible English SEO block. */
+function SeoDubaiUaeSection() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-12%" });
+  const reduce = useReducedMotion();
+
+  return (
+    <section
+      id="dubai-uae-ai-marketing"
+      ref={ref}
+      aria-labelledby="seo-dubai-uae-heading"
+      className="scroll-mt-28 border-t border-black/[0.06] bg-[#faf8f5] px-6 py-20 md:px-12 md:py-28"
+    >
+      <div className="mx-auto max-w-3xl">
+        <p
+          className="text-[10px] uppercase tracking-[0.35em]"
+          style={{ color: MUTED }}
+        >
+          Dubai · UAE
+        </p>
+        <h2
+          id="seo-dubai-uae-heading"
+          className="mt-4 font-serif text-3xl leading-tight md:text-4xl lg:text-5xl"
+          style={{ color: INK }}
+        >
+          AI marketing, GEO &amp; Dubai AIO for the{" "}
+          <span style={{ color: GOLD }}>UAE</span>
+        </h2>
+        <motion.p
+          className="mt-8 text-base font-light leading-relaxed md:text-lg"
+          style={{ color: MUTED }}
+          initial={{ opacity: 0, y: 14 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.75, ease: EASE }}
+        >
+          GAM solutions builds{" "}
+          <strong className="font-medium" style={{ color: INK }}>
+            digital marketing
+          </strong>{" "}
+          and{" "}
+          <strong className="font-medium" style={{ color: INK }}>
+            AI marketing
+          </strong>{" "}
+          infrastructure for operators in{" "}
+          <strong className="font-medium" style={{ color: INK }}>
+            Dubai
+          </strong>{" "}
+          and across the{" "}
+          <strong className="font-medium" style={{ color: INK }}>
+            United Arab Emirates (UAE)
+          </strong>
+          . We combine{" "}
+          <strong className="font-medium" style={{ color: INK }}>
+            GEO
+          </strong>{" "}
+          (generative engine optimization)—ChatGPT-style systems, Perplexity-class discovery, and Google AI surfaces—with{" "}
+          <strong className="font-medium" style={{ color: INK }}>
+            Dubai AIO
+          </strong>{" "}
+          and AI-overviews-style visibility, plus reputation, reviews, and maps—so your brand is
+          recommended where buyers search in the Emirates.
+        </motion.p>
+        <motion.p
+          className="mt-6 text-base font-light leading-relaxed md:text-lg"
+          style={{ color: MUTED }}
+          initial={{ opacity: 0, y: 14 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: reduce ? 0 : 0.08, duration: 0.75, ease: EASE }}
+        >
+          <strong className="font-medium" style={{ color: INK }}>
+            Dubai marketing
+          </strong>{" "}
+          in the UAE now spans classic search, social, maps, and generative AI answers. Whether you serve tourists on
+          Sheikh Zayed Road or B2B buyers in Business Bay, our stack aligns{" "}
+          <strong className="font-medium" style={{ color: INK }}>
+            digital marketing
+          </strong>
+          ,{" "}
+          <strong className="font-medium" style={{ color: INK }}>
+            AI
+          </strong>
+          -driven discovery, and{" "}
+          <strong className="font-medium" style={{ color: INK }}>
+            GEO
+          </strong>{" "}
+          so your brand is cited where decisions are formed across the Emirates.
+        </motion.p>
+      </div>
     </section>
   );
 }
@@ -1255,7 +1350,7 @@ function FaqSection() {
             Frequently asked questions
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed" style={{ color: MUTED }}>
-            Straight answers on how mirAIreach works, effort, pricing, scale, and availability.
+            Straight answers on mirAIreach, AI marketing, GEO, and Dubai operations across the UAE.
           </p>
         </RevealStaggerGroup>
 
@@ -1361,7 +1456,7 @@ function ClosingCta() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.35, duration: 0.95, ease: EASE }}
         >
-          Tell us your markets and we’ll map the GEO and reputation work that closes the gap.
+          Tell us your Dubai and UAE markets—we’ll map GEO, Dubai AIO, and reputation work that closes the gap.
         </motion.p>
         <motion.div
           className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-4"
@@ -1513,6 +1608,7 @@ export default function GamImmersiveLp() {
         <TimelineStrip />
         <CapabilitiesGrid />
         <PlatformStatement />
+        <SeoDubaiUaeSection />
         <FaqSection />
         <ClosingCta />
       </main>

@@ -32,14 +32,20 @@ const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "GAM solutions L.L.C-FZ | AI & DX Solutions in Dubai",
-  description: "Dubai's leading AI-powered business intelligence platform for DX and AIO.",
+  title: {
+    default: "GAM solutions L.L.C-FZ | Dubai & UAE AI Marketing, GEO & Digital Marketing",
+    template: "%s | GAM solutions",
+  },
+  description:
+    "GAM solutions: Dubai and UAE-focused AI marketing, digital marketing, GEO, and Dubai AIO — mirAIreach, LocalReach, and campaigns for operators across the Emirates.",
   openGraph: {
     type: "website",
     url: "/",
     siteName: "GAM solutions L.L.C-FZ",
-    title: "GAM solutions L.L.C-FZ | AI & DX Solutions in Dubai",
-    description: "Dubai's leading AI-powered business intelligence platform for DX and AIO.",
+    title: "GAM solutions L.L.C-FZ | Dubai & UAE AI Marketing & GEO",
+    description:
+      "Dubai and UAE AI marketing, digital marketing, GEO (generative engine optimization), and Dubai AIO visibility for businesses in the Emirates.",
+    locale: "en_AE",
   },
 };
 
@@ -50,7 +56,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-AE"
       dir="ltr"
       className={`${urbanist.variable} ${cormorant.variable} ${geistMono.variable} ${notoArabic.variable} h-full antialiased`}
     >
