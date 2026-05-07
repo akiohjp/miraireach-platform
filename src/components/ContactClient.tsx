@@ -6,6 +6,7 @@ import Header from "./Header";
 import {
   formatLocalReachQuizForMessage,
   formatLocalReachQuizFromAnswers,
+  LOCALREACH_QUIZ_BODY_MARKER,
   LOCALREACH_QUIZ_STORAGE_KEY,
   readLocalReachQuizTripleFromBrowser,
 } from "@/content/localReachLeadQuiz";
@@ -82,10 +83,14 @@ function ContactForm() {
         timeStyle: "short",
         timeZone: "Asia/Dubai",
       });
+      const trimmed = message.trim();
+      const messageAlreadyHasQuiz = trimmed.includes(LOCALREACH_QUIZ_BODY_MARKER);
       const messageToSend =
-        quizTriple && quizTriple.every(Boolean)
-          ? `${formatLocalReachQuizFromAnswers(quizTriple, { recordedAt })}\n\n--- Message from contact form ---\n\n${message.trim() || "(empty)"}`
-          : message;
+        messageAlreadyHasQuiz
+          ? trimmed
+          : quizTriple && quizTriple.every(Boolean)
+            ? `${formatLocalReachQuizFromAnswers(quizTriple, { recordedAt })}\n\n--- Message from contact form ---\n\n${trimmed || "(empty)"}`
+            : trimmed;
 
       const res = await fetch("/api/contact", {
         method: "POST",

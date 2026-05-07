@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { LOCALREACH_QUIZ_BODY_MARKER } from "@/content/localReachLeadQuiz";
 
 const MAX_NAME = 200;
 const MAX_EMAIL = 320;
@@ -52,7 +53,7 @@ export async function POST(request: Request) {
   const email = trim(body.email, MAX_EMAIL);
   const service = trim(body.service, 120);
   const message = trim(body.message, MAX_MESSAGE);
-  const hasQuizInBody = message.includes("=== LocalReach visibility quiz (answers on file) ===");
+  const hasQuizInBody = message.includes(LOCALREACH_QUIZ_BODY_MARKER);
 
   if (!name || !email || !message) {
     return NextResponse.json(

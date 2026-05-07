@@ -2,6 +2,8 @@
  * LocalReach /free strategy report lead quiz — shared by `/localreach` and `/contact` prefill.
  */
 export const LOCALREACH_QUIZ_STORAGE_KEY = "localreach-quiz-v1";
+/** First line of the quiz block; used to detect prefilled textarea vs server merge. */
+export const LOCALREACH_QUIZ_BODY_MARKER = "=== LocalReach visibility quiz (answers on file) ===";
 export const LOCALREACH_LEAD_QUIZ_QUESTIONS = [
   {
     question: "How many Google reviews does your business currently have?",
@@ -42,7 +44,7 @@ export function formatLocalReachQuizFromAnswers(
   }).join("\n\n");
 
   const header = [
-    "=== LocalReach visibility quiz (answers on file) ===",
+    LOCALREACH_QUIZ_BODY_MARKER,
     "",
     "The lead completed the 3 questions on the LocalReach page before opening this form.",
     "Use the summary for a quick scan; detail matches the exact on-page wording.",
@@ -66,7 +68,6 @@ export function formatLocalReachQuizFromAnswers(
   return header;
 }
 
-/** Validate + cap length for API / JSON POST. */
 /** Read q0–q2 from the live URL + sessionStorage (browser only). Call at submit time so data is not lost if React state lags. */
 export function readLocalReachQuizTripleFromBrowser(): [string, string, string] | null {
   if (typeof window === "undefined") return null;
