@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import GamImmersiveLp from "@/components/GamImmersiveLp";
 import { GAM_FAQ_ITEMS } from "@/content/gamFaq";
-import { getSiteUrl } from "@/lib/site";
+import { getOgImageAbsoluteUrl, getSiteUrl, OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from "@/lib/site";
 
 const siteUrl = getSiteUrl();
+const ogImageUrl = getOgImageAbsoluteUrl();
 
 export const metadata: Metadata = {
   title: "Dubai & UAE AI Marketing | GEO, AIO & Digital Marketing | GAM solutions",
@@ -38,14 +39,16 @@ export const metadata: Metadata = {
     description:
       "AI marketing, GEO, and Dubai AIO for businesses in Dubai and the UAE — built for AI discovery, maps, and performance.",
     locale: "en_AE",
-    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "GAM solutions — Dubai & UAE AI marketing" }],
+    images: [
+      { url: ogImageUrl, width: OG_IMAGE_WIDTH, height: OG_IMAGE_HEIGHT, alt: "GAM solutions — Dubai & UAE AI marketing" },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dubai & UAE AI Marketing | GEO & AIO | GAM solutions",
     description:
       "AI marketing, digital marketing, GEO, and Dubai AIO for Dubai and the UAE.",
-    images: [{ url: "/twitter-image", width: 1200, height: 630, alt: "GAM solutions — Dubai & UAE AI marketing" }],
+    images: [{ url: ogImageUrl, width: OG_IMAGE_WIDTH, height: OG_IMAGE_HEIGHT, alt: "GAM solutions — Dubai & UAE AI marketing" }],
   },
 };
 
