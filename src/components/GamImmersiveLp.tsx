@@ -743,11 +743,11 @@ function LocalReachProductSection() {
   );
 }
 
-/** Color bar + copy so the block reads as Google Ads / Performance ecosystem at a glance. */
+/** Color bar + copy so the block reads as Google Ads + AI (Search, Ads Advisor, etc.). */
 function GoogleAdsEcosystemRibbon() {
   return (
-    <div className="flex flex-col gap-3 rounded-2xl border border-black/[0.08] bg-gradient-to-br from-white to-gray-50 px-4 py-3.5 shadow-sm sm:flex-row sm:items-center sm:gap-4">
-      <div className="flex items-center gap-2" aria-hidden>
+    <div className="flex flex-col gap-3 rounded-2xl border border-black/[0.08] bg-gradient-to-br from-white to-gray-50 px-4 py-3.5 shadow-sm sm:flex-row sm:items-start sm:gap-4">
+      <div className="flex items-center gap-2 sm:pt-0.5" aria-hidden>
         <div className="flex gap-1">
           {G_BRAND_BAR.map((c) => (
             <span key={c} className="h-10 w-2 rounded-full shadow-sm" style={{ backgroundColor: c }} />
@@ -763,16 +763,20 @@ function GoogleAdsEcosystemRibbon() {
           <MousePointerClick className="h-5 w-5 shrink-0 text-[#34A853]" strokeWidth={2} aria-hidden />
         </div>
       </div>
-      <div className="min-w-0 flex-1 space-y-1">
+      <div className="min-w-0 flex-1 space-y-2">
         <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500">Google Ads powered growth</p>
         <p className="text-sm font-bold leading-snug text-gray-900 md:text-base">
           <span style={{ color: G_ADS_PRIMARY }}>Search</span>
           <span className="text-gray-400"> · </span>
-          Performance Max
+          <span className="font-bold text-gray-900">Ads Advisor (beta)</span>
           <span className="text-gray-400"> · </span>
           Demand Gen
           <span className="text-gray-400"> · </span>
           YouTube
+        </p>
+        <p className="text-xs font-medium leading-relaxed text-gray-600 md:text-[13px]">
+          Ads Advisor (beta) is a conversational agent built with the Gemini family of models. It is designed to assist
+          with campaign performance, optimization, and reporting.
         </p>
       </div>
     </div>
