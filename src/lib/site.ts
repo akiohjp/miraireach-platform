@@ -4,17 +4,16 @@ export function getSiteUrl() {
   return raw.trim().replace(/\/+$/, "");
 }
 
-const OG_DEFAULT_ROUTE = "/opengraph-image";
+const OG_DEFAULT_ROUTE = "/og/gam-solutions-og.png";
 
-/** Default OG/Twitter card size (recommended for social previews). */
+/** Default OG/Twitter card size (recommended for social previews). Facebook often uses 1200×630 — our PNG may differ aspect; platforms will crop/scale. */
 export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;
 
 /**
  * Absolute URL for `og:image` / Twitter large card.
- * - Set `NEXT_PUBLIC_OG_IMAGE_URL` to a high-res JPG/PNG (recommended 1200×630), e.g.
- *   `https://miraireach.marketing/og/gam-social.jpg` or path `/og/gam-social.jpg` under `public/`.
- * - If unset, uses the generated `/opengraph-image` route.
+ * - Set `NEXT_PUBLIC_OG_IMAGE_URL` to override (absolute URL or `/path` under site).
+ * - Default: high-res branded PNG in `/public/og/gam-solutions-og.png`.
  */
 export function getOgImageAbsoluteUrl(): string {
   const raw = process.env.NEXT_PUBLIC_OG_IMAGE_URL?.trim();
