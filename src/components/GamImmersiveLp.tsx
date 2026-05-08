@@ -12,7 +12,7 @@ import {
   useInView,
 } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowRight, ArrowUpRight, BarChart3, CheckCircle, ChevronDown, Globe, MapPin, Megaphone, Menu, MousePointerClick, Star, Target, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BarChart3, CheckCircle, ChevronDown, Globe, MapPin, Megaphone, Menu, MousePointerClick, Rocket, Star, Target, X } from "lucide-react";
 import RevealStaggerGroup from "@/components/miraireach/RevealStaggerGroup";
 import ScrollParallax from "@/components/miraireach/ScrollParallax";
 import MagneticLink from "@/components/miraireach/MagneticLink";
@@ -21,6 +21,7 @@ import LocalReachShowcase from "@/components/miraireach/LocalReachShowcase";
 import LocalReachProductionPreviews from "@/components/localreach/LocalReachProductionPreviews";
 import { GAM_MISSION_AND_VISION_BLOCKS } from "@/content/gamAboutCopy";
 import { GAM_FAQ_ITEMS } from "@/content/gamFaq";
+import { GOOGLE_AI_ADS_WHY_CHOOSE } from "@/content/googleAiAdsCopy";
 
 const CREAM = "#f7f5f0";
 const INK = "#1a1714";
@@ -817,6 +818,103 @@ function GoogleAdsMicroGallery() {
   );
 }
 
+/** Inline **bold** and *italic* in Google Ads copy strings. */
+function RichAdsCopy({ text }: { text: string }) {
+  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter((p) => p.length > 0);
+  return (
+    <>
+      {parts.map((chunk, i) => {
+        if (chunk.startsWith("**") && chunk.endsWith("**")) {
+          return (
+            <strong key={i} className="font-bold text-gray-900">
+              {chunk.slice(2, -2)}
+            </strong>
+          );
+        }
+        if (chunk.startsWith("*") && chunk.endsWith("*")) {
+          return (
+            <em key={i} className="italic text-gray-800">
+              {chunk.slice(1, -1)}
+            </em>
+          );
+        }
+        return <span key={i}>{chunk}</span>;
+      })}
+    </>
+  );
+}
+
+function GoogleAdsWhyChooseDeepDive({ inView }: { inView: boolean }) {
+  const { heading, lead, items } = GOOGLE_AI_ADS_WHY_CHOOSE;
+
+  return (
+    <div className="mt-14 border-t border-black/[0.06] pt-12 md:mt-20 md:pt-16">
+      <motion.div
+        className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5"
+        initial={{ opacity: 0, y: 12 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.65, ease: EASE }}
+      >
+        <div
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-sm ring-1 ring-[#1a73e8]/25"
+          style={{
+            background: `linear-gradient(145deg, ${G_ADS_PRIMARY}18, #fff)`,
+          }}
+          aria-hidden
+        >
+          <Rocket className="h-7 w-7 text-[#1a73e8]" strokeWidth={2} />
+        </div>
+        <div className="min-w-0">
+          <p className="text-[10px] font-bold uppercase tracking-[0.26em] text-gray-500 md:text-[11px]">
+            Strategic pillars
+          </p>
+          <h3 className="font-serif text-2xl font-medium leading-snug tracking-tight text-gray-900 md:text-3xl">
+            {heading}
+          </h3>
+          <p className="mt-3 max-w-3xl text-base font-medium leading-relaxed text-gray-700 md:text-lg">{lead}</p>
+        </div>
+      </motion.div>
+
+      <div className="grid gap-5 md:grid-cols-2">
+        {items.map((item, idx) => (
+          <motion.article
+            key={item.n}
+            className={
+              item.n === 5
+                ? "rounded-2xl border border-black/[0.07] bg-gradient-to-br from-[#f8fafc] to-white p-5 shadow-sm ring-1 ring-[#1a73e8]/10 md:col-span-2 md:p-7"
+                : "rounded-2xl border border-black/[0.06] bg-gradient-to-br from-white to-gray-50/80 p-5 shadow-sm md:p-6"
+            }
+            initial={{ opacity: 0, y: 14 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.06 + idx * 0.05, duration: 0.65, ease: EASE }}
+          >
+            <div className="flex gap-4 md:gap-5">
+              <span
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-sm font-black text-white shadow-sm"
+                style={{ backgroundColor: G_ADS_PRIMARY }}
+                aria-hidden
+              >
+                {item.n}
+              </span>
+              <div className="min-w-0">
+                <h4 className="font-serif text-lg font-semibold tracking-tight text-gray-900 md:text-xl">
+                  {item.title}
+                </h4>
+                <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1a73e8] md:text-xs">
+                  {item.subtitle}
+                </p>
+                <p className="mt-3 text-sm font-medium leading-relaxed text-gray-700 md:text-[15px] md:leading-relaxed">
+                  <RichAdsCopy text={item.body} />
+                </p>
+              </div>
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /** Suggests signed-in Google Ads without using Google trademarks as artwork. */
 function GoogleAdsOmnibarStrip() {
   return (
@@ -844,13 +942,6 @@ function GoogleAdsOmnibarStrip() {
 function GoogleAiAdsSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-12%" });
-
-  const bullets = [
-    "AI bid optimization & precision audience targeting",
-    "Real-time performance monitoring & auto-adjustments",
-    "Conversion-focused ad creative generation",
-    "Fully transparent ROI reporting dashboard",
-  ];
 
   return (
     <section ref={ref} id="google-ai-ads" className="border-b border-black/[0.06] bg-white px-6 py-12 md:px-10 md:py-16">
@@ -917,29 +1008,10 @@ function GoogleAiAdsSection() {
           >
             <GoogleAdsMicroGallery />
           </motion.div>
-          <motion.ul
-            className="space-y-3"
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.14, duration: 0.75, ease: EASE }}
-          >
-            {bullets.map((t) => (
-              <li key={t} className="flex items-start gap-3 text-gray-800">
-                <span
-                  className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-black"
-                  style={{ backgroundColor: GOLD }}
-                  aria-hidden
-                >
-                  ✓
-                </span>
-                <span className="text-sm font-semibold leading-snug md:text-base">{t}</span>
-              </li>
-            ))}
-          </motion.ul>
           <motion.div
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.2, duration: 0.75, ease: EASE }}
+            transition={{ delay: 0.18, duration: 0.75, ease: EASE }}
           >
             <MagneticLink
               href="/contact"
@@ -959,6 +1031,10 @@ function GoogleAiAdsSection() {
           <GoogleAdsOmnibarStrip />
           <GoogleAdsRoiCard nested />
         </motion.div>
+      </div>
+
+      <div className="mx-auto max-w-7xl">
+        <GoogleAdsWhyChooseDeepDive inView={inView} />
       </div>
     </section>
   );
