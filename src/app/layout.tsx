@@ -46,6 +46,18 @@ export const metadata: Metadata = {
     description:
       "Dubai and UAE AI marketing, digital marketing, GEO (generative engine optimization), and Dubai AIO visibility for businesses in the Emirates.",
     locale: "en_AE",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "GAM solutions — Dubai & UAE AI marketing",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [{ url: "/twitter-image", width: 1200, height: 630, alt: "GAM solutions — Dubai & UAE AI marketing" }],
   },
 };
 
