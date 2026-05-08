@@ -12,7 +12,7 @@ import {
   useInView,
 } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowRight, ArrowUpRight, CheckCircle, ChevronDown, Globe, MapPin, Menu, Star, Target, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BarChart3, CheckCircle, ChevronDown, Globe, MapPin, Megaphone, Menu, MousePointerClick, Star, Target, X } from "lucide-react";
 import RevealStaggerGroup from "@/components/miraireach/RevealStaggerGroup";
 import ScrollParallax from "@/components/miraireach/ScrollParallax";
 import MagneticLink from "@/components/miraireach/MagneticLink";
@@ -26,6 +26,16 @@ const CREAM = "#f7f5f0";
 const INK = "#1a1714";
 const GOLD = "#D4AF37";
 const MUTED = "rgba(26,23,20,0.55)";
+
+/** Google product UI / brand-adjacent accents (informative only — not official logo artwork). */
+const G_ADS_PRIMARY = "#1a73e8";
+const G_BRAND_BAR = ["#4285F4", "#EA4335", "#FBBC04", "#34A853"] as const;
+
+/** Editorial: paid media / dashboards (Unsplash — no Google logos in-frame). */
+const ADS_EDITORIAL_SIDE =
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=82";
+const ADS_EDITORIAL_MOBILE =
+  "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=82";
 
 /** Dubai skyline（Unsplash）— 本番で差し替え可 */
 const HERO_DUBAI_IMAGE =
@@ -732,6 +742,104 @@ function LocalReachProductSection() {
   );
 }
 
+/** Color bar + copy so the block reads as Google Ads / Performance ecosystem at a glance. */
+function GoogleAdsEcosystemRibbon() {
+  return (
+    <div className="flex flex-col gap-3 rounded-2xl border border-black/[0.08] bg-gradient-to-br from-white to-gray-50 px-4 py-3.5 shadow-sm sm:flex-row sm:items-center sm:gap-4">
+      <div className="flex items-center gap-2" aria-hidden>
+        <div className="flex gap-1">
+          {G_BRAND_BAR.map((c) => (
+            <span key={c} className="h-10 w-2 rounded-full shadow-sm" style={{ backgroundColor: c }} />
+          ))}
+        </div>
+        <span
+          className="hidden h-10 w-px bg-black/10 sm:block"
+          aria-hidden
+        />
+        <div className="flex gap-2 text-gray-700">
+          <Megaphone className="h-5 w-5 shrink-0 text-[#4285F4]" strokeWidth={2} aria-hidden />
+          <BarChart3 className="h-5 w-5 shrink-0 text-[#EA4335]" strokeWidth={2} aria-hidden />
+          <MousePointerClick className="h-5 w-5 shrink-0 text-[#34A853]" strokeWidth={2} aria-hidden />
+        </div>
+      </div>
+      <div className="min-w-0 flex-1 space-y-1">
+        <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500">Google Ads powered growth</p>
+        <p className="text-sm font-bold leading-snug text-gray-900 md:text-base">
+          <span style={{ color: G_ADS_PRIMARY }}>Search</span>
+          <span className="text-gray-400"> · </span>
+          Performance Max
+          <span className="text-gray-400"> · </span>
+          Demand Gen
+          <span className="text-gray-400"> · </span>
+          YouTube
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function GoogleAdsMicroGallery() {
+  return (
+    <div className="grid grid-cols-2 gap-3 pt-1">
+      <div className="relative aspect-[5/4] overflow-hidden rounded-2xl ring-1 ring-black/[0.08]">
+        <Image
+          src={ADS_EDITORIAL_SIDE}
+          alt="Campaign analytics dashboards and performance reporting on a screen"
+          fill
+          sizes="(max-width: 1024px) 45vw, 220px"
+          className="object-cover"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#1a73e8]/25 to-transparent"
+          aria-hidden
+        />
+        <p className="absolute bottom-2 left-2 right-2 rounded-md bg-black/45 px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-white backdrop-blur-[2px] md:text-[10px]">
+          Live performance &amp; pacing
+        </p>
+      </div>
+      <div className="relative aspect-[5/4] overflow-hidden rounded-2xl ring-1 ring-black/[0.08]">
+        <Image
+          src={ADS_EDITORIAL_MOBILE}
+          alt="Mobile placements and on-the-go demand generation"
+          fill
+          sizes="(max-width: 1024px) 45vw, 220px"
+          className="object-cover"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#34A853]/20 to-transparent"
+          aria-hidden
+        />
+        <p className="absolute bottom-2 left-2 right-2 rounded-md bg-black/45 px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-white backdrop-blur-[2px] md:text-[10px]">
+          Feed &amp; Demand Gen surfaces
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/** Suggests signed-in Google Ads without using Google trademarks as artwork. */
+function GoogleAdsOmnibarStrip() {
+  return (
+    <div className="border-b border-black/[0.06] bg-gradient-to-b from-gray-100/95 to-gray-50/80 px-4 py-2.5 md:px-5">
+      <div className="flex items-center gap-2">
+        <div className="flex gap-1.5 opacity-40" aria-hidden>
+          <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
+          <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
+          <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
+        </div>
+        <div className="flex min-h-[2.25rem] min-w-0 flex-1 items-center gap-2 rounded-lg bg-white px-3 py-1.5 shadow-sm ring-1 ring-black/[0.06]">
+          <span className="text-xs" aria-hidden>
+            🔒
+          </span>
+          <span className="truncate font-mono text-[11px] font-medium text-gray-700 md:text-xs">
+            ads.google.com<span className="text-gray-400">/aw/campaigns/overview</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /** 旧トップの「AI-Managed Google Ads」相当 — ダッシュボード付きで有償獲得を提示 */
 function GoogleAiAdsSection() {
   const ref = useRef(null);
@@ -757,13 +865,29 @@ function GoogleAiAdsSection() {
             Paid acquisition
           </motion.p>
           <motion.div
-            className="flex h-12 w-12 items-center justify-center rounded-2xl shadow-sm"
-            style={{ backgroundColor: `${GOLD}18`, color: GOLD }}
-            initial={{ opacity: 0, scale: 0.92 }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.65, ease: EASE }}
+          >
+            <GoogleAdsEcosystemRibbon />
+          </motion.div>
+          <motion.div
+            className="flex flex-wrap items-center gap-3"
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.55, ease: EASE }}
           >
-            <Target className="h-6 w-6" strokeWidth={1.75} />
+            <div
+              className="flex h-12 w-12 items-center justify-center rounded-2xl shadow-sm ring-1 ring-[#1a73e8]/20"
+              style={{ background: `linear-gradient(135deg, ${G_ADS_PRIMARY}12, #fff)` }}
+            >
+              <Target className="h-6 w-6 text-[#1a73e8]" strokeWidth={1.75} aria-hidden />
+            </div>
+            <div className="flex gap-2">
+              {G_BRAND_BAR.map((c) => (
+                <span key={c} className="h-2 w-2 rounded-full ring-2 ring-black/[0.04]" style={{ backgroundColor: c }} />
+              ))}
+            </div>
           </motion.div>
           <motion.h2
             className="font-serif text-3xl font-medium leading-[1.1] tracking-tight md:text-[2.4rem]"
@@ -786,6 +910,13 @@ function GoogleAiAdsSection() {
             audiences—targeting the right audience at the right moment with the right message. ROI that manual campaign
             managers simply can&apos;t match.
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.12, duration: 0.75, ease: EASE }}
+          >
+            <GoogleAdsMicroGallery />
+          </motion.div>
           <motion.ul
             className="space-y-3"
             initial={{ opacity: 0, y: 10 }}
@@ -820,18 +951,20 @@ function GoogleAiAdsSection() {
         </div>
 
         <motion.div
+          className="overflow-hidden rounded-3xl border border-black/[0.06] shadow-xl"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.12, duration: 0.85, ease: EASE }}
         >
-          <GoogleAdsRoiCard />
+          <GoogleAdsOmnibarStrip />
+          <GoogleAdsRoiCard nested />
         </motion.div>
       </div>
     </section>
   );
 }
 
-function GoogleAdsRoiCard() {
+function GoogleAdsRoiCard({ nested }: { nested?: boolean }) {
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"] as const;
   const reduce = useReducedMotion();
   /** Upward ROI curve in viewBox 0 0 100 42 */
@@ -839,8 +972,12 @@ function GoogleAdsRoiCard() {
     "M 2 36 L 18 32 L 34 26 L 50 19 L 66 12 L 82 7 L 97 4";
   const areaPath = `${linePath} L 99 42 L 0 42 Z`;
 
+  const wrap = nested
+    ? "rounded-b-3xl border-0 bg-white p-6 shadow-none md:p-8"
+    : "rounded-3xl border border-black/[0.06] bg-white p-6 shadow-xl md:p-8";
+
   return (
-    <div className="rounded-3xl border border-black/[0.06] bg-white p-6 shadow-xl md:p-8">
+    <div className={wrap}>
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
           <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.2em] text-gray-500">
