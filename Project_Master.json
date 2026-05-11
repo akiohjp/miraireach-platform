@@ -1,0 +1,18 @@
+{
+  "company_os_status": "active",
+  "current_mission": {
+    "mission_id": "001",
+    "project_name": "新規飲食店の集客診断と初期PR",
+    "status": "pending_execution",
+    "objective": "提供するデータからターゲットを絞り、無料診断LPとPRテキストを生成せよ",
+    "target_market": "Dubai, UAE",
+    "input_data_path": "./data/raw_data.csv",
+    "output_requirements": [
+      "財務・CRM分析レポート (Markdown)",
+      "診断用LPのフロントエンドコード (Vite/React)",
+      "配信スタンバイ状態のPR文面"
+    ]
+  }
+}
+
+

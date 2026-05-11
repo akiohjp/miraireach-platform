@@ -1,0 +1,41 @@
+{
+  "name": "nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "seed:gam": "node scripts/seed-gam.mjs",
+    "seed:data": "node scripts/seed-data.mjs",
+    "seed:env": "node scripts/seed-env-org.mjs",
+    "bootstrap:auth": "node scripts/bootstrap-gam-auth.mjs",
+    "link:org-member": "node scripts/link-org-member.mjs",
+    "gam:setup": "node scripts/gam-full-setup.mjs",
+    "db:apply-rls-fix": "node scripts/apply-sql-file.mjs supabase/migrations/20260205120000_fix_rls_org_members_recursion.sql",
+    "db:apply-sheet-ingest": "node scripts/apply-sql-file.mjs supabase/migrations/20260207120000_sheet_ingest_daily_operations.sql",
+    "sheet:update-id": "node scripts/update-sheet-ingest-spreadsheet-id.mjs",
+    "sheet:sync": "node scripts/trigger-sheet-sync.mjs"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "googleapis": "^144.0.0",
+    "@supabase/supabase-js": "^2.105.1",
+    "lucide-react": "^0.468.0",
+    "next": "16.2.4",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "pg": "^8.14.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

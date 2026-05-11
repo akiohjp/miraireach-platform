@@ -1,0 +1,4 @@
+# Minimal config so `supabase db query --linked` can resolve project ref.
+# Full local dev: run `supabase init` and merge settings as needed.
+
+project_id = "wlnmjjhbwsbhzmagcrvq"

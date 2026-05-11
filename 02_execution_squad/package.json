@@ -1,0 +1,13 @@
+{
+  "name": "02_execution_squad",
+  "private": true,
+  "description": "Run admin/review app from repo root: npm run dev",
+  "scripts": {
+    "dev": "npm run dev --prefix review_app_nextjs",
+    "dev:admin": "npm run dev --prefix review_app_nextjs",
+    "dev:field": "npm run dev --prefix review_collection_app",
+    "build:admin": "npm run build --prefix review_app_nextjs",
+    "build:field": "npm run build --prefix review_collection_app",
+    "check:deploy:admin": "npm run check:deploy --prefix review_app_nextjs"
+  }
+}
