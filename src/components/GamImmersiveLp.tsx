@@ -45,8 +45,11 @@ const HERO_POSTER = "/hero/hero-dubai-poster.jpg";
 /** Fallback still when video cannot load or reduced motion is enabled. */
 const HERO_DUBAI_IMAGE_FALLBACK =
   "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2400&q=88";
-const HERO_TEXT_LIGHT = "#f7f5f0";
-const HERO_MUTED_LIGHT = "rgba(255,255,255,0.88)";
+const HERO_TEXT_LIGHT = "#ffffff";
+const HERO_MUTED_LIGHT = "rgba(255,255,255,0.94)";
+const HERO_HEADLINE_SHADOW =
+  "0 1px 0 rgba(0,0,0,0.85), 0 2px 12px rgba(0,0,0,0.65), 0 12px 40px rgba(0,0,0,0.4)";
+const HERO_BODY_SHADOW = "0 1px 8px rgba(0,0,0,0.55)";
 
 /** Editorial / peace-put系：ゆっくり落ち着いた減速 */
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -262,9 +265,53 @@ function MenuOverlay({
   );
 }
 
-/** Slightly oversized static frame — avoids Ken Burns scale blur on `<video>`. */
+/** Full-bleed cover; minimal overscan to avoid edge gaps without heavy scale blur. */
 const HERO_MEDIA_COVER =
-  "absolute left-1/2 top-1/2 z-0 h-[115%] w-[115%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover object-[center_32%]";
+  "absolute left-1/2 top-1/2 z-0 h-full w-full min-h-[104%] min-w-[104%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover object-[center_32%] [filter:brightness(1.04)_contrast(1.04)_saturate(1.06)]";
+
+/** Localized scrim + highlight panel so hero copy stays readable on video. */
+function HeroCopyBackdrop({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      className="relative z-10 max-w-[min(92vw,980px)]"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.85, ease: EASE }}
+    >
+      <motion.div
+        className="pointer-events-none absolute -inset-x-4 -top-6 bottom-0 rounded-2xl md:-inset-x-8 md:-top-8"
+        style={{
+          background:
+            "linear-gradient(105deg, rgba(6,5,4,0.72) 0%, rgba(10,9,8,0.48) 42%, rgba(10,9,8,0.18) 68%, transparent 100%)",
+          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.14)",
+        }}
+        aria-hidden
+      />
+      <motion.div className="relative">{children}</motion.div>
+    </motion.div>
+  );
+}
+
+function HeroGoldHighlight({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="relative inline-block">
+      <span
+        className="absolute -inset-x-1 bottom-[0.08em] -z-0 h-[0.42em] rounded-sm"
+        style={{ backgroundColor: "rgba(212,175,55,0.42)" }}
+        aria-hidden
+      />
+      <span
+        className="relative z-10"
+        style={{
+          color: GOLD,
+          textShadow: `${HERO_HEADLINE_SHADOW}, 0 0 28px rgba(212,175,55,0.35)`,
+        }}
+      >
+        {children}
+      </span>
+    </span>
+  );
+}
 
 function HeroBackgroundMedia() {
   const reduce = useReducedMotion();
@@ -347,14 +394,9 @@ function HeroBlock() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.15, ease: EASE }}
           >
-            <motion.div
-              className="relative h-full min-h-[100svh] w-full overflow-hidden"
-              initial={reduce ? false : { scale: 1.04 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 2.2, ease: EASE }}
-            >
+            <div className="relative h-full min-h-[100svh] w-full overflow-hidden">
               <HeroBackgroundMedia />
-            </motion.div>
+            </div>
           </motion.div>
         </motion.div>
 
@@ -427,26 +469,20 @@ function HeroBlock() {
           ))}
       </div>
 
-      {/* Dubai ピル（即レスで場所が伝わる） */}
-      <motion.div
-        className="relative z-10 mb-8 md:mb-10 max-w-[min(92vw,980px)]"
-        initial={{ opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
-      >
-        <div
-          className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/15 px-4 py-2 backdrop-blur-sm"
-          style={{ color: HERO_MUTED_LIGHT }}
-        >
-          <MapPin className="h-3.5 w-3.5 shrink-0 text-[#D4AF37]" strokeWidth={1.6} aria-hidden />
-          <span className="text-[10px] uppercase tracking-[0.28em]">Dubai · United Arab Emirates</span>
-        </div>
-      </motion.div>
-
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-[min(92vw,980px)]">
+      <HeroCopyBackdrop>
+        <motion.div style={{ y, opacity }}>
+          <div
+            className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/12 px-4 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-md md:mb-10"
+            style={{ color: HERO_TEXT_LIGHT, textShadow: HERO_BODY_SHADOW }}
+          >
+            <MapPin className="h-3.5 w-3.5 shrink-0 text-[#D4AF37]" strokeWidth={1.6} aria-hidden />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.28em]">
+              Dubai · United Arab Emirates
+            </span>
+          </div>
         <motion.p
-          className="mb-6 text-[10px] tracking-[0.35em] uppercase md:mb-8 md:text-[11px]"
-          style={{ color: HERO_MUTED_LIGHT }}
+          className="mb-6 inline-block rounded-md border border-white/20 bg-black/40 px-3 py-1.5 text-[10px] font-semibold tracking-[0.35em] uppercase backdrop-blur-md md:mb-8 md:text-[11px]"
+          style={{ color: HERO_TEXT_LIGHT, textShadow: HERO_BODY_SHADOW }}
           initial={{ opacity: 0, filter: reduce ? "none" : "blur(8px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
           transition={{ duration: 1.15, delay: 0.08, ease: EASE }}
@@ -465,7 +501,8 @@ function HeroBlock() {
               style={{
                 color: HERO_TEXT_LIGHT,
                 fontSize: "clamp(2.35rem, 7.2vw, 5.2rem)",
-                textShadow: "0 2px 24px rgba(0,0,0,0.35)",
+                textShadow: HERO_HEADLINE_SHADOW,
+                WebkitTextStroke: "0.35px rgba(0,0,0,0.25)",
               }}
             >
               Search is rewriting itself.
@@ -478,18 +515,19 @@ function HeroBlock() {
                 style={{
                   color: HERO_TEXT_LIGHT,
                   fontSize: "clamp(2.35rem, 7.2vw, 5.2rem)",
-                  textShadow: "0 2px 24px rgba(0,0,0,0.35)",
+                  textShadow: HERO_HEADLINE_SHADOW,
+                  WebkitTextStroke: "0.35px rgba(0,0,0,0.25)",
                 }}
               >
-                <span style={{ color: GOLD }}>Put your brand</span> in every answer.
+                <HeroGoldHighlight>Put your brand</HeroGoldHighlight> in every answer.
               </span>
             </RevealMaskLine>
           </div>
         </h1>
 
         <motion.p
-          className="mt-8 max-w-xl text-base font-light leading-relaxed text-pretty md:mt-10 md:text-lg"
-          style={{ color: HERO_MUTED_LIGHT }}
+          className="mt-8 max-w-xl rounded-xl border border-white/15 bg-black/40 px-5 py-4 text-base font-normal leading-relaxed text-pretty shadow-[0_12px_40px_rgba(0,0,0,0.35)] backdrop-blur-md md:mt-10 md:text-lg"
+          style={{ color: HERO_MUTED_LIGHT, textShadow: HERO_BODY_SHADOW }}
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.15, delay: 0.55, ease: EASE }}
@@ -513,16 +551,17 @@ function HeroBlock() {
           </MagneticLink>
           <a
             href="#what-we-offer"
-            className="inline-flex items-center gap-2 rounded-sm border border-white/25 bg-white/5 px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm transition-colors hover:bg-white/10"
+            className="inline-flex items-center gap-2 rounded-sm border border-white/35 bg-white/12 px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_8px_28px_rgba(0,0,0,0.3)] backdrop-blur-md transition-colors hover:bg-white/20"
           >
             What we offer
           </a>
         </motion.div>
-      </motion.div>
+        </motion.div>
+      </HeroCopyBackdrop>
 
       <motion.div
         className="relative z-10 mt-16 flex flex-col items-center gap-3 md:mt-24"
-        style={{ color: "rgba(255,255,255,0.45)" }}
+        style={{ color: "rgba(255,255,255,0.72)", textShadow: HERO_BODY_SHADOW }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.35, duration: 1.05, ease: EASE }}
