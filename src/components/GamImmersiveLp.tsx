@@ -22,6 +22,7 @@ import LocalReachProductionPreviews from "@/components/localreach/LocalReachProd
 import { GAM_MISSION_AND_VISION_BLOCKS } from "@/content/gamAboutCopy";
 import { GAM_FAQ_ITEMS } from "@/content/gamFaq";
 import { GOOGLE_AI_ADS_WHY_CHOOSE } from "@/content/googleAiAdsCopy";
+import { heroAssetUrl } from "@/lib/hero-assets";
 
 const CREAM = "#f7f5f0";
 const INK = "#1a1714";
@@ -38,10 +39,10 @@ const ADS_EDITORIAL_SIDE =
 const ADS_EDITORIAL_MOBILE =
   "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=82";
 
-/** Dubai hero — loop video in `public/hero/` (poster/fallback until upload). */
-const HERO_VIDEO_MP4 = "/hero/hero-dubai.mp4";
-const HERO_VIDEO_WEBM = "/hero/hero-dubai.webm";
-const HERO_POSTER = "/hero/hero-dubai-poster.jpg";
+/** Dubai hero — loop video in `public/hero/` (version query busts mobile cache). */
+const HERO_VIDEO_MP4 = heroAssetUrl("/hero/hero-dubai.mp4");
+const HERO_VIDEO_WEBM = heroAssetUrl("/hero/hero-dubai.webm");
+const HERO_POSTER = heroAssetUrl("/hero/hero-dubai-poster.jpg");
 /** Fallback still when video cannot load or reduced motion is enabled. */
 const HERO_DUBAI_IMAGE_FALLBACK =
   "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2400&q=88";
