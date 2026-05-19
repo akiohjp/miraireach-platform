@@ -301,8 +301,8 @@ function HeroBackgroundMedia() {
       aria-hidden
       onError={() => setUseFallbackImage(true)}
     >
-      <source src={HERO_VIDEO_WEBM} type="video/webm" />
       <source src={HERO_VIDEO_MP4} type="video/mp4" />
+      <source src={HERO_VIDEO_WEBM} type="video/webm" />
     </video>
   );
 }
