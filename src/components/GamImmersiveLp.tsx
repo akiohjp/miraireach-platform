@@ -46,7 +46,7 @@ const HERO_POSTER = "/hero/hero-dubai-poster.jpg";
 const HERO_DUBAI_IMAGE_FALLBACK =
   "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2400&q=88";
 const HERO_TEXT_LIGHT = "#f7f5f0";
-const HERO_MUTED_LIGHT = "rgba(255,255,255,0.74)";
+const HERO_MUTED_LIGHT = "rgba(255,255,255,0.88)";
 
 /** Editorial / peace-put系：ゆっくり落ち着いた減速 */
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -358,12 +358,12 @@ function HeroBlock() {
           </motion.div>
         </motion.div>
 
-        {/* 読みやすさ + 下でクリームセクションへ溶ける */}
+        {/* 下端だけ少し落として文字可読性を確保（中央〜上は動画を明るく） */}
         <div
           className="absolute inset-0 z-[1]"
           style={{
             background:
-              "linear-gradient(to top, #0a0908 0%, rgba(14,12,10,0.88) 38%, rgba(18,16,14,0.55) 62%, rgba(26,23,20,0.35) 100%)",
+              "linear-gradient(to top, rgba(10,9,8,0.62) 0%, rgba(14,12,10,0.28) 32%, rgba(18,16,14,0.1) 58%, transparent 88%)",
           }}
           aria-hidden
         />
@@ -371,7 +371,7 @@ function HeroBlock() {
           className="absolute inset-0 z-[1]"
           style={{
             background:
-              "radial-gradient(ellipse 90% 70% at 70% 20%, rgba(212,175,55,0.14), transparent 55%), radial-gradient(ellipse 60% 50% at 15% 80%, rgba(0,0,0,0.45), transparent 65%)",
+              "radial-gradient(ellipse 90% 70% at 70% 20%, rgba(212,175,55,0.12), transparent 55%), radial-gradient(ellipse 60% 50% at 15% 80%, rgba(0,0,0,0.12), transparent 65%)",
           }}
           aria-hidden
         />
@@ -435,7 +435,7 @@ function HeroBlock() {
         transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
       >
         <div
-          className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/25 px-4 py-2 backdrop-blur-md"
+          className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/15 px-4 py-2 backdrop-blur-sm"
           style={{ color: HERO_MUTED_LIGHT }}
         >
           <MapPin className="h-3.5 w-3.5 shrink-0 text-[#D4AF37]" strokeWidth={1.6} aria-hidden />
@@ -465,7 +465,7 @@ function HeroBlock() {
               style={{
                 color: HERO_TEXT_LIGHT,
                 fontSize: "clamp(2.35rem, 7.2vw, 5.2rem)",
-                textShadow: "0 2px 40px rgba(0,0,0,0.45)",
+                textShadow: "0 2px 24px rgba(0,0,0,0.35)",
               }}
             >
               Search is rewriting itself.
@@ -478,7 +478,7 @@ function HeroBlock() {
                 style={{
                   color: HERO_TEXT_LIGHT,
                   fontSize: "clamp(2.35rem, 7.2vw, 5.2rem)",
-                  textShadow: "0 2px 40px rgba(0,0,0,0.45)",
+                  textShadow: "0 2px 24px rgba(0,0,0,0.35)",
                 }}
               >
                 <span style={{ color: GOLD }}>Put your brand</span> in every answer.
@@ -1795,7 +1795,7 @@ export default function GamImmersiveLp() {
         }`}
         initial={false}
         animate={{
-          backgroundColor: scrolled ? "rgba(247, 245, 240, 0.94)" : "rgba(8, 7, 6, 0.38)",
+          backgroundColor: scrolled ? "rgba(247, 245, 240, 0.94)" : "rgba(8, 7, 6, 0.12)",
           borderBottomColor: scrolled ? "rgba(26, 23, 20, 0.08)" : "rgba(255, 255, 255, 0.12)",
         }}
         transition={{ duration: 0.55, ease: EASE }}
