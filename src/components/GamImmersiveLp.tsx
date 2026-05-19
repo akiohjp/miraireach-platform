@@ -47,10 +47,14 @@ const HERO_POSTER = heroAssetUrl("/hero/hero-dubai-poster.jpg");
 const HERO_DUBAI_IMAGE_FALLBACK =
   "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2400&q=88";
 const HERO_TEXT_LIGHT = "#ffffff";
-const HERO_MUTED_LIGHT = "rgba(255,255,255,0.94)";
+const HERO_SUBTEXT_LIGHT = "rgba(255,255,255,0.98)";
 const HERO_HEADLINE_SHADOW =
-  "0 1px 0 rgba(0,0,0,0.85), 0 2px 12px rgba(0,0,0,0.65), 0 12px 40px rgba(0,0,0,0.4)";
-const HERO_BODY_SHADOW = "0 1px 8px rgba(0,0,0,0.55)";
+  "0 0 2px rgba(0,0,0,1), 0 1px 0 rgba(0,0,0,1), 0 4px 16px rgba(0,0,0,0.85), 0 16px 48px rgba(0,0,0,0.55)";
+const HERO_BODY_SHADOW = "0 1px 2px rgba(0,0,0,0.9), 0 4px 16px rgba(0,0,0,0.65)";
+const HERO_LABEL_SHADOW = "0 1px 3px rgba(0,0,0,0.85)";
+const HERO_HEADLINE_STROKE = "0.5px rgba(0,0,0,0.55)";
+const HERO_COPY_PANEL =
+  "rounded-3xl border border-white/25 bg-gradient-to-br from-black/80 via-black/72 to-black/55 shadow-[0_28px_90px_rgba(0,0,0,0.65)] ring-1 ring-white/10 backdrop-blur-lg";
 
 /** Editorial / peace-put系：ゆっくり落ち着いた減速 */
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -270,7 +274,7 @@ function MenuOverlay({
 const HERO_MEDIA_COVER =
   "absolute left-1/2 top-1/2 z-0 h-full w-full min-h-[104%] min-w-[104%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover object-[center_32%] [filter:brightness(1.04)_contrast(1.04)_saturate(1.06)]";
 
-/** Localized scrim + highlight panel so hero copy stays readable on video. */
+/** Card panel behind hero copy — keeps type crisp on bright video. */
 function HeroCopyBackdrop({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
@@ -279,33 +283,34 @@ function HeroCopyBackdrop({ children }: { children: React.ReactNode }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.85, ease: EASE }}
     >
-      <motion.div
-        className="pointer-events-none absolute -inset-x-4 -top-6 bottom-0 rounded-2xl md:-inset-x-8 md:-top-8"
-        style={{
-          background:
-            "linear-gradient(105deg, rgba(6,5,4,0.72) 0%, rgba(10,9,8,0.48) 42%, rgba(10,9,8,0.18) 68%, transparent 100%)",
-          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.14)",
-        }}
-        aria-hidden
-      />
-      <motion.div className="relative">{children}</motion.div>
+      <div className={`relative ${HERO_COPY_PANEL} px-5 py-6 sm:px-7 sm:py-8 md:px-9 md:py-10`}>
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent"
+          aria-hidden
+        />
+        {children}
+      </div>
     </motion.div>
   );
 }
 
 function HeroGoldHighlight({ children }: { children: React.ReactNode }) {
   return (
-    <span className="relative inline-block">
+    <span className="relative inline-block px-0.5">
       <span
-        className="absolute -inset-x-1 bottom-[0.08em] -z-0 h-[0.42em] rounded-sm"
-        style={{ backgroundColor: "rgba(212,175,55,0.42)" }}
+        className="absolute -inset-x-1.5 bottom-[0.06em] -z-0 h-[0.48em] rounded-md"
+        style={{
+          background: "linear-gradient(90deg, rgba(212,175,55,0.75), rgba(255,232,160,0.85))",
+          boxShadow: "0 0 20px rgba(212,175,55,0.45)",
+        }}
         aria-hidden
       />
       <span
-        className="relative z-10"
+        className="relative z-10 font-semibold"
         style={{
-          color: GOLD,
-          textShadow: `${HERO_HEADLINE_SHADOW}, 0 0 28px rgba(212,175,55,0.35)`,
+          color: "#FFE9A8",
+          textShadow: `${HERO_HEADLINE_SHADOW}, 0 0 32px rgba(212,175,55,0.55)`,
+          WebkitTextStroke: HERO_HEADLINE_STROKE,
         }}
       >
         {children}
@@ -473,17 +478,17 @@ function HeroBlock() {
       <HeroCopyBackdrop>
         <motion.div style={{ y, opacity }}>
           <div
-            className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/12 px-4 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-md md:mb-10"
-            style={{ color: HERO_TEXT_LIGHT, textShadow: HERO_BODY_SHADOW }}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/50 bg-black/50 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] md:mb-7"
+            style={{ color: HERO_TEXT_LIGHT, textShadow: HERO_LABEL_SHADOW }}
           >
-            <MapPin className="h-3.5 w-3.5 shrink-0 text-[#D4AF37]" strokeWidth={1.6} aria-hidden />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.28em]">
+            <MapPin className="h-3.5 w-3.5 shrink-0 text-[#F5D76E]" strokeWidth={2} aria-hidden />
+            <span className="text-[10px] font-bold uppercase tracking-[0.28em] md:text-[11px]">
               Dubai · United Arab Emirates
             </span>
           </div>
         <motion.p
-          className="mb-6 inline-block rounded-md border border-white/20 bg-black/40 px-3 py-1.5 text-[10px] font-semibold tracking-[0.35em] uppercase backdrop-blur-md md:mb-8 md:text-[11px]"
-          style={{ color: HERO_TEXT_LIGHT, textShadow: HERO_BODY_SHADOW }}
+          className="mb-5 inline-block rounded-md border border-[#D4AF37]/40 bg-[#D4AF37]/15 px-3.5 py-1.5 text-[10px] font-bold tracking-[0.32em] uppercase text-[#FFE9A8] shadow-[0_0_24px_rgba(212,175,55,0.2)] md:mb-6 md:text-[11px]"
+          style={{ textShadow: HERO_LABEL_SHADOW }}
           initial={{ opacity: 0, filter: reduce ? "none" : "blur(8px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
           transition={{ duration: 1.15, delay: 0.08, ease: EASE }}
@@ -491,33 +496,33 @@ function HeroBlock() {
           AI marketing · Dubai &amp; UAE
         </motion.p>
 
-        <h1 className="m-0 p-0 font-normal">
+        <h1 className="m-0 p-0">
           <RevealMaskLine
             active={intro}
             delay={0.12}
-            className="block font-serif leading-[1.05] tracking-tight"
+            className="block font-serif font-medium leading-[1.04] tracking-tight"
           >
             <span
               className="block text-balance"
               style={{
                 color: HERO_TEXT_LIGHT,
-                fontSize: "clamp(2.35rem, 7.2vw, 5.2rem)",
+                fontSize: "clamp(2.45rem, 7.5vw, 5.35rem)",
                 textShadow: HERO_HEADLINE_SHADOW,
-                WebkitTextStroke: "0.35px rgba(0,0,0,0.25)",
+                WebkitTextStroke: HERO_HEADLINE_STROKE,
               }}
             >
               Search is rewriting itself.
             </span>
           </RevealMaskLine>
-          <div className="mt-2">
-            <RevealMaskLine active={intro} delay={0.28} className="block font-serif leading-[1.05] tracking-tight">
+          <div className="mt-1.5 md:mt-2">
+            <RevealMaskLine active={intro} delay={0.28} className="block font-serif font-medium leading-[1.04] tracking-tight">
               <span
                 className="block text-balance"
                 style={{
                   color: HERO_TEXT_LIGHT,
-                  fontSize: "clamp(2.35rem, 7.2vw, 5.2rem)",
+                  fontSize: "clamp(2.45rem, 7.5vw, 5.35rem)",
                   textShadow: HERO_HEADLINE_SHADOW,
-                  WebkitTextStroke: "0.35px rgba(0,0,0,0.25)",
+                  WebkitTextStroke: HERO_HEADLINE_STROKE,
                 }}
               >
                 <HeroGoldHighlight>Put your brand</HeroGoldHighlight> in every answer.
@@ -527,8 +532,8 @@ function HeroBlock() {
         </h1>
 
         <motion.p
-          className="mt-8 max-w-xl rounded-xl border border-white/15 bg-black/40 px-5 py-4 text-base font-normal leading-relaxed text-pretty shadow-[0_12px_40px_rgba(0,0,0,0.35)] backdrop-blur-md md:mt-10 md:text-lg"
-          style={{ color: HERO_MUTED_LIGHT, textShadow: HERO_BODY_SHADOW }}
+          className="mt-6 max-w-xl rounded-xl border border-white/20 bg-black/45 px-5 py-4 text-base font-medium leading-relaxed text-pretty md:mt-8 md:text-[1.125rem] md:leading-relaxed"
+          style={{ color: HERO_SUBTEXT_LIGHT, textShadow: HERO_BODY_SHADOW }}
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.15, delay: 0.55, ease: EASE }}
@@ -552,7 +557,7 @@ function HeroBlock() {
           </MagneticLink>
           <a
             href="#what-we-offer"
-            className="inline-flex items-center gap-2 rounded-sm border border-white/35 bg-white/12 px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_8px_28px_rgba(0,0,0,0.3)] backdrop-blur-md transition-colors hover:bg-white/20"
+            className="inline-flex items-center gap-2 rounded-sm border-2 border-white/50 bg-white/20 px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_8px_28px_rgba(0,0,0,0.4)] backdrop-blur-md transition-colors hover:bg-white/30"
           >
             What we offer
           </a>
@@ -562,7 +567,7 @@ function HeroBlock() {
 
       <motion.div
         className="relative z-10 mt-16 flex flex-col items-center gap-3 md:mt-24"
-        style={{ color: "rgba(255,255,255,0.72)", textShadow: HERO_BODY_SHADOW }}
+        style={{ color: "rgba(255,255,255,0.9)", textShadow: HERO_LABEL_SHADOW }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.35, duration: 1.05, ease: EASE }}
