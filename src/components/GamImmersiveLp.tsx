@@ -41,6 +41,7 @@ const ADS_EDITORIAL_MOBILE =
 /** Dubai hero — loop video in `public/hero/` (poster/fallback until upload). */
 const HERO_VIDEO_MP4 = "/hero/hero-dubai.mp4";
 const HERO_VIDEO_WEBM = "/hero/hero-dubai.webm";
+const HERO_POSTER = "/hero/hero-dubai-poster.jpg";
 /** Fallback still when video cannot load or reduced motion is enabled. */
 const HERO_DUBAI_IMAGE_FALLBACK =
   "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2400&q=88";
@@ -261,6 +262,10 @@ function MenuOverlay({
   );
 }
 
+/** Slightly oversized static frame — avoids Ken Burns scale blur on `<video>`. */
+const HERO_MEDIA_COVER =
+  "absolute left-1/2 top-1/2 z-0 h-[115%] w-[115%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover object-[center_32%]";
+
 function HeroBackgroundMedia() {
   const reduce = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -272,8 +277,6 @@ function HeroBackgroundMedia() {
     v.play().catch(() => {});
   }, [reduce]);
 
-  const coverClass = "absolute inset-0 h-full w-full object-cover object-[center_32%]";
-
   if (reduce || useFallbackImage) {
     return (
       <Image
@@ -281,9 +284,9 @@ function HeroBackgroundMedia() {
         alt="Dubai skyline"
         fill
         priority
-        className={coverClass}
+        className="absolute inset-0 h-full w-full object-cover object-[center_32%]"
         sizes="100vw"
-        quality={88}
+        quality={92}
       />
     );
   }
@@ -291,13 +294,13 @@ function HeroBackgroundMedia() {
   return (
     <video
       ref={videoRef}
-      className={coverClass}
+      className={HERO_MEDIA_COVER}
       autoPlay
       muted
       loop
       playsInline
       preload="auto"
-      poster={HERO_DUBAI_IMAGE_FALLBACK}
+      poster={HERO_POSTER}
       aria-hidden
       onError={() => setUseFallbackImage(true)}
     >
@@ -340,23 +343,15 @@ function HeroBlock() {
         >
           <motion.div
             className="absolute inset-0"
-            initial={reduce ? false : { scale: 1.12 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 2.4, ease: EASE }}
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.15, ease: EASE }}
           >
             <motion.div
               className="relative h-full min-h-[100svh] w-full overflow-hidden"
-              animate={reduce ? undefined : { scale: [1, 1.02, 1] }}
-              transition={
-                reduce
-                  ? undefined
-                  : {
-                      duration: 28,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }
-              }
-              style={{ transformOrigin: "50% 40%" }}
+              initial={reduce ? false : { scale: 1.04 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 2.2, ease: EASE }}
             >
               <HeroBackgroundMedia />
             </motion.div>
@@ -1741,7 +1736,7 @@ function FilmGrain() {
   if (reduce) return null;
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-[6] mix-blend-multiply"
+      className="pointer-events-none fixed inset-x-0 bottom-0 top-[100svh] z-[6] mix-blend-multiply"
       style={{
         opacity: 0.038,
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,

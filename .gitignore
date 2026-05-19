@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# hero source backup (run npm run hero:optimize locally)
+public/hero/hero-dubai.720p-source.mp4
