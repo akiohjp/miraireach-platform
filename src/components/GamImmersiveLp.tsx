@@ -49,12 +49,13 @@ const HERO_DUBAI_IMAGE_FALLBACK =
 const HERO_TEXT_LIGHT = "#ffffff";
 const HERO_SUBTEXT_LIGHT = "rgba(255,255,255,0.98)";
 const HERO_HEADLINE_SHADOW =
-  "0 0 2px rgba(0,0,0,1), 0 1px 0 rgba(0,0,0,1), 0 4px 16px rgba(0,0,0,0.85), 0 16px 48px rgba(0,0,0,0.55)";
-const HERO_BODY_SHADOW = "0 1px 2px rgba(0,0,0,0.9), 0 4px 16px rgba(0,0,0,0.65)";
-const HERO_LABEL_SHADOW = "0 1px 3px rgba(0,0,0,0.85)";
-const HERO_HEADLINE_STROKE = "0.5px rgba(0,0,0,0.55)";
-const HERO_COPY_PANEL =
-  "rounded-3xl border border-white/25 bg-gradient-to-br from-black/80 via-black/72 to-black/55 shadow-[0_28px_90px_rgba(0,0,0,0.65)] ring-1 ring-white/10 backdrop-blur-lg";
+  "0 0 6px rgba(0,0,0,1), 0 0 18px rgba(0,0,0,0.92), 0 2px 6px rgba(0,0,0,1), 0 12px 40px rgba(0,0,0,0.75)";
+const HERO_BODY_SHADOW =
+  "0 0 4px rgba(0,0,0,1), 0 0 14px rgba(0,0,0,0.88), 0 2px 8px rgba(0,0,0,0.9)";
+const HERO_LABEL_SHADOW = "0 0 6px rgba(0,0,0,1), 0 2px 8px rgba(0,0,0,0.85)";
+const HERO_HEADLINE_STROKE = "0.65px rgba(0,0,0,0.7)";
+const HERO_TEXT_GLOW =
+  "drop-shadow-[0_0_1px_rgba(0,0,0,1)] drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]";
 
 /** Editorial / peace-put系：ゆっくり落ち着いた減速 */
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -274,8 +275,8 @@ function MenuOverlay({
 const HERO_MEDIA_COVER =
   "absolute left-1/2 top-1/2 z-0 h-full w-full min-h-[104%] min-w-[104%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover object-[center_32%] [filter:brightness(1.04)_contrast(1.04)_saturate(1.06)]";
 
-/** Card panel behind hero copy — keeps type crisp on bright video. */
-function HeroCopyBackdrop({ children }: { children: React.ReactNode }) {
+/** Hero copy — no full panel; legibility from shadow + small chips only. */
+function HeroCopyStack({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
       className="relative z-10 max-w-[min(92vw,980px)]"
@@ -283,13 +284,7 @@ function HeroCopyBackdrop({ children }: { children: React.ReactNode }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.85, ease: EASE }}
     >
-      <div className={`relative ${HERO_COPY_PANEL} px-5 py-6 sm:px-7 sm:py-8 md:px-9 md:py-10`}>
-        <div
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent"
-          aria-hidden
-        />
-        {children}
-      </div>
+      {children}
     </motion.div>
   );
 }
@@ -406,12 +401,12 @@ function HeroBlock() {
           </motion.div>
         </motion.div>
 
-        {/* 下端だけ少し落として文字可読性を確保（中央〜上は動画を明るく） */}
+        {/* 下端のみ軽いグラデ（動画は中央〜上で見える） */}
         <div
           className="absolute inset-0 z-[1]"
           style={{
             background:
-              "linear-gradient(to top, rgba(10,9,8,0.62) 0%, rgba(14,12,10,0.28) 32%, rgba(18,16,14,0.1) 58%, transparent 88%)",
+              "linear-gradient(to top, rgba(8,7,6,0.52) 0%, rgba(10,9,8,0.22) 30%, transparent 58%)",
           }}
           aria-hidden
         />
@@ -419,7 +414,7 @@ function HeroBlock() {
           className="absolute inset-0 z-[1]"
           style={{
             background:
-              "radial-gradient(ellipse 90% 70% at 70% 20%, rgba(212,175,55,0.12), transparent 55%), radial-gradient(ellipse 60% 50% at 15% 80%, rgba(0,0,0,0.12), transparent 65%)",
+              "radial-gradient(ellipse 90% 70% at 70% 20%, rgba(212,175,55,0.1), transparent 55%)",
           }}
           aria-hidden
         />
@@ -475,10 +470,10 @@ function HeroBlock() {
           ))}
       </div>
 
-      <HeroCopyBackdrop>
-        <motion.div style={{ y, opacity }}>
+      <HeroCopyStack>
+        <motion.div style={{ y, opacity }} className={HERO_TEXT_GLOW}>
           <div
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/50 bg-black/50 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] md:mb-7"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/45 bg-white/12 px-4 py-2 backdrop-blur-sm md:mb-7"
             style={{ color: HERO_TEXT_LIGHT, textShadow: HERO_LABEL_SHADOW }}
           >
             <MapPin className="h-3.5 w-3.5 shrink-0 text-[#F5D76E]" strokeWidth={2} aria-hidden />
@@ -487,7 +482,7 @@ function HeroBlock() {
             </span>
           </div>
         <motion.p
-          className="mb-5 inline-block rounded-md border border-[#D4AF37]/40 bg-[#D4AF37]/15 px-3.5 py-1.5 text-[10px] font-bold tracking-[0.32em] uppercase text-[#FFE9A8] shadow-[0_0_24px_rgba(212,175,55,0.2)] md:mb-6 md:text-[11px]"
+          className="mb-5 inline-block rounded-md border border-[#D4AF37]/55 bg-[#D4AF37]/20 px-3.5 py-1.5 text-[10px] font-bold tracking-[0.32em] uppercase text-[#FFF4D0] backdrop-blur-sm md:mb-6 md:text-[11px]"
           style={{ textShadow: HERO_LABEL_SHADOW }}
           initial={{ opacity: 0, filter: reduce ? "none" : "blur(8px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
@@ -532,7 +527,7 @@ function HeroBlock() {
         </h1>
 
         <motion.p
-          className="mt-6 max-w-xl rounded-xl border border-white/20 bg-black/45 px-5 py-4 text-base font-medium leading-relaxed text-pretty md:mt-8 md:text-[1.125rem] md:leading-relaxed"
+          className="mt-6 max-w-xl text-base font-semibold leading-relaxed text-pretty md:mt-8 md:text-[1.125rem] md:leading-relaxed"
           style={{ color: HERO_SUBTEXT_LIGHT, textShadow: HERO_BODY_SHADOW }}
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
@@ -563,7 +558,7 @@ function HeroBlock() {
           </a>
         </motion.div>
         </motion.div>
-      </HeroCopyBackdrop>
+      </HeroCopyStack>
 
       <motion.div
         className="relative z-10 mt-16 flex flex-col items-center gap-3 md:mt-24"
