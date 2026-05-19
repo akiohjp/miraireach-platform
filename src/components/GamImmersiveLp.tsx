@@ -38,8 +38,11 @@ const ADS_EDITORIAL_SIDE =
 const ADS_EDITORIAL_MOBILE =
   "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=82";
 
-/** Dubai skyline（Unsplash）— 本番で差し替え可 */
-const HERO_DUBAI_IMAGE =
+/** Dubai hero — loop video in `public/hero/` (poster/fallback until upload). */
+const HERO_VIDEO_MP4 = "/hero/hero-dubai.mp4";
+const HERO_VIDEO_WEBM = "/hero/hero-dubai.webm";
+/** Fallback still when video cannot load or reduced motion is enabled. */
+const HERO_DUBAI_IMAGE_FALLBACK =
   "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2400&q=88";
 const HERO_TEXT_LIGHT = "#f7f5f0";
 const HERO_MUTED_LIGHT = "rgba(255,255,255,0.74)";
@@ -258,6 +261,52 @@ function MenuOverlay({
   );
 }
 
+function HeroBackgroundMedia() {
+  const reduce = useReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [useFallbackImage, setUseFallbackImage] = useState(false);
+
+  useEffect(() => {
+    if (reduce || !videoRef.current) return;
+    const v = videoRef.current;
+    v.play().catch(() => {});
+  }, [reduce]);
+
+  const coverClass = "absolute inset-0 h-full w-full object-cover object-[center_32%]";
+
+  if (reduce || useFallbackImage) {
+    return (
+      <Image
+        src={HERO_DUBAI_IMAGE_FALLBACK}
+        alt="Dubai skyline"
+        fill
+        priority
+        className={coverClass}
+        sizes="100vw"
+        quality={88}
+      />
+    );
+  }
+
+  return (
+    <video
+      ref={videoRef}
+      className={coverClass}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      poster={HERO_DUBAI_IMAGE_FALLBACK}
+      aria-hidden
+      onError={() => setUseFallbackImage(true)}
+    >
+      <source src={HERO_VIDEO_WEBM} type="video/webm" />
+      <source src={HERO_VIDEO_MP4} type="video/mp4" />
+    </video>
+  );
+}
+
 function HeroBlock() {
   const ref = useRef(null);
   const reduce = useReducedMotion();
@@ -281,7 +330,7 @@ function HeroBlock() {
       ref={ref}
       className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden px-6 pb-20 pt-28 md:px-12 md:pb-32 md:pt-36"
     >
-      {/* ── Dubai 写真（オープニングでスケールイン + 軽い Ken Burns） ── */}
+      {/* ── Dubai hero video (`public/hero/hero-dubai.mp4`) ── */}
       <div className="absolute inset-0 z-0">
         <motion.div
           className="absolute inset-0"
@@ -295,40 +344,22 @@ function HeroBlock() {
             animate={{ scale: 1 }}
             transition={{ duration: 2.4, ease: EASE }}
           >
-            <div className="relative h-full min-h-[100svh] w-full overflow-hidden">
-              {reduce ? (
-                <Image
-                  src={HERO_DUBAI_IMAGE}
-                  alt="Dubai skyline"
-                  fill
-                  priority
-                  className="object-cover object-[center_32%]"
-                  sizes="100vw"
-                  quality={88}
-                />
-              ) : (
-                <motion.div
-                  className="relative h-full min-h-[100svh] w-full"
-                  animate={{ scale: [1, 1.04, 1] }}
-                  transition={{
-                    duration: 32,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  style={{ transformOrigin: "50% 40%" }}
-                >
-                  <Image
-                    src={HERO_DUBAI_IMAGE}
-                    alt="Dubai skyline"
-                    fill
-                    priority
-                    className="object-cover object-[center_32%]"
-                    sizes="100vw"
-                    quality={88}
-                  />
-                </motion.div>
-              )}
-            </div>
+            <motion.div
+              className="relative h-full min-h-[100svh] w-full overflow-hidden"
+              animate={reduce ? undefined : { scale: [1, 1.02, 1] }}
+              transition={
+                reduce
+                  ? undefined
+                  : {
+                      duration: 28,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }
+              }
+              style={{ transformOrigin: "50% 40%" }}
+            >
+              <HeroBackgroundMedia />
+            </motion.div>
           </motion.div>
         </motion.div>
 
