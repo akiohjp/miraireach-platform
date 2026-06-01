@@ -5,11 +5,13 @@ import Link from "next/link";
 const DARK = "#1a1714";
 const GOLD = "#D4AF37";
 
+const MIRAIREACH_SYSTEM_URL = "https://miraireach.jp/ae/";
+
 const NAV_COLUMNS = [
   {
     heading: "services",
     links: [
-      { label: "mirAIreach", href: "/" },
+      { label: "mirAIreach", href: MIRAIREACH_SYSTEM_URL, external: true },
       { label: "LocalReach", href: "/localreach" },
       { label: "Google AI Ads", href: "/#google-ai-ads" },
     ],
@@ -43,8 +45,10 @@ export default function Footer() {
           style={{ borderRight: "1px solid rgba(255,255,255,0.05)" }}
         >
           {/* Flagship mirAIreach — dominant block */}
-          <Link
-            href="/lp/miraireach"
+          <a
+            href="https://miraireach.jp/ae/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative z-10 flex w-full max-w-xl flex-col rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.08] via-white/[0.02] to-black/20 p-8 shadow-[0_28px_80px_-34px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.04] transition-[border-color,box-shadow] hover:border-[#D4AF37]/45 hover:shadow-[0_32px_90px_-30px_rgba(212,175,55,0.12)] md:p-10 md:pb-11"
           >
             <span
@@ -73,7 +77,7 @@ export default function Footer() {
                 ↗
               </span>
             </span>
-          </Link>
+          </a>
 
           {/* Company wordmark — secondary anchor, sized to defer to flagship */}
           <Link
@@ -129,19 +133,40 @@ export default function Footer() {
                     {col.heading}
                   </p>
                   <ul className="space-y-2.5">
-                    {col.links.map((link) => (
-                      <li key={link.label}>
-                        <Link
-                          href={link.href}
-                          className="text-[12px] font-light transition-colors"
-                          style={{ color: "rgba(255,255,255,0.45)" }}
-                          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = GOLD; }}
-                          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.45)"; }}
-                        >
-                          — {link.label}
-                        </Link>
-                      </li>
-                    ))}
+                    {col.links.map((link) => {
+                      const isExternal = "external" in link && link.external;
+                      const sharedClassName = "text-[12px] font-light transition-colors";
+                      const sharedStyle = { color: "rgba(255,255,255,0.45)" };
+                      const onEnter = (e: React.MouseEvent<HTMLElement>) => { (e.currentTarget as HTMLElement).style.color = GOLD; };
+                      const onLeave = (e: React.MouseEvent<HTMLElement>) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.45)"; };
+                      return (
+                        <li key={link.label}>
+                          {isExternal ? (
+                            <a
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={sharedClassName}
+                              style={sharedStyle}
+                              onMouseEnter={onEnter}
+                              onMouseLeave={onLeave}
+                            >
+                              — {link.label}
+                            </a>
+                          ) : (
+                            <Link
+                              href={link.href}
+                              className={sharedClassName}
+                              style={sharedStyle}
+                              onMouseEnter={onEnter}
+                              onMouseLeave={onLeave}
+                            >
+                              — {link.label}
+                            </Link>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               ))}

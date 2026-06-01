@@ -9,9 +9,12 @@ interface Props {
   children: React.ReactNode;
   className?: string;
   strength?: number;
+  target?: string;
+  rel?: string;
+  onClick?: () => void;
 }
 
-export default function MagneticLink({ href, children, className, strength = 0.3 }: Props) {
+export default function MagneticLink({ href, children, className, strength = 0.3, target, rel, onClick }: Props) {
   const ref = useRef<HTMLAnchorElement>(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
 
@@ -34,7 +37,7 @@ export default function MagneticLink({ href, children, className, strength = 0.3
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
     >
-      <Link ref={ref} href={href} className={className}>
+      <Link ref={ref} href={href} className={className} target={target} rel={rel} onClick={onClick}>
         {children}
       </Link>
     </motion.div>
