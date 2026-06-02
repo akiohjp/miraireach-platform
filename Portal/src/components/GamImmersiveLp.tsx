@@ -22,6 +22,9 @@ import LocalReachProductionPreviews from "@/components/localreach/LocalReachProd
 import { GAM_MISSION_AND_VISION_BLOCKS } from "@/content/gamAboutCopy";
 import { GAM_FAQ_ITEMS } from "@/content/gamFaq";
 import { GOOGLE_AI_ADS_WHY_CHOOSE } from "@/content/googleAiAdsCopy";
+import { heroAssetUrl } from "@/lib/hero-assets";
+import { MIRAIREACH_LP_PATH, MIRAIREACH_SYSTEM_URL } from "@/lib/miraireach-links";
+import MirAIreachSystemSection from "@/components/miraireach/MirAIreachSystemSection";
 
 const CREAM = "#f7f5f0";
 const INK = "#1a1714";
@@ -38,14 +41,23 @@ const ADS_EDITORIAL_SIDE =
 const ADS_EDITORIAL_MOBILE =
   "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=82";
 
-/** Dubai hero — loop video in `public/hero/` (poster/fallback until upload). */
-const HERO_VIDEO_MP4 = "/hero/hero-dubai.mp4";
-const HERO_VIDEO_WEBM = "/hero/hero-dubai.webm";
+/** Dubai hero — loop video in `public/hero/` (version query busts mobile cache). */
+const HERO_VIDEO_MP4 = heroAssetUrl("/hero/hero-dubai.mp4");
+const HERO_VIDEO_WEBM = heroAssetUrl("/hero/hero-dubai.webm");
+const HERO_POSTER = heroAssetUrl("/hero/hero-dubai-poster.jpg");
 /** Fallback still when video cannot load or reduced motion is enabled. */
 const HERO_DUBAI_IMAGE_FALLBACK =
   "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2400&q=88";
-const HERO_TEXT_LIGHT = "#f7f5f0";
-const HERO_MUTED_LIGHT = "rgba(255,255,255,0.74)";
+const HERO_TEXT_LIGHT = "#ffffff";
+const HERO_SUBTEXT_LIGHT = "rgba(255,255,255,0.98)";
+const HERO_HEADLINE_SHADOW =
+  "0 1px 1px rgba(0,0,0,0.95), 0 2px 4px rgba(0,0,0,0.7), 0 4px 10px rgba(0,0,0,0.45)";
+const HERO_BODY_SHADOW =
+  "0 1px 1px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,0.7)";
+const HERO_LABEL_SHADOW = "0 1px 2px rgba(0,0,0,0.9), 0 2px 5px rgba(0,0,0,0.6)";
+const HERO_HEADLINE_STROKE = "0px rgba(0,0,0,0)";
+const HERO_TEXT_GLOW =
+  "drop-shadow-[0_1px_1px_rgba(0,0,0,0.95)] drop-shadow-[0_2px_4px_rgba(0,0,0,0.55)]";
 
 /** Editorial / peace-put系：ゆっくり落ち着いた減速 */
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -53,14 +65,14 @@ const SPRING_SCROLL = { stiffness: 42, damping: 28, mass: 0.85 };
 
 /** In-page sections (labels are plain language; anchors match IDs below) */
 const NAV = [
+  { label: "mirAIreach system", href: "#miraireach-system" },
   { label: "what we offer", href: "#what-we-offer" },
   { label: "how it connects", href: "#how-it-connects" },
   { label: "LocalReach", href: "/localreach" },
   { label: "about", href: "/about" },
 ];
 
-/** 専用 LP（今後コンテンツ追加）— リンク先はここに集約 */
-export const MIRAIREACH_LP_PATH = "/lp/miraireach";
+export { MIRAIREACH_LP_PATH, MIRAIREACH_SYSTEM_URL } from "@/lib/miraireach-links";
 
 /* ── クリップマスクで一行ずつ「緩く」顔を出す ─────────────────────── */
 function RevealMaskLine({
@@ -186,8 +198,10 @@ function MenuOverlay({
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ delay: 0.18, duration: 0.95, ease: EASE }}
             >
-              <Link
-                href={MIRAIREACH_LP_PATH}
+              <a
+                href={MIRAIREACH_SYSTEM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={onClose}
                 className="group block max-w-2xl rounded-2xl border border-[#D4AF37]/35 bg-[rgba(26,23,20,0.03)] px-6 py-8 shadow-[0_24px_60px_-28px_rgba(26,23,20,0.25)] transition-[border-color,box-shadow] hover:border-[#D4AF37]/55 hover:shadow-[0_28px_70px_-24px_rgba(212,175,55,0.18)] md:px-8 md:py-10"
               >
@@ -202,10 +216,10 @@ function MenuOverlay({
                   <span style={{ color: INK }}>reach</span>
                 </span>
                 <span className="mt-4 flex items-center gap-2 font-sans text-xs font-medium tracking-wide text-[#1a1714]/55 group-hover:text-[#1a1714]/75 md:text-sm">
-                  Dedicated mirAIreach page
+                  See the mirAIreach system
                   <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.5} />
                 </span>
-              </Link>
+              </a>
             </motion.div>
 
             <div className="flex flex-col gap-8 md:gap-10">
@@ -261,6 +275,45 @@ function MenuOverlay({
   );
 }
 
+/** Full-bleed cover; minimal overscan to avoid edge gaps without heavy scale blur. */
+const HERO_MEDIA_COVER =
+  "absolute left-1/2 top-1/2 z-0 h-full w-full min-h-[104%] min-w-[104%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover object-[center_32%] [filter:brightness(1.08)_contrast(1.2)_saturate(1.35)]";
+
+/** Hero copy — no full panel; legibility from shadow + small chips only. */
+function HeroCopyStack({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      className="relative z-10 max-w-[min(92vw,980px)]"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.85, ease: EASE }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function HeroGoldHighlight({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="relative inline-block px-2">
+      <span
+        className="absolute -inset-x-1 bottom-[0.04em] -z-0 h-[0.96em] rounded-md"
+        style={{
+          background: "linear-gradient(100deg, #E0B53C 0%, #F4D575 55%, #FFE9A8 100%)",
+          boxShadow: "0 10px 28px -10px rgba(212,175,55,0.55)",
+        }}
+        aria-hidden
+      />
+      <span
+        className="relative z-10 font-bold"
+        style={{ color: "#1a1714", textShadow: "none", WebkitTextStroke: "0px transparent" }}
+      >
+        {children}
+      </span>
+    </span>
+  );
+}
+
 function HeroBackgroundMedia() {
   const reduce = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -272,8 +325,6 @@ function HeroBackgroundMedia() {
     v.play().catch(() => {});
   }, [reduce]);
 
-  const coverClass = "absolute inset-0 h-full w-full object-cover object-[center_32%]";
-
   if (reduce || useFallbackImage) {
     return (
       <Image
@@ -281,9 +332,9 @@ function HeroBackgroundMedia() {
         alt="Dubai skyline"
         fill
         priority
-        className={coverClass}
+        className="absolute inset-0 h-full w-full object-cover object-[center_32%] [filter:brightness(1.08)_contrast(1.2)_saturate(1.35)]"
         sizes="100vw"
-        quality={88}
+        quality={92}
       />
     );
   }
@@ -291,18 +342,18 @@ function HeroBackgroundMedia() {
   return (
     <video
       ref={videoRef}
-      className={coverClass}
+      className={HERO_MEDIA_COVER}
       autoPlay
       muted
       loop
       playsInline
       preload="auto"
-      poster={HERO_DUBAI_IMAGE_FALLBACK}
+      poster={HERO_POSTER}
       aria-hidden
       onError={() => setUseFallbackImage(true)}
     >
-      <source src={HERO_VIDEO_WEBM} type="video/webm" />
       <source src={HERO_VIDEO_MP4} type="video/mp4" />
+      <source src={HERO_VIDEO_WEBM} type="video/webm" />
     </video>
   );
 }
@@ -340,35 +391,22 @@ function HeroBlock() {
         >
           <motion.div
             className="absolute inset-0"
-            initial={reduce ? false : { scale: 1.12 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 2.4, ease: EASE }}
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.15, ease: EASE }}
           >
-            <motion.div
-              className="relative h-full min-h-[100svh] w-full overflow-hidden"
-              animate={reduce ? undefined : { scale: [1, 1.02, 1] }}
-              transition={
-                reduce
-                  ? undefined
-                  : {
-                      duration: 28,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }
-              }
-              style={{ transformOrigin: "50% 40%" }}
-            >
+            <div className="relative h-full min-h-[100svh] w-full overflow-hidden">
               <HeroBackgroundMedia />
-            </motion.div>
+            </div>
           </motion.div>
         </motion.div>
 
-        {/* 読みやすさ + 下でクリームセクションへ溶ける */}
+        {/* コピー裏のスクリム：左＋下＋上を暗くして文字を背景から分離（右の夕景は残す） */}
         <div
           className="absolute inset-0 z-[1]"
           style={{
             background:
-              "linear-gradient(to top, #0a0908 0%, rgba(14,12,10,0.88) 38%, rgba(18,16,14,0.55) 62%, rgba(26,23,20,0.35) 100%)",
+              "linear-gradient(to right, rgba(4,3,2,0.95) 0%, rgba(6,5,4,0.82) 32%, rgba(8,7,6,0.52) 56%, rgba(9,8,7,0.24) 76%, transparent 90%), linear-gradient(to top, rgba(4,3,2,0.78) 0%, rgba(8,7,6,0.36) 36%, transparent 64%), linear-gradient(to bottom, rgba(4,3,2,0.52) 0%, transparent 30%)",
           }}
           aria-hidden
         />
@@ -376,7 +414,7 @@ function HeroBlock() {
           className="absolute inset-0 z-[1]"
           style={{
             background:
-              "radial-gradient(ellipse 90% 70% at 70% 20%, rgba(212,175,55,0.14), transparent 55%), radial-gradient(ellipse 60% 50% at 15% 80%, rgba(0,0,0,0.45), transparent 65%)",
+              "radial-gradient(ellipse 90% 70% at 70% 20%, rgba(212,175,55,0.1), transparent 55%)",
           }}
           aria-hidden
         />
@@ -398,11 +436,11 @@ function HeroBlock() {
           <motion.div
             className="absolute inset-0 z-[2] mix-blend-soft-light pointer-events-none"
             aria-hidden
-            animate={{ opacity: [0.08, 0.14, 0.08] }}
+            animate={{ opacity: [0.04, 0.08, 0.04] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             style={{
               background:
-                "radial-gradient(circle at 40% 30%, rgba(252,240,200,0.35), transparent 45%)",
+                "radial-gradient(circle at 40% 30%, rgba(252,240,200,0.25), transparent 50%)",
             }}
           />
         )}
@@ -432,69 +470,67 @@ function HeroBlock() {
           ))}
       </div>
 
-      {/* Dubai ピル（即レスで場所が伝わる） */}
-      <motion.div
-        className="relative z-10 mb-8 md:mb-10 max-w-[min(92vw,980px)]"
-        initial={{ opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
-      >
-        <div
-          className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/25 px-4 py-2 backdrop-blur-md"
-          style={{ color: HERO_MUTED_LIGHT }}
-        >
-          <MapPin className="h-3.5 w-3.5 shrink-0 text-[#D4AF37]" strokeWidth={1.6} aria-hidden />
-          <span className="text-[10px] uppercase tracking-[0.28em]">Dubai · United Arab Emirates</span>
+      <HeroCopyStack>
+        <motion.div style={{ y, opacity }} className={HERO_TEXT_GLOW}>
+        <div className="mb-6 flex flex-wrap items-center gap-2.5 md:mb-7">
+          <div
+            className="inline-flex items-center gap-2 rounded-full border border-white/45 bg-white/12 px-4 py-2 backdrop-blur-sm"
+            style={{ color: HERO_TEXT_LIGHT, textShadow: HERO_LABEL_SHADOW }}
+          >
+            <MapPin className="h-3.5 w-3.5 shrink-0 text-[#F5D76E]" strokeWidth={2} aria-hidden />
+            <span className="text-[10px] font-bold uppercase tracking-[0.28em] md:text-[11px]">
+              Dubai · United Arab Emirates
+            </span>
+          </div>
+          <motion.p
+            className="inline-flex items-center rounded-full border border-[#D4AF37]/55 bg-[#D4AF37]/20 px-4 py-2 text-[10px] font-bold tracking-[0.32em] uppercase text-[#FFF4D0] backdrop-blur-sm md:text-[11px]"
+            style={{ textShadow: HERO_LABEL_SHADOW }}
+            initial={{ opacity: 0, filter: reduce ? "none" : "blur(8px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1.15, delay: 0.08, ease: EASE }}
+          >
+            AI marketing · Dubai &amp; UAE
+          </motion.p>
         </div>
-      </motion.div>
 
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-[min(92vw,980px)]">
-        <motion.p
-          className="mb-6 text-[10px] tracking-[0.35em] uppercase md:mb-8 md:text-[11px]"
-          style={{ color: HERO_MUTED_LIGHT }}
-          initial={{ opacity: 0, filter: reduce ? "none" : "blur(8px)" }}
-          animate={{ opacity: 1, filter: "blur(0px)" }}
-          transition={{ duration: 1.15, delay: 0.08, ease: EASE }}
-        >
-          AI marketing · Dubai &amp; UAE
-        </motion.p>
-
-        <h1 className="m-0 p-0 font-normal">
+        <h1 className="m-0 p-0">
           <RevealMaskLine
             active={intro}
             delay={0.12}
-            className="block font-serif leading-[1.05] tracking-tight"
+            className="block font-serif font-semibold leading-[1.04] tracking-tight"
           >
             <span
               className="block text-balance"
               style={{
                 color: HERO_TEXT_LIGHT,
-                fontSize: "clamp(2.35rem, 7.2vw, 5.2rem)",
-                textShadow: "0 2px 40px rgba(0,0,0,0.45)",
+                fontSize: "clamp(2.45rem, 7.5vw, 5.35rem)",
+                textShadow: HERO_HEADLINE_SHADOW,
+                WebkitTextStroke: HERO_HEADLINE_STROKE,
               }}
             >
               Search is rewriting itself.
             </span>
           </RevealMaskLine>
-          <div className="mt-2">
-            <RevealMaskLine active={intro} delay={0.28} className="block font-serif leading-[1.05] tracking-tight">
+          <div className="mt-1.5 md:mt-2">
+            <RevealMaskLine active={intro} delay={0.28} className="block font-serif font-semibold leading-[1.04] tracking-tight">
               <span
                 className="block text-balance"
                 style={{
                   color: HERO_TEXT_LIGHT,
-                  fontSize: "clamp(2.35rem, 7.2vw, 5.2rem)",
-                  textShadow: "0 2px 40px rgba(0,0,0,0.45)",
+                  fontSize: "clamp(2.45rem, 7.5vw, 5.35rem)",
+                  textShadow: HERO_HEADLINE_SHADOW,
+                  WebkitTextStroke: HERO_HEADLINE_STROKE,
                 }}
               >
-                <span style={{ color: GOLD }}>Put your brand</span> in every answer.
+                <HeroGoldHighlight>Put your brand</HeroGoldHighlight> in every answer.
               </span>
             </RevealMaskLine>
           </div>
         </h1>
 
         <motion.p
-          className="mt-8 max-w-xl text-base font-light leading-relaxed text-pretty md:mt-10 md:text-lg"
-          style={{ color: HERO_MUTED_LIGHT }}
+          className="mt-6 max-w-xl text-base font-semibold leading-relaxed text-pretty md:mt-8 md:text-[1.125rem] md:leading-relaxed"
+          style={{ color: HERO_SUBTEXT_LIGHT, textShadow: HERO_BODY_SHADOW }}
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.15, delay: 0.55, ease: EASE }}
@@ -517,17 +553,27 @@ function HeroBlock() {
             Get started <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
           </MagneticLink>
           <a
+            href={MIRAIREACH_SYSTEM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 rounded-sm border-2 border-[#D4AF37] bg-[#1a1714]/55 px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#FFE9A8] shadow-[0_10px_34px_-8px_rgba(212,175,55,0.5)] backdrop-blur-md transition-colors hover:bg-[#1a1714]/75"
+          >
+            See the mirAIreach system
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={2} />
+          </a>
+          <a
             href="#what-we-offer"
-            className="inline-flex items-center gap-2 rounded-sm border border-white/25 bg-white/5 px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm transition-colors hover:bg-white/10"
+            className="inline-flex items-center gap-2 rounded-sm border-2 border-white/50 bg-white/20 px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_8px_28px_rgba(0,0,0,0.4)] backdrop-blur-md transition-colors hover:bg-white/30"
           >
             What we offer
           </a>
         </motion.div>
-      </motion.div>
+        </motion.div>
+      </HeroCopyStack>
 
       <motion.div
         className="relative z-10 mt-16 flex flex-col items-center gap-3 md:mt-24"
-        style={{ color: "rgba(255,255,255,0.45)" }}
+        style={{ color: "rgba(255,255,255,0.9)", textShadow: HERO_LABEL_SHADOW }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.35, duration: 1.05, ease: EASE }}
@@ -1313,7 +1359,7 @@ const CAPABILITIES = [
     title: "mirAIreach",
     sub: "Flagship engine",
     body: "Dubai and UAE AI marketing core: reputation, reviews, and flows tuned for how people actually decide—Maps, AI answers, and digital marketing in one lane.",
-    href: "/localreach",
+    href: "#miraireach-system",
   },
   {
     title: "GEO & AI Search",
@@ -1477,7 +1523,9 @@ function PlatformStatement() {
           transition={{ delay: 0.32, duration: 0.85, ease: EASE }}
         >
           <MagneticLink
-            href={MIRAIREACH_LP_PATH}
+            href={MIRAIREACH_SYSTEM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 rounded-sm bg-[#f7f5f0] px-10 py-4 text-sm font-bold tracking-wide text-[#1a1714] shadow-lg shadow-black/25 transition hover:opacity-95 hover:shadow-xl md:px-12 md:py-5 md:text-[0.9375rem]"
           >
             mirAIreach overview <ArrowUpRight size={18} strokeWidth={2} aria-hidden />
@@ -1741,7 +1789,7 @@ function FilmGrain() {
   if (reduce) return null;
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-[6] mix-blend-multiply"
+      className="pointer-events-none fixed inset-x-0 bottom-0 top-[100svh] z-[6] mix-blend-multiply"
       style={{
         opacity: 0.038,
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
@@ -1800,7 +1848,7 @@ export default function GamImmersiveLp() {
         }`}
         initial={false}
         animate={{
-          backgroundColor: scrolled ? "rgba(247, 245, 240, 0.94)" : "rgba(8, 7, 6, 0.38)",
+          backgroundColor: scrolled ? "rgba(247, 245, 240, 0.94)" : "rgba(8, 7, 6, 0.12)",
           borderBottomColor: scrolled ? "rgba(26, 23, 20, 0.08)" : "rgba(255, 255, 255, 0.12)",
         }}
         transition={{ duration: 0.55, ease: EASE }}
@@ -1854,6 +1902,7 @@ export default function GamImmersiveLp() {
       <main>
         <HeroBlock />
         <EcosystemFlowSection />
+        <MirAIreachSystemSection />
         <LocalReachProductSection />
         <GoogleAiAdsSection />
         <ManifestoSection />
