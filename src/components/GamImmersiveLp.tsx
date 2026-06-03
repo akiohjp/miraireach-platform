@@ -23,6 +23,7 @@ import { GAM_MISSION_AND_VISION_BLOCKS } from "@/content/gamAboutCopy";
 import { GAM_FAQ_ITEMS } from "@/content/gamFaq";
 import { GOOGLE_AI_ADS_WHY_CHOOSE } from "@/content/googleAiAdsCopy";
 import { heroAssetUrl } from "@/lib/hero-assets";
+import { LOCALREACH_MONTHLY_AED } from "@/content/localReachPricing";
 import { MIRAIREACH_LP_PATH, MIRAIREACH_SYSTEM_URL } from "@/lib/miraireach-links";
 import MirAIreachSystemSection from "@/components/miraireach/MirAIreachSystemSection";
 
@@ -716,7 +717,7 @@ function LocalReachProductSection() {
             transition={{ delay: 0.1, duration: 0.75, ease: EASE }}
           >
             <div className="flex flex-wrap items-baseline gap-2">
-              <span className="text-4xl font-black tabular-nums text-gray-900 md:text-5xl">500</span>
+              <span className="text-4xl font-black tabular-nums text-gray-900 md:text-5xl">{LOCALREACH_MONTHLY_AED}</span>
               <span className="text-2xl font-black text-gray-800">AED</span>
               <span className="text-lg font-bold text-gray-500">/ month</span>
             </div>
@@ -793,7 +794,7 @@ function LocalReachProductSection() {
               href="/contact"
               className="inline-flex items-center gap-2 bg-[#D4AF37] px-8 py-4 text-[11px] font-bold uppercase tracking-[0.16em] text-black md:px-10 md:py-5"
             >
-              Get started — 500 AED/mo <ArrowRight className="h-4 w-4" strokeWidth={2.25} aria-hidden />
+              Get started — {LOCALREACH_MONTHLY_AED} AED/mo <ArrowRight className="h-4 w-4" strokeWidth={2.25} aria-hidden />
             </MagneticLink>
             <Link
               href="/localreach"

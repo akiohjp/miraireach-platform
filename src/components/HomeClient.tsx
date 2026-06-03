@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Header from "./Header";
+import { LOCALREACH_MONTHLY_AED } from "@/content/localReachPricing";
 import {
   ArrowRight, Star, Shield, Zap, Globe, MapPin,
   CheckCircle, Gift, Target, MessageCircle, Phone
@@ -733,7 +734,7 @@ export default function HomeClient() {
               {/* Price block */}
               <div className="rounded-2xl border-2 p-6 shadow-sm" style={{ borderColor: GOLD, backgroundColor: `${GOLD}06` }}>
                 <div className="flex items-baseline gap-2 flex-wrap">
-                  <span className="text-5xl font-black text-gray-900">500</span>
+                  <span className="text-5xl font-black text-gray-900">{LOCALREACH_MONTHLY_AED}</span>
                   <span className="text-2xl font-black text-gray-700">AED</span>
                   <span className="text-lg font-bold text-gray-400">/ month</span>
                 </div>
@@ -774,7 +775,7 @@ export default function HomeClient() {
 
               <div className="pt-2 flex flex-wrap gap-4 items-center">
                 <GoldButton href="/contact">
-                  Get Started — 500 AED/mo <ArrowRight size={13} />
+                  Get Started — {LOCALREACH_MONTHLY_AED} AED/mo <ArrowRight size={13} />
                 </GoldButton>
                 <Link
                   href="/localreach"

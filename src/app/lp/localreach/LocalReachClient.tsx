@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
 import { LOCALREACH_LEAD_QUIZ_QUESTIONS, LOCALREACH_QUIZ_STORAGE_KEY } from "@/content/localReachLeadQuiz";
+import { LOCALREACH_MONTHLY_AED } from "@/content/localReachPricing";
 
 // ── Brand constants ────────────────────────────────────────────────
 const GOLD = "#D4AF37";
@@ -1261,7 +1262,7 @@ export default function LocalReachClient() {
                         className="text-7xl font-black leading-none"
                         style={{ color: GOLD }}
                       >
-                        500
+                        {LOCALREACH_MONTHLY_AED}
                       </span>
                       <div className="mb-1 space-y-0.5">
                         <span className="block text-2xl font-black text-gray-900 leading-none">AED</span>

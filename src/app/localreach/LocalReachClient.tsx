@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import ReviewFlowHeroAnimation from "@/components/localreach/ReviewFlowHeroAnimation";
 import LocalReachProductionPreviews from "@/components/localreach/LocalReachProductionPreviews";
 import { LOCALREACH_LEAD_QUIZ_QUESTIONS, LOCALREACH_QUIZ_STORAGE_KEY } from "@/content/localReachLeadQuiz";
+import { LOCALREACH_MONTHLY_AED } from "@/content/localReachPricing";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
 /* ── Local animation helpers ──────────────────────────── */
@@ -1427,7 +1428,7 @@ export default function LocalReachClient() {
                         className="text-7xl font-black leading-none"
                         style={{ color: GOLD }}
                       >
-                        500
+                        {LOCALREACH_MONTHLY_AED}
                       </span>
                       <div className="mb-1 space-y-0.5">
                         <span className="block text-2xl font-black text-gray-900 leading-none">AED</span>
