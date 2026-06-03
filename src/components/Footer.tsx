@@ -5,7 +5,7 @@ import Link from "next/link";
 const DARK = "#1a1714";
 const GOLD = "#D4AF37";
 
-const MIRAIREACH_SYSTEM_URL = "https://miraireach.jp/ae/";
+import { MIRAIREACH_SYSTEM_URL } from "@/lib/miraireach-links";
 
 const NAV_COLUMNS = [
   {

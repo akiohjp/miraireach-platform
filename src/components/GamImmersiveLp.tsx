@@ -23,6 +23,8 @@ import { GAM_MISSION_AND_VISION_BLOCKS } from "@/content/gamAboutCopy";
 import { GAM_FAQ_ITEMS } from "@/content/gamFaq";
 import { GOOGLE_AI_ADS_WHY_CHOOSE } from "@/content/googleAiAdsCopy";
 import { heroAssetUrl } from "@/lib/hero-assets";
+import { MIRAIREACH_LP_PATH, MIRAIREACH_SYSTEM_URL } from "@/lib/miraireach-links";
+import MirAIreachSystemSection from "@/components/miraireach/MirAIreachSystemSection";
 
 const CREAM = "#f7f5f0";
 const INK = "#1a1714";
@@ -63,17 +65,14 @@ const SPRING_SCROLL = { stiffness: 42, damping: 28, mass: 0.85 };
 
 /** In-page sections (labels are plain language; anchors match IDs below) */
 const NAV = [
+  { label: "mirAIreach system", href: "#miraireach-system" },
   { label: "what we offer", href: "#what-we-offer" },
   { label: "how it connects", href: "#how-it-connects" },
   { label: "LocalReach", href: "/localreach" },
   { label: "about", href: "/about" },
 ];
 
-/** 専用 LP（今後コンテンツ追加）— リンク先はここに集約 */
-export const MIRAIREACH_LP_PATH = "/lp/miraireach";
-
-/** メインシステム説明ページ（外部）— 専用ボタンは必ずここへ直接飛ばす */
-export const MIRAIREACH_SYSTEM_URL = "https://miraireach.jp/ae/";
+export { MIRAIREACH_LP_PATH, MIRAIREACH_SYSTEM_URL } from "@/lib/miraireach-links";
 
 /* ── クリップマスクで一行ずつ「緩く」顔を出す ─────────────────────── */
 function RevealMaskLine({
@@ -1360,7 +1359,7 @@ const CAPABILITIES = [
     title: "mirAIreach",
     sub: "Flagship engine",
     body: "Dubai and UAE AI marketing core: reputation, reviews, and flows tuned for how people actually decide—Maps, AI answers, and digital marketing in one lane.",
-    href: "/localreach",
+    href: "#miraireach-system",
   },
   {
     title: "GEO & AI Search",
@@ -1903,6 +1902,7 @@ export default function GamImmersiveLp() {
       <main>
         <HeroBlock />
         <EcosystemFlowSection />
+        <MirAIreachSystemSection />
         <LocalReachProductSection />
         <GoogleAiAdsSection />
         <ManifestoSection />
