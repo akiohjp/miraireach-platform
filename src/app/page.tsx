@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import GamImmersiveLp from "@/components/GamImmersiveLp";
-import { GAM_FAQ_ITEMS } from "@/content/gamFaq";
 import { getOgImageAbsoluteUrl, getSiteUrl, OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from "@/lib/site";
 
 const siteUrl = getSiteUrl();
@@ -78,29 +77,12 @@ const professionalServiceJsonLd = {
   ],
 };
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: GAM_FAQ_ITEMS.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer,
-    },
-  })),
-};
-
 export default function Home() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <GamImmersiveLp />
     </>

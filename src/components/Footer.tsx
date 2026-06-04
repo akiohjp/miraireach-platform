@@ -13,7 +13,7 @@ const NAV_COLUMNS = [
     links: [
       { label: "mirAIreach", href: MIRAIREACH_SYSTEM_URL, external: true },
       { label: "LocalReach", href: "/localreach" },
-      { label: "Google AI Ads", href: "/#google-ai-ads" },
+      { label: "Google AI Ads", href: "/google-ai-ads" },
     ],
   },
   {

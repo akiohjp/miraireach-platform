@@ -11,6 +11,7 @@ const STATIC_PATHS = [
   "/terms",
   "/privacy",
   "/localreach",
+  "/google-ai-ads",
   "/lp/miraireach",
   "/lp/fb-automation",
 ] as const;
