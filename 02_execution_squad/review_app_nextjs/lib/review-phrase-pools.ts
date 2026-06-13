@@ -1,7 +1,19 @@
 /**
  * Extra guest-facing phrase pools (no SEO jargon, no typographic long dashes).
  * Combined with `review-full-templates.ts` base pools for strong combinatorial variance.
+ * Large inventory additions: `review-phrase-pools-bulk.ts`.
  */
+
+import {
+  PHRASE_BRIDGES_LONG_BULK,
+  PHRASE_BRIDGES_SHORT_BULK,
+  PHRASE_CLOSERS_LONG_BULK,
+  PHRASE_CLOSERS_SHORT_BULK,
+  PHRASE_CORE_BULK,
+  PHRASE_FILLERS_BULK,
+  PHRASE_OPENERS_LONG_BULK,
+  PHRASE_OPENERS_SHORT_BULK,
+} from "@/lib/review-phrase-pools-bulk";
 
 export type OpenerFn = (store: string) => string;
 export type CoreFn = (store: string, list: string) => string;
@@ -58,6 +70,7 @@ export const PHRASE_OPENERS_LONG_EXTRA: readonly OpenerFn[] = [
     `${s} left us full, not painfully stuffed, which is harder to calibrate than it looks.`,
   (s) =>
     `Took photos for the group chat; captions wrote themselves because ${s} had clear highs.`,
+  ...PHRASE_OPENERS_LONG_BULK,
 ];
 
 export const PHRASE_OPENERS_SHORT_EXTRA: readonly OpenerFn[] = [
@@ -76,6 +89,7 @@ export const PHRASE_OPENERS_SHORT_EXTRA: readonly OpenerFn[] = [
   (s) => `${s} didn't waste our evening; that matters.`,
   (s) => `Random pick that paid off: ${s}.`,
   (s) => `${s} was worth the short wait we had.`,
+  ...PHRASE_OPENERS_SHORT_BULK,
 ];
 
 export const PHRASE_CORE_EXTRA: readonly CoreFn[] = [
@@ -127,6 +141,7 @@ export const PHRASE_CORE_EXTRA: readonly CoreFn[] = [
     `${list} made ${s} feel worth leaving the neighborhood for.`,
   (_, list) =>
     `The meal had edges, sure, but ${list} was the clean win.`,
+  ...PHRASE_CORE_BULK,
 ];
 
 export const PHRASE_BRIDGES_LONG_EXTRA: readonly BridgeFn[] = [
@@ -150,6 +165,7 @@ export const PHRASE_BRIDGES_LONG_EXTRA: readonly BridgeFn[] = [
     `Restrooms were clean enough that I'd mention them, oddly enough.`,
   (s) =>
     `They offered a takeaway box without acting like we're cheap at ${s}.`,
+  ...PHRASE_BRIDGES_LONG_BULK,
 ];
 
 export const PHRASE_BRIDGES_SHORT_EXTRA: readonly BridgeFn[] = [
@@ -161,6 +177,7 @@ export const PHRASE_BRIDGES_SHORT_EXTRA: readonly BridgeFn[] = [
   (s) => `Tables felt spaced fairly at ${s}.`,
   (s) => `${s} didn't rush the tab.`,
   (s) => `Small asks got quick nods at ${s}.`,
+  ...PHRASE_BRIDGES_SHORT_BULK,
 ];
 
 export const PHRASE_CLOSERS_LONG_EXTRA: readonly OpenerFn[] = [
@@ -180,6 +197,7 @@ export const PHRASE_CLOSERS_LONG_EXTRA: readonly OpenerFn[] = [
     `We left ${s} without that sour \"should've stayed home\" feeling.`,
   (s) =>
     `Happy to be a repeat customer if ${s} stays this consistent.`,
+  ...PHRASE_CLOSERS_LONG_BULK,
 ];
 
 export const PHRASE_CLOSERS_SHORT_EXTRA: readonly OpenerFn[] = [
@@ -192,6 +210,7 @@ export const PHRASE_CLOSERS_SHORT_EXTRA: readonly OpenerFn[] = [
   (s) => `${s} made the outing feel worth it.`,
   (s) => `No regrets choosing ${s}.`,
   (s) => `${s} gets my nod.`,
+  ...PHRASE_CLOSERS_SHORT_BULK,
 ];
 
 export const PHRASE_FILLERS_EXTRA: readonly OpenerFn[] = [
@@ -209,4 +228,5 @@ export const PHRASE_FILLERS_EXTRA: readonly OpenerFn[] = [
     `If ${s} has an off night, ours wasn't it.`,
   (s) =>
     `Comfort food energy without feeling lazy sums up part of ${s} for me.`,
+  ...PHRASE_FILLERS_BULK,
 ];

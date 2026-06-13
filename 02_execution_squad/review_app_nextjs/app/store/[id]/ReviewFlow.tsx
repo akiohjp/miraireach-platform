@@ -64,12 +64,14 @@ export default function ReviewFlow({
 
   const progressIdx = POSITIVE_STEPS.indexOf(step)
 
-  function handleRating(value: number) {
-    setRating(value)
-    setStep(value >= 4 ? 'keywords' : 'feedback')
+  function hasAnyConfiguredKeywords(): boolean {
+    return (
+      forcedKeywords.some((k) => k.trim()) ||
+      keywords.some((k) => k.trim())
+    )
   }
 
-  async function handleKeywords(guestSelected: string[]) {
+  async function proceedToGenerate(guestSelected: string[]) {
     const merged = mergeGuestAndForced(forcedKeywords, guestSelected)
     setSelectedKeywords(merged)
     setStep('generating')
@@ -81,6 +83,23 @@ export default function ReviewFlow({
       }),
     )
     setStep('result')
+  }
+
+  function handleRating(value: number) {
+    setRating(value)
+    if (value < 4) {
+      setStep('feedback')
+      return
+    }
+    if (!hasAnyConfiguredKeywords()) {
+      void proceedToGenerate([])
+      return
+    }
+    setStep('keywords')
+  }
+
+  async function handleKeywords(guestSelected: string[]) {
+    await proceedToGenerate(guestSelected)
   }
 
   const forcedSet = new Set(
@@ -170,6 +189,11 @@ export default function ReviewFlow({
               storeId={storeId}
               selectedKeywords={selectedKeywords}
               onRetry={reset}
+              onRegenerate={() =>
+                generateReview(storeName, selectedKeywords, {
+                  nonce: createReviewNonce(),
+                  outletKey: `${storeId}|${businessCategory ?? ''}|${brandColor}`,
+                })}
             />
           )}
 

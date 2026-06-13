@@ -3,10 +3,11 @@
  * - Business name appears at least twice, verbatim.
  * - Every selected keyword appears verbatim at least once (Oxford-style list + optional weave).
  * - Template pools must not use product jargon (AIO, GEO, SEO, "maps optimization", etc.): reads as spam.
- * - No long dashes (Unicode U+2014 em dash or U+2013 en dash as sentence glue) in guest-facing sentences;
- *   use commas, periods, semicolons, or colons instead so copy reads less "AI".
+ * - No typographic long dashes (Unicode U+2014/U+2013) as glue; commas/periods read more human here.
+ * - Keyword lists deliberately vary (Oxford comma vs simpler ", and" joins) so copy does not feel copyedited the same way every time.
  * - Length tuned toward ~100 English words.
- * - Large phrase pools: `review-phrase-pools.ts`; slot picks use forked RNG from `seed` so choices stay uncorrelated.
+ * - Large phrase pools (`review-phrase-pools*.ts`): avoid symmetrical "essay outline" lines; conversational blurbs over polished parallel lists.
+ * - Main arc uses short paragraphs (double newline between blocks); whitespace inside each block is single-line.
  */
 
 import { forkRng } from "@/lib/review-rng";
@@ -40,13 +41,102 @@ export function wordCount(text: string): number {
     .filter((w) => w.length > 0).length;
 }
 
-/** Oxford comma join (keeps each keyword phrase intact). */
+const PARAGRAPH_GAP = "\n\n";
+
+function oneLineCollapse(s: string): string {
+  return s.replace(/\s+/g, " ").trim();
+}
+
+/** Preserves `\n\n` paragraphs; trims and collapses horizontal whitespace inside each. */
+function normalizeParagraphFormatting(text: string): string {
+  return text
+    .split(/\n\n+/)
+    .map(oneLineCollapse)
+    .filter(Boolean)
+    .join(PARAGRAPH_GAP)
+    .trim();
+}
+
+function appendToLastParagraph(full: string, sentence: string): string {
+  const paras = normalizeParagraphFormatting(full).split(/\n\n+/).filter(Boolean);
+  const frag = oneLineCollapse(sentence);
+  if (!frag) return normalizeParagraphFormatting(full);
+  if (paras.length === 0) return frag;
+  const li = paras.length - 1;
+  paras[li] = oneLineCollapse(`${paras[li]} ${frag}`);
+  return paras.join(PARAGRAPH_GAP);
+}
+
+function trimLastParagraphTailSentence(multiline: string): string {
+  const paras = normalizeParagraphFormatting(multiline).split(/\n\n+/).filter(Boolean);
+  if (paras.length === 0) return multiline.trim();
+  const li = paras.length - 1;
+  const last = paras[li]!;
+  const idx = last.lastIndexOf(".");
+  if (idx <= 0) return multiline;
+  const prev = last.lastIndexOf(".", idx - 1);
+  if (prev <= 0) return multiline;
+  paras[li] = last.slice(0, idx + 1).trim();
+  return paras.join(PARAGRAPH_GAP);
+}
+
+const MICRO_GRAPH_OPENERS: readonly string[] = [
+  `Jotting this down before my brain resets.`,
+  `Writing this while the taste memory still works.`,
+  `Not a fancy review, just a real note.`,
+  `Keeping this short on purpose.`,
+];
+
+/** Human posts do not paragraph like a graded essay every time; blur runs together sometimes. */
+function weaveParagraphs(parts: readonly string[], rng: () => number, compact: boolean): string {
+  const cleaned = parts.map(oneLineCollapse).filter(Boolean);
+  if (cleaned.length === 0) return "";
+  const mergeProb = compact ? 0.5 : 0.36;
+  let acc = cleaned[0]!;
+  for (let i = 1; i < cleaned.length; i++) {
+    if (rng() < mergeProb) {
+      acc = `${acc} ${cleaned[i]}`;
+    } else {
+      acc = `${acc}${PARAGRAPH_GAP}${cleaned[i]}`;
+    }
+  }
+  return normalizeParagraphFormatting(acc);
+}
+
+/** Plain restaurant-list join (canonical Oxford). Keywords stay verbatim. */
 export function oxfordJoinKeywordPhrases(phrases: string[]): string {
   const p = phrases.filter(Boolean);
   if (p.length === 0) return "";
   if (p.length === 1) return p[0]!;
   if (p.length === 2) return `${p[0]} and ${p[1]}`;
   return `${p.slice(0, -1).join(", ")}, and ${p[p.length - 1]}`;
+}
+
+/**
+ * Human reviewers rarely keep one list style forever. Mix commas, stacked "ands", occasional "plus"
+ * between two items. Keywords remain verbatim chunks.
+ */
+function joinKeywordPhrasesHumanish(phrases: string[], rng: () => number): string {
+  const p = phrases.filter(Boolean);
+  if (p.length === 0) return "";
+  if (p.length === 1) return p[0]!;
+  if (p.length === 2) {
+    const roll = rng();
+    if (roll < 0.48) return `${p[0]} and ${p[1]}`;
+    if (roll < 0.8) return `${p[0]}, ${p[1]}`;
+    return `${p[0]}, plus ${p[1]}`;
+  }
+  if (p.length === 3) {
+    const roll = rng();
+    if (roll < 0.54) return oxfordJoinKeywordPhrases(p);
+    if (roll < 0.86) return `${p[0]}, ${p[1]} and ${p[2]}`;
+    return `${p[0]} and ${p[1]} and ${p[2]}`;
+  }
+  const last = p[p.length - 1]!;
+  const head = p.slice(0, -1);
+  return rng() < 0.48
+    ? oxfordJoinKeywordPhrases(p)
+    : `${head.join(", ")} and ${last}`;
 }
 
 function shuffle<T>(arr: T[], rng: () => number): T[] {
@@ -72,7 +162,7 @@ const OPENERS_LONG: readonly Opener[] = [
   (s) =>
     `Spent an evening at ${s} with friends. A few details were genuinely strong, so I'm writing this while it's still fresh.`,
   (s) =>
-    `First visit to ${s} went better than I expected. I'll keep this short: what worked, what I'd order again, and why I'd go back.`,
+    `First visit to ${s} went better than I expected. We'd order at least two of the plates again.`,
   (s) =>
     `Dinner at ${s} was the kind of meal where you walk out and actually want to say something online, so here are straight notes from our table.`,
   (s) =>
@@ -86,7 +176,7 @@ const OPENERS_LONG: readonly Opener[] = [
   (s) =>
     `My table at ${s} agreed on more than we usually do after a meal, and that alone says something.`,
   (s) =>
-    `${s} earned the write-up for small reasons that add up: pacing, flavor balance, and staff who read the room.`,
+    `${s} piled up quiet wins across the meal, pacing, seasoning, tiny service stuff that rarely lines up.`,
   (s) =>
     `Posting this because ${s} nailed a few food details I don't want to flatten into a star rating only.`,
   (s) =>
@@ -130,16 +220,16 @@ const CORE_LONG: readonly CoreBuild[] = [
   (s, list) =>
     `The backbone of what I liked ties back to ${list}. ${s} didn't phone that in.`,
   (_, list) =>
-    `Walking through ${list}: each piece felt deliberate, which is harder than it sounds on a crowded night.`,
+    `${list} hung together tighter than I'd expect once the dining room filled up.`,
   (s, list) =>
     `If you strip it down, the meal was basically ${list} done with attention, and that's the story at ${s}.`,
 ];
 
 const CORE_MID: readonly CoreBuild[] = [
   (s, list) =>
-    `Standouts for us were ${list}; ${s} didn't treat those like afterthoughts.`,
+    `Standouts for us were ${list}. ${s} didn't treat those like garnish.`,
   (_, list) =>
-    `The through-line of the meal felt like ${list}; nothing in that set felt like a weak link.`,
+    `Meal kinda orbited ${list}; nothing there felt accidental.`,
   (s, list) =>
     `What I'd steer people toward is ${list}, and ${s} actually delivered on those.`,
   (_, list) =>
@@ -167,7 +257,7 @@ const CORE_CASUAL: readonly CoreBuild[] = [
 /** Direct, conversational; reads less \"template\". */
 const CORE_DIRECT: readonly CoreBuild[] = [
   (_, list) =>
-    `${list}: that's what's worth knowing.`,
+    `${list}: that's the gist if someone asks me.`,
   (s, list) =>
     `At ${s} we kept coming back to ${list}.`,
   (_, list) =>
@@ -185,7 +275,7 @@ const CORE_MICROSTORY: readonly CoreBuild[] = [
   (_, list) =>
     `Someone at our table said \"that's ${list} done right\"; hard to disagree.`,
   (s, list) =>
-    `${list} sounded like hype on paper, but tastes don't lie, and ${s} made it coherent.`,
+    `${list} sounded like hype on the menu but it made sense once we tasted it at ${s}.`,
 ];
 
 const CORE_COMPACT: readonly CoreBuild[] = [
@@ -291,15 +381,18 @@ function buildKeywordDualBlock(
   store: string,
   kws: string[],
   rng: () => number,
+  seed: number,
 ): string | null {
   if (kws.length < 6) return null;
-  if (rng() > 0.38) return null;
+  if (rng() > 0.34) return null;
   const minFirst = 2;
   const maxFirst = kws.length - 2;
   if (maxFirst < minFirst) return null;
   const pivot = minFirst + Math.floor(rng() * (maxFirst - minFirst + 1));
-  const a = oxfordJoinKeywordPhrases(kws.slice(0, pivot));
-  const b = oxfordJoinKeywordPhrases(kws.slice(pivot));
+  const joinA = forkRng(seed, 0xb200 + pivot * 17);
+  const joinB = forkRng(seed, 0xb380 + pivot * 19);
+  const a = joinKeywordPhrasesHumanish(kws.slice(0, pivot), joinA);
+  const b = joinKeywordPhrasesHumanish(kws.slice(pivot), joinB);
   return pick(DUAL_KEYWORD_BLOCKS, rng)(store, a, b);
 }
 
@@ -313,10 +406,10 @@ function buildKeywordParagraph(
 ): string {
   const rDual = forkRng(seed, 0x33);
   if (!compact) {
-    const dual = buildKeywordDualBlock(store, kws, rDual);
+    const dual = buildKeywordDualBlock(store, kws, rDual, seed);
     if (dual) return dual;
   }
-  const list = oxfordJoinKeywordPhrases(kws);
+  const list = joinKeywordPhrasesHumanish(kws, forkRng(seed, 0xaa11));
   if (compact) {
     return pick(CORE_COMPACT, rngCompact)(store, list);
   }
@@ -345,11 +438,16 @@ function buildReviewInner(
   const bridge = pick(bridgePool, rBridge)(store);
   const closer = pick(closerPool, rCloser)(store);
 
-  const bridgeFirst = !compact && rOrder() < 0.34;
-  const body = bridgeFirst
-    ? `${opener} ${bridge} ${core} ${closer}`
-    : `${opener} ${core} ${bridge} ${closer}`;
-  return body.replace(/\s+/g, " ").trim();
+  const bridgeFirst = !compact && rOrder() < 0.41;
+  let segments = bridgeFirst
+    ? [opener, bridge, core, closer]
+    : [opener, core, bridge, closer];
+  const rMicro = forkRng(seed, 0x10a);
+  if (!compact && rMicro() < 0.11) {
+    segments = [pick(MICRO_GRAPH_OPENERS, rMicro), ...segments];
+  }
+  const rLayout = forkRng(seed, 0x108);
+  return weaveParagraphs(segments, rLayout, compact);
 }
 
 function tuneWordCount(
@@ -363,17 +461,9 @@ function tuneWordCount(
   let t = text;
   let wc = wordCount(t);
 
-  const trimNonListTail = (s: string): string => {
-    const idx = s.lastIndexOf(".");
-    if (idx <= 0) return s;
-    const prev = s.lastIndexOf(".", idx - 1);
-    if (prev <= 0) return s;
-    return s.slice(0, idx + 1).trim();
-  };
-
   let guard = 0;
   while (wc > 115 && guard < 4) {
-    t = trimNonListTail(t);
+    t = trimLastParagraphTailSentence(t);
     wc = wordCount(t);
     guard++;
   }
@@ -394,19 +484,19 @@ function tuneWordCount(
   ];
 
   while (wc < 92 && guard < 6) {
-    t = `${t} ${pick(fillers, rng)(store)}`.replace(/\s+/g, " ").trim();
+    t = appendToLastParagraph(t, pick(fillers, rng)(store));
     wc = wordCount(t);
     guard++;
   }
 
   if (wc < TARGET - 5) {
-    t = `${t} ${pick(fillers, rng)(store)}`.replace(/\s+/g, " ").trim();
+    t = appendToLastParagraph(t, pick(fillers, rng)(store));
   }
   if (wordCount(t) > TARGET + 8) {
-    t = trimNonListTail(t);
+    t = trimLastParagraphTailSentence(t);
   }
 
-  return t.replace(/\s+/g, " ").trim();
+  return normalizeParagraphFormatting(t);
 }
 
 function reviewWithNoKeywords(store: string, seed: number): string {
@@ -418,7 +508,7 @@ function reviewWithNoKeywords(store: string, seed: number): string {
     "The night ran smoothly for us; I'd still name " +
     store +
     " as a place I'd go back to for hospitality and pacing alone.";
-  const t = `${opener} ${mid} ${closer}`.replace(/\s+/g, " ").trim();
+  const t = [opener, mid, closer].map(oneLineCollapse).filter(Boolean).join(PARAGRAPH_GAP);
   return tuneWordCount(t, store, seed, 0x203);
 }
 
@@ -451,7 +541,7 @@ function appendMissingKeyword(
     (k) => `${k} didn't get lost in the shuffle.`,
     (k) => `Easy to recommend on ${k} alone.`,
   ];
-  return `${text} ${pick(tails, rng)(kw)}`.replace(/\s+/g, " ").trim();
+  return appendToLastParagraph(text, pick(tails, rng)(kw));
 }
 
 /**
@@ -474,14 +564,19 @@ const BANNED_TEMPLATE_LEAK_PHRASES = [
   "summaries that prize clarity",
 ] as const;
 
-/** Typographic sentence dashes (U+2014/U+2013) read "AI"; normalize any leak from keywords or copy-paste. */
+/** Typographic sentence dashes (U+2014/U+2013) read "AI"; normalize any leak from keywords or copy-paste. Keeps `\n\n` paragraphs. */
 function normalizeGuestFacingDashes(text: string): string {
-  return text
-    .replace(/\u2014/g, ", ")
-    .replace(/\u2013/g, "-")
-    .replace(/\s*,\s*/g, ", ")
-    .replace(/\s+/g, " ")
-    .trim();
+  return normalizeParagraphFormatting(
+    text
+      .split(/\n\n+/)
+      .map((para) =>
+        para
+          .replace(/\u2014/g, ", ")
+          .replace(/\u2013/g, "-")
+          .replace(/\s*,\s*/g, ", "),
+      )
+      .join(PARAGRAPH_GAP),
+  );
 }
 
 function warnIfMarketingJargonLeak(text: string): void {
@@ -519,7 +614,7 @@ export function buildFullTemplateReview(
   text = tuneWordCount(text, name, seed, 0x301);
 
   if (!text.includes(name)) {
-    text = `${text} (${name})`.replace(/\s+/g, " ").trim();
+    text = appendToLastParagraph(text, `(${name})`);
   }
 
   let salt = 0xd00;

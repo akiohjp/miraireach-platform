@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Copy, Globe, ExternalLink, RotateCcw, Check } from "lucide-react";
+import { Copy, Globe, ExternalLink, RotateCcw, Check, RefreshCw } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 import { isValidUuid } from "@/lib/is-valid-uuid";
 
@@ -10,6 +10,8 @@ type Props = {
   storeId: string;
   selectedKeywords: string[];
   onRetry: () => void;
+  /** Fresh nonce + new wording; same merged keywords. For client demos. */
+  onRegenerate?: () => string;
 };
 
 type WaState = "idle" | "saving" | "saved" | "error";
@@ -37,12 +39,23 @@ function shouldFallbackToRestInsertAfterRpcFail(err: WaSaveErrorLike): boolean {
   return (
     c === "42501" ||
     c === "PGRST202" ||
+    c === "42703" ||
     c === "42883" ||
+    isMissingCustomerNameColumn(err) ||
     m.includes("permission denied") ||
     m.includes("row-level security") ||
     m.includes("violates row-level security policy") ||
     m.includes("could not find the function") ||
     m.includes("could not find the ")
+  );
+}
+
+function isMissingCustomerNameColumn(err: WaSaveErrorLike | null): boolean {
+  if (!err) return false;
+  const text = `${err.message ?? ""} ${err.details ?? ""} ${err.hint ?? ""}`.toLowerCase();
+  return (
+    (err.code === "42703" || err.code === "PGRST204" || text.includes("column")) &&
+    text.includes("customer_name")
   );
 }
 
@@ -58,12 +71,36 @@ function buildTranslateUrl(text: string) {
   return `https://translate.google.com/?sl=en&tl=auto&text=${encodeURIComponent(text)}`;
 }
 
+async function saveLeadViaServerFallback(row: {
+  store_id: string;
+  whatsapp_number: string;
+  opt_in: boolean;
+  selected_keywords: string[] | null;
+  customer_name: string | null;
+}): Promise<{ ok: true } | { ok: false; error: string }> {
+  try {
+    const response = await fetch("/api/customer-leads", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(row),
+    });
+    const body = (await response.json().catch(() => null)) as { error?: string } | null;
+    if (!response.ok) {
+      return { ok: false, error: body?.error ?? `HTTP ${response.status}` };
+    }
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : String(err) };
+  }
+}
+
 export default function StepResult({
   reviewText,
   gbpReviewUrl,
   storeId,
   selectedKeywords,
   onRetry,
+  onRegenerate,
 }: Props) {
   const [text, setText] = useState(reviewText);
   const [copied, setCopied] = useState(false);
@@ -89,6 +126,12 @@ export default function StepResult({
   function handlePostOnGoogle() {
     navigator.clipboard.writeText(text);
     window.open(gbpReviewUrl, "_blank");
+  }
+
+  function handleRegenerateWording() {
+    if (!onRegenerate) return;
+    setCopied(false);
+    setText(onRegenerate());
   }
 
   async function handleWhatsAppSave() {
@@ -117,6 +160,12 @@ export default function StepResult({
         selectedKeywords.length > 0 ? selectedKeywords : null,
       customer_name: customerName.trim() ? customerName.trim() : null,
     };
+    const legacyRow = {
+      store_id: row.store_id,
+      whatsapp_number: row.whatsapp_number,
+      opt_in: row.opt_in,
+      selected_keywords: row.selected_keywords,
+    };
 
     const { error: rpcError } = await supabase.rpc("capture_store_customer_lead", {
       p_store_id: row.store_id,
@@ -139,12 +188,27 @@ export default function StepResult({
       return;
     }
 
-    const { error: insertError } = await supabase.from("customers").insert(row);
+    const insertPayload = isMissingCustomerNameColumn(rpcError) ? legacyRow : row;
+    let { error: insertError } = await supabase.from("customers").insert(insertPayload);
+
+    if (insertError && !isMissingCustomerNameColumn(rpcError) && isMissingCustomerNameColumn(insertError)) {
+      ({ error: insertError } = await supabase.from("customers").insert(legacyRow));
+    }
 
     if (insertError) {
       console.error("[WhatsApp save] REST insert fallback failed", insertError.message, insertError);
+      let serverFallback: { ok: true } | { ok: false; error: string } | null = null;
+      if (isMissingCustomerNameColumn(rpcError)) {
+        serverFallback = await saveLeadViaServerFallback(row);
+        if (serverFallback.ok) {
+          setWaState("saved");
+          return;
+        }
+      }
       setWaErrorDetail(
-        `${formatWaErrorForUi(rpcError)} · Fallback: ${formatWaErrorForUi(insertError)}`,
+        `${formatWaErrorForUi(rpcError)} · Fallback: ${formatWaErrorForUi(insertError)}${
+          serverFallback && !serverFallback.ok ? ` · Server: ${serverFallback.error}` : ""
+        }`,
       );
       setWaState("error");
       return;
@@ -307,6 +371,19 @@ export default function StepResult({
 
       {/* Action buttons */}
       <div className="flex flex-col gap-2.5">
+        {onRegenerate && (
+          <button
+            type="button"
+            onClick={handleRegenerateWording}
+            className="w-full py-3 rounded-xl font-semibold text-sm border border-dashed border-slate-300 bg-slate-50/80
+              text-slate-700 hover:bg-slate-100 hover:border-slate-400 active:scale-[0.98]
+              transition-all flex items-center justify-center gap-2"
+          >
+            <RefreshCw size={13} />
+            Try another wording
+          </button>
+        )}
+
         <button
           type="button"
           onClick={handleCopy}

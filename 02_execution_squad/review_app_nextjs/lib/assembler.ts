@@ -26,6 +26,30 @@ function hashString(input: string): number {
   return h >>> 0;
 }
 
+/** Mix bits so small nonce changes flip many template slots. */
+function avalanche32(x: number): number {
+  let v = x >>> 0;
+  v ^= v >>> 16;
+  v = Math.imul(v, 0x7feb352d);
+  v ^= v >>> 15;
+  v = Math.imul(v, 0x846ca68b);
+  return (v ^ (v >>> 16)) >>> 0;
+}
+
+function computeReviewSeed(
+  store: string,
+  keywordsOrdered: string[],
+  nonce: string,
+  outlet: string,
+): number {
+  const sorted = [...keywordsOrdered].sort().join("\0");
+  const ordered = keywordsOrdered.join("\0");
+  const meta = `${keywordsOrdered.length}\0${keywordsOrdered.reduce((n, k) => n + k.length, 0)}`;
+  const hStable = hashString(`${sorted}\0${store}\0${outlet}\0${meta}`);
+  const hEntropy = hashString(`${nonce}\0${ordered}\0${store}`);
+  return avalanche32(hStable ^ avalanche32(hEntropy));
+}
+
 export function generateReview(
   storeName: string,
   keywords: string[],
@@ -39,24 +63,21 @@ export function generateReview(
       : `${Date.now()}-ssr`);
 
   const outlet = options?.outletKey?.trim() ?? "";
-  const seed = hashString(
-    [...keywords].sort().join("\0") +
-      "\0" +
-      store +
-      "\0" +
-      nonce +
-      "\0" +
-      outlet,
-  );
   const cleaned = keywords.map((k) => k.trim()).filter(Boolean);
+  const seed = computeReviewSeed(store, cleaned, nonce, outlet);
   return buildFullTemplateReview(store, cleaned, seed);
 }
 
-/** Call once per generated review (client). Strengthens variance vs. keyword set alone. */
+/** Call once per generated review (client). Each call must be unique for visible shuffle in demos. */
 export function createReviewNonce(): string {
   if (typeof globalThis !== "undefined" && "crypto" in globalThis) {
     const c = globalThis.crypto as Crypto | undefined;
+    if (c?.randomUUID && c?.getRandomValues) {
+      const extra = new Uint32Array(2);
+      c.getRandomValues(extra);
+      return `${c.randomUUID()}:${extra[0].toString(16)}:${extra[1].toString(16)}`;
+    }
     if (c?.randomUUID) return c.randomUUID();
   }
-  return `${Date.now()}-${Math.random().toString(36).slice(2, 12)}`;
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 14)}-${Math.random().toString(36).slice(2, 14)}`;
 }

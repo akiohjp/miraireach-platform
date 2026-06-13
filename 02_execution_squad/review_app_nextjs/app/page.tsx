@@ -24,6 +24,7 @@ export default function ReviewPage() {
   const [step, setStep] = useState<Step>("rating");
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
   const progressIdx = POSITIVE_STEPS.indexOf(step);
 
@@ -33,6 +34,7 @@ export default function ReviewPage() {
   }
 
   async function handleKeywords(selected: string[]) {
+    setSelectedKeywords(selected);
     setStep("generating");
     await new Promise((r) => setTimeout(r, 1200));
     setReviewText(
@@ -48,6 +50,7 @@ export default function ReviewPage() {
     setStep("rating");
     setRating(0);
     setReviewText("");
+    setSelectedKeywords([]);
   }
 
   return (
@@ -121,8 +124,13 @@ export default function ReviewPage() {
                 reviewText={reviewText}
                 gbpReviewUrl={STORE_CONFIG.gbpReviewUrl}
                 storeId={RESULT_STORE_ID}
-                selectedKeywords={[]}
+                selectedKeywords={selectedKeywords}
                 onRetry={reset}
+                onRegenerate={() =>
+                  generateReview(STORE_CONFIG.storeName, selectedKeywords, {
+                    nonce: createReviewNonce(),
+                    outletKey: `${RESULT_STORE_ID}|demo|${STORE_CONFIG.storeName}`,
+                  })}
               />
             )}
             {step === "feedback" && (

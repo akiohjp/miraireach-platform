@@ -63,6 +63,24 @@ function formatSupabaseActionError(context: string, raw: string): string {
   return `${context}: ${raw}`
 }
 
+type SupabaseColumnError = { code?: string; message?: string; details?: string; hint?: string }
+type CustomerExportRow = {
+  customer_name?: string | null
+  whatsapp_number: string
+  opt_in: boolean
+  selected_keywords: string[] | null
+  created_at: string
+}
+
+function isMissingCustomerNameColumn(error: SupabaseColumnError | null): boolean {
+  if (!error) return false
+  const text = `${error.message ?? ''} ${error.details ?? ''} ${error.hint ?? ''}`.toLowerCase()
+  return (
+    (error.code === '42703' || error.code === 'PGRST204' || text.includes('column')) &&
+    text.includes('customer_name')
+  )
+}
+
 export async function createStore(payload: {
   storeName: string
   email: string
@@ -182,12 +200,23 @@ export async function masterExportCustomersCsv(
 
   try {
     const admin = createAdminClient()
-    const { data, error } = await admin
+    const customersWithName = await admin
       .from('customers')
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .select('customer_name, whatsapp_number, opt_in, selected_keywords, created_at' as any)
       .eq('store_id', storeId)
       .order('created_at', { ascending: false })
+    let data = customersWithName.data as unknown as CustomerExportRow[] | null
+    let error = customersWithName.error
+    if (isMissingCustomerNameColumn(error)) {
+      const customersWithoutName = await admin
+        .from('customers')
+        .select('whatsapp_number, opt_in, selected_keywords, created_at')
+        .eq('store_id', storeId)
+        .order('created_at', { ascending: false })
+      data = customersWithoutName.data as CustomerExportRow[] | null
+      error = customersWithoutName.error
+    }
 
     if (error) return { ok: false, error: error.message }
     if (!data) return { ok: false, error: 'No data.' }
